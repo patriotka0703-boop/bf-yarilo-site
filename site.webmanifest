@@ -1,0 +1,8 @@
+{
+  "name": "Благотворительный фонд «Ярило»",
+  "short_name": "Ярило",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f3ea",
+  "theme_color": "#10251f"
+}

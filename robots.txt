@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bf-yarilo.ru/sitemap.xml

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пожертвовать благотворительному фонду «Ярило»</title>
+<meta name="description" content="Сделать пожертвование благотворительному фонду «Ярило» и поддержать адресную помощь людям, оказавшимся в беде.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#10251f">
+<link rel="canonical" href="https://bf-yarilo.ru/donate.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Благотворительный фонд «Ярило»">
+<meta property="og:title" content="Пожертвовать благотворительному фонду «Ярило»">
+<meta property="og:description" content="Сделать пожертвование благотворительному фонду «Ярило» и поддержать адресную помощь людям, оказавшимся в беде.">
+<meta property="og:url" content="https://bf-yarilo.ru/donate.html">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NGO", "name": "Благотворительный фонд «Ярило»", "url": "https://bf-yarilo.ru/", "telephone": "+79660577755", "areaServed": "Московская область", "description": "Фонд помощи тем, кто попал в беду."}</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="Благотворительный фонд Ярило">
+      <img class="brand-logo-img" src="logo-yarilo.jpg" alt="Логотип благотворительного фонда Ярило">
+      <span><b>ЯРИЛО</b><small>благотворительный фонд</small></span>
+    </a>
+    <button class="menu-btn" aria-label="Открыть меню" aria-expanded="false">☰</button>
+    <nav class="menu" aria-label="Основная навигация">
+      <a href="about.html">О фонде</a><a href="help.html">Кому помогаем</a><a href="projects.html">Проекты</a><a href="news.html">Новости</a><a href="reports.html">Отчётность</a><a href="requisites.html">Реквизиты</a><a href="contacts.html">Контакты</a>
+      <a class="btn btn-small donate-nav" href="donate.html">Пожертвовать</a>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="page-hero donate-hero"><div class="container narrow"><p class="breadcrumbs"><a href="index.html">Главная</a> / Пожертвовать</p><p class="eyebrow">Поддержать фонд</p><h1>Сделать пожертвование</h1><p class="lead">Ваше пожертвование помогает фонду закупать необходимые товары, организовывать доставку и поддерживать подопечных.</p></div></section>
+<section class="section"><div class="container donate-layout">
+<div class="donation-box">
+<h2>Выберите сумму</h2>
+<div class="amounts"><button type="button" data-amount="300">300 ₽</button><button type="button" data-amount="500">500 ₽</button><button type="button" data-amount="1000">1 000 ₽</button><button type="button" data-amount="3000">3 000 ₽</button></div>
+<label class="amount-label">Другая сумма<input id="customAmount" inputmode="numeric" type="number" min="1" placeholder="Введите сумму"></label>
+<button id="donateButton" class="btn btn-large full" type="button">Перейти к пожертвованию</button>
+<p id="paymentNote" class="payment-note">Онлайн-оплата будет активирована после подключения официальной платёжной ссылки фонда.</p>
+</div>
+<div class="donate-info"><h2>Другие способы помочь</h2><ul class="checklist"><li>Передать необходимые товары</li><li>Помочь с транспортом или доставкой</li><li>Помочь с топливом для поездок</li><li>Стать партнёром фонда</li></ul><a class="btn btn-ghost" href="tel:+79660577755">Связаться: +7 966 057-77-55</a></div>
+</div></section>
+<section class="section section-alt"><div class="container narrow"><h2>Почему здесь пока нет номера карты?</h2><p class="prose">На сайте безопаснее публиковать только официальные и подтверждённые способы пожертвования. Платёжная кнопка уже встроена в сайт; после подключения эквайринга или получения официальной платёжной ссылки её можно активировать одной строкой в файле <code>script.js</code>.</p></div></section>
+</main>
+
+<footer>
+  <div class="container footer-main">
+    <div>
+      <a class="brand footer-brand" href="index.html"><img class="brand-logo-img" src="logo-yarilo.jpg" alt="Логотип благотворительного фонда Ярило"><span><b>ЯРИЛО</b><small>благотворительный фонд</small></span></a>
+      <p>Фонд помощи тем, кто попал в беду.</p>
+    </div>
+    <div>
+      <b>Разделы</b>
+      <a href="about.html">О фонде</a>
+      <a href="help.html">Кому помогаем</a>
+      <a href="reports.html">Отчётность</a>
+      <a href="requisites.html">Реквизиты</a><a href="contacts.html">Контакты</a>
+    </div>
+    <div>
+      <b>Связь</b>
+      <a href="tel:+79660577755">+7 966 057-77-55</a>
+      <a href="https://bf-yarilo.ru/">bf-yarilo.ru</a>
+      <span>Московская область</span>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> Благотворительный фонд «Ярило»</span>
+    <a href="privacy.html">Политика конфиденциальности</a>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
