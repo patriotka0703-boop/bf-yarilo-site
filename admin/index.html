@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админка — БФ ЯРИЛО</title>
+  <link rel="stylesheet" href="content.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+    }
+
+    .header {
+      background: #10251f;
+      color: white;
+      padding: 22px 30px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .header p {
+      margin: 6px 0 0;
+      opacity: .8;
+    }
+
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 90px);
+    }
+
+    .sidebar {
+      width: 250px;
+      background: white;
+      padding: 25px 15px;
+      border-right: 1px solid #ddd;
+    }
+
+    .sidebar button {
+      width: 100%;
+      display: block;
+      padding: 13px 15px;
+      margin-bottom: 8px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      text-align: left;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .sidebar button:hover {
+      background: #eef3f1;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      max-width: 900px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+
+    .status {
+      background: #e8f7ee;
+      border: 1px solid #b8e2c7;
+      padding: 14px;
+      border-radius: 9px;
+      margin: 20px 0;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .action {
+      padding: 18px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    @media (max-width: 700px) {
+      .layout {
+        display: block;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
+
+      .actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>Благотворительный фонд «ЯРИЛО»</h1>
+    <p>Панель управления сайтом</p>
+  </div>
+
+  <div class="layout">
+
+    <div class="sidebar">
+      <button>🏠 Главная</button>
+      <button>✏️ Тексты сайта</button>
+      <button>📰 Новости</button>
+      <button>📷 Фото и видео</button>
+      <button>📁 Документы</button>
+      <button>❤️ Реквизиты и помощь</button>
+      <button>📞 Контакты</button>
+      <button>⚙️ Настройки</button>
+    </div>
+
+    <div class="main">
+
+      <div class="card">
+
+        <h2>Кабинет фонда</h2>
+
+        <p>
+          Здесь будет управление содержимым сайта БФ «ЯРИЛО».
+        </p>
+
+        <div class="status">
+          ✓ Административная панель установлена
+        </div>
+
+        <h3>Управление сайтом</h3>
+
+        <div class="actions">
+
+          <div class="action">
+            <strong>✏️ Изменить тексты</strong>
+            <p>Редактирование информации на страницах сайта.</p>
+          </div>
+
+          <div class="action">
+            <strong>📰 Добавить новость</strong>
+            <p>Публикация новостей и отчётов фонда.</p>
+          </div>
+
+          <div class="action">
+            <strong>📷 Фото и видео</strong>
+            <p>Добавление фотографий и видеоматериалов.</p>
+          </div>
+
+          <div class="action">
+            <strong>📁 Документы</strong>
+            <p>Добавление отчётов и документов фонда.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
