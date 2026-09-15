@@ -28,7 +28,7 @@
   "name": "Благотворительный фонд «Ярило»",
   "url": "https://bf-yarilo.ru/",
   "telephone": "+79660577755",
-  "areaServed": "Московская область",
+  "areaServed": "Москва и Московская область",
   "description": "Фонд помощи тем, кто попал в беду."
 }
 </script>
@@ -42,6 +42,7 @@
 
 <a class="brand" href="index.html" aria-label="Благотворительный фонд Ярило">
 <img class="brand-logo-img" src="logo-yarilo.jpg" alt="Логотип благотворительного фонда Ярило">
+
 <span>
 <b id="foundation-short-name">ЯРИЛО</b>
 <small>благотворительный фонд</small>
@@ -64,6 +65,7 @@
 </div>
 </header>
 
+
 <main>
 
 <section class="page-hero">
@@ -73,13 +75,15 @@
 <a href="index.html">Главная</a> / О фонде
 </p>
 
-<p class="eyebrow">О фонде</p>
+<p class="eyebrow" id="about-eyebrow">
+О фонде
+</p>
 
 <h1 id="about-foundation-name">
 Благотворительный фонд «Ярило»
 </h1>
 
-<p class="lead">
+<p class="lead" id="about-lead">
 Мы помогаем тем, кто оказался в беде и кому нужна конкретная, практическая поддержка.
 </p>
 
@@ -91,18 +95,20 @@
 <div class="container split">
 
 <div>
-<h2>Наша работа — довести помощь до получателя</h2>
+<h2 id="history-title">
+Наша работа — довести помощь до получателя
+</h2>
 </div>
 
 <div class="prose">
 
-<p>
+<p id="history-text-1">
 Фонд «Ярило» создавался для адресной помощи людям и учреждениям,
 оказавшимся в трудной ситуации. Мы не ограничиваемся сбором:
 проверяем потребности, формируем грузы, организуем логистику и передачу.
 </p>
 
-<p>
+<p id="history-text-2">
 Одно из важных направлений — помощь детям и взрослым с инвалидностью,
 реабилитационным центрам и учреждениям, где постоянно нужны
 расходные материалы, средства ухода и бытовые товары.
@@ -110,7 +116,7 @@
 
 <p>
 Фонд зарегистрирован в
-<span id="foundation-region">Московской области</span>.
+<span id="foundation-region">Москве и Московской области</span>.
 Генеральный директор —
 <span id="foundation-director">Невзорова Эльвира Викторовна</span>.
 </p>
@@ -123,24 +129,35 @@
 <section class="section section-alt">
 <div class="container">
 
-<p class="eyebrow">Принципы</p>
-<h2>Как мы работаем</h2>
+<p class="eyebrow" id="principles-eyebrow">
+Принципы
+</p>
+
+<h2 id="principles-title">
+Как мы работаем
+</h2>
 
 <div class="cards three">
 
 <div class="card">
-<h3>Адресно</h3>
-<p>Сначала узнаём конкретную потребность, затем формируем помощь.</p>
+<h3 id="principle-1-title">Адресно</h3>
+<p id="principle-1-text">
+Сначала узнаём конкретную потребность, затем формируем помощь.
+</p>
 </div>
 
 <div class="card">
-<h3>Практично</h3>
-<p>Собираем то, что действительно нужно получателям здесь и сейчас.</p>
+<h3 id="principle-2-title">Практично</h3>
+<p id="principle-2-text">
+Собираем то, что действительно нужно получателям здесь и сейчас.
+</p>
 </div>
 
 <div class="card">
-<h3>Прозрачно</h3>
-<p>Публикуем документы и отчёты о деятельности фонда.</p>
+<h3 id="principle-3-title">Прозрачно</h3>
+<p id="principle-3-text">
+Публикуем документы и отчёты о деятельности фонда.
+</p>
 </div>
 
 </div>
@@ -152,8 +169,13 @@
 <div class="container cta">
 
 <div>
-<h2>Хотите помочь?</h2>
-<p>Поддержите работу фонда удобным способом.</p>
+<h2 id="about-cta-title">
+Хотите помочь?
+</h2>
+
+<p id="about-cta-text">
+Поддержите работу фонда удобным способом.
+</p>
 </div>
 
 <a class="btn btn-large" href="donate.html">
@@ -220,7 +242,7 @@ bf-yarilo.ru
 </a>
 
 <span id="footer-region">
-Московская область
+Москва и Московская область
 </span>
 
 </div>
@@ -252,56 +274,159 @@ bf-yarilo.ru
   if (!window.YARILO) return;
 
   const data = window.YARILO;
+  const foundation = data.foundation || {};
+  const about = data.aboutPage || {};
 
   function setText(id, value) {
     const element = document.getElementById(id);
 
-    if (element && value !== undefined && value !== null) {
+    if (
+      element &&
+      value !== undefined &&
+      value !== null
+    ) {
       element.textContent = value;
     }
   }
 
+  /* Общие данные фонда */
+
   setText(
     "foundation-short-name",
-    data.foundation.shortName
+    foundation.shortName
   );
 
   setText(
     "footer-short-name",
-    data.foundation.shortName
+    foundation.shortName
   );
 
   setText(
     "foundation-slogan",
-    data.foundation.slogan
+    foundation.slogan
   );
 
   setText(
     "foundation-director",
-    data.foundation.director
+    foundation.director
   );
 
   setText(
     "foundation-region",
-    data.foundation.region
+    foundation.region
   );
 
   setText(
     "footer-region",
-    data.foundation.region
+    foundation.region
   );
 
   setText(
     "about-foundation-name",
-    data.foundation.name
+    about.title || foundation.name
   );
+
+
+  /* Страница О фонде */
+
+  setText(
+    "about-eyebrow",
+    about.eyebrow
+  );
+
+  setText(
+    "about-lead",
+    about.lead
+  );
+
+  setText(
+    "history-title",
+    about.historyTitle
+  );
+
+  setText(
+    "history-text-1",
+    about.historyText1
+  );
+
+  setText(
+    "history-text-2",
+    about.historyText2
+  );
+
+
+  /* Принципы */
+
+  setText(
+    "principles-eyebrow",
+    about.principlesEyebrow
+  );
+
+  setText(
+    "principles-title",
+    about.principlesTitle
+  );
+
+  setText(
+    "principle-1-title",
+    about.principle1Title
+  );
+
+  setText(
+    "principle-1-text",
+    about.principle1Text
+  );
+
+  setText(
+    "principle-2-title",
+    about.principle2Title
+  );
+
+  setText(
+    "principle-2-text",
+    about.principle2Text
+  );
+
+  setText(
+    "principle-3-title",
+    about.principle3Title
+  );
+
+  setText(
+    "principle-3-text",
+    about.principle3Text
+  );
+
+
+  /* Призыв помочь */
+
+  setText(
+    "about-cta-title",
+    about.ctaTitle
+  );
+
+  setText(
+    "about-cta-text",
+    about.ctaText
+  );
+
+
+  /* Телефон */
 
   const phone =
     document.getElementById("foundation-phone");
 
-  if (phone) {
-    phone.textContent = data.foundation.phone;
-    phone.href = "tel:" + data.foundation.phoneLink;
+  if (phone && foundation.phone) {
+
+    phone.textContent =
+      foundation.phone;
+
+    phone.href =
+      "tel:" +
+      (
+        foundation.phoneLink ||
+        foundation.phone.replace(/[^\d+]/g, "")
+      );
   }
 
 })();
