@@ -208,6 +208,22 @@ nav{width:100%}
 </main>
 </div>
 <script src="config.js"></script>
-  
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+
+    window.netlifyIdentity.on("logout", () => {
+      document.location.href = "/";
+    });
+  }
+</script>  
 </body>
 </html>
