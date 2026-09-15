@@ -1,1 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Личный кабинет — БФ ЯРИЛО</title>
 
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f3f5f4;
+color:#1f2937;
+}
+
+header{
+background:#173b32;
+color:white;
+padding:25px 30px;
+}
+
+header h1{
+margin:0;
+font-size:26px;
+}
+
+header p{
+margin:7px 0 0;
+opacity:.8;
+}
+
+.layout{
+display:flex;
+min-height:calc(100vh - 90px);
+}
+
+nav{
+width:260px;
+background:white;
+padding:25px 15px;
+border-right:1px solid #ddd;
+}
+
+nav a{
+display:block;
+padding:14px;
+margin-bottom:7px;
+border-radius:9px;
+text-decoration:none;
+color:#222;
+font-size:16px;
+}
+
+nav a:hover{
+background:#edf3f1;
+}
+
+main{
+flex:1;
+padding:35px;
+}
+
+.panel{
+max-width:950px;
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 3px 15px rgba(0,0,0,.07);
+}
+
+.success{
+background:#e8f7ed;
+border:1px solid #b7dfc3;
+padding:15px;
+border-radius:10px;
+margin:20px 0;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-top:25px;
+}
+
+.card{
+border:1px solid #ddd;
+border-radius:12px;
+padding:20px;
+background:#fafafa;
+cursor:pointer;
+}
+
+.card:hover{
+background:#f0f5f3;
+}
+
+.card h3{
+margin-top:0;
+}
+
+.logout{
+margin-top:30px;
+border-top:1px solid #ddd;
+padding-top:20px;
+}
+
+@media(max-width:750px){
+.layout{display:block}
+nav{width:100%}
+.grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Благотворительный фонд «ЯРИЛО»</h1>
+<p>Личный кабинет управления сайтом</p>
+</header>
+
+<div class="layout">
+
+<nav>
+<a href="#">🏠 Главная</a>
+<a href="#">✏️ Тексты сайта</a>
+<a href="#">📰 Новости</a>
+<a href="#">📷 Фото и видео</a>
+<a href="#">📁 Документы</a>
+<a href="#">❤️ Реквизиты фонда</a>
+<a href="#">📞 Контакты</a>
+<a href="#">⚙️ Настройки</a>
+</nav>
+
+<main>
+
+<div class="panel">
+
+<h2>Добро пожаловать в кабинет фонда</h2>
+
+<p>
+Здесь вы сможете самостоятельно управлять информацией
+на сайте БФ «ЯРИЛО».
+</p>
+
+<div class="success">
+✓ Кабинет установлен и работает
+</div>
+
+<h2>Что вы сможете редактировать</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>✏️ Тексты сайта</h3>
+<p>Менять тексты страниц без редактирования HTML-кода.</p>
+</div>
+
+<div class="card">
+<h3>📰 Новости</h3>
+<p>Добавлять новости, отчёты о поездках и деятельности фонда.</p>
+</div>
+
+<div class="card">
+<h3>📷 Фото и видео</h3>
+<p>Загружать фотографии и материалы фонда.</p>
+</div>
+
+<div class="card">
+<h3>📁 Документы</h3>
+<p>Добавлять отчёты, документы и другие файлы.</p>
+</div>
+
+<div class="card">
+<h3>❤️ Реквизиты</h3>
+<p>Изменять реквизиты и информацию о способах помощи.</p>
+</div>
+
+<div class="card">
+<h3>📞 Контакты</h3>
+<p>Редактировать телефон, электронную почту и другие контакты.</p>
+</div>
+
+</div>
+
+<div class="logout">
+<strong>БФ «ЯРИЛО»</strong><br>
+Панель управления сайтом
+</div>
+
+</div>
+
+</main>
+</div>
+
+</body>
+</html>
