@@ -135,5 +135,30 @@
   </div>
 </footer>
 <script src="script.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<script>
+if (window.netlifyIdentity) {
+
+  window.netlifyIdentity.on("init", function(user) {
+
+    var hash = window.location.hash || "";
+
+    if (
+      hash.indexOf("recovery_token") !== -1 ||
+      hash.indexOf("invite_token") !== -1 ||
+      hash.indexOf("confirmation_token") !== -1
+    ) {
+      window.netlifyIdentity.open();
+    }
+
+  });
+
+  window.netlifyIdentity.on("login", function() {
+    window.location.href = "/admin/";
+  });
+
+}
+</script>
 </body>
 </html>
