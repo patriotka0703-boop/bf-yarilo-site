@@ -2,217 +2,133 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Админка — БФ «ЯРИЛО»</title>
 <meta name="robots" content="noindex,nofollow">
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f5;
+  color:#17231f
 }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f5;
-  color: #17231f;
+header{
+  background:#10251f;
+  color:#fff;
+  padding:24px 20px
 }
-
-header {
-  background: #10251f;
-  color: white;
-  padding: 24px 20px;
+.header{
+  max-width:1000px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px
 }
-
-.header-inner {
-  max-width: 1000px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+h1{margin:0 0 5px;font-size:28px}
+header p{margin:0;opacity:.8}
+.site{
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.4);
+  padding:10px 14px;
+  border-radius:8px
 }
-
-header h1 {
-  margin: 0 0 5px;
-  font-size: 28px;
+main{
+  max-width:1000px;
+  margin:30px auto;
+  padding:0 20px 60px
 }
-
-header p {
-  margin: 0;
-  opacity: .8;
+.panel{
+  background:#fff;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+  margin-bottom:20px
 }
-
-main {
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 0 20px 60px;
+.login{
+  text-align:center;
+  padding:50px 25px
 }
-
-.panel {
-  background: white;
-  padding: 24px;
-  border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
-  margin-bottom: 20px;
+.hidden{display:none!important}
+.status{
+  display:none;
+  padding:14px 16px;
+  margin-bottom:20px;
+  border-radius:9px
 }
-
-.login-panel {
-  text-align: center;
-  padding: 50px 25px;
+.status.info{
+  display:block;
+  background:#edf2f0
 }
-
-.login-panel h2 {
-  margin-top: 0;
+.status.ok{
+  display:block;
+  background:#e7f5eb;
+  color:#176238
 }
-
-button,
-.button {
-  border: 0;
-  border-radius: 8px;
-  padding: 13px 20px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
+.status.error{
+  display:block;
+  background:#fdeaea;
+  color:#8a2222
 }
-
-.primary {
-  background: #10251f;
-  color: white;
+button{
+  border:0;
+  border-radius:8px;
+  padding:13px 20px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer
 }
-
-.secondary {
-  background: #e9eeeb;
-  color: #17231f;
+.primary{background:#10251f;color:#fff}
+.save{background:#18794e;color:#fff}
+.secondary{background:#e7ece9;color:#17231f}
+.danger{background:#8d2727;color:#fff}
+.field{margin-bottom:18px}
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px
 }
-
-.danger {
-  background: #8d2727;
-  color: white;
+input,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd5d1;
+  border-radius:8px;
+  font:inherit
 }
-
-.save {
-  background: #18794e;
-  color: white;
-  padding: 15px 25px;
+textarea{
+  min-height:105px;
+  resize:vertical
 }
-
-.actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 25px;
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px
 }
-
-.status {
-  padding: 13px 16px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  display: none;
-  line-height: 1.4;
+.section{
+  margin:32px 0 20px;
+  padding-bottom:10px;
+  border-bottom:1px solid #e3e8e5
 }
-
-.status.ok {
-  display: block;
-  background: #e8f5ec;
-  color: #176238;
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:25px
 }
-
-.status.error {
-  display: block;
-  background: #fdeaea;
-  color: #8a2222;
+.small{
+  color:#69736f;
+  font-size:13px;
+  line-height:1.5
 }
-
-.status.info {
-  display: block;
-  background: #eef3f1;
-  color: #34443e;
-}
-
-.section-title {
-  border-bottom: 1px solid #e4e8e6;
-  padding-bottom: 10px;
-  margin: 30px 0 20px;
-}
-
-.section-title:first-child {
-  margin-top: 0;
-}
-
-.field {
-  margin-bottom: 18px;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 7px;
-}
-
-input,
-textarea {
-  width: 100%;
-  padding: 12px 13px;
-  border: 1px solid #ccd5d1;
-  border-radius: 8px;
-  font: inherit;
-  color: #17231f;
-  background: white;
-}
-
-textarea {
-  min-height: 110px;
-  resize: vertical;
-}
-
-input:focus,
-textarea:focus {
-  outline: 2px solid #9fb8ae;
-  border-color: #67897b;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.user {
-  font-size: 14px;
-  opacity: .9;
-}
-
-.small {
-  font-size: 13px;
-  color: #69736f;
-  line-height: 1.5;
-}
-
-.site-link {
-  color: white;
-  text-decoration: none;
-  border: 1px solid rgba(255,255,255,.4);
-  padding: 9px 13px;
-  border-radius: 7px;
-  white-space: nowrap;
-}
-
-@media (max-width: 700px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .header-inner {
-    align-items: flex-start;
-    flex-direction: column;
+@media(max-width:700px){
+  .grid{grid-template-columns:1fr}
+  .header{
+    flex-direction:column;
+    align-items:flex-start
   }
 }
 </style>
@@ -221,28 +137,29 @@ textarea:focus {
 <body>
 
 <header>
-  <div class="header-inner">
-    <div>
-      <h1>БФ «ЯРИЛО»</h1>
-      <p>Управление сайтом</p>
-    </div>
-
-    <a class="site-link" href="https://bf-yarilo.ru/" target="_blank">
-      Открыть сайт →
-    </a>
+<div class="header">
+  <div>
+    <h1>БФ «ЯРИЛО»</h1>
+    <p>Управление сайтом</p>
   </div>
+
+  <a class="site"
+     href="https://bf-yarilo.ru/"
+     target="_blank">
+    Открыть сайт →
+  </a>
+</div>
 </header>
 
 <main>
 
 <div id="status" class="status"></div>
 
-<section id="loginPanel" class="panel login-panel">
+<section id="loginPanel" class="panel login">
   <h2>Вход в админку</h2>
 
   <p>
-    Для изменения сайта необходимо войти через аккаунт GitHub,
-    которому принадлежит сайт БФ «ЯРИЛО».
+    Войдите через GitHub, чтобы редактировать сайт фонда.
   </p>
 
   <button id="loginButton" class="primary">
@@ -250,263 +167,240 @@ textarea:focus {
   </button>
 
   <p class="small">
-    Пароль GitHub на сайте не сохраняется.
+    Пароль GitHub здесь не сохраняется.
   </p>
 </section>
 
-
 <section id="editorPanel" class="panel hidden">
 
-  <div class="user">
-    Вы вошли как: <strong id="githubUser">GitHub</strong>
-  </div>
+<p>
+  Вы вошли как:
+  <strong id="githubUser"></strong>
+</p>
 
-  <h2 class="section-title">Фонд</h2>
+<h2 class="section">Основные данные фонда</h2>
 
-  <div class="field">
-    <label for="foundationName">Полное название</label>
-    <input id="foundationName">
-  </div>
+<div class="field">
+<label>Полное название</label>
+<input id="foundationName">
+</div>
 
-  <div class="grid">
-    <div class="field">
-      <label for="shortName">Короткое название</label>
-      <input id="shortName">
-    </div>
+<div class="grid">
+<div class="field">
+<label>Короткое название</label>
+<input id="shortName">
+</div>
 
-    <div class="field">
-      <label for="region">Регион</label>
-      <input id="region">
-    </div>
-  </div>
+<div class="field">
+<label>Регион</label>
+<input id="region">
+</div>
+</div>
 
-  <div class="field">
-    <label for="slogan">Девиз / описание фонда</label>
-    <input id="slogan">
-  </div>
+<div class="field">
+<label>Девиз</label>
+<input id="slogan">
+</div>
 
-  <div class="field">
-    <label for="director">Генеральный директор</label>
-    <input id="director">
-  </div>
+<div class="field">
+<label>Генеральный директор</label>
+<input id="director">
+</div>
 
-  <div class="grid">
-    <div class="field">
-      <label for="phone">Телефон</label>
-      <input id="phone">
-    </div>
+<div class="grid">
+<div class="field">
+<label>Телефон</label>
+<input id="phone">
+</div>
 
-    <div class="field">
-      <label for="website">Адрес сайта</label>
-      <input id="website">
-    </div>
-  </div>
-
-
-  <h2 class="section-title">Главная страница</h2>
-
-  <div class="field">
-    <label for="homeTitle">Главный заголовок</label>
-    <input id="homeTitle">
-  </div>
-
-  <div class="field">
-    <label for="homeDescription">Описание</label>
-    <textarea id="homeDescription"></textarea>
-  </div>
-
-  <div class="field">
-    <label for="missionTitle">Заголовок миссии</label>
-    <input id="missionTitle">
-  </div>
-
-  <div class="field">
-    <label for="missionText">Текст миссии</label>
-    <textarea id="missionText"></textarea>
-  </div>
-
-  <div class="field">
-    <label for="aboutTitle">Заголовок блока о фонде</label>
-    <input id="aboutTitle">
-  </div>
-
-  <div class="field">
-    <label for="aboutText">Текст блока о фонде</label>
-    <textarea id="aboutText"></textarea>
-  </div>
+<div class="field">
+<label>Адрес сайта</label>
+<input id="website">
+</div>
+</div>
 
 
-  <h2 class="section-title">Результаты</h2>
+<h2 class="section">Главная страница</h2>
 
-  <div class="grid">
-    <div class="field">
-      <label for="recipients">Получателей помощи</label>
-      <input id="recipients">
-    </div>
+<div class="field">
+<label>Главный заголовок</label>
+<input id="homeTitle">
+</div>
 
-    <div class="field">
-      <label for="cities">Количество городов</label>
-      <input id="cities">
-    </div>
-  </div>
+<div class="field">
+<label>Описание</label>
+<textarea id="homeDescription"></textarea>
+</div>
 
-  <div class="field">
-    <label for="citiesText">Города</label>
-    <textarea id="citiesText"></textarea>
-  </div>
+<div class="field">
+<label>Заголовок миссии</label>
+<input id="missionTitle">
+</div>
 
+<div class="field">
+<label>Текст миссии</label>
+<textarea id="missionText"></textarea>
+</div>
 
-  <h2 class="section-title">Кому помогаем</h2>
+<div class="field">
+<label>Заголовок блока о фонде</label>
+<input id="aboutTitle">
+</div>
 
-  <div class="field">
-    <label for="disabledTitle">Люди с инвалидностью — заголовок</label>
-    <input id="disabledTitle">
-  </div>
-
-  <div class="field">
-    <label for="disabledText">Описание</label>
-    <textarea id="disabledText"></textarea>
-  </div>
-
-  <div class="field">
-    <label for="rehabTitle">Реабилитационные центры — заголовок</label>
-    <input id="rehabTitle">
-  </div>
-
-  <div class="field">
-    <label for="rehabText">Описание</label>
-    <textarea id="rehabText"></textarea>
-  </div>
-
-  <div class="field">
-    <label for="hospitalsTitle">Госпитали — заголовок</label>
-    <input id="hospitalsTitle">
-  </div>
-
-  <div class="field">
-    <label for="hospitalsText">Описание</label>
-    <textarea id="hospitalsText"></textarea>
-  </div>
-
-  <div class="field">
-    <label for="crisisTitle">Трудная жизненная ситуация — заголовок</label>
-    <input id="crisisTitle">
-  </div>
-
-  <div class="field">
-    <label for="crisisText">Описание</label>
-    <textarea id="crisisText"></textarea>
-  </div>
+<div class="field">
+<label>Текст блока о фонде</label>
+<textarea id="aboutText"></textarea>
+</div>
 
 
-  <h2 class="section-title">Поддержать фонд</h2>
+<h2 class="section">Результаты</h2>
 
-  <div class="field">
-    <label for="supportTitle">Заголовок</label>
-    <input id="supportTitle">
-  </div>
+<div class="grid">
+<div class="field">
+<label>Получателей помощи</label>
+<input id="recipients">
+</div>
 
-  <div class="field">
-    <label for="supportText">Описание</label>
-    <textarea id="supportText"></textarea>
-  </div>
+<div class="field">
+<label>Количество городов</label>
+<input id="cities">
+</div>
+</div>
+
+<div class="field">
+<label>Города</label>
+<textarea id="citiesText"></textarea>
+</div>
 
 
-  <div class="actions">
-    <button id="saveButton" class="save">
-      Сохранить изменения
-    </button>
+<h2 class="section">Направления помощи</h2>
 
-    <button id="reloadButton" class="secondary">
-      Обновить данные
-    </button>
+<div class="field">
+<label>Дети и взрослые с инвалидностью</label>
+<input id="disabledTitle">
+<textarea id="disabledText"></textarea>
+</div>
 
-    <button id="logoutButton" class="danger">
-      Выйти
-    </button>
-  </div>
+<div class="field">
+<label>Реабилитационные центры</label>
+<input id="rehabTitle">
+<textarea id="rehabText"></textarea>
+</div>
 
-  <p class="small">
-    После сохранения изменения записываются в GitHub.
-    GitHub Pages автоматически обновит сайт.
-  </p>
+<div class="field">
+<label>Госпитали и учреждения</label>
+<input id="hospitalsTitle">
+<textarea id="hospitalsText"></textarea>
+</div>
+
+<div class="field">
+<label>Люди в трудной ситуации</label>
+<input id="crisisTitle">
+<textarea id="crisisText"></textarea>
+</div>
+
+
+<h2 class="section">Поддержка фонда</h2>
+
+<div class="field">
+<label>Заголовок</label>
+<input id="supportTitle">
+</div>
+
+<div class="field">
+<label>Описание</label>
+<textarea id="supportText"></textarea>
+</div>
+
+
+<div class="actions">
+
+<button id="saveButton" class="save">
+Сохранить изменения
+</button>
+
+<button id="reloadButton" class="secondary">
+Обновить данные
+</button>
+
+<button id="logoutButton" class="danger">
+Выйти
+</button>
+
+</div>
+
+<p class="small">
+После сохранения изменения записываются в GitHub.
+GitHub Pages автоматически обновит сайт.
+</p>
 
 </section>
 
 </main>
 
 <script>
-const WORKER = "https://yarilo-admin-auth.patriotka0703.workers.dev";
-const OWNER = "patriotka0703-boop";
-const REPO = "bf-yarilo-site";
-const FILE = "site-data.js";
+const WORKER =
+  "https://yarilo-admin-auth.patriotka0703.workers.dev";
 
-let token = sessionStorage.getItem("yarilo_github_token") || "";
+let token =
+  sessionStorage.getItem("yarilo_token") || "";
+
 let currentSha = "";
 
 const $ = id => document.getElementById(id);
 
-function showStatus(message, type = "info") {
-  const el = $("status");
-  el.textContent = message;
-  el.className = "status " + type;
+function status(message,type="info"){
+  const box=$("status");
+  box.textContent=message;
+  box.className="status "+type;
 }
 
-function clearStatus() {
-  $("status").className = "status";
-  $("status").textContent = "";
+function set(id,value){
+  $(id).value=value ?? "";
 }
 
-function utf8ToBase64(text) {
-  const bytes = new TextEncoder().encode(text);
-  let binary = "";
-
-  bytes.forEach(byte => {
-    binary += String.fromCharCode(byte);
-  });
-
-  return btoa(binary);
-}
-
-function base64ToUtf8(base64) {
-  const binary = atob(base64.replace(/\n/g, ""));
-  const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-  return new TextDecoder().decode(bytes);
-}
-
-function getValue(id) {
+function get(id){
   return $(id).value.trim();
 }
 
-function setValue(id, value) {
-  $(id).value = value ?? "";
+function decodeBase64(content){
+  const clean=content.replace(/\s/g,"");
+  const binary=atob(clean);
+  const bytes=Uint8Array.from(
+    binary,
+    c=>c.charCodeAt(0)
+  );
+  return new TextDecoder().decode(bytes);
 }
 
-async function workerRequest(path, options = {}) {
-  const headers = {
-    ...(options.headers || {})
+async function api(path,options={}){
+  const headers={
+    ...(options.headers||{})
   };
 
-  if (token) {
-    headers.Authorization = "Bearer " + token;
+  if(token){
+    headers.Authorization="Bearer "+token;
   }
 
-  const response = await fetch(WORKER + path, {
-    ...options,
-    headers
-  });
+  const response=await fetch(
+    WORKER+path,
+    {
+      ...options,
+      headers
+    }
+  );
 
-  const text = await response.text();
+  const text=await response.text();
 
   let data;
 
-  try {
-    data = JSON.parse(text);
-  } catch {
-    data = { message: text };
+  try{
+    data=JSON.parse(text);
+  }catch{
+    data={message:text};
   }
 
-  if (!response.ok) {
+  if(!response.ok){
     throw new Error(
       data.message ||
       data.error ||
@@ -517,299 +411,316 @@ async function workerRequest(path, options = {}) {
   return data;
 }
 
-async function startLogin() {
-  clearStatus();
-  showStatus("Открываю безопасный вход через GitHub…");
-
-  try {
-    const data = await workerRequest("/login");
-
-    if (!data.url) {
-      throw new Error("Worker не вернул адрес входа.");
-    }
-
-    window.location.href = data.url;
-  } catch (error) {
-    showStatus(error.message, "error");
-  }
+function login(){
+  window.location.href=WORKER+"/login";
 }
 
-async function finishLogin() {
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
+function readToken(){
+  const params=
+    new URLSearchParams(location.search);
 
-  if (!code) {
-    return false;
-  }
+  const received=params.get("token");
 
-  showStatus("Завершаю вход через GitHub…");
+  if(received){
+    token=received;
 
-  try {
-    const data = await workerRequest(
-      "/callback?code=" + encodeURIComponent(code)
+    sessionStorage.setItem(
+      "yarilo_token",
+      token
     );
-
-    if (!data.access_token) {
-      throw new Error("GitHub не вернул ключ доступа.");
-    }
-
-    token = data.access_token;
-    sessionStorage.setItem("yarilo_github_token", token);
 
     history.replaceState(
       {},
       document.title,
-      window.location.pathname
+      location.pathname
     );
-
-    return true;
-  } catch (error) {
-    showStatus(error.message, "error");
-    return false;
   }
 }
 
-async function loadUser() {
-  const data = await workerRequest("/github/user");
+async function checkUser(){
+  const user=await api("/me");
 
-  if (data.login !== OWNER) {
-    throw new Error(
-      "Этот GitHub-аккаунт не имеет доступа к админке."
-    );
-  }
+  $("githubUser").textContent=
+    user.name || user.login;
 
-  $("githubUser").textContent = data.login;
+  $("loginPanel").classList.add("hidden");
+  $("editorPanel").classList.remove("hidden");
 }
 
-async function loadData() {
-  showStatus("Загружаю данные сайта…");
+async function loadData(){
 
-  const data = await workerRequest(
-    "/github/repos/" +
-    OWNER + "/" +
-    REPO +
-    "/contents/" +
-    FILE +
-    "?ref=main"
+  status("Загружаю данные сайта…");
+
+  const file=await api(
+    "/file?path="+
+    encodeURIComponent("site-data.js")
   );
 
-  currentSha = data.sha;
+  currentSha=file.sha;
 
-  const source = base64ToUtf8(data.content);
+  const source=
+    decodeBase64(file.content);
 
-  const match = source.match(
-    /window\.YARILO\s*=\s*([\s\S]*);\s*$/
+  const match=source.match(
+    /window\.YARILO\s*=\s*([\s\S]*?);\s*$/
   );
 
-  if (!match) {
+  if(!match){
     throw new Error(
-      "Не удалось прочитать site-data.js."
+      "Не удалось прочитать site-data.js"
     );
   }
 
-  let siteData;
+  let data;
 
-  try {
-    siteData = Function(
-      '"use strict"; return (' + match[1] + ')'
+  try{
+    data=Function(
+      '"use strict";return ('+
+      match[1]+
+      ')'
     )();
-  } catch {
+  }catch(error){
     throw new Error(
-      "В site-data.js обнаружена ошибка формата."
+      "Ошибка в формате site-data.js"
     );
   }
 
-  fillForm(siteData);
+  fill(data);
 
-  showStatus("Данные сайта загружены.", "ok");
+  status(
+    "Данные сайта загружены.",
+    "ok"
+  );
 }
 
-function fillForm(data) {
-  setValue("foundationName", data.foundation?.name);
-  setValue("shortName", data.foundation?.shortName);
-  setValue("slogan", data.foundation?.slogan);
-  setValue("director", data.foundation?.director);
-  setValue("region", data.foundation?.region);
-  setValue("phone", data.foundation?.phone);
-  setValue("website", data.foundation?.website);
+function fill(data){
 
-  setValue("homeTitle", data.home?.title);
-  setValue("homeDescription", data.home?.description);
-  setValue("missionTitle", data.home?.missionTitle);
-  setValue("missionText", data.home?.missionText);
-  setValue("aboutTitle", data.home?.aboutTitle);
-  setValue("aboutText", data.home?.aboutText);
+  set("foundationName",data.foundation?.name);
+  set("shortName",data.foundation?.shortName);
+  set("slogan",data.foundation?.slogan);
+  set("director",data.foundation?.director);
+  set("region",data.foundation?.region);
+  set("phone",data.foundation?.phone);
+  set("website",data.foundation?.website);
 
-  setValue("recipients", data.results?.recipients);
-  setValue("cities", data.results?.cities);
-  setValue("citiesText", data.results?.citiesText);
+  set("homeTitle",data.home?.title);
+  set("homeDescription",data.home?.description);
+  set("missionTitle",data.home?.missionTitle);
+  set("missionText",data.home?.missionText);
+  set("aboutTitle",data.home?.aboutTitle);
+  set("aboutText",data.home?.aboutText);
 
-  setValue("disabledTitle", data.help?.disabled?.title);
-  setValue("disabledText", data.help?.disabled?.text);
+  set("recipients",data.results?.recipients);
+  set("cities",data.results?.cities);
+  set("citiesText",data.results?.citiesText);
 
-  setValue("rehabTitle", data.help?.rehab?.title);
-  setValue("rehabText", data.help?.rehab?.text);
+  set("disabledTitle",data.help?.disabled?.title);
+  set("disabledText",data.help?.disabled?.text);
 
-  setValue("hospitalsTitle", data.help?.hospitals?.title);
-  setValue("hospitalsText", data.help?.hospitals?.text);
+  set("rehabTitle",data.help?.rehab?.title);
+  set("rehabText",data.help?.rehab?.text);
 
-  setValue("crisisTitle", data.help?.crisis?.title);
-  setValue("crisisText", data.help?.crisis?.text);
+  set("hospitalsTitle",data.help?.hospitals?.title);
+  set("hospitalsText",data.help?.hospitals?.text);
 
-  setValue("supportTitle", data.support?.title);
-  setValue("supportText", data.support?.text);
+  set("crisisTitle",data.help?.crisis?.title);
+  set("crisisText",data.help?.crisis?.text);
+
+  set("supportTitle",data.support?.title);
+  set("supportText",data.support?.text);
 }
 
-function buildData() {
-  const phone = getValue("phone");
+function build(){
+
+  const phone=get("phone");
 
   return {
-    foundation: {
-      name: getValue("foundationName"),
-      shortName: getValue("shortName"),
-      slogan: getValue("slogan"),
-      director: getValue("director"),
-      region: getValue("region"),
-      phone: phone,
-      phoneLink: phone.replace(/[^\d+]/g, ""),
-      website: getValue("website")
+
+    foundation:{
+      name:get("foundationName"),
+      shortName:get("shortName"),
+      slogan:get("slogan"),
+      director:get("director"),
+      region:get("region"),
+      phone:phone,
+      phoneLink:
+        phone.replace(/[^\d+]/g,""),
+      website:get("website")
     },
 
-    home: {
-      title: getValue("homeTitle"),
-      description: getValue("homeDescription"),
-      missionTitle: getValue("missionTitle"),
-      missionText: getValue("missionText"),
-      aboutTitle: getValue("aboutTitle"),
-      aboutText: getValue("aboutText")
+    home:{
+      title:get("homeTitle"),
+      description:get("homeDescription"),
+      missionTitle:get("missionTitle"),
+      missionText:get("missionText"),
+      aboutTitle:get("aboutTitle"),
+      aboutText:get("aboutText")
     },
 
-    results: {
-      recipients: getValue("recipients"),
-      cities: getValue("cities"),
-      citiesText: getValue("citiesText")
+    results:{
+      recipients:get("recipients"),
+      cities:get("cities"),
+      citiesText:get("citiesText")
     },
 
-    help: {
-      disabled: {
-        title: getValue("disabledTitle"),
-        text: getValue("disabledText")
+    help:{
+
+      disabled:{
+        title:get("disabledTitle"),
+        text:get("disabledText")
       },
 
-      rehab: {
-        title: getValue("rehabTitle"),
-        text: getValue("rehabText")
+      rehab:{
+        title:get("rehabTitle"),
+        text:get("rehabText")
       },
 
-      hospitals: {
-        title: getValue("hospitalsTitle"),
-        text: getValue("hospitalsText")
+      hospitals:{
+        title:get("hospitalsTitle"),
+        text:get("hospitalsText")
       },
 
-      crisis: {
-        title: getValue("crisisTitle"),
-        text: getValue("crisisText")
+      crisis:{
+        title:get("crisisTitle"),
+        text:get("crisisText")
       }
+
     },
 
-    support: {
-      title: getValue("supportTitle"),
-      text: getValue("supportText")
+    support:{
+      title:get("supportTitle"),
+      text:get("supportText")
     }
+
   };
 }
 
-async function saveData() {
-  if (!currentSha) {
-    showStatus(
-      "Сначала необходимо загрузить данные сайта.",
+async function save(){
+
+  if(!currentSha){
+    status(
+      "Сначала загрузите данные.",
       "error"
     );
     return;
   }
 
-  $("saveButton").disabled = true;
-  showStatus("Сохраняю изменения…");
+  status("Сохраняю изменения…");
 
-  try {
-    const data = buildData();
+  $("saveButton").disabled=true;
 
-    const source =
-      "window.YARILO = " +
-      JSON.stringify(data, null, 2) +
+  try{
+
+    const content=
+      "window.YARILO = "+
+      JSON.stringify(
+        build(),
+        null,
+        2
+      )+
       ";\n";
 
-    const result = await workerRequest(
-      "/github/repos/" +
-      OWNER + "/" +
-      REPO +
-      "/contents/" +
-      FILE,
+    const result=await api(
+      "/file",
       {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
         },
-        body: JSON.stringify({
-          message: "Update site data from YARILO admin",
-          content: utf8ToBase64(source),
-          sha: currentSha,
-          branch: "main"
+
+        body:JSON.stringify({
+          path:"site-data.js",
+          sha:currentSha,
+          content:content
         })
       }
     );
 
-    if (result.content?.sha) {
-      currentSha = result.content.sha;
+    if(result.content?.sha){
+      currentSha=result.content.sha;
     }
 
-    showStatus(
-      "Готово. Изменения сохранены. Сайт обновится автоматически.",
+    status(
+      "Готово. Изменения сохранены.",
       "ok"
     );
-  } catch (error) {
-    showStatus(error.message, "error");
-  } finally {
-    $("saveButton").disabled = false;
+
+  }catch(error){
+
+    status(
+      error.message,
+      "error"
+    );
+
+  }finally{
+
+    $("saveButton").disabled=false;
+
   }
 }
 
-function logout() {
-  sessionStorage.removeItem("yarilo_github_token");
-  token = "";
-  location.reload();
+function logout(){
+
+  sessionStorage.removeItem(
+    "yarilo_token"
+  );
+
+  token="";
+
+  location.href=location.pathname;
 }
 
-async function openEditor() {
-  try {
-    await loadUser();
+$("loginButton").onclick=login;
 
-    $("loginPanel").classList.add("hidden");
-    $("editorPanel").classList.remove("hidden");
+$("saveButton").onclick=save;
+
+$("reloadButton").onclick=async()=>{
+  try{
+    await loadData();
+  }catch(error){
+    status(error.message,"error");
+  }
+};
+
+$("logoutButton").onclick=logout;
+
+
+(async function(){
+
+  readToken();
+
+  if(!token){
+    return;
+  }
+
+  try{
+
+    await checkUser();
 
     await loadData();
-  } catch (error) {
-    sessionStorage.removeItem("yarilo_github_token");
-    token = "";
 
-    $("editorPanel").classList.add("hidden");
-    $("loginPanel").classList.remove("hidden");
+  }catch(error){
 
-    showStatus(error.message, "error");
+    sessionStorage.removeItem(
+      "yarilo_token"
+    );
+
+    token="";
+
+    $("editorPanel")
+      .classList.add("hidden");
+
+    $("loginPanel")
+      .classList.remove("hidden");
+
+    status(
+      error.message,
+      "error"
+    );
   }
-}
 
-$("loginButton").addEventListener("click", startLogin);
-$("saveButton").addEventListener("click", saveData);
-$("reloadButton").addEventListener("click", loadData);
-$("logoutButton").addEventListener("click", logout);
-
-(async function init() {
-  const loggedInNow = await finishLogin();
-
-  if (loggedInNow || token) {
-    await openEditor();
-  }
 })();
 </script>
 
