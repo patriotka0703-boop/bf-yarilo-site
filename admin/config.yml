@@ -15,29 +15,43 @@ collections:
     label: "Страницы сайта"
     files:
 
-      - name: "about"
-        label: "О фонде"
+      - label: "Главная"
+        name: "home"
+        file: "content/home.md"
+        fields:
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "body", widget: "markdown" }
+
+      - label: "О фонде"
+        name: "about"
         file: "content/about.md"
         fields:
           - { label: "Заголовок", name: "title", widget: "string" }
           - { label: "Текст", name: "body", widget: "markdown" }
 
-      - name: "requisites"
-        label: "Реквизиты фонда"
+      - label: "Помощь"
+        name: "help"
+        file: "content/help.md"
+        fields:
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "body", widget: "markdown" }
+
+      - label: "Реквизиты"
+        name: "requisites"
         file: "content/requisites.md"
         fields:
           - { label: "Заголовок", name: "title", widget: "string" }
-          - { label: "Реквизиты", name: "body", widget: "markdown" }
+          - { label: "Текст", name: "body", widget: "markdown" }
 
-      - name: "contacts"
-        label: "Контакты"
+      - label: "Контакты"
+        name: "contacts"
         file: "content/contacts.md"
         fields:
           - { label: "Заголовок", name: "title", widget: "string" }
-          - { label: "Контакты", name: "body", widget: "markdown" }
+          - { label: "Текст", name: "body", widget: "markdown" }
 
-      - name: "donate"
-        label: "Пожертвования"
+      - label: "Пожертвования"
+        name: "donate"
         file: "content/donate.md"
         fields:
           - { label: "Заголовок", name: "title", widget: "string" }
@@ -54,7 +68,7 @@ collections:
       - { label: "Заголовок", name: "title", widget: "string" }
       - { label: "Дата", name: "date", widget: "datetime" }
       - { label: "Фотография", name: "image", widget: "image", required: false }
-      - { label: "Текст новости", name: "body", widget: "markdown" }
+      - { label: "Текст", name: "body", widget: "markdown" }
 
   - name: "projects"
     label: "Проекты"
@@ -64,6 +78,18 @@ collections:
     slug: "{{slug}}"
 
     fields:
-      - { label: "Название проекта", name: "title", widget: "string" }
+      - { label: "Название", name: "title", widget: "string" }
       - { label: "Фотография", name: "image", widget: "image", required: false }
-      - { label: "Описание проекта", name: "body", widget: "markdown" }
+      - { label: "Описание", name: "body", widget: "markdown" }
+
+  - name: "documents"
+    label: "Документы и отчёты"
+    label_singular: "Документ"
+    folder: "content/documents"
+    create: true
+    slug: "{{slug}}"
+
+    fields:
+      - { label: "Название", name: "title", widget: "string" }
+      - { label: "Дата", name: "date", widget: "datetime", required: false }
+      - { label: "Файл", name: "file", widget: "file" }
