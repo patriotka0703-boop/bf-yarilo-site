@@ -3,114 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Личный кабинет — БФ ЯРИЛО</title>
+
+<title>Админка — БФ ЯРИЛО</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f3f5f4;
-color:#1f2937;
+* {
+  box-sizing: border-box;
 }
 
-header{
-background:#173b32;
-color:white;
-padding:25px 30px;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f5f4;
+  color: #1f2937;
 }
 
-header h1{
-margin:0;
-font-size:26px;
+header {
+  background: #173b32;
+  color: white;
+  padding: 25px 30px;
 }
 
-header p{
-margin:7px 0 0;
-opacity:.8;
+header h1 {
+  margin: 0;
+  font-size: 26px;
 }
 
-.layout{
-display:flex;
-min-height:calc(100vh - 90px);
+header p {
+  margin: 7px 0 0;
+  opacity: .85;
 }
 
-nav{
-width:260px;
-background:white;
-padding:25px 15px;
-border-right:1px solid #ddd;
+/* ВХОД */
+
+.auth {
+  background: white;
+  padding: 15px 30px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-nav a{
-display:block;
-padding:14px;
-margin-bottom:7px;
-border-radius:9px;
-text-decoration:none;
-color:#222;
-font-size:16px;
+.auth-status {
+  margin-right: auto;
+  font-weight: bold;
 }
 
-nav a:hover{
-background:#edf3f1;
+.btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 11px 18px;
+  cursor: pointer;
+  font-size: 15px;
 }
 
-main{
-flex:1;
-padding:35px;
+.btn-login {
+  background: #173b32;
+  color: white;
 }
 
-.panel{
-max-width:950px;
-background:white;
-padding:30px;
-border-radius:16px;
-box-shadow:0 3px 15px rgba(0,0,0,.07);
+.btn-register {
+  background: #e8f1ee;
+  color: #173b32;
 }
 
-.success{
-background:#e8f7ed;
-border:1px solid #b7dfc3;
-padding:15px;
-border-radius:10px;
-margin:20px 0;
+.btn-logout {
+  background: #eee;
+  display: none;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-margin-top:25px;
+/* КАБИНЕТ */
+
+.layout {
+  display: flex;
+  min-height: calc(100vh - 150px);
 }
 
-.card{
-border:1px solid #ddd;
-border-radius:12px;
-padding:20px;
-background:#fafafa;
-cursor:pointer;
+nav {
+  width: 260px;
+  background: white;
+  padding: 25px 15px;
+  border-right: 1px solid #ddd;
 }
 
-.card:hover{
-background:#f0f5f3;
+nav a {
+  display: block;
+  padding: 14px;
+  margin-bottom: 7px;
+  border-radius: 9px;
+  text-decoration: none;
+  color: #222;
+  font-size: 16px;
 }
 
-.card h3{
-margin-top:0;
+nav a:hover {
+  background: #edf3f1;
 }
 
-.logout{
-margin-top:30px;
-border-top:1px solid #ddd;
-padding-top:20px;
+main {
+  flex: 1;
+  padding: 35px;
 }
 
-@media(max-width:750px){
-.layout{display:block}
-nav{width:100%}
-.grid{grid-template-columns:1fr}
+.panel {
+  max-width: 950px;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 3px 15px rgba(0,0,0,.07);
+}
+
+.notice {
+  background: #fff5d9;
+  border: 1px solid #ead59a;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.success {
+  background: #e8f7ed;
+  border: 1px solid #b7dfc3;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
+  display: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.card {
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fafafa;
+  cursor: pointer;
+  text-decoration: none;
+  color: #1f2937;
+}
+
+.card:hover {
+  background: #f0f5f3;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.footer {
+  margin-top: 30px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+@media(max-width:750px) {
+  .layout {
+    display: block;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
@@ -118,113 +183,199 @@ nav{width:100%}
 <body>
 
 <header>
-<h1>Благотворительный фонд «ЯРИЛО»</h1>
-<p>Личный кабинет управления сайтом</p>
+  <h1>Благотворительный фонд «ЯРИЛО»</h1>
+  <p>Личный кабинет управления сайтом</p>
 </header>
+
+<div class="auth">
+
+  <div class="auth-status" id="userStatus">
+    Вход не выполнен
+  </div>
+
+  <button
+    class="btn btn-login"
+    id="loginBtn"
+    type="button">
+    Войти
+  </button>
+
+  <button
+    class="btn btn-register"
+    id="registerBtn"
+    type="button">
+    Регистрация
+  </button>
+
+  <button
+    class="btn btn-logout"
+    id="logoutBtn"
+    type="button">
+    Выйти
+  </button>
+
+</div>
 
 <div class="layout">
 
 <nav>
-<a href="#">🏠 Главная</a>
-<a href="#">✏️ Тексты сайта</a>
-<a href="#">📰 Новости</a>
-<a href="#">📷 Фото и видео</a>
-<a href="#">📁 Документы</a>
-<a href="#">❤️ Реквизиты фонда</a>
-<a href="#">📞 Контакты</a>
-<a href="#">⚙️ Настройки</a>
+  <a href="../index.html">🏠 Главная</a>
+  <a href="../about.html">✏️ О фонде</a>
+  <a href="../news.html">📰 Новости</a>
+  <a href="../projects.html">📋 Проекты</a>
+  <a href="../reports.html">📁 Документы</a>
+  <a href="../requisites.html">❤️ Реквизиты</a>
+  <a href="../contacts.html">📞 Контакты</a>
+  <a href="../donate.html">💳 Пожертвования</a>
 </nav>
 
 <main>
 
 <div class="panel">
 
-<h2>Добро пожаловать в кабинет фонда</h2>
+  <h2>Кабинет фонда</h2>
 
-<p>
-Здесь вы сможете самостоятельно управлять информацией
-на сайте БФ «ЯРИЛО».
-</p>
+  <p>
+    Войдите в систему для управления сайтом БФ «ЯРИЛО».
+  </p>
 
-<div class="success">
-✓ Кабинет установлен и работает
-</div>
+  <div class="notice" id="loginNotice">
+    🔒 Для редактирования сайта необходимо войти.
+  </div>
 
-<h2>Управление сайтом</h2>
+  <div class="success" id="loginSuccess">
+    ✓ Вы вошли в систему.
+  </div>
 
-<div class="grid">
+  <h2>Управление сайтом</h2>
 
-  <a class="card" href="../index.html" target="_blank">
-    <h3>🏠 Главная</h3>
-    <p>Просмотреть главную страницу сайта</p>
-  </a>
+  <div class="grid">
 
-  <a class="card" href="../about.html" target="_blank">
-    <h3>✏️ О фонде</h3>
-    <p>Редактировать информацию о фонде</p>
-  </a>
+    <a class="card" href="../index.html" target="_blank">
+      <h3>🏠 Главная</h3>
+      <p>Главная страница сайта фонда.</p>
+    </a>
 
-  <a class="card" href="../news.html" target="_blank">
-    <h3>📰 Новости</h3>
-    <p>Новости, поездки и деятельность фонда</p>
-  </a>
+    <a class="card" href="../about.html" target="_blank">
+      <h3>✏️ О фонде</h3>
+      <p>Информация о фонде.</p>
+    </a>
 
-  <a class="card" href="../projects.html" target="_blank">
-    <h3>📋 Проекты</h3>
-    <p>Проекты благотворительного фонда</p>
-  </a>
+    <a class="card" href="../news.html" target="_blank">
+      <h3>📰 Новости</h3>
+      <p>Новости, поездки и деятельность фонда.</p>
+    </a>
 
-  <a class="card" href="../reports.html" target="_blank">
-    <h3>📁 Отчёты и документы</h3>
-    <p>Отчёты фонда и документы</p>
-  </a>
+    <a class="card" href="../projects.html" target="_blank">
+      <h3>📋 Проекты</h3>
+      <p>Проекты благотворительного фонда.</p>
+    </a>
 
-  <a class="card" href="../requisites.html" target="_blank">
-    <h3>❤️ Реквизиты</h3>
-    <p>Реквизиты и способы помощи</p>
-  </a>
+    <a class="card" href="../reports.html" target="_blank">
+      <h3>📁 Отчёты и документы</h3>
+      <p>Документы и отчётность фонда.</p>
+    </a>
 
-  <a class="card" href="../contacts.html" target="_blank">
-    <h3>☎️ Контакты</h3>
-    <p>Телефон, электронная почта и контакты</p>
-  </a>
+    <a class="card" href="../requisites.html" target="_blank">
+      <h3>❤️ Реквизиты</h3>
+      <p>Реквизиты и способы помощи.</p>
+    </a>
 
-  <a class="card" href="../donate.html" target="_blank">
-    <h3>💳 Пожертвования</h3>
-    <p>Страница помощи фонду</p>
-  </a>
+    <a class="card" href="../contacts.html" target="_blank">
+      <h3>☎️ Контакты</h3>
+      <p>Телефон, электронная почта и контакты.</p>
+    </a>
 
-</div>
+    <a class="card" href="../donate.html" target="_blank">
+      <h3>💳 Пожертвования</h3>
+      <p>Страница помощи фонду.</p>
+    </a>
 
-</div>
+  </div>
 
-<div class="logout">
-<strong>БФ «ЯРИЛО»</strong><br>
-Панель управления сайтом
-</div>
+  <div class="footer">
+    <strong>БФ «ЯРИЛО»</strong><br>
+    Панель управления сайтом
+  </div>
 
 </div>
 
 </main>
 </div>
+
 <script src="config.js"></script>
+
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const status = document.getElementById("userStatus");
+  const loginBtn = document.getElementById("loginBtn");
+  const registerBtn = document.getElementById("registerBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const notice = document.getElementById("loginNotice");
+  const success = document.getElementById("loginSuccess");
+
+  function updateUser(user) {
+
+    if (user) {
+
+      status.textContent = "Выполнен вход: " + user.email;
+
+      loginBtn.style.display = "none";
+      registerBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+
+      notice.style.display = "none";
+      success.style.display = "block";
+
+    } else {
+
+      status.textContent = "Вход не выполнен";
+
+      loginBtn.style.display = "inline-block";
+      registerBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+
+      notice.style.display = "block";
+      success.style.display = "none";
+    }
+  }
+
   if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
+
+    netlifyIdentity.on("init", updateUser);
+
+    netlifyIdentity.on("login", function(user) {
+      updateUser(user);
+      netlifyIdentity.close();
     });
 
-    window.netlifyIdentity.on("logout", () => {
-      document.location.href = "/";
+    netlifyIdentity.on("logout", function() {
+      updateUser(null);
     });
+
+    loginBtn.addEventListener("click", function() {
+      netlifyIdentity.open("login");
+    });
+
+    registerBtn.addEventListener("click", function() {
+      netlifyIdentity.open("signup");
+    });
+
+    logoutBtn.addEventListener("click", function() {
+      netlifyIdentity.logout();
+    });
+
+  } else {
+
+    status.textContent = "Сервис входа не загрузился";
+
   }
-</script> 
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+});
+</script>
+
 </body>
 </html>
