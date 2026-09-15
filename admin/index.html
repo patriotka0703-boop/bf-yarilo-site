@@ -9,17 +9,20 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#f4f6f5;
   color:#17231f
 }
+
 header{
   background:#10251f;
   color:#fff;
   padding:24px 20px
 }
+
 .header{
   max-width:1000px;
   margin:auto;
@@ -28,8 +31,10 @@ header{
   align-items:center;
   gap:20px
 }
+
 h1{margin:0 0 5px;font-size:28px}
 header p{margin:0;opacity:.8}
+
 .site{
   color:#fff;
   text-decoration:none;
@@ -37,11 +42,13 @@ header p{margin:0;opacity:.8}
   padding:10px 14px;
   border-radius:8px
 }
+
 main{
   max-width:1000px;
   margin:30px auto;
   padding:0 20px 60px
 }
+
 .panel{
   background:#fff;
   padding:25px;
@@ -49,31 +56,38 @@ main{
   box-shadow:0 2px 12px rgba(0,0,0,.06);
   margin-bottom:20px
 }
+
 .login{
   text-align:center;
   padding:50px 25px
 }
+
 .hidden{display:none!important}
+
 .status{
   display:none;
   padding:14px 16px;
   margin-bottom:20px;
   border-radius:9px
 }
+
 .status.info{
   display:block;
   background:#edf2f0
 }
+
 .status.ok{
   display:block;
   background:#e7f5eb;
   color:#176238
 }
+
 .status.error{
   display:block;
   background:#fdeaea;
   color:#8a2222
 }
+
 button{
   border:0;
   border-radius:8px;
@@ -82,16 +96,25 @@ button{
   font-weight:bold;
   cursor:pointer
 }
+
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed
+}
+
 .primary{background:#10251f;color:#fff}
 .save{background:#18794e;color:#fff}
 .secondary{background:#e7ece9;color:#17231f}
 .danger{background:#8d2727;color:#fff}
+
 .field{margin-bottom:18px}
+
 label{
   display:block;
   font-weight:bold;
   margin-bottom:7px
 }
+
 input,textarea{
   width:100%;
   padding:12px;
@@ -99,33 +122,53 @@ input,textarea{
   border-radius:8px;
   font:inherit
 }
+
 textarea{
   min-height:105px;
   resize:vertical
 }
+
+textarea.long{
+  min-height:150px
+}
+
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:18px
 }
+
 .section{
   margin:32px 0 20px;
   padding-bottom:10px;
   border-bottom:1px solid #e3e8e5
 }
+
+.section:first-of-type{
+  margin-top:20px
+}
+
+.subsection{
+  margin:25px 0 15px;
+  font-size:18px
+}
+
 .actions{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
-  margin-top:25px
+  margin-top:30px
 }
+
 .small{
   color:#69736f;
   font-size:13px;
   line-height:1.5
 }
+
 @media(max-width:700px){
   .grid{grid-template-columns:1fr}
+
   .header{
     flex-direction:column;
     align-items:flex-start
@@ -171,6 +214,7 @@ textarea{
   </p>
 </section>
 
+
 <section id="editorPanel" class="panel hidden">
 
 <p>
@@ -178,165 +222,261 @@ textarea{
   <strong id="githubUser"></strong>
 </p>
 
+
 <h2 class="section">Основные данные фонда</h2>
 
 <div class="field">
-<label>Полное название</label>
-<input id="foundationName">
+  <label>Полное название</label>
+  <input id="foundationName">
 </div>
 
 <div class="grid">
-<div class="field">
-<label>Короткое название</label>
-<input id="shortName">
+  <div class="field">
+    <label>Короткое название</label>
+    <input id="shortName">
+  </div>
+
+  <div class="field">
+    <label>Регион</label>
+    <input id="region">
+  </div>
 </div>
 
 <div class="field">
-<label>Регион</label>
-<input id="region">
-</div>
-</div>
-
-<div class="field">
-<label>Девиз</label>
-<input id="slogan">
+  <label>Девиз</label>
+  <input id="slogan">
 </div>
 
 <div class="field">
-<label>Генеральный директор</label>
-<input id="director">
+  <label>Генеральный директор</label>
+  <input id="director">
 </div>
 
 <div class="grid">
-<div class="field">
-<label>Телефон</label>
-<input id="phone">
-</div>
+  <div class="field">
+    <label>Телефон</label>
+    <input id="phone">
+  </div>
 
-<div class="field">
-<label>Адрес сайта</label>
-<input id="website">
-</div>
+  <div class="field">
+    <label>Адрес сайта</label>
+    <input id="website">
+  </div>
 </div>
 
 
 <h2 class="section">Главная страница</h2>
 
 <div class="field">
-<label>Главный заголовок</label>
-<input id="homeTitle">
+  <label>Главный заголовок</label>
+  <input id="homeTitle">
 </div>
 
 <div class="field">
-<label>Описание</label>
-<textarea id="homeDescription"></textarea>
+  <label>Описание</label>
+  <textarea id="homeDescription"></textarea>
 </div>
 
 <div class="field">
-<label>Заголовок миссии</label>
-<input id="missionTitle">
+  <label>Заголовок миссии</label>
+  <input id="missionTitle">
 </div>
 
 <div class="field">
-<label>Текст миссии</label>
-<textarea id="missionText"></textarea>
+  <label>Текст миссии</label>
+  <textarea id="missionText"></textarea>
 </div>
 
 <div class="field">
-<label>Заголовок блока о фонде</label>
-<input id="aboutTitle">
+  <label>Заголовок блока о фонде на главной</label>
+  <input id="aboutTitle">
 </div>
 
 <div class="field">
-<label>Текст блока о фонде</label>
-<textarea id="aboutText"></textarea>
+  <label>Текст блока о фонде на главной</label>
+  <textarea id="aboutText"></textarea>
+</div>
+
+
+<h2 class="section">Страница «О фонде»</h2>
+
+<div class="field">
+  <label>Метка над заголовком</label>
+  <input id="aboutPageEyebrow">
+</div>
+
+<div class="field">
+  <label>Заголовок страницы</label>
+  <input id="aboutPageTitle">
+</div>
+
+<div class="field">
+  <label>Вводный текст</label>
+  <textarea id="aboutPageLead"></textarea>
+</div>
+
+
+<h3 class="subsection">История фонда / наша работа</h3>
+
+<div class="field">
+  <label>Заголовок истории</label>
+  <input id="historyTitle">
+</div>
+
+<div class="field">
+  <label>Первый абзац истории</label>
+  <textarea class="long" id="historyText1"></textarea>
+</div>
+
+<div class="field">
+  <label>Второй абзац истории</label>
+  <textarea class="long" id="historyText2"></textarea>
+</div>
+
+
+<h3 class="subsection">Принципы работы</h3>
+
+<div class="grid">
+  <div class="field">
+    <label>Метка раздела</label>
+    <input id="principlesEyebrow">
+  </div>
+
+  <div class="field">
+    <label>Заголовок раздела</label>
+    <input id="principlesTitle">
+  </div>
+</div>
+
+<div class="field">
+  <label>Принцип №1 — название</label>
+  <input id="principle1Title">
+</div>
+
+<div class="field">
+  <label>Принцип №1 — описание</label>
+  <textarea id="principle1Text"></textarea>
+</div>
+
+<div class="field">
+  <label>Принцип №2 — название</label>
+  <input id="principle2Title">
+</div>
+
+<div class="field">
+  <label>Принцип №2 — описание</label>
+  <textarea id="principle2Text"></textarea>
+</div>
+
+<div class="field">
+  <label>Принцип №3 — название</label>
+  <input id="principle3Title">
+</div>
+
+<div class="field">
+  <label>Принцип №3 — описание</label>
+  <textarea id="principle3Text"></textarea>
+</div>
+
+
+<h3 class="subsection">Блок «Хотите помочь?»</h3>
+
+<div class="field">
+  <label>Заголовок</label>
+  <input id="aboutCtaTitle">
+</div>
+
+<div class="field">
+  <label>Текст</label>
+  <textarea id="aboutCtaText"></textarea>
 </div>
 
 
 <h2 class="section">Результаты</h2>
 
 <div class="grid">
-<div class="field">
-<label>Получателей помощи</label>
-<input id="recipients">
+  <div class="field">
+    <label>Получателей помощи</label>
+    <input id="recipients">
+  </div>
+
+  <div class="field">
+    <label>Количество городов</label>
+    <input id="cities">
+  </div>
 </div>
 
 <div class="field">
-<label>Количество городов</label>
-<input id="cities">
-</div>
-</div>
-
-<div class="field">
-<label>Города</label>
-<textarea id="citiesText"></textarea>
+  <label>Города</label>
+  <textarea id="citiesText"></textarea>
 </div>
 
 
 <h2 class="section">Направления помощи</h2>
 
 <div class="field">
-<label>Дети и взрослые с инвалидностью</label>
-<input id="disabledTitle">
-<textarea id="disabledText"></textarea>
+  <label>Дети и взрослые с инвалидностью</label>
+  <input id="disabledTitle">
+  <textarea id="disabledText"></textarea>
 </div>
 
 <div class="field">
-<label>Реабилитационные центры</label>
-<input id="rehabTitle">
-<textarea id="rehabText"></textarea>
+  <label>Реабилитационные центры</label>
+  <input id="rehabTitle">
+  <textarea id="rehabText"></textarea>
 </div>
 
 <div class="field">
-<label>Госпитали и учреждения</label>
-<input id="hospitalsTitle">
-<textarea id="hospitalsText"></textarea>
+  <label>Госпитали и учреждения</label>
+  <input id="hospitalsTitle">
+  <textarea id="hospitalsText"></textarea>
 </div>
 
 <div class="field">
-<label>Люди в трудной ситуации</label>
-<input id="crisisTitle">
-<textarea id="crisisText"></textarea>
+  <label>Люди в трудной ситуации</label>
+  <input id="crisisTitle">
+  <textarea id="crisisText"></textarea>
 </div>
 
 
 <h2 class="section">Поддержка фонда</h2>
 
 <div class="field">
-<label>Заголовок</label>
-<input id="supportTitle">
+  <label>Заголовок</label>
+  <input id="supportTitle">
 </div>
 
 <div class="field">
-<label>Описание</label>
-<textarea id="supportText"></textarea>
+  <label>Описание</label>
+  <textarea id="supportText"></textarea>
 </div>
 
 
 <div class="actions">
 
-<button id="saveButton" class="save">
-Сохранить изменения
-</button>
+  <button id="saveButton" class="save">
+    Сохранить изменения
+  </button>
 
-<button id="reloadButton" class="secondary">
-Обновить данные
-</button>
+  <button id="reloadButton" class="secondary">
+    Обновить данные
+  </button>
 
-<button id="logoutButton" class="danger">
-Выйти
-</button>
+  <button id="logoutButton" class="danger">
+    Выйти
+  </button>
 
 </div>
 
 <p class="small">
-После сохранения изменения записываются в GitHub.
-GitHub Pages автоматически обновит сайт.
+  После сохранения изменения записываются в GitHub.
+  GitHub Pages автоматически обновит сайт.
 </p>
 
 </section>
 
 </main>
+
 
 <script>
 const WORKER =
@@ -356,20 +496,26 @@ function status(message,type="info"){
 }
 
 function set(id,value){
-  $(id).value=value ?? "";
+  const element=$(id);
+  if(element){
+    element.value=value ?? "";
+  }
 }
 
 function get(id){
-  return $(id).value.trim();
+  const element=$(id);
+  return element ? element.value.trim() : "";
 }
 
 function decodeBase64(content){
   const clean=content.replace(/\s/g,"");
   const binary=atob(clean);
+
   const bytes=Uint8Array.from(
     binary,
     c=>c.charCodeAt(0)
   );
+
   return new TextDecoder().decode(bytes);
 }
 
@@ -510,6 +656,29 @@ function fill(data){
   set("aboutTitle",data.home?.aboutTitle);
   set("aboutText",data.home?.aboutText);
 
+  set("aboutPageEyebrow",data.aboutPage?.eyebrow);
+  set("aboutPageTitle",data.aboutPage?.title);
+  set("aboutPageLead",data.aboutPage?.lead);
+
+  set("historyTitle",data.aboutPage?.historyTitle);
+  set("historyText1",data.aboutPage?.historyText1);
+  set("historyText2",data.aboutPage?.historyText2);
+
+  set("principlesEyebrow",data.aboutPage?.principlesEyebrow);
+  set("principlesTitle",data.aboutPage?.principlesTitle);
+
+  set("principle1Title",data.aboutPage?.principle1Title);
+  set("principle1Text",data.aboutPage?.principle1Text);
+
+  set("principle2Title",data.aboutPage?.principle2Title);
+  set("principle2Text",data.aboutPage?.principle2Text);
+
+  set("principle3Title",data.aboutPage?.principle3Title);
+  set("principle3Text",data.aboutPage?.principle3Text);
+
+  set("aboutCtaTitle",data.aboutPage?.ctaTitle);
+  set("aboutCtaText",data.aboutPage?.ctaText);
+
   set("recipients",data.results?.recipients);
   set("cities",data.results?.cities);
   set("citiesText",data.results?.citiesText);
@@ -555,6 +724,31 @@ function build(){
       missionText:get("missionText"),
       aboutTitle:get("aboutTitle"),
       aboutText:get("aboutText")
+    },
+
+    aboutPage:{
+      eyebrow:get("aboutPageEyebrow"),
+      title:get("aboutPageTitle"),
+      lead:get("aboutPageLead"),
+
+      historyTitle:get("historyTitle"),
+      historyText1:get("historyText1"),
+      historyText2:get("historyText2"),
+
+      principlesEyebrow:get("principlesEyebrow"),
+      principlesTitle:get("principlesTitle"),
+
+      principle1Title:get("principle1Title"),
+      principle1Text:get("principle1Text"),
+
+      principle2Title:get("principle2Title"),
+      principle2Text:get("principle2Text"),
+
+      principle3Title:get("principle3Title"),
+      principle3Text:get("principle3Text"),
+
+      ctaTitle:get("aboutCtaTitle"),
+      ctaText:get("aboutCtaText")
     },
 
     results:{
@@ -686,7 +880,6 @@ $("reloadButton").onclick=async()=>{
 
 $("logoutButton").onclick=logout;
 
-
 (async function(){
 
   readToken();
@@ -698,7 +891,6 @@ $("logoutButton").onclick=logout;
   try{
 
     await checkUser();
-
     await loadData();
 
   }catch(error){
