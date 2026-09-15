@@ -1,0 +1,69 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: "ru"
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+publish_mode: simple
+
+collections:
+
+  - name: "pages"
+    label: "Страницы сайта"
+    files:
+
+      - name: "about"
+        label: "О фонде"
+        file: "content/about.md"
+        fields:
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "body", widget: "markdown" }
+
+      - name: "requisites"
+        label: "Реквизиты фонда"
+        file: "content/requisites.md"
+        fields:
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Реквизиты", name: "body", widget: "markdown" }
+
+      - name: "contacts"
+        label: "Контакты"
+        file: "content/contacts.md"
+        fields:
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Контакты", name: "body", widget: "markdown" }
+
+      - name: "donate"
+        label: "Пожертвования"
+        file: "content/donate.md"
+        fields:
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "body", widget: "markdown" }
+
+  - name: "news"
+    label: "Новости"
+    label_singular: "Новость"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+
+    fields:
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Дата", name: "date", widget: "datetime" }
+      - { label: "Фотография", name: "image", widget: "image", required: false }
+      - { label: "Текст новости", name: "body", widget: "markdown" }
+
+  - name: "projects"
+    label: "Проекты"
+    label_singular: "Проект"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+
+    fields:
+      - { label: "Название проекта", name: "title", widget: "string" }
+      - { label: "Фотография", name: "image", widget: "image", required: false }
+      - { label: "Описание проекта", name: "body", widget: "markdown" }
