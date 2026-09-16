@@ -334,9 +334,34 @@ textarea.long{
 </div>
 <div class="field">
   <label>Фото истории фонда</label>
-  <input type="file" id="historyImageFile" accept="image/jpeg,image/png,image/webp">
+
+  <div id="historyImagePreviewBox" style="display:none;margin-bottom:12px;">
+    <img
+      id="historyImagePreview"
+      src=""
+      alt="Фото истории фонда"
+      style="max-width:100%;max-height:350px;border-radius:10px;display:block;margin-bottom:10px;"
+    >
+
+    <button
+      type="button"
+      id="deleteHistoryImage"
+      class="danger">
+      Удалить фото
+    </button>
+  </div>
+
+  <input
+    type="file"
+    id="historyImageFile"
+    accept="image/jpeg,image/png,image/webp"
+  >
+
   <input type="hidden" id="historyImage">
-  <p class="small">Можно загрузить JPG, PNG или WEBP.</p>
+
+  <p class="small">
+    Выберите новое фото, чтобы загрузить или заменить существующее.
+  </p>
 </div>
 
 <div class="field">
