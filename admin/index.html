@@ -166,6 +166,26 @@ textarea.long{
   line-height:1.5
 }
 
+
+.media-preview{
+  margin:12px 0;
+  padding:12px;
+  border:1px solid #e3e8e5;
+  border-radius:10px;
+  background:#f8faf9
+}
+
+.media-preview img,
+.media-preview video{
+  display:block;
+  width:100%;
+  max-width:520px;
+  max-height:360px;
+  object-fit:contain;
+  border-radius:10px;
+  margin-bottom:10px
+}
+
 @media(max-width:700px){
   .grid{grid-template-columns:1fr}
 
@@ -335,18 +355,10 @@ textarea.long{
 <div class="field">
   <label>Фото истории фонда</label>
 
-  <div id="historyImagePreviewBox" style="display:none;margin-bottom:12px;">
-    <img
-      id="historyImagePreview"
-      src=""
-      alt="Фото истории фонда"
-      style="max-width:100%;max-height:350px;border-radius:10px;display:block;margin-bottom:10px;"
-    >
+  <div id="historyImagePreviewBox" class="media-preview hidden">
+    <img id="historyImagePreview" src="" alt="Фото истории фонда">
 
-    <button
-      type="button"
-      id="deleteHistoryImage"
-      class="danger">
+    <button type="button" id="deleteHistoryImage" class="danger">
       Удалить фото
     </button>
   </div>
@@ -366,10 +378,28 @@ textarea.long{
 
 <div class="field">
   <label>Видео истории фонда</label>
-  <input type="file" id="historyVideoFile" accept="video/mp4,video/webm">
+
+  <div id="historyVideoPreviewBox" class="media-preview hidden">
+    <video id="historyVideoPreview" controls preload="metadata"></video>
+
+    <button type="button" id="deleteHistoryVideo" class="danger">
+      Удалить видео
+    </button>
+  </div>
+
+  <input
+    type="file"
+    id="historyVideoFile"
+    accept="video/mp4,video/webm"
+  >
+
   <input type="hidden" id="historyVideo">
-  <p class="small">Можно загрузить MP4 или WEBM.</p>
+
+  <p class="small">
+    Выберите новое видео, чтобы загрузить или заменить существующее.
+  </p>
 </div>
+
 <h3 class="subsection">Принципы работы</h3>
 
 <div class="grid">
@@ -542,6 +572,49 @@ function get(id){
   return element ? element.value.trim() : "";
 }
 
+function mediaUrl(path){
+  if(!path) return "";
+
+  if(/^https?:\/\//i.test(path)){
+    return path;
+  }
+
+  return "/" + String(path).replace(/^\/+/,"");
+}
+
+function showHistoryImage(path){
+  const box=$("historyImagePreviewBox");
+  const image=$("historyImagePreview");
+
+  if(!box || !image) return;
+
+  if(path){
+    image.src=mediaUrl(path)+"?v="+Date.now();
+    box.classList.remove("hidden");
+  }else{
+    image.removeAttribute("src");
+    box.classList.add("hidden");
+  }
+}
+
+function showHistoryVideo(path){
+  const box=$("historyVideoPreviewBox");
+  const video=$("historyVideoPreview");
+
+  if(!box || !video) return;
+
+  if(path){
+    video.src=mediaUrl(path)+"?v="+Date.now();
+    box.classList.remove("hidden");
+    video.load();
+  }else{
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+    box.classList.add("hidden");
+  }
+}
+
 function decodeBase64(content){
   const clean=content.replace(/\s/g,"");
   const binary=atob(clean);
@@ -700,6 +773,8 @@ function fill(data){
   set("historyText2",data.aboutPage?.historyText2);
 set("historyImage",data.aboutPage?.historyImage);
 set("historyVideo",data.aboutPage?.historyVideo);
+  showHistoryImage(data.aboutPage?.historyImage || "");
+  showHistoryVideo(data.aboutPage?.historyVideo || "");
   set("principlesEyebrow",data.aboutPage?.principlesEyebrow);
   set("principlesTitle",data.aboutPage?.principlesTitle);
 
@@ -902,38 +977,54 @@ function logout(){
 
   location.href=location.pathname;
 }
-async function uploadMedia(inputId, hiddenId, path){
+async function fileToBase64(file){
+  return await new Promise((resolve,reject)=>{
+    const reader=new FileReader();
 
+    reader.onload=()=>{
+      const result=String(reader.result || "");
+      const comma=result.indexOf(",");
+
+      if(comma === -1){
+        reject(new Error("Не удалось прочитать файл."));
+        return;
+      }
+
+      resolve(result.slice(comma+1));
+    };
+
+    reader.onerror=()=>{
+      reject(new Error("Не удалось прочитать файл."));
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+async function getExistingFileSha(path){
+  try{
+    const oldFile=await api(
+      "/file?path="+encodeURIComponent(path)
+    );
+
+    return oldFile.sha || "";
+  }catch(error){
+    return "";
+  }
+}
+
+async function uploadMedia(inputId,hiddenId,path,kind){
   const input=$(inputId);
-  const file=input.files[0];
+  const file=input?.files?.[0];
 
   if(!file) return;
 
   status("Загружаю файл…");
+  input.disabled=true;
 
   try{
-
-    const content=await new Promise((resolve,reject)=>{
-      const reader=new FileReader();
-
-      reader.onload=()=>{
-        resolve(reader.result.split(",")[1]);
-      };
-
-      reader.onerror=reject;
-      reader.readAsDataURL(file);
-    });
-
-    let sha="";
-
-    try{
-      const oldFile=await api(
-        "/file?path="+encodeURIComponent(path)
-      );
-      sha=oldFile.sha || "";
-    }catch(error){
-      sha="";
-    }
+    const content=await fileToBase64(file);
+    const sha=await getExistingFileSha(path);
 
     await api("/file",{
       method:"POST",
@@ -949,40 +1040,63 @@ async function uploadMedia(inputId, hiddenId, path){
     });
 
     set(hiddenId,path);
-if (hiddenId === "historyImage") {
-  const oldPreview = document.getElementById("historyImagePreview");
-  if (oldPreview) oldPreview.remove();
 
-  const preview = document.createElement("img");
-  preview.id = "historyImagePreview";
-  preview.src = "/" + path;
-  preview.style.maxWidth = "400px";
-  preview.style.width = "100%";
-  preview.style.marginTop = "10px";
-  preview.style.borderRadius = "12px";
+    if(kind === "image"){
+      showHistoryImage(path);
+    }
 
-  document.getElementById("historyImageFile").after(preview);
-}
+    if(kind === "video"){
+      showHistoryVideo(path);
+    }
+
     status(
-      "Файл загружен. Нажмите «Сохранить изменения».",
+      "Файл загружен. Теперь нажмите «Сохранить изменения».",
       "ok"
     );
 
   }catch(error){
     status(error.message,"error");
+  }finally{
+    input.disabled=false;
+    input.value="";
   }
+}
+
+function removeMediaFromPage(hiddenId,kind){
+  set(hiddenId,"");
+
+  if(kind === "image"){
+    showHistoryImage("");
+  }
+
+  if(kind === "video"){
+    showHistoryVideo("");
+  }
+
+  status(
+    "Файл убран со страницы. Нажмите «Сохранить изменения».",
+    "ok"
+  );
 }
 
 $("historyImageFile").onchange=()=>{
   const file=$("historyImageFile").files[0];
   if(!file) return;
 
-  const ext=file.name.split(".").pop().toLowerCase();
+  const ext=(file.name.split(".").pop() || "").toLowerCase();
+  const allowed=["jpg","jpeg","png","webp"];
+
+  if(!allowed.includes(ext)){
+    $("historyImageFile").value="";
+    status("Разрешены только JPG, JPEG, PNG или WEBP.","error");
+    return;
+  }
 
   uploadMedia(
     "historyImageFile",
     "historyImage",
-   "uploads/history-image."+ext
+    "uploads/history-image."+ext,
+    "image"
   );
 };
 
@@ -990,14 +1104,31 @@ $("historyVideoFile").onchange=()=>{
   const file=$("historyVideoFile").files[0];
   if(!file) return;
 
-  const ext=file.name.split(".").pop().toLowerCase();
+  const ext=(file.name.split(".").pop() || "").toLowerCase();
+  const allowed=["mp4","webm"];
+
+  if(!allowed.includes(ext)){
+    $("historyVideoFile").value="";
+    status("Разрешены только MP4 или WEBM.","error");
+    return;
+  }
 
   uploadMedia(
     "historyVideoFile",
     "historyVideo",
-   "uploads/history-video."+ext
+    "uploads/history-video."+ext,
+    "video"
   );
 };
+
+$("deleteHistoryImage").onclick=()=>{
+  removeMediaFromPage("historyImage","image");
+};
+
+$("deleteHistoryVideo").onclick=()=>{
+  removeMediaFromPage("historyVideo","video");
+};
+
 $("loginButton").onclick=login;
 
 $("saveButton").onclick=save;
