@@ -203,6 +203,35 @@ textarea.long{
     align-items:flex-start
   }
 }
+  /* Галерея фотографий в админке */
+.admin-photo-gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.admin-photo-gallery img{
+  width:120px;
+  height:90px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid #d8ddd9;
+  cursor:pointer;
+  background:#f5f5f5;
+}
+
+.admin-photo-gallery img:hover{
+  transform:scale(1.04);
+}
+
+#historyImagePreviewBox{
+  padding:14px;
+}
+
+#historyImagePreviewBox.hidden{
+  display:none;
+}
 </style>
 </head>
 
@@ -592,21 +621,42 @@ function mediaUrl(path){
 
   return "/" + String(path).replace(/^\/+/,"");
 }
-
-function showHistoryImage(path){
+function showHistoryImage(paths){
   const box=$("historyImagePreviewBox");
-  const image=$("historyImagePreview");
+  const gallery=$("historyImageGallery");
 
-  if(!box || !image) return;
+  if(!box || !gallery) return;
 
-  if(path){
-    image.src=mediaUrl(path)+"?v="+Date.now();
+  gallery.innerHTML="";
+
+  let photos=[];
+
+  if(Array.isArray(paths)){
+    photos=paths;
+  }else if(paths){
+    photos=[paths];
+  }
+
+  if(photos.length){
+    photos.forEach(path=>{
+      const img=document.createElement("img");
+      img.src=mediaUrl(path)+"?v="+Date.now();
+      img.alt="Фото истории фонда";
+      img.loading="lazy";
+
+      img.onclick=()=>{
+        window.open(mediaUrl(path),"_blank");
+      };
+
+      gallery.appendChild(img);
+    });
+
     box.classList.remove("hidden");
   }else{
-    image.removeAttribute("src");
     box.classList.add("hidden");
   }
 }
+
 
 function showHistoryVideo(path){
   const box=$("historyVideoPreviewBox");
@@ -1152,9 +1202,7 @@ $("historyImageFile").onchange=async()=>{
 
     set("historyImage",allImages.join(","));
 
-    if(allImages.length){
-      showHistoryImage(allImages[0]);
-    }
+   showHistoryImage(allImages);
 
     status(
       "Фотографии загружены. Теперь нажмите «Сохранить изменения».",
