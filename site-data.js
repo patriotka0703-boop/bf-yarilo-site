@@ -48,7 +48,13 @@ window.YARILO = {
     "disabled": {
       "title": "Дети и взрослые с инвалидностью",
       "text": "Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.",
-      "photos": [],
+      "photos": [
+        "uploads/admin-f736b6e5-f889-47d9-a914-9951ecce9b0b.jpg",
+        "uploads/admin-f06fbfbe-4ef2-47a9-a6b4-a43c13fcab89.jpg",
+        "uploads/admin-6d8fd7f8-923e-45a0-8403-c7e5b35f99ec.jpg",
+        "uploads/admin-94f1053d-085f-45fa-a2a8-753d122ba637.jpg",
+        "uploads/admin-9c6c55a8-fe11-4ed7-b3f0-c7802a0e85ff.jpg"
+      ],
       "videos": [],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы."
@@ -72,13 +78,7 @@ window.YARILO = {
     "crisis": {
       "title": "Люди в трудной ситуации",
       "text": "Одежда, предметы первой необходимости и адресная поддержка.",
-      "photos": [
-        "uploads/admin-561d9eed-e44d-4a5e-87c8-5cf2be4ddd3e.jpg",
-        "uploads/admin-534fa348-5e52-4478-b1e0-1c65bf0e7eea.jpg",
-        "uploads/admin-78410a95-418d-4f2d-afa2-a878d1500936.jpg",
-        "uploads/admin-928a2c25-a536-4993-a0b2-ce6bad1ba7b0.jpg",
-        "uploads/admin-b1710b1a-fc5c-48d5-a421-661108455f74.jpg"
-      ],
+      "photos": [],
       "videos": [],
       "pageTitle": "Помощь людям в трудной жизненной ситуации",
       "pageText": "Поддерживаем людей, которым не хватает базовых вещей и ресурсов."
