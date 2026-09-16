@@ -949,7 +949,20 @@ async function uploadMedia(inputId, hiddenId, path){
     });
 
     set(hiddenId,path);
+if (hiddenId === "historyImage") {
+  const oldPreview = document.getElementById("historyImagePreview");
+  if (oldPreview) oldPreview.remove();
 
+  const preview = document.createElement("img");
+  preview.id = "historyImagePreview";
+  preview.src = "/" + path;
+  preview.style.maxWidth = "400px";
+  preview.style.width = "100%";
+  preview.style.marginTop = "10px";
+  preview.style.borderRadius = "12px";
+
+  document.getElementById("historyImageFile").after(preview);
+}
     status(
       "Файл загружен. Нажмите «Сохранить изменения».",
       "ok"
