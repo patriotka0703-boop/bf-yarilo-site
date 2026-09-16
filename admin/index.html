@@ -175,7 +175,16 @@ textarea.long{
   background:#f8faf9
 }
 
-.media-preview img,
+.media-preview img{
+  display:block;
+  width:140px;
+  height:100px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:10px;
+  cursor:zoom-in;
+}
+
 .media-preview video{
   display:block;
   width:100%;
@@ -183,7 +192,7 @@ textarea.long{
   max-height:360px;
   object-fit:contain;
   border-radius:10px;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 
 @media(max-width:700px){
@@ -363,11 +372,13 @@ textarea.long{
     </button>
   </div>
 
-  <input
-    type="file"
-    id="historyImageFile"
-    accept="image/jpeg,image/png,image/webp"
-  >
+  
+   <input
+  type="file"
+  id="historyImageFile"
+  accept="image/jpeg,image/png,image/webp"
+  multiple
+>
 
   <input type="hidden" id="historyImage">
 
