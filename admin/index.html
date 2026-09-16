@@ -332,7 +332,19 @@ textarea.long{
   <label>История фонда — второй абзац</label>
   <textarea class="long" id="historyText2"></textarea>
 </div>
+<div class="field">
+  <label>Фото истории фонда</label>
+  <input type="file" id="historyImageFile" accept="image/jpeg,image/png,image/webp">
+  <input type="hidden" id="historyImage">
+  <p class="small">Можно загрузить JPG, PNG или WEBP.</p>
+</div>
 
+<div class="field">
+  <label>Видео истории фонда</label>
+  <input type="file" id="historyVideoFile" accept="video/mp4,video/webm">
+  <input type="hidden" id="historyVideo">
+  <p class="small">Можно загрузить MP4 или WEBM.</p>
+</div>
 <h3 class="subsection">Принципы работы</h3>
 
 <div class="grid">
@@ -661,7 +673,8 @@ function fill(data){
   set("historyTitle",data.aboutPage?.historyTitle);
   set("historyText1",data.aboutPage?.historyText1);
   set("historyText2",data.aboutPage?.historyText2);
-
+set("historyImage",data.aboutPage?.historyImage);
+set("historyVideo",data.aboutPage?.historyVideo);
   set("principlesEyebrow",data.aboutPage?.principlesEyebrow);
   set("principlesTitle",data.aboutPage?.principlesTitle);
 
@@ -732,7 +745,8 @@ function build(){
       historyTitle:get("historyTitle"),
       historyText1:get("historyText1"),
       historyText2:get("historyText2"),
-
+historyImage:get("historyImage"),
+historyVideo:get("historyVideo"),
       principlesEyebrow:get("principlesEyebrow"),
       principlesTitle:get("principlesTitle"),
 
