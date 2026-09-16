@@ -834,7 +834,12 @@ function fill(data){
   set("historyText2",data.aboutPage?.historyText2);
 set("historyImage",data.aboutPage?.historyImage);
 set("historyVideo",data.aboutPage?.historyVideo);
-  showHistoryImage(data.aboutPage?.historyImage || "");
+  showHistoryImage(
+  (data.aboutPage?.historyImage || "")
+    .split(",")
+    .map(item => item.trim())
+    .filter(Boolean)
+);
   showHistoryVideo(data.aboutPage?.historyVideo || "");
   set("principlesEyebrow",data.aboutPage?.principlesEyebrow);
   set("principlesTitle",data.aboutPage?.principlesTitle);
@@ -1275,17 +1280,7 @@ $("logoutButton").onclick=logout;
 
   }catch(error){
 
-    sessionStorage.removeItem(
-      "yarilo_token"
-    );
-
-    token="";
-
-    $("editorPanel")
-      .classList.add("hidden");
-
-    $("loginPanel")
-      .classList.remove("hidden");
+   
 
     status(
       error.message,
