@@ -877,7 +877,89 @@ function logout(){
 
   location.href=location.pathname;
 }
+async function uploadMedia(inputId, hiddenId, path){
 
+  const input=$(inputId);
+  const file=input.files[0];
+
+  if(!file) return;
+
+  status("Загружаю файл…");
+
+  try{
+
+    const content=await new Promise((resolve,reject)=>{
+      const reader=new FileReader();
+
+      reader.onload=()=>{
+        resolve(reader.result.split(",")[1]);
+      };
+
+      reader.onerror=reject;
+      reader.readAsDataURL(file);
+    });
+
+    let sha="";
+
+    try{
+      const oldFile=await api(
+        "/file?path="+encodeURIComponent(path)
+      );
+      sha=oldFile.sha || "";
+    }catch(error){
+      sha="";
+    }
+
+    await api("/file",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        path:path,
+        sha:sha,
+        content:content,
+        encoding:"base64"
+      })
+    });
+
+    set(hiddenId,path);
+
+    status(
+      "Файл загружен. Нажмите «Сохранить изменения».",
+      "ok"
+    );
+
+  }catch(error){
+    status(error.message,"error");
+  }
+}
+
+$("historyImageFile").onchange=()=>{
+  const file=$("historyImageFile").files[0];
+  if(!file) return;
+
+  const ext=file.name.split(".").pop().toLowerCase();
+
+  uploadMedia(
+    "historyImageFile",
+    "historyImage",
+   "uploads/history-image."+ext
+  );
+};
+
+$("historyVideoFile").onchange=()=>{
+  const file=$("historyVideoFile").files[0];
+  if(!file) return;
+
+  const ext=file.name.split(".").pop().toLowerCase();
+
+  uploadMedia(
+    "historyVideoFile",
+    "historyVideo",
+   "uploads/history-video."+ext
+  );
+};
 $("loginButton").onclick=login;
 
 $("saveButton").onclick=save;
