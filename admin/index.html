@@ -1090,25 +1090,83 @@ function removeMediaFromPage(hiddenId,kind){
   );
 }
 
-$("historyImageFile").onchange=()=>{
-  const file=$("historyImageFile").files[0];
-  if(!file) return;
+$("historyImageFile").onchange=async()=>{
+  const input=$("historyImageFile");
+  const files=Array.from(input.files || []);
 
-  const ext=(file.name.split(".").pop() || "").toLowerCase();
+  if(!files.length) return;
+
   const allowed=["jpg","jpeg","png","webp"];
+  const uploaded=[];
 
-  if(!allowed.includes(ext)){
-    $("historyImageFile").value="";
-    status("Разрешены только JPG, JPEG, PNG или WEBP.","error");
-    return;
+  for(const file of files){
+    const ext=(file.name.split(".").pop() || "").toLowerCase();
+
+    if(!allowed.includes(ext)){
+      status(
+        "Разрешены только JPG, JPEG, PNG или WEBP.",
+        "error"
+      );
+      input.value="";
+      return;
+    }
   }
 
-  uploadMedia(
-    "historyImageFile",
-    "historyImage",
-    "uploads/history-image."+ext,
-    "image"
-  );
+  status("Загружаю фотографии…");
+  input.disabled=true;
+
+  try{
+    for(let i=0;i<files.length;i++){
+      const file=files[i];
+      const ext=(file.name.split(".").pop() || "").toLowerCase();
+
+      const safeName=
+        Date.now()+"-"+i+"."+ext;
+
+      const path="uploads/history-"+safeName;
+
+      const content=await fileToBase64(file);
+
+      await api("/file",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          path:path,
+          sha:"",
+          content:content,
+          encoding:"base64"
+        })
+      });
+
+      uploaded.push(path);
+    }
+
+    const oldValue=get("historyImage");
+    const oldImages=oldValue
+      ? oldValue.split(",").filter(Boolean)
+      : [];
+
+    const allImages=[...oldImages,...uploaded];
+
+    set("historyImage",allImages.join(","));
+
+    if(allImages.length){
+      showHistoryImage(allImages[0]);
+    }
+
+    status(
+      "Фотографии загружены. Теперь нажмите «Сохранить изменения».",
+      "ok"
+    );
+
+  }catch(error){
+    status(error.message,"error");
+  }finally{
+    input.disabled=false;
+    input.value="";
+  }
 };
 
 $("historyVideoFile").onchange=()=>{
