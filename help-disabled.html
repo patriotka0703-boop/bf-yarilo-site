@@ -81,7 +81,7 @@
 Помощь детям и взрослым с инвалидностью
 </h1>
 
-<p class="lead">
+<p class="lead" id="disabled-page-text">
 Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы.
 </p>
 
@@ -121,6 +121,7 @@
 </section>
 
 
+<section class="section" id="direction-media-section" hidden><div class="container"><h2>Фото и видео</h2><div class="public-media" data-direction="disabled"></div></div></section>
 <section class="section section-alt">
 <div class="container cta">
 
@@ -243,10 +244,8 @@ bf-yarilo.ru
   setText("foundation-slogan", data.foundation.slogan);
   setText("footer-region", data.foundation.region);
 
-  setText(
-    "disabled-page-title",
-    "Помощь " + data.help.disabled.title.toLowerCase()
-  );
+  setText("disabled-page-title", data.help.disabled.pageTitle);
+  setText("disabled-page-text", data.help.disabled.pageText);
 
   const phone = document.getElementById("foundation-phone");
 
@@ -258,7 +257,9 @@ bf-yarilo.ru
 })();
 </script>
 
+<script src="yarilo-model.js"></script>
 <script src="script.js"></script>
+<script src="scripts.js"></script>
 
 </body>
 </html>

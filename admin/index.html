@@ -7,6 +7,8 @@
 <title>Админка — БФ «ЯРИЛО»</title>
 <meta name="robots" content="noindex,nofollow">
 
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="admin.css">
 <style>
 *{box-sizing:border-box}
 
@@ -254,7 +256,7 @@ textarea.long{
 
 <main>
 
-<div id="status" class="status"></div>
+<div id="status" class="status" role="status" aria-live="polite"></div>
 
 <section id="loginPanel" class="panel login">
   <h2>Вход в админку</h2>
@@ -284,41 +286,41 @@ textarea.long{
 <h2 class="section">Основные данные фонда</h2>
 
 <div class="field">
-  <label>Полное название</label>
-  <input id="foundationName">
+  <label for="foundationName">Полное название</label>
+  <input id="foundationName" data-field="foundation.name">
 </div>
 
 <div class="grid">
   <div class="field">
-    <label>Короткое название</label>
-    <input id="shortName">
+    <label for="shortName">Короткое название</label>
+    <input id="shortName" data-field="foundation.shortName">
   </div>
 
   <div class="field">
-    <label>Регион</label>
-    <input id="region">
+    <label for="region">Регион</label>
+    <input id="region" data-field="foundation.region">
   </div>
 </div>
 
 <div class="field">
-  <label>Девиз</label>
-  <input id="slogan">
+  <label for="slogan">Девиз</label>
+  <input id="slogan" data-field="foundation.slogan">
 </div>
 
 <div class="field">
-  <label>Генеральный директор</label>
-  <input id="director">
+  <label for="director">Генеральный директор</label>
+  <input id="director" data-field="foundation.director">
 </div>
 
 <div class="grid">
   <div class="field">
-    <label>Телефон</label>
-    <input id="phone">
+    <label for="phone">Телефон</label>
+    <input id="phone" data-field="foundation.phone">
   </div>
 
   <div class="field">
-    <label>Адрес сайта</label>
-    <input id="website">
+    <label for="website">Адрес сайта</label>
+    <input id="website" data-field="foundation.website">
   </div>
 </div>
 
@@ -326,33 +328,33 @@ textarea.long{
 <h2 class="section">Главная страница</h2>
 
 <div class="field">
-  <label>Главный заголовок</label>
-  <input id="homeTitle">
+  <label for="homeTitle">Главный заголовок</label>
+  <input id="homeTitle" data-field="home.title">
 </div>
 
 <div class="field">
-  <label>Описание</label>
-  <textarea id="homeDescription"></textarea>
+  <label for="homeDescription">Описание</label>
+  <textarea id="homeDescription" data-field="home.description"></textarea>
 </div>
 
 <div class="field">
-  <label>Заголовок миссии</label>
-  <input id="missionTitle">
+  <label for="missionTitle">Заголовок миссии</label>
+  <input id="missionTitle" data-field="home.missionTitle">
 </div>
 
 <div class="field">
-  <label>Текст миссии</label>
-  <textarea id="missionText"></textarea>
+  <label for="missionText">Текст миссии</label>
+  <textarea id="missionText" data-field="home.missionText"></textarea>
 </div>
 
 <div class="field">
-  <label>Заголовок блока о фонде на главной</label>
-  <input id="aboutTitle">
+  <label for="aboutTitle">Заголовок блока о фонде на главной</label>
+  <input id="aboutTitle" data-field="home.aboutTitle">
 </div>
 
 <div class="field">
-  <label>Текст блока о фонде на главной</label>
-  <textarea id="aboutText"></textarea>
+  <label for="aboutText">Текст блока о фонде на главной</label>
+  <textarea id="aboutText" data-field="home.aboutText"></textarea>
 </div>
 
 
@@ -360,140 +362,91 @@ textarea.long{
 <h2 class="section">О фонде и история фонда</h2>
 
 <div class="field">
-  <label>Метка над заголовком</label>
-  <input id="aboutPageEyebrow">
+  <label for="aboutPageEyebrow">Метка над заголовком</label>
+  <input id="aboutPageEyebrow" data-field="aboutPage.eyebrow">
 </div>
 
 <div class="field">
-  <label>Заголовок страницы</label>
-  <input id="aboutPageTitle">
+  <label for="aboutPageTitle">Заголовок страницы</label>
+  <input id="aboutPageTitle" data-field="aboutPage.title">
 </div>
 
 <div class="field">
   <label>Вводный текст о фонде</label>
-  <textarea class="long" id="aboutPageLead"></textarea>
+  <textarea class="long" id="aboutPageLead" data-field="aboutPage.lead"></textarea>
 </div>
 
 <h3 class="subsection">История фонда</h3>
 
 <div class="field">
-  <label>Заголовок истории</label>
-  <input id="historyTitle">
+  <label for="historyTitle">Заголовок истории</label>
+  <input id="historyTitle" data-field="aboutPage.historyTitle">
 </div>
 
 <div class="field">
   <label>История фонда — первый абзац</label>
-  <textarea class="long" id="historyText1"></textarea>
+  <textarea class="long" id="historyText1" data-field="aboutPage.historyText1"></textarea>
 </div>
 
 <div class="field">
   <label>История фонда — второй абзац</label>
-  <textarea class="long" id="historyText2"></textarea>
+  <textarea class="long" id="historyText2" data-field="aboutPage.historyText2"></textarea>
 </div>
-<div class="field">
-  <label>Фото истории фонда</label>
-
- <div id="historyImagePreviewBox" class="media-preview hidden">
-  <div id="historyImageGallery" class="admin-photo-gallery"></div>
-
-  <button type="button" id="deleteHistoryImage" class="danger">
-    Удалить все фото
-  </button>
-</div>
-
-  
-   <input
-  type="file"
-  id="historyImageFile"
-  accept="image/jpeg,image/png,image/webp"
-  multiple
->
-
-  <input type="hidden" id="historyImage">
-
-  <p class="small">
-    Выберите новое фото, чтобы загрузить или заменить существующее.
-  </p>
-</div>
-
-<div class="field">
-  <label>Видео истории фонда</label>
-
-  <div id="historyVideoPreviewBox" class="media-preview hidden">
-    <video id="historyVideoPreview" controls preload="metadata"></video>
-
-    <button type="button" id="deleteHistoryVideo" class="danger">
-      Удалить видео
-    </button>
-  </div>
-
-  <input
-    type="file"
-    id="historyVideoFile"
-    accept="video/mp4,video/webm"
-  >
-
-  <input type="hidden" id="historyVideo">
-
-  <p class="small">
-    Выберите новое видео, чтобы загрузить или заменить существующее.
-  </p>
-</div>
-
+<div data-media-group="aboutPage"></div>
 <h3 class="subsection">Принципы работы</h3>
 
 <div class="grid">
   <div class="field">
-    <label>Метка раздела</label>
-    <input id="principlesEyebrow">
+    <label for="principlesEyebrow">Метка раздела</label>
+    <input id="principlesEyebrow" data-field="aboutPage.principlesEyebrow">
   </div>
 
   <div class="field">
-    <label>Заголовок раздела</label>
-    <input id="principlesTitle">
+    <label for="principlesTitle">Заголовок раздела</label>
+    <input id="principlesTitle" data-field="aboutPage.principlesTitle">
   </div>
 </div>
 
 <div class="field">
-  <label>Принцип №1 — название</label>
-  <input id="principle1Title">
+  <label for="principle1Title">Принцип №1 — название</label>
+  <input id="principle1Title" data-field="aboutPage.principle1Title">
 </div>
 
 <div class="field">
-  <label>Принцип №1 — описание</label>
-  <textarea id="principle1Text"></textarea>
+  <label for="principle1Text">Принцип №1 — описание</label>
+  <textarea id="principle1Text" data-field="aboutPage.principle1Text"></textarea>
 </div>
 
 <div class="field">
-  <label>Принцип №2 — название</label>
-  <input id="principle2Title">
+  <label for="principle2Title">Принцип №2 — название</label>
+  <input id="principle2Title" data-field="aboutPage.principle2Title">
 </div>
 
 <div class="field">
-  <label>Принцип №2 — описание</label>
-  <textarea id="principle2Text"></textarea>
+  <label for="principle2Text">Принцип №2 — описание</label>
+  <textarea id="principle2Text" data-field="aboutPage.principle2Text"></textarea>
 </div>
 
 <div class="field">
-  <label>Принцип №3 — название</label>
-  <input id="principle3Title">
+  <label for="principle3Title">Принцип №3 — название</label>
+  <input id="principle3Title" data-field="aboutPage.principle3Title">
 </div>
 
 <div class="field">
-  <label>Принцип №3 — описание</label>
-  <textarea id="principle3Text"></textarea>
+  <label for="principle3Text">Принцип №3 — описание</label>
+  <textarea id="principle3Text" data-field="aboutPage.principle3Text"></textarea>
 </div>
 
 <h3 class="subsection">Блок «Хотите помочь?»</h3>
 
 <div class="field">
-  <label>Заголовок</label>
-  <input id="aboutCtaTitle">
+  <label for="aboutCtaTitle">Заголовок</label>
+  <input id="aboutCtaTitle" data-field="aboutPage.ctaTitle">
 </div>
 
 <div class="field">
-  <label>Текст</label>
-  <textarea id="aboutCtaText"></textarea>
+  <label for="aboutCtaText">Текст</label>
+  <textarea id="aboutCtaText" data-field="aboutPage.ctaText"></textarea>
 </div>
 
 
@@ -501,62 +454,81 @@ textarea.long{
 
 <div class="grid">
   <div class="field">
-    <label>Получателей помощи</label>
-    <input id="recipients">
+    <label for="recipients">Получателей помощи</label>
+    <input id="recipients" data-field="results.recipients">
   </div>
 
   <div class="field">
-    <label>Количество городов</label>
-    <input id="cities">
+    <label for="cities">Количество городов</label>
+    <input id="cities" data-field="results.cities">
   </div>
 </div>
 
 <div class="field">
-  <label>Города</label>
-  <textarea id="citiesText"></textarea>
+  <label for="citiesText">Города</label>
+  <textarea id="citiesText" data-field="results.citiesText"></textarea>
 </div>
 
 
 <h2 class="section">Направления помощи</h2>
 
 <div class="field">
-  <label>Дети и взрослые с инвалидностью</label>
-  <input id="disabledTitle">
-  <textarea id="disabledText"></textarea>
+  <label for="disabledTitle">Дети и взрослые с инвалидностью</label>
+  <input id="disabledTitle" data-field="help.disabled.title">
+  <textarea id="disabledText" data-field="help.disabled.text"></textarea>
+<label for="disabledPageTitle">Заголовок отдельной страницы</label><input id="disabledPageTitle" data-field="help.disabled.pageTitle">
+<label for="disabledPageText">Вводный текст отдельной страницы</label><textarea id="disabledPageText" data-field="help.disabled.pageText"></textarea>
+<div data-media-group="help.disabled"></div>
 </div>
 
 <div class="field">
-  <label>Реабилитационные центры</label>
-  <input id="rehabTitle">
-  <textarea id="rehabText"></textarea>
+  <label for="rehabTitle">Реабилитационные центры</label>
+  <input id="rehabTitle" data-field="help.rehab.title">
+  <textarea id="rehabText" data-field="help.rehab.text"></textarea>
+<label for="rehabPageTitle">Заголовок отдельной страницы</label><input id="rehabPageTitle" data-field="help.rehab.pageTitle">
+<label for="rehabPageText">Вводный текст отдельной страницы</label><textarea id="rehabPageText" data-field="help.rehab.pageText"></textarea>
+<div data-media-group="help.rehab"></div>
 </div>
 
 <div class="field">
-  <label>Госпитали и учреждения</label>
-  <input id="hospitalsTitle">
-  <textarea id="hospitalsText"></textarea>
+  <label for="hospitalsTitle">Госпитали и учреждения</label>
+  <input id="hospitalsTitle" data-field="help.hospitals.title">
+  <textarea id="hospitalsText" data-field="help.hospitals.text"></textarea>
+<label for="hospitalsPageTitle">Заголовок отдельной страницы</label><input id="hospitalsPageTitle" data-field="help.hospitals.pageTitle">
+<label for="hospitalsPageText">Вводный текст отдельной страницы</label><textarea id="hospitalsPageText" data-field="help.hospitals.pageText"></textarea>
+<div data-media-group="help.hospitals"></div>
 </div>
 
 <div class="field">
-  <label>Люди в трудной ситуации</label>
-  <input id="crisisTitle">
-  <textarea id="crisisText"></textarea>
+  <label for="crisisTitle">Люди в трудной ситуации</label>
+  <input id="crisisTitle" data-field="help.crisis.title">
+  <textarea id="crisisText" data-field="help.crisis.text"></textarea>
+<label for="crisisPageTitle">Заголовок отдельной страницы</label><input id="crisisPageTitle" data-field="help.crisis.pageTitle">
+<label for="crisisPageText">Вводный текст отдельной страницы</label><textarea id="crisisPageText" data-field="help.crisis.pageText"></textarea>
+<div data-media-group="help.crisis"></div>
 </div>
 
 
 <h2 class="section">Поддержка фонда</h2>
 
 <div class="field">
-  <label>Заголовок</label>
-  <input id="supportTitle">
+  <label for="supportTitle">Заголовок</label>
+  <input id="supportTitle" data-field="support.title">
 </div>
 
 <div class="field">
-  <label>Описание</label>
-  <textarea id="supportText"></textarea>
+  <label for="supportText">Описание</label>
+  <textarea id="supportText" data-field="support.text"></textarea>
 </div>
 
 
+<h2 class="section">Реквизиты и банковские счета</h2>
+<div class="grid"><div class="field"><label for="req-inn">ИНН</label><input id="req-inn" data-field="requisites.inn"></div><div class="field"><label for="req-kpp">КПП</label><input id="req-kpp" data-field="requisites.kpp"></div><div class="field"><label for="req-ogrn">ОГРН</label><input id="req-ogrn" data-field="requisites.ogrn"></div><div class="field"><label for="req-address">Юридический адрес</label><input id="req-address" data-field="requisites.address"></div></div>
+<div id="accounts"></div><button type="button" id="addAccount" class="secondary">Добавить банковский счёт</button>
+<h2 class="section">Кнопка «Пожертвовать»</h2>
+<div class="field"><label for="donationText">Текст кнопки</label><input id="donationText" data-field="donation.text"></div>
+<div class="field"><label for="donationUrl">Куда ведёт кнопка</label><input id="donationUrl" data-field="donation.url" placeholder="donate.html или https://…"><p class="small">Можно указать платёжную ссылку банка, donate.html или requisites.html.</p></div>
+<div class="field"><label for="donationPurpose">Назначение пожертвования</label><textarea id="donationPurpose" data-field="donation.purpose"></textarea></div>
 <div class="actions">
 
   <button id="saveButton" class="save">
@@ -583,713 +555,8 @@ textarea.long{
 </main>
 
 
-<script>
-const WORKER =
-  "https://yarilo-admin-auth.patriotka0703.workers.dev";
-
-let token =
-  sessionStorage.getItem("yarilo_token") || "";
-
-let currentSha = "";
-
-const $ = id => document.getElementById(id);
-
-function status(message,type="info"){
-  const box=$("status");
-  box.textContent=message;
-  box.className="status "+type;
-}
-
-function set(id,value){
-  const element=$(id);
-  if(element){
-    element.value=value ?? "";
-  }
-}
-
-function get(id){
-  const element=$(id);
-  return element ? element.value.trim() : "";
-}
-
-function mediaUrl(path){
-  if(!path) return "";
-
-  if(/^https?:\/\//i.test(path)){
-    return path;
-  }
-
-  return "/" + String(path).replace(/^\/+/,"");
-}
-function showHistoryImage(paths){
-  const box=$("historyImagePreviewBox");
-  const gallery=$("historyImageGallery");
-
-  if(!box || !gallery) return;
-
-  gallery.innerHTML="";
-
-  let photos=[];
-
-  if(Array.isArray(paths)){
-    photos=paths;
-  }else if(paths){
-    photos=[paths];
-  }
-
-  if(photos.length){
-    photos.forEach(path=>{
-      const img=document.createElement("img");
-      img.src=mediaUrl(path)+"?v="+Date.now();
-      img.alt="Фото истории фонда";
-      img.loading="lazy";
-
-      img.onclick=()=>{
-        window.open(mediaUrl(path),"_blank");
-      };
-
-      gallery.appendChild(img);
-    });
-
-    box.classList.remove("hidden");
-  }else{
-    box.classList.add("hidden");
-  }
-}
-
-
-function showHistoryVideo(path){
-  const box=$("historyVideoPreviewBox");
-  const video=$("historyVideoPreview");
-
-  if(!box || !video) return;
-
-  if(path){
-    video.src=mediaUrl(path)+"?v="+Date.now();
-    box.classList.remove("hidden");
-    video.load();
-  }else{
-    video.pause();
-    video.removeAttribute("src");
-    video.load();
-    box.classList.add("hidden");
-  }
-}
-
-function decodeBase64(content){
-  const clean=content.replace(/\s/g,"");
-  const binary=atob(clean);
-
-  const bytes=Uint8Array.from(
-    binary,
-    c=>c.charCodeAt(0)
-  );
-
-  return new TextDecoder().decode(bytes);
-}
-
-async function api(path,options={}){
-  const headers={
-    ...(options.headers||{})
-  };
-
-  if(token){
-    headers.Authorization="Bearer "+token;
-  }
-
-  const response=await fetch(
-    WORKER+path,
-    {
-      ...options,
-      headers
-    }
-  );
-
-  const text=await response.text();
-
-  let data;
-
-  try{
-    data=JSON.parse(text);
-  }catch{
-    data={message:text};
-  }
-
-  if(!response.ok){
-    throw new Error(
-      data.message ||
-      data.error ||
-      "Ошибка запроса"
-    );
-  }
-
-  return data;
-}
-
-function login(){
-  window.location.href=WORKER+"/login";
-}
-
-function readToken(){
-  const params=
-    new URLSearchParams(location.search);
-
-  const received=params.get("token");
-
-  if(received){
-    token=received;
-
-    sessionStorage.setItem(
-      "yarilo_token",
-      token
-    );
-
-    history.replaceState(
-      {},
-      document.title,
-      location.pathname
-    );
-  }
-}
-
-async function checkUser(){
-  const user=await api("/me");
-
-  $("githubUser").textContent=
-    user.name || user.login;
-
-  $("loginPanel").classList.add("hidden");
-  $("editorPanel").classList.remove("hidden");
-}
-
-async function loadData(){
-
-  status("Загружаю данные сайта…");
-
-  const file=await api(
-    "/file?path="+
-    encodeURIComponent("site-data.js")
-  );
-
-  currentSha=file.sha;
-
-  const source=
-    decodeBase64(file.content);
-
-  const match=source.match(
-    /window\.YARILO\s*=\s*([\s\S]*?);\s*$/
-  );
-
-  if(!match){
-    throw new Error(
-      "Не удалось прочитать site-data.js"
-    );
-  }
-
-  let data;
-
-  try{
-    data=Function(
-      '"use strict";return ('+
-      match[1]+
-      ')'
-    )();
-  }catch(error){
-    throw new Error(
-      "Ошибка в формате site-data.js"
-    );
-  }
-
-  fill(data);
-
-  status(
-    "Данные сайта загружены.",
-    "ok"
-  );
-}
-
-function fill(data){
-
-  set("foundationName",data.foundation?.name);
-  set("shortName",data.foundation?.shortName);
-  set("slogan",data.foundation?.slogan);
-  set("director",data.foundation?.director);
-  set("region",data.foundation?.region);
-  set("phone",data.foundation?.phone);
-  set("website",data.foundation?.website);
-
-  set("homeTitle",data.home?.title);
-  set("homeDescription",data.home?.description);
-  set("missionTitle",data.home?.missionTitle);
-  set("missionText",data.home?.missionText);
-  set("aboutTitle",data.home?.aboutTitle);
-  set("aboutText",data.home?.aboutText);
-
-  set("aboutPageEyebrow",data.aboutPage?.eyebrow);
-  set("aboutPageTitle",data.aboutPage?.title);
-  set("aboutPageLead",data.aboutPage?.lead);
-
-  set("historyTitle",data.aboutPage?.historyTitle);
-  set("historyText1",data.aboutPage?.historyText1);
-  set("historyText2",data.aboutPage?.historyText2);
-set("historyImage",data.aboutPage?.historyImage);
-set("historyVideo",data.aboutPage?.historyVideo);
-  showHistoryImage(
-  (data.aboutPage?.historyImage || "")
-    .split(",")
-    .map(item => item.trim())
-    .filter(Boolean)
-);
-  showHistoryVideo(data.aboutPage?.historyVideo || "");
-  set("principlesEyebrow",data.aboutPage?.principlesEyebrow);
-  set("principlesTitle",data.aboutPage?.principlesTitle);
-
-  set("principle1Title",data.aboutPage?.principle1Title);
-  set("principle1Text",data.aboutPage?.principle1Text);
-
-  set("principle2Title",data.aboutPage?.principle2Title);
-  set("principle2Text",data.aboutPage?.principle2Text);
-
-  set("principle3Title",data.aboutPage?.principle3Title);
-  set("principle3Text",data.aboutPage?.principle3Text);
-
-  set("aboutCtaTitle",data.aboutPage?.ctaTitle);
-  set("aboutCtaText",data.aboutPage?.ctaText);
-
-  set("recipients",data.results?.recipients);
-  set("cities",data.results?.cities);
-  set("citiesText",data.results?.citiesText);
-
-  set("disabledTitle",data.help?.disabled?.title);
-  set("disabledText",data.help?.disabled?.text);
-
-  set("rehabTitle",data.help?.rehab?.title);
-  set("rehabText",data.help?.rehab?.text);
-
-  set("hospitalsTitle",data.help?.hospitals?.title);
-  set("hospitalsText",data.help?.hospitals?.text);
-
-  set("crisisTitle",data.help?.crisis?.title);
-  set("crisisText",data.help?.crisis?.text);
-
-  set("supportTitle",data.support?.title);
-  set("supportText",data.support?.text);
-}
-
-function build(){
-
-  const phone=get("phone");
-
-  return {
-
-    foundation:{
-      name:get("foundationName"),
-      shortName:get("shortName"),
-      slogan:get("slogan"),
-      director:get("director"),
-      region:get("region"),
-      phone:phone,
-      phoneLink:
-        phone.replace(/[^\d+]/g,""),
-      website:get("website")
-    },
-
-    home:{
-      title:get("homeTitle"),
-      description:get("homeDescription"),
-      missionTitle:get("missionTitle"),
-      missionText:get("missionText"),
-      aboutTitle:get("aboutTitle"),
-      aboutText:get("aboutText")
-    },
-
-    aboutPage:{
-      eyebrow:get("aboutPageEyebrow"),
-      title:get("aboutPageTitle"),
-      lead:get("aboutPageLead"),
-
-      historyTitle:get("historyTitle"),
-      historyText1:get("historyText1"),
-      historyText2:get("historyText2"),
-historyImage:get("historyImage"),
-historyVideo:get("historyVideo"),
-      principlesEyebrow:get("principlesEyebrow"),
-      principlesTitle:get("principlesTitle"),
-
-      principle1Title:get("principle1Title"),
-      principle1Text:get("principle1Text"),
-
-      principle2Title:get("principle2Title"),
-      principle2Text:get("principle2Text"),
-
-      principle3Title:get("principle3Title"),
-      principle3Text:get("principle3Text"),
-
-      ctaTitle:get("aboutCtaTitle"),
-      ctaText:get("aboutCtaText")
-    },
-
-    results:{
-      recipients:get("recipients"),
-      cities:get("cities"),
-      citiesText:get("citiesText")
-    },
-
-    help:{
-
-      disabled:{
-        title:get("disabledTitle"),
-        text:get("disabledText")
-      },
-
-      rehab:{
-        title:get("rehabTitle"),
-        text:get("rehabText")
-      },
-
-      hospitals:{
-        title:get("hospitalsTitle"),
-        text:get("hospitalsText")
-      },
-
-      crisis:{
-        title:get("crisisTitle"),
-        text:get("crisisText")
-      }
-
-    },
-
-    support:{
-      title:get("supportTitle"),
-      text:get("supportText")
-    }
-
-  };
-}
-
-async function save(){
-
-  if(!currentSha){
-    status(
-      "Сначала загрузите данные.",
-      "error"
-    );
-    return;
-  }
-
-  status("Сохраняю изменения…");
-
-  $("saveButton").disabled=true;
-
-  try{
-
-    const content=
-      "window.YARILO = "+
-      JSON.stringify(
-        build(),
-        null,
-        2
-      )+
-      ";\n";
-
-    const result=await api(
-      "/file",
-      {
-        method:"POST",
-
-        headers:{
-          "Content-Type":
-            "application/json"
-        },
-
-        body:JSON.stringify({
-          path:"site-data.js",
-          sha:currentSha,
-          content:content
-        })
-      }
-    );
-
-    if(result.content?.sha){
-      currentSha=result.content.sha;
-    }
-
-    status(
-      "Готово. Изменения сохранены.",
-      "ok"
-    );
-
-  }catch(error){
-
-    status(
-      error.message,
-      "error"
-    );
-
-  }finally{
-
-    $("saveButton").disabled=false;
-
-  }
-}
-
-function logout(){
-
-  sessionStorage.removeItem(
-    "yarilo_token"
-  );
-
-  token="";
-
-  location.href=location.pathname;
-}
-async function fileToBase64(file){
-  return await new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-
-    reader.onload=()=>{
-      const result=String(reader.result || "");
-      const comma=result.indexOf(",");
-
-      if(comma === -1){
-        reject(new Error("Не удалось прочитать файл."));
-        return;
-      }
-
-      resolve(result.slice(comma+1));
-    };
-
-    reader.onerror=()=>{
-      reject(new Error("Не удалось прочитать файл."));
-    };
-
-    reader.readAsDataURL(file);
-  });
-}
-
-async function getExistingFileSha(path){
-  try{
-    const oldFile=await api(
-      "/file?path="+encodeURIComponent(path)
-    );
-
-    return oldFile.sha || "";
-  }catch(error){
-    return "";
-  }
-}
-
-async function uploadMedia(inputId,hiddenId,path,kind){
-  const input=$(inputId);
-  const file=input?.files?.[0];
-
-  if(!file) return;
-
-  status("Загружаю файл…");
-  input.disabled=true;
-
-  try{
-    const content=await fileToBase64(file);
-    const sha=await getExistingFileSha(path);
-
-    await api("/file",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        path:path,
-        sha:sha,
-        content:content,
-        encoding:"base64"
-      })
-    });
-
-    set(hiddenId,path);
-
-    if(kind === "image"){
-      showHistoryImage(path);
-    }
-
-    if(kind === "video"){
-      showHistoryVideo(path);
-    }
-
-    status(
-      "Файл загружен. Теперь нажмите «Сохранить изменения».",
-      "ok"
-    );
-
-  }catch(error){
-    status(error.message,"error");
-  }finally{
-    input.disabled=false;
-    input.value="";
-  }
-}
-
-function removeMediaFromPage(hiddenId,kind){
-  set(hiddenId,"");
-
-  if(kind === "image"){
-    showHistoryImage("");
-  }
-
-  if(kind === "video"){
-    showHistoryVideo("");
-  }
-
-  status(
-    "Файл убран со страницы. Нажмите «Сохранить изменения».",
-    "ok"
-  );
-}
-
-$("historyImageFile").onchange=async()=>{
-  const input=$("historyImageFile");
-  const files=Array.from(input.files || []);
-
-  if(!files.length) return;
-
-  const allowed=["jpg","jpeg","png","webp"];
-  const uploaded=[];
-
-  for(const file of files){
-    const ext=(file.name.split(".").pop() || "").toLowerCase();
-
-    if(!allowed.includes(ext)){
-      status(
-        "Разрешены только JPG, JPEG, PNG или WEBP.",
-        "error"
-      );
-      input.value="";
-      return;
-    }
-  }
-
-  status("Загружаю фотографии…");
-  input.disabled=true;
-
-  try{
-    for(let i=0;i<files.length;i++){
-      const file=files[i];
-      const ext=(file.name.split(".").pop() || "").toLowerCase();
-
-      const safeName=
-        Date.now()+"-"+i+"."+ext;
-
-      const path="uploads/history-"+safeName;
-
-      const content=await fileToBase64(file);
-
-      await api("/file",{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          path:path,
-          sha:"",
-          content:content,
-          encoding:"base64"
-        })
-      });
-
-      uploaded.push(path);
-    }
-
-    const oldValue=get("historyImage");
-    const oldImages=oldValue
-      ? oldValue.split(",").filter(Boolean)
-      : [];
-
-    const allImages=[...oldImages,...uploaded];
-
-    set("historyImage",allImages.join(","));
-
-   showHistoryImage(allImages);
-
-    status(
-      "Фотографии загружены. Теперь нажмите «Сохранить изменения».",
-      "ok"
-    );
-
-  }catch(error){
-    status(error.message,"error");
-  }finally{
-    input.disabled=false;
-    input.value="";
-  }
-};
-
-$("historyVideoFile").onchange=()=>{
-  const file=$("historyVideoFile").files[0];
-  if(!file) return;
-
-  const ext=(file.name.split(".").pop() || "").toLowerCase();
-  const allowed=["mp4","webm"];
-
-  if(!allowed.includes(ext)){
-    $("historyVideoFile").value="";
-    status("Разрешены только MP4 или WEBM.","error");
-    return;
-  }
-
-  uploadMedia(
-    "historyVideoFile",
-    "historyVideo",
-    "uploads/history-video."+ext,
-    "video"
-  );
-};
-
-$("deleteHistoryImage").onclick=()=>{
-  removeMediaFromPage("historyImage","image");
-};
-
-$("deleteHistoryVideo").onclick=()=>{
-  removeMediaFromPage("historyVideo","video");
-};
-
-$("loginButton").onclick=login;
-
-$("saveButton").onclick=save;
-
-$("reloadButton").onclick=async()=>{
-  try{
-    await loadData();
-  }catch(error){
-    status(error.message,"error");
-  }
-};
-
-$("logoutButton").onclick=logout;
-
-(async function(){
-
-  readToken();
-
-  if(!token){
-    return;
-  }
-
-  try{
-
-    await checkUser();
-    await loadData();
-
-  }catch(error){
-
-   
-
-    status(
-      error.message,
-      "error"
-    );
-  }
-
-})();
-</script>
-
+<script src="../yarilo-model.js"></script>
+<script src="config.js"></script>
+<script src="admin.js"></script>
 </body>
 </html>

@@ -82,7 +82,7 @@
 Помощь людям в трудной жизненной ситуации
 </h1>
 
-<p class="lead">
+<p class="lead" id="crisis-page-text">
 Поддерживаем людей, которым не хватает базовых вещей и ресурсов.
 </p>
 
@@ -121,6 +121,7 @@
 </section>
 
 
+<section class="section" id="direction-media-section" hidden><div class="container"><h2>Фото и видео</h2><div class="public-media" data-direction="crisis"></div></div></section>
 <section class="section section-alt">
 <div class="container cta">
 
@@ -243,10 +244,8 @@ bf-yarilo.ru
   setText("foundation-slogan", data.foundation.slogan);
   setText("footer-region", data.foundation.region);
 
-  setText(
-    "crisis-page-title",
-    "Помощь " + data.help.crisis.title.toLowerCase()
-  );
+  setText("crisis-page-title", data.help.crisis.pageTitle);
+  setText("crisis-page-text", data.help.crisis.pageText);
 
   const phone = document.getElementById("foundation-phone");
 
@@ -258,7 +257,9 @@ bf-yarilo.ru
 })();
 </script>
 
+<script src="yarilo-model.js"></script>
 <script src="script.js"></script>
+<script src="scripts.js"></script>
 
 </body>
 </html>

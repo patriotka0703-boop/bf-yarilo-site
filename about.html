@@ -113,9 +113,7 @@
 реабилитационным центрам и учреждениям, где постоянно нужны
 расходные материалы, средства ухода и бытовые товары.
 </p>
-<div id="history-media" class="history-media" style="display:none;">
-  <img id="history-image" src="" alt="История благотворительного фонда «Ярило»">
-</div>
+<div id="history-media" class="public-media" hidden></div>
 <p>
 Фонд зарегистрирован в
 <span id="foundation-region">Москве и Московской области</span>.
@@ -355,13 +353,7 @@ bf-yarilo.ru
     "history-text-2",
     about.historyText2
   );
-const historyMedia = document.getElementById("history-media");
-const historyImage = document.getElementById("history-image");
 
-if (historyMedia && historyImage && about.historyImage) {
-  historyImage.src = about.historyImage;
-  historyMedia.style.display = "block";
-}
 
   /* Принципы */
 
@@ -440,7 +432,9 @@ if (historyMedia && historyImage && about.historyImage) {
 })();
 </script>
 
+<script src="yarilo-model.js"></script>
 <script src="script.js"></script>
+<script src="scripts.js"></script>
 
 </body>
 </html>

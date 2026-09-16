@@ -82,7 +82,7 @@
 Помощь реабилитационным центрам
 </h1>
 
-<p class="lead">
+<p class="lead" id="rehab-page-text">
 Поддерживаем учреждения Московской области, где помощь требуется детям и взрослым с ограниченными возможностями.
 </p>
 
@@ -121,6 +121,7 @@
 </section>
 
 
+<section class="section" id="direction-media-section" hidden><div class="container"><h2>Фото и видео</h2><div class="public-media" data-direction="rehab"></div></div></section>
 <section class="section section-alt">
 <div class="container cta">
 
@@ -243,10 +244,8 @@ bf-yarilo.ru
   setText("foundation-slogan", data.foundation.slogan);
   setText("footer-region", data.foundation.region);
 
-  setText(
-    "rehab-page-title",
-    "Помощь " + data.help.rehab.title.toLowerCase()
-  );
+  setText("rehab-page-title", data.help.rehab.pageTitle);
+  setText("rehab-page-text", data.help.rehab.pageText);
 
   const phone = document.getElementById("foundation-phone");
 
@@ -258,7 +257,9 @@ bf-yarilo.ru
 })();
 </script>
 
+<script src="yarilo-model.js"></script>
 <script src="script.js"></script>
+<script src="scripts.js"></script>
 
 </body>
 </html>
