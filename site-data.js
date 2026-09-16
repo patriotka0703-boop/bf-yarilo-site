@@ -49,11 +49,7 @@ window.YARILO = {
       "title": "Дети и взрослые с инвалидностью",
       "text": "Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.",
       "photos": [
-        "uploads/admin-f736b6e5-f889-47d9-a914-9951ecce9b0b.jpg",
-        "uploads/admin-f06fbfbe-4ef2-47a9-a6b4-a43c13fcab89.jpg",
-        "uploads/admin-6d8fd7f8-923e-45a0-8403-c7e5b35f99ec.jpg",
-        "uploads/admin-94f1053d-085f-45fa-a2a8-753d122ba637.jpg",
-        "uploads/admin-9c6c55a8-fe11-4ed7-b3f0-c7802a0e85ff.jpg"
+        "uploads/admin-168e216a-c85e-4ddb-aedd-6ddaed27ae8e.jpg"
       ],
       "videos": [],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
