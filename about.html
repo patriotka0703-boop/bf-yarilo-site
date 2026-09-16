@@ -355,7 +355,13 @@ bf-yarilo.ru
     "history-text-2",
     about.historyText2
   );
+const historyMedia = document.getElementById("history-media");
+const historyImage = document.getElementById("history-image");
 
+if (historyMedia && historyImage && about.historyImage) {
+  historyImage.src = about.historyImage;
+  historyMedia.style.display = "block";
+}
 
   /* Принципы */
 
