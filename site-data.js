@@ -92,11 +92,32 @@ window.YARILO = {
     "text": "Помочь можно пожертвованием, товарами, транспортом, топливом или доставкой."
   },
   "requisites": {
-    "inn": "",
-    "kpp": "",
-    "ogrn": "",
+    "inn": "5045071931",
+    "kpp": "504501001",
+    "ogrn": "1245000038062",
     "address": "",
-    "accounts": []
+    "accounts": [
+      {
+        "label": "",
+        "recipient": "Благотворительный фонд «Ярило»",
+        "bank": "ПАО Сбербанк",
+        "account": "40703810940000401257",
+        "bik": "044525225",
+        "correspondent": "30101810400000000225",
+        "currency": "RUB",
+        "purpose": ""
+      },
+      {
+        "label": "",
+        "recipient": "Благотворительный фонд «Ярило»",
+        "bank": "",
+        "account": "",
+        "bik": "",
+        "correspondent": "",
+        "currency": "RUB",
+        "purpose": ""
+      }
+    ]
   },
   "donation": {
     "text": "Пожертвовать",
