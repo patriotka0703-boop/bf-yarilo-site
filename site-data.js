@@ -5,8 +5,8 @@ window.YARILO = {
     "slogan": "Фонд помощи тем, кто попал в беду.",
     "director": "Невзорова Эльвира Викторовна",
     "region": "городе Ступино, Московская область",
-    "phone": "+7 966 057-77-55",
-    "phoneLink": "+79660577755",
+    "phone": "+79917593068",
+    "phoneLink": "+79917593068",
     "website": "https://bf-yarilo.ru/"
   },
   "home": {
@@ -24,7 +24,7 @@ window.YARILO = {
     "historyTitle": "Наша работа — довести помощь до получателя",
     "historyText1": "Фонд «Ярило» создавался для адресной помощи людям и учреждениям, оказавшимся в трудной ситуации. Мы не ограничиваемся сбором: проверяем потребности, формируем грузы, организуем логистику и передачу.",
     "historyText2": "Одно из важных направлений — помощь детям и взрослым с инвалидностью, реабилитационным центрам и учреждениям, где постоянно нужны расходные материалы, средства ухода и бытовые товары.",
-    "historyImage": "",
+    "historyImage": "uploads/admin-12221947-a406-4ae4-baba-501b4692ede0.jpg",
     "historyVideo": "",
     "principlesEyebrow": "Принципы",
     "principlesTitle": "Как мы работаем",
@@ -36,9 +36,13 @@ window.YARILO = {
     "principle3Text": "Публикуем документы и отчёты о деятельности фонда.",
     "ctaTitle": "Хотите помочь?",
     "ctaText": "Поддержите работу фонда удобным способом.",
-    "photos": [],
+    "photos": [
+      "uploads/admin-12221947-a406-4ae4-baba-501b4692ede0.jpg"
+    ],
     "videos": [],
-    "mediaDescriptions": {}
+    "mediaDescriptions": {
+      "uploads/admin-12221947-a406-4ae4-baba-501b4692ede0.jpg": "тест"
+    }
   },
   "results": {
     "recipients": "1000+",
@@ -50,28 +54,38 @@ window.YARILO = {
       "title": "Дети и взрослые с инвалидностью",
       "text": "Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.",
       "photos": [
-        "uploads/admin-168e216a-c85e-4ddb-aedd-6ddaed27ae8e.jpg"
+        "uploads/admin-168e216a-c85e-4ddb-aedd-6ddaed27ae8e.jpg",
+        "uploads/admin-4d8b0b6d-3d72-47df-8767-54f29c3946b1.jpg",
+        "uploads/admin-6f0337df-e717-4325-bdc5-3b21db6e4515.jpg"
       ],
       "videos": [],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы.",
       "mediaDescriptions": {
-        "uploads/admin-168e216a-c85e-4ddb-aedd-6ddaed27ae8e.jpg": "ночной город тест"
+        "uploads/admin-168e216a-c85e-4ddb-aedd-6ddaed27ae8e.jpg": "ночной город тест",
+        "uploads/admin-4d8b0b6d-3d72-47df-8767-54f29c3946b1.jpg": "тест",
+        "uploads/admin-6f0337df-e717-4325-bdc5-3b21db6e4515.jpg": "тест"
       }
     },
     "rehab": {
       "title": "Реабилитационные центры",
       "text": "Подарки, предметы ухода и необходимые расходные материалы.",
-      "photos": [],
+      "photos": [
+        "uploads/admin-4640c5fa-b62b-4560-bcae-2ca016aa86a3.jpg"
+      ],
       "videos": [],
       "pageTitle": "Помощь реабилитационным центрам",
       "pageText": "Поддерживаем учреждения Московской области, где помощь требуется детям и взрослым с ограниченными возможностями.",
-      "mediaDescriptions": {}
+      "mediaDescriptions": {
+        "uploads/admin-4640c5fa-b62b-4560-bcae-2ca016aa86a3.jpg": "тест"
+      }
     },
     "hospitals": {
       "title": "Госпитали и учреждения",
       "text": "Постельное бельё, ткань, техника, моющие средства.",
-      "photos": [],
+      "photos": [
+        "uploads/admin-7b65a8a6-4a63-4fd9-8789-ce6dba54f97e.jpg"
+      ],
       "videos": [],
       "pageTitle": "Помощь госпиталям и учреждениям",
       "pageText": "Передаём необходимые бытовые и расходные товары по конкретным запросам.",
@@ -80,11 +94,15 @@ window.YARILO = {
     "crisis": {
       "title": "Люди в трудной ситуации",
       "text": "Одежда, предметы первой необходимости и адресная поддержка.",
-      "photos": [],
+      "photos": [
+        "uploads/admin-9715326e-66d9-4ece-b06b-edfbf75cd689.jpg"
+      ],
       "videos": [],
       "pageTitle": "Помощь людям в трудной жизненной ситуации",
       "pageText": "Поддерживаем людей, которым не хватает базовых вещей и ресурсов.",
-      "mediaDescriptions": {}
+      "mediaDescriptions": {
+        "uploads/admin-9715326e-66d9-4ece-b06b-edfbf75cd689.jpg": "тест"
+      }
     }
   },
   "support": {
