@@ -127,6 +127,6 @@ window.YARILO = {
   "socials": {
     "vk": "https://vk.ru/patriotka_07",
     "instagram": "",
-    "youtube": ""
+    "youtube": "https://www.youtube.com/@rus_rus_pom"
   }
 };
