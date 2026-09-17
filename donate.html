@@ -14,7 +14,7 @@
 
 <link rel="canonical" href="https://bf-yarilo.ru/donate.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=20260917.3">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Благотворительный фонд «Ярило»">
@@ -125,28 +125,34 @@ aria-expanded="false"
 
 <div class="donation-box">
 
-<h2>
-Поддержать фонд
-</h2>
-
-<p id="donation-offline-note">
-Онлайн-пожертвования через сайт будут доступны после подключения
-официального платёжного сервиса фонда.
-</p>
-
-<p id="donation-contact-note">
-До этого момента вы можете связаться с фондом или посмотреть
-официальные реквизиты.
-</p>
-
-<p id="donation-purpose"></p><a id="donation-payment" class="btn btn-large full" href="requisites.html">
-Реквизиты фонда
-</a>
+<p class="eyebrow">Ваше участие</p>
+<h2>Выберите сумму помощи</h2>
+<p>Каждое пожертвование помогает передать нужные вещи тем, кто их ждёт.</p>
+<div class="donation-amounts" role="group" aria-label="Сумма пожертвования">
+<button type="button" data-amount="300" aria-pressed="false">300 ₽</button>
+<button type="button" data-amount="500" aria-pressed="false">500 ₽</button>
+<button type="button" data-amount="1000" aria-pressed="true" class="selected">1 000 ₽</button>
+<button type="button" data-amount="3000" aria-pressed="false">3 000 ₽</button>
+</div>
+<label class="amount-label" for="donationAmount">Своя сумма, ₽<input id="donationAmount" type="text" inputmode="decimal" value="1000" maxlength="12" aria-describedby="amount-error" autocomplete="off"></label>
+<p id="amount-error" class="amount-error" role="alert" hidden></p>
+<p id="donation-purpose" class="payment-purpose"></p>
+<a id="donation-payment" class="btn btn-large full" href="#donation-bank">Перевести по реквизитам</a>
+<p id="payment-state" class="payment-note">Сейчас доступны пожертвования переводом на расчётный счёт фонда.</p>
+<p id="selected-amount-note" class="payment-note" aria-live="polite"></p>
 
 </div>
 
 
 <div class="donate-info">
+
+<div class="donation-qr-card">
+<p class="eyebrow">Помочь с телефона</p>
+<h2>Пожертвование по QR-коду</h2>
+<div id="donation-qr-image" hidden></div>
+<div id="donation-qr-placeholder" class="qr-placeholder"><span aria-hidden="true">↗</span><p>Здесь появится банковский QR-код фонда.</p></div>
+<p id="donation-qr-note">Пока можно сделать перевод по реквизитам ниже.</p>
+</div>
 
 <h2>
 Другие способы помочь
@@ -187,6 +193,17 @@ href="tel:+79660577755"
 
 </section>
 
+
+<section class="section section-alt" id="donation-bank">
+<div class="container">
+<p class="eyebrow">Прямой перевод</p>
+<h2>Реквизиты фонда</h2>
+<p>Можно переводить средства на расчётный счёт фонда по реквизитам.</p>
+<div id="donation-bank-accounts" class="donation-bank-grid"></div>
+<p id="copy-status" role="status" aria-live="polite"></p>
+<a href="requisites.html" class="text-link">Все реквизиты фонда →</a>
+</div>
+</section>
 
 <section class="section section-alt">
 
@@ -292,10 +309,12 @@ bf-yarilo.ru
 </footer>
 
 
-<script src="site-data.js"></script>
+<script src="site-data.js?v=20260917.3"></script>
+<script src="site-data-loader.js?v=20260917.3"></script>
 
 <script>
-(function () {
+(async function () {
+  await window.yariloDataReady;
 
   if (!window.YARILO) return;
 
@@ -331,9 +350,9 @@ bf-yarilo.ru
 })();
 </script>
 
-<script src="yarilo-model.js"></script>
+<script src="yarilo-model.js?v=20260917.3"></script>
 <script src="script.js"></script>
-<script src="scripts.js"></script>
+<script src="scripts.js?v=20260917.3"></script>
 
 </body>
 

@@ -1,3 +1,4 @@
+/* YARILO browser bundle 20260917.3 — built by work/build-browser.cjs */
 /* Shared data model: used by the website, editor and the standalone Worker. */
 (function (root) {
   'use strict';
@@ -124,3 +125,17 @@
   }
   root.YariloModel = {kinds, normalize, parse, serialize, safeURL, socialURL, description, qrImage, amount, paymentLink, mediaPaths, validate};
 })(globalThis);
+
+// Refresh published content on every visit. The existing script is a fallback
+// when the network fails, so the original static pages remain usable.
+window.yariloDataReady = (async function () {
+  try {
+    const response=await fetch(new URL('site-data.js?content='+Date.now(),location.href),{cache:'no-store',signal:AbortSignal.timeout(10000)});
+    if(!response.ok)throw new Error('Content unavailable');
+    window.YARILO=window.YariloModel.parse(await response.text());
+  } catch {
+    const note=document.createElement('p');note.className='content-refresh-note';note.setAttribute('role','status');
+    note.textContent='Не удалось обновить данные сайта. Показана ранее загруженная версия; попробуйте обновить страницу.';
+    document.body.prepend(note);
+  }
+})();

@@ -11,7 +11,7 @@
 
 <link rel="canonical" href="https://bf-yarilo.ru/help-disabled.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=20260917.3">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Благотворительный фонд «Ярило»">
@@ -222,10 +222,12 @@ bf-yarilo.ru
 </footer>
 
 
-<script src="site-data.js"></script>
+<script src="site-data.js?v=20260917.3"></script>
+<script src="site-data-loader.js?v=20260917.3"></script>
 
 <script>
-(function () {
+(async function () {
+  await window.yariloDataReady;
 
   if (!window.YARILO) return;
 
@@ -257,9 +259,9 @@ bf-yarilo.ru
 })();
 </script>
 
-<script src="yarilo-model.js"></script>
+<script src="yarilo-model.js?v=20260917.3"></script>
 <script src="script.js"></script>
-<script src="scripts.js"></script>
+<script src="scripts.js?v=20260917.3"></script>
 
 </body>
 </html>

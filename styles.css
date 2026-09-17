@@ -49,3 +49,32 @@ img[src*="history-image"] {
 .footer-main .social-link{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #64746b;border-radius:8px;color:#f6f3ea;font-weight:600;text-decoration:none;transition:background .15s,border-color .15s}
 .footer-main .social-link:hover{background:#344b3e;border-color:#d8c694;color:#fff}
 .social-link:focus-visible{outline:3px solid #d8c694;outline-offset:3px}
+/* Donation page and social buttons — same cream, gold and forest palette. */
+.footer-main .social-link{gap:9px;padding:7px 12px 7px 7px;border-color:#ffffff26;border-radius:999px;background:#ffffff08;box-shadow:0 3px 12px #0002;transition:transform .15s,background .15s,border-color .15s}
+.footer-main .social-link:hover{transform:translateY(-2px);background:#ffffff16;border-color:#ffffff50}
+.footer-main .social-link span{color:#f6f3ea;font-size:13px;font-weight:700}
+.footer-main .social-icon{display:grid;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;background:#2787f5;color:#fff}
+.social-icon svg{width:19px;height:19px}
+.footer-main .social-telegram .social-icon{background:#229ed9}
+.footer-main .social-instagram .social-icon{background:linear-gradient(135deg,#7851bd,#c13584,#e89b3b)}
+.footer-main .social-youtube .social-icon{background:#d73737}
+.donation-amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:24px}
+.donation-amounts button{border:1px solid var(--line);background:#f8f5ed;color:var(--ink);border-radius:12px;padding:14px 4px;font:inherit;font-weight:750;cursor:pointer}
+.donation-amounts button.selected{background:var(--dark);border-color:var(--dark);color:#fff;box-shadow:0 4px 12px #10251f20}
+.donation-amounts button:focus-visible,.donation-box input:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+.amount-error{color:#a32929;font-size:14px}.payment-purpose{padding:14px 16px;background:#f7f3e8;border-radius:12px;font-size:14px;line-height:1.6}
+#donation-payment[aria-disabled=true]{opacity:.5;cursor:not-allowed}
+.donation-qr-card{border:1px solid #d7d5c9;border-radius:22px;padding:26px;background:#eeeee4;margin-bottom:38px;text-align:center}
+.donation-qr-card h2{font-size:25px}.donation-qr-card p{font-size:14px;line-height:1.6}
+.qr-placeholder{width:min(220px,100%);min-height:200px;margin:20px auto;border:1px dashed #9ba79d;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:#f6f3ea}
+.qr-placeholder>span{font-size:40px;color:#71806e}.qr-placeholder p{margin:8px 0 0;color:#65716c}
+#donation-qr-image img{display:block;max-width:100%;width:240px;height:auto;margin:22px auto;padding:12px;background:white;border-radius:8px;object-fit:contain}
+.donation-bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:24px;margin-top:26px}
+.donation-bank-card{padding:30px;background:white;border:1px solid var(--line);border-radius:20px;min-width:0}
+.donation-bank-card .req-row{display:grid;grid-template-columns:170px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid #ebe9e1;font-size:14px}
+.donation-bank-card .req-row span{color:var(--muted)}.donation-bank-card .req-row b{font-weight:600;overflow-wrap:anywhere}
+.donation-bank-card .btn{margin-top:24px}.copy-fallback{display:block;width:100%;min-height:230px;margin-top:16px;padding:12px;font:inherit;font-size:13px}
+#donation-bank{scroll-margin-top:100px}#copy-status{color:#265c40}
+.content-refresh-note{padding:12px 20px;background:#fff0c7;color:#574516;margin:0;font-size:14px}
+@media(max-width:620px){.donation-box{padding:22px}.donate-info{padding:0}.donation-bank-card{padding:20px}.donation-bank-card .req-row{grid-template-columns:1fr;gap:4px}.donation-amounts{gap:6px}.donation-amounts button{font-size:14px}.donation-qr-card{padding:20px}.donation-bank-card .btn{width:100%;text-align:center;white-space:normal}}
+.menu>a.btn.active{color:#fff}
