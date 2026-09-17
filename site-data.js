@@ -56,7 +56,7 @@ window.YARILO = {
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы.",
       "mediaDescriptions": {
-        "uploads/admin-168e216a-c85e-4ddb-aedd-6ddaed27ae8e.jpg": "ночной город"
+        "uploads/admin-168e216a-c85e-4ddb-aedd-6ddaed27ae8e.jpg": "ночной город тест"
       }
     },
     "rehab": {
@@ -104,7 +104,7 @@ window.YARILO = {
     "purpose": "Благотворительное пожертвование на уставную деятельность фонда."
   },
   "socials": {
-    "vk": "",
+    "vk": "https://vk.ru/patriotka_07",
     "instagram": "",
     "youtube": ""
   }
