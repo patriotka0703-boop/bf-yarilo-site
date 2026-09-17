@@ -22,6 +22,10 @@
     d.requisites ||= {inn: '', kpp: '', ogrn: '', address: '', accounts: []};
     d.requisites.accounts ||= [];
     d.donation ||= {text: 'Пожертвовать', url: 'donate.html', purpose: 'Благотворительное пожертвование на уставную деятельность фонда.'};
+    d.socials ||= {vk: '', instagram: '', youtube: ''};
+    for (const group of groups(d)) {
+      if (!group.mediaDescriptions || typeof group.mediaDescriptions !== 'object' || Array.isArray(group.mediaDescriptions)) group.mediaDescriptions = {};
+    }
     return d;
   }
   function parse(source) {
@@ -35,6 +39,13 @@
     try { const u = new URL(value, base); return ['https:', 'http:'].includes(u.protocol) && !u.username && !u.password ? u.href : ''; } catch { return ''; }
   }
   function groups(d) { return [d.aboutPage, ...kinds.map(k => d.help[k])]; }
+  function socialURL(value) {
+    return typeof value === 'string' && /^https?:\/\//i.test(value.trim()) ? safeURL(value.trim()) : '';
+  }
+  function description(group, path) {
+    const value = group.mediaDescriptions?.[path];
+    return typeof value === 'string' ? value.trim() : '';
+  }
   function mediaPaths(d) { return [...new Set(groups(normalize(d)).flatMap(g => [...g.photos, ...g.videos]))]; }
   function validate(d) {
     if (!d || typeof d !== 'object' || Array.isArray(d)) throw new Error('Некорректные данные сайта.');
@@ -44,6 +55,12 @@
     if (JSON.stringify(d).length > 500000) throw new Error('Слишком большой объём текстовых данных.');
     for (const group of groups(d)) {
       if (!group) throw new Error('Отсутствует направление помощи.');
+      if (group.mediaDescriptions) {
+        if (typeof group.mediaDescriptions !== 'object' || Array.isArray(group.mediaDescriptions)) throw new Error('Некорректные описания файлов.');
+        for (const value of Object.values(group.mediaDescriptions)) {
+          if (typeof value !== 'string' || value.length > 2000) throw new Error('Описание фото или видео должно содержать не больше 2000 символов.');
+        }
+      }
       for (const [key, ext] of [['photos', imageExt], ['videos', videoExt]]) {
         if (!Array.isArray(group[key]) || group[key].length > 200) throw new Error('Допускается до 200 файлов каждого типа в разделе.');
         for (const p of group[key]) {
@@ -60,7 +77,14 @@
       }
     }
     if (typeof d.donation.text !== 'string' || !d.donation.text.trim() || !safeURL(d.donation.url)) throw new Error('Укажите текст и корректную ссылку кнопки пожертвования.');
+    if (d.socials) {
+      if (typeof d.socials !== 'object' || Array.isArray(d.socials)) throw new Error('Некорректные ссылки на соцсети.');
+      for (const [key, title] of [['vk', 'ВК'], ['instagram', 'Instagram'], ['youtube', 'YouTube']]) {
+        const value = d.socials[key];
+        if (value && !socialURL(value)) throw new Error('Укажите полную ссылку для ' + title + ', начиная с https://, или оставьте поле пустым.');
+      }
+    }
     return d;
   }
-  root.YariloModel = {kinds, normalize, parse, serialize, safeURL, mediaPaths, validate};
+  root.YariloModel = {kinds, normalize, parse, serialize, safeURL, socialURL, description, mediaPaths, validate};
 })(globalThis);

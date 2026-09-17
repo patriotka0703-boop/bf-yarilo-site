@@ -49,11 +49,11 @@
     renderAccounts();
   }
   function element(tag, text, className) { const el=document.createElement(tag); if(text!==undefined)el.textContent=text; if(className)el.className=className; return el; }
-  function openImage(src) {
+  function openImage(src, description) {
     const dialog=element('dialog',undefined,'media-dialog');
     const close=element('button','Закрыть','secondary'); close.type='button'; close.onclick=()=>dialog.close();
     const img=element('img'); img.src=src; img.alt='Увеличенное фото';
-    dialog.append(close,img); dialog.addEventListener('close',()=>dialog.remove());
+    dialog.append(close,img); if(description)dialog.append(element('p',description,'media-caption')); dialog.addEventListener('close',()=>dialog.remove());
     dialog.onclick=e=>{if(e.target===dialog)dialog.close();}; document.body.append(dialog); dialog.showModal();
   }
   function mediaURL(p) { return previews.get(p) || M.safeURL(p, new URL('../',location.href).href); }
@@ -70,11 +70,15 @@
       group[key].forEach((p,index)=>{
         const card=element('div',undefined,'media-item');
         const src=mediaURL(p);
-        if(key==='photos') { const button=element('button',undefined,'media-open'); button.type='button'; button.setAttribute('aria-label','Увеличить фото '+(index+1)); const img=element('img'); img.src=src; img.alt='Фото '+(index+1); img.loading='lazy'; button.append(img); button.onclick=()=>openImage(src); card.append(button); }
+        if(key==='photos') { const button=element('button',undefined,'media-open'); button.type='button'; button.setAttribute('aria-label','Увеличить фото '+(index+1)); const img=element('img'); img.src=src; img.alt='Фото '+(index+1); img.loading='lazy'; button.append(img); button.onclick=()=>openImage(src,M.description(getPath(data,groupPath),p)); card.append(button); }
         else { const video=element('video'); video.controls=true; video.preload='metadata'; video.src=src; card.append(video); }
         const remove=element('button',key==='photos'?'Удалить фото':'Удалить видео','danger'); remove.type='button';
-        remove.onclick=()=>{group[key].splice(index,1);changed();renderMedia(container);status('Файл убран из раздела. Нажмите «Сохранить изменения».');};
-        card.append(element('p',p.split('/').pop()),remove); grid.append(card);
+        remove.onclick=()=>{const current=getPath(data,groupPath);current[key].splice(index,1);if(![...current.photos,...current.videos].includes(p))delete current.mediaDescriptions[p];changed();renderMedia(container);status('Файл убран из раздела. Нажмите «Сохранить изменения».');};
+        const captionLabel=element('label',key==='photos'?'Описание фото':'Описание видео','media-caption-label');
+        const caption=element('textarea',undefined,'media-caption-input');caption.id=id+'-description-'+index;captionLabel.htmlFor=caption.id;
+        caption.value=M.description(group,p);caption.maxLength=2000;caption.rows=3;caption.placeholder='Необязательно. Появится под файлом на сайте.';
+        caption.oninput=()=>{const descriptions=getPath(data,groupPath).mediaDescriptions;if(caption.value.trim())descriptions[p]=caption.value;else delete descriptions[p];changed();};
+        card.append(element('p',p.split('/').pop()),captionLabel,caption,remove); grid.append(card);
       });
       container.append(label,input,hint,grid);
     }
@@ -126,6 +130,7 @@
       const paths=new Set(M.mediaPaths(next));
       const result=await post('/save',{data:next,sha,uploads:[...uploads].filter(([p])=>paths.has(p)).map(([,receipt])=>receipt)});
       data=next;sha=result.sha;dirty=false;uploads.clear();
+      fill();
       status('Сохранено в GitHub. Сайт обновится после завершения публикации GitHub Pages.','ok');
     } catch(e) {status(e.message,'error');} finally{lock(false);}
   }
