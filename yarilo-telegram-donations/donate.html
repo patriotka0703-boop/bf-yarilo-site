@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Пожертвовать благотворительному фонду «Ярило»</title>
+
+<meta name="description" content="Сделать пожертвование благотворительному фонду «Ярило» и поддержать адресную помощь людям, оказавшимся в беде.">
+
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#10251f">
+
+<link rel="canonical" href="https://bf-yarilo.ru/donate.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="styles.css?v=20260917.3">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Благотворительный фонд «Ярило»">
+<meta property="og:title" content="Пожертвовать благотворительному фонду «Ярило»">
+<meta property="og:description" content="Поддержите работу благотворительного фонда «Ярило» и адресную помощь людям, оказавшимся в беде.">
+<meta property="og:url" content="https://bf-yarilo.ru/donate.html">
+
+<meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "Благотворительный фонд «Ярило»",
+  "url": "https://bf-yarilo.ru/",
+  "telephone": "+79660577755",
+  "areaServed": "Московская область",
+  "description": "Фонд помощи тем, кто попал в беду."
+}
+</script>
+
+</head>
+
+
+<body>
+
+<header class="site-header">
+
+<div class="container nav">
+
+<a class="brand" href="index.html" aria-label="Благотворительный фонд Ярило">
+
+<img
+class="brand-logo-img"
+src="logo-yarilo.jpg"
+alt="Логотип благотворительного фонда Ярило"
+>
+
+<span>
+<b id="foundation-short-name">ЯРИЛО</b>
+<small>благотворительный фонд</small>
+</span>
+
+</a>
+
+<button
+class="menu-btn"
+aria-label="Открыть меню"
+aria-expanded="false"
+>
+☰
+</button>
+
+<nav class="menu" aria-label="Основная навигация">
+
+<a href="about.html">О фонде</a>
+<a href="help.html">Кому помогаем</a>
+<a href="projects.html">Проекты</a>
+<a href="news.html">Новости</a>
+<a href="reports.html">Отчётность</a>
+<a href="requisites.html">Реквизиты</a>
+<a href="contacts.html">Контакты</a>
+
+<a class="btn btn-small donate-nav active" href="donate.html">
+Пожертвовать
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<main>
+
+<section class="page-hero donate-hero">
+
+<div class="container narrow">
+
+<p class="breadcrumbs">
+<a href="index.html">Главная</a> / Пожертвовать
+</p>
+
+<p class="eyebrow">
+Поддержать фонд
+</p>
+
+<h1>
+Сделать пожертвование
+</h1>
+
+<p class="lead">
+Ваша поддержка помогает фонду организовывать адресную помощь,
+доставлять необходимые товары и поддерживать тех, кто оказался
+в трудной жизненной ситуации.
+</p>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="container donate-layout">
+
+
+<div class="donation-box">
+
+<p class="eyebrow">Ваше участие</p>
+<h2>Выберите сумму помощи</h2>
+<p>Каждое пожертвование помогает передать нужные вещи тем, кто их ждёт.</p>
+<div class="donation-amounts" role="group" aria-label="Сумма пожертвования">
+<button type="button" data-amount="300" aria-pressed="false">300 ₽</button>
+<button type="button" data-amount="500" aria-pressed="false">500 ₽</button>
+<button type="button" data-amount="1000" aria-pressed="true" class="selected">1 000 ₽</button>
+<button type="button" data-amount="3000" aria-pressed="false">3 000 ₽</button>
+</div>
+<label class="amount-label" for="donationAmount">Своя сумма, ₽<input id="donationAmount" type="text" inputmode="decimal" value="1000" maxlength="12" aria-describedby="amount-error" autocomplete="off"></label>
+<p id="amount-error" class="amount-error" role="alert" hidden></p>
+<p id="donation-purpose" class="payment-purpose"></p>
+<a id="donation-payment" class="btn btn-large full" href="#donation-bank">Перевести по реквизитам</a>
+<p id="payment-state" class="payment-note">Сейчас доступны пожертвования переводом на расчётный счёт фонда.</p>
+<p id="selected-amount-note" class="payment-note" aria-live="polite"></p>
+
+</div>
+
+
+<div class="donate-info">
+
+<div class="donation-qr-card">
+<p class="eyebrow">Помочь с телефона</p>
+<h2>Пожертвование по QR-коду</h2>
+<div id="donation-qr-image" hidden></div>
+<div id="donation-qr-placeholder" class="qr-placeholder"><span aria-hidden="true">↗</span><p>Здесь появится банковский QR-код фонда.</p></div>
+<p id="donation-qr-note">Пока можно сделать перевод по реквизитам ниже.</p>
+</div>
+
+<h2>
+Другие способы помочь
+</h2>
+
+<ul class="checklist">
+
+<li>
+Передать необходимые товары
+</li>
+
+<li>
+Помочь с транспортом или доставкой
+</li>
+
+<li>
+Помочь с топливом для поездок
+</li>
+
+<li>
+Стать партнёром фонда
+</li>
+
+</ul>
+
+<a
+id="contact-button"
+class="btn btn-ghost"
+href="tel:+79660577755"
+>
+Связаться с фондом
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="section section-alt" id="donation-bank">
+<div class="container">
+<p class="eyebrow">Прямой перевод</p>
+<h2>Реквизиты фонда</h2>
+<p>Можно переводить средства на расчётный счёт фонда по реквизитам.</p>
+<div id="donation-bank-accounts" class="donation-bank-grid"></div>
+<p id="copy-status" role="status" aria-live="polite"></p>
+<a href="requisites.html" class="text-link">Все реквизиты фонда →</a>
+</div>
+</section>
+
+<section class="section section-alt">
+
+<div class="container narrow">
+
+<p class="eyebrow">
+Поддержка
+</p>
+
+<h2>
+Каждая помощь имеет значение
+</h2>
+
+<p class="prose">
+Фонд принимает не только денежную помощь. Можно передать необходимые
+товары, помочь с транспортом, доставкой и другими ресурсами,
+необходимыми для работы фонда.
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<div class="container footer-main">
+
+
+<div>
+
+<a class="brand footer-brand" href="index.html">
+
+<img
+class="brand-logo-img"
+src="logo-yarilo.jpg"
+alt="Логотип благотворительного фонда Ярило"
+>
+
+<span>
+<b id="footer-short-name">ЯРИЛО</b>
+<small>благотворительный фонд</small>
+</span>
+
+</a>
+
+<p id="foundation-slogan">
+Фонд помощи тем, кто попал в беду.
+</p>
+
+</div>
+
+
+<div>
+
+<b>Разделы</b>
+
+<a href="about.html">О фонде</a>
+<a href="help.html">Кому помогаем</a>
+<a href="reports.html">Отчётность</a>
+<a href="requisites.html">Реквизиты</a>
+<a href="contacts.html">Контакты</a>
+
+</div>
+
+
+<div>
+
+<b>Связь</b>
+
+<a id="footer-phone" href="tel:+79660577755">
++7 966 057-77-55
+</a>
+
+<a href="https://bf-yarilo.ru/">
+bf-yarilo.ru
+</a>
+
+<span id="footer-region">
+Московская область
+</span>
+
+</div>
+
+</div>
+
+
+<div class="container footer-bottom">
+
+<span>
+© <span id="year"></span>
+Благотворительный фонд «Ярило»
+</span>
+
+<a href="privacy.html">
+Политика конфиденциальности
+</a>
+
+</div>
+
+</footer>
+
+
+<script src="site-data.js?v=20260917.3"></script>
+<script src="site-data-loader.js?v=20260917.3"></script>
+
+<script>
+(async function () {
+  await window.yariloDataReady;
+
+  if (!window.YARILO) return;
+
+  const data = window.YARILO;
+
+  function setText(id, value) {
+
+    const element = document.getElementById(id);
+
+    if (element && value !== undefined && value !== null) {
+      element.textContent = value;
+    }
+
+  }
+
+  setText("foundation-short-name", data.foundation.shortName);
+  setText("footer-short-name", data.foundation.shortName);
+  setText("foundation-slogan", data.foundation.slogan);
+  setText("footer-region", data.foundation.region);
+
+  const footerPhone = document.getElementById("footer-phone");
+  const contactButton = document.getElementById("contact-button");
+
+  if (footerPhone) {
+    footerPhone.textContent = data.foundation.phone;
+    footerPhone.href = "tel:" + data.foundation.phoneLink;
+  }
+
+  if (contactButton) {
+    contactButton.href = "tel:" + data.foundation.phoneLink;
+  }
+
+})();
+</script>
+
+<script src="yarilo-model.js?v=20260917.3"></script>
+<script src="script.js"></script>
+<script src="scripts.js?v=20260917.3"></script>
+
+</body>
+
+</html>

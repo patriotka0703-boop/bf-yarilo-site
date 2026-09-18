@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Админка — БФ «ЯРИЛО»</title>
+<meta name="robots" content="noindex,nofollow">
+
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="admin.css?v=20260917.3">
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f5;
+  color:#17231f
+}
+
+header{
+  background:#10251f;
+  color:#fff;
+  padding:24px 20px
+}
+
+.header{
+  max-width:1000px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px
+}
+
+h1{margin:0 0 5px;font-size:28px}
+header p{margin:0;opacity:.8}
+
+.site{
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.4);
+  padding:10px 14px;
+  border-radius:8px
+}
+
+main{
+  max-width:1000px;
+  margin:30px auto;
+  padding:0 20px 60px
+}
+
+.panel{
+  background:#fff;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+  margin-bottom:20px
+}
+
+.login{
+  text-align:center;
+  padding:50px 25px
+}
+
+.hidden{display:none!important}
+
+.status{
+  display:none;
+  padding:14px 16px;
+  margin-bottom:20px;
+  border-radius:9px
+}
+
+.status.info{
+  display:block;
+  background:#edf2f0
+}
+
+.status.ok{
+  display:block;
+  background:#e7f5eb;
+  color:#176238
+}
+
+.status.error{
+  display:block;
+  background:#fdeaea;
+  color:#8a2222
+}
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:13px 20px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer
+}
+
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed
+}
+
+.primary{background:#10251f;color:#fff}
+.save{background:#18794e;color:#fff}
+.secondary{background:#e7ece9;color:#17231f}
+.danger{background:#8d2727;color:#fff}
+
+.field{margin-bottom:18px}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px
+}
+
+input,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd5d1;
+  border-radius:8px;
+  font:inherit
+}
+
+textarea{
+  min-height:105px;
+  resize:vertical
+}
+
+textarea.long{
+  min-height:150px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px
+}
+
+.section{
+  margin:32px 0 20px;
+  padding-bottom:10px;
+  border-bottom:1px solid #e3e8e5
+}
+
+.section:first-of-type{
+  margin-top:20px
+}
+
+.subsection{
+  margin:25px 0 15px;
+  font-size:18px
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px
+}
+
+.small{
+  color:#69736f;
+  font-size:13px;
+  line-height:1.5
+}
+
+
+.media-preview{
+  margin:12px 0;
+  padding:12px;
+  border:1px solid #e3e8e5;
+  border-radius:10px;
+  background:#f8faf9
+}
+
+.media-preview img{
+  display:block;
+  width:140px;
+  height:100px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:10px;
+  cursor:zoom-in;
+}
+
+.media-preview video{
+  display:block;
+  width:100%;
+  max-width:520px;
+  max-height:360px;
+  object-fit:contain;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+@media(max-width:700px){
+  .grid{grid-template-columns:1fr}
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start
+  }
+}
+  /* Галерея фотографий в админке */
+.admin-photo-gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.admin-photo-gallery img{
+  width:120px;
+  height:90px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid #d8ddd9;
+  cursor:pointer;
+  background:#f5f5f5;
+}
+
+.admin-photo-gallery img:hover{
+  transform:scale(1.04);
+}
+
+#historyImagePreviewBox{
+  padding:14px;
+}
+
+#historyImagePreviewBox.hidden{
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header">
+  <div>
+    <h1>БФ «ЯРИЛО»</h1>
+    <p>Управление сайтом</p>
+  </div>
+
+  <a class="site"
+     href="https://bf-yarilo.ru/"
+     target="_blank">
+    Открыть сайт →
+  </a>
+</div>
+</header>
+
+<main>
+
+<div id="status" class="status" role="status" aria-live="polite"></div>
+
+<section id="loginPanel" class="panel login">
+  <h2>Вход в админку</h2>
+
+  <p>
+    Войдите через GitHub, чтобы редактировать сайт фонда.
+  </p>
+
+  <button id="loginButton" class="primary">
+    Войти через GitHub
+  </button>
+
+  <p class="small">
+    Пароль GitHub здесь не сохраняется.
+  </p>
+</section>
+
+
+<section id="editorPanel" class="panel hidden">
+
+<p>
+  Вы вошли как:
+  <strong id="githubUser"></strong>
+</p>
+
+
+<h2 class="section">Основные данные фонда</h2>
+
+<div class="field">
+  <label for="foundationName">Полное название</label>
+  <input id="foundationName" data-field="foundation.name">
+</div>
+
+<div class="grid">
+  <div class="field">
+    <label for="shortName">Короткое название</label>
+    <input id="shortName" data-field="foundation.shortName">
+  </div>
+
+  <div class="field">
+    <label for="region">Регион</label>
+    <input id="region" data-field="foundation.region">
+  </div>
+</div>
+
+<div class="field">
+  <label for="slogan">Девиз</label>
+  <input id="slogan" data-field="foundation.slogan">
+</div>
+
+<div class="field">
+  <label for="director">Генеральный директор</label>
+  <input id="director" data-field="foundation.director">
+</div>
+
+<div class="grid">
+  <div class="field">
+    <label for="phone">Телефон</label>
+    <input id="phone" data-field="foundation.phone">
+  </div>
+
+  <div class="field">
+    <label for="website">Адрес сайта</label>
+    <input id="website" data-field="foundation.website">
+  </div>
+</div>
+
+
+<h2 class="section">Главная страница</h2>
+
+<div class="field">
+  <label for="homeTitle">Главный заголовок</label>
+  <input id="homeTitle" data-field="home.title">
+</div>
+
+<div class="field">
+  <label for="homeDescription">Описание</label>
+  <textarea id="homeDescription" data-field="home.description"></textarea>
+</div>
+
+<div class="field">
+  <label for="missionTitle">Заголовок миссии</label>
+  <input id="missionTitle" data-field="home.missionTitle">
+</div>
+
+<div class="field">
+  <label for="missionText">Текст миссии</label>
+  <textarea id="missionText" data-field="home.missionText"></textarea>
+</div>
+
+<div class="field">
+  <label for="aboutTitle">Заголовок блока о фонде на главной</label>
+  <input id="aboutTitle" data-field="home.aboutTitle">
+</div>
+
+<div class="field">
+  <label for="aboutText">Текст блока о фонде на главной</label>
+  <textarea id="aboutText" data-field="home.aboutText"></textarea>
+</div>
+
+
+
+<h2 class="section">О фонде и история фонда</h2>
+
+<div class="field">
+  <label for="aboutPageEyebrow">Метка над заголовком</label>
+  <input id="aboutPageEyebrow" data-field="aboutPage.eyebrow">
+</div>
+
+<div class="field">
+  <label for="aboutPageTitle">Заголовок страницы</label>
+  <input id="aboutPageTitle" data-field="aboutPage.title">
+</div>
+
+<div class="field">
+  <label>Вводный текст о фонде</label>
+  <textarea class="long" id="aboutPageLead" data-field="aboutPage.lead"></textarea>
+</div>
+
+<h3 class="subsection">История фонда</h3>
+
+<div class="field">
+  <label for="historyTitle">Заголовок истории</label>
+  <input id="historyTitle" data-field="aboutPage.historyTitle">
+</div>
+
+<div class="field">
+  <label>История фонда — первый абзац</label>
+  <textarea class="long" id="historyText1" data-field="aboutPage.historyText1"></textarea>
+</div>
+
+<div class="field">
+  <label>История фонда — второй абзац</label>
+  <textarea class="long" id="historyText2" data-field="aboutPage.historyText2"></textarea>
+</div>
+<div data-media-group="aboutPage"></div>
+<h3 class="subsection">Принципы работы</h3>
+
+<div class="grid">
+  <div class="field">
+    <label for="principlesEyebrow">Метка раздела</label>
+    <input id="principlesEyebrow" data-field="aboutPage.principlesEyebrow">
+  </div>
+
+  <div class="field">
+    <label for="principlesTitle">Заголовок раздела</label>
+    <input id="principlesTitle" data-field="aboutPage.principlesTitle">
+  </div>
+</div>
+
+<div class="field">
+  <label for="principle1Title">Принцип №1 — название</label>
+  <input id="principle1Title" data-field="aboutPage.principle1Title">
+</div>
+
+<div class="field">
+  <label for="principle1Text">Принцип №1 — описание</label>
+  <textarea id="principle1Text" data-field="aboutPage.principle1Text"></textarea>
+</div>
+
+<div class="field">
+  <label for="principle2Title">Принцип №2 — название</label>
+  <input id="principle2Title" data-field="aboutPage.principle2Title">
+</div>
+
+<div class="field">
+  <label for="principle2Text">Принцип №2 — описание</label>
+  <textarea id="principle2Text" data-field="aboutPage.principle2Text"></textarea>
+</div>
+
+<div class="field">
+  <label for="principle3Title">Принцип №3 — название</label>
+  <input id="principle3Title" data-field="aboutPage.principle3Title">
+</div>
+
+<div class="field">
+  <label for="principle3Text">Принцип №3 — описание</label>
+  <textarea id="principle3Text" data-field="aboutPage.principle3Text"></textarea>
+</div>
+
+<h3 class="subsection">Блок «Хотите помочь?»</h3>
+
+<div class="field">
+  <label for="aboutCtaTitle">Заголовок</label>
+  <input id="aboutCtaTitle" data-field="aboutPage.ctaTitle">
+</div>
+
+<div class="field">
+  <label for="aboutCtaText">Текст</label>
+  <textarea id="aboutCtaText" data-field="aboutPage.ctaText"></textarea>
+</div>
+
+
+<h2 class="section">Результаты</h2>
+
+<div class="grid">
+  <div class="field">
+    <label for="recipients">Получателей помощи</label>
+    <input id="recipients" data-field="results.recipients">
+  </div>
+
+  <div class="field">
+    <label for="cities">Количество городов</label>
+    <input id="cities" data-field="results.cities">
+  </div>
+</div>
+
+<div class="field">
+  <label for="citiesText">Города</label>
+  <textarea id="citiesText" data-field="results.citiesText"></textarea>
+</div>
+
+
+<h2 class="section">Направления помощи</h2>
+
+<div class="field">
+  <label for="disabledTitle">Дети и взрослые с инвалидностью</label>
+  <input id="disabledTitle" data-field="help.disabled.title">
+  <textarea id="disabledText" data-field="help.disabled.text"></textarea>
+<label for="disabledPageTitle">Заголовок отдельной страницы</label><input id="disabledPageTitle" data-field="help.disabled.pageTitle">
+<label for="disabledPageText">Вводный текст отдельной страницы</label><textarea id="disabledPageText" data-field="help.disabled.pageText"></textarea>
+<div data-media-group="help.disabled"></div>
+</div>
+
+<div class="field">
+  <label for="rehabTitle">Реабилитационные центры</label>
+  <input id="rehabTitle" data-field="help.rehab.title">
+  <textarea id="rehabText" data-field="help.rehab.text"></textarea>
+<label for="rehabPageTitle">Заголовок отдельной страницы</label><input id="rehabPageTitle" data-field="help.rehab.pageTitle">
+<label for="rehabPageText">Вводный текст отдельной страницы</label><textarea id="rehabPageText" data-field="help.rehab.pageText"></textarea>
+<div data-media-group="help.rehab"></div>
+</div>
+
+<div class="field">
+  <label for="hospitalsTitle">Госпитали и учреждения</label>
+  <input id="hospitalsTitle" data-field="help.hospitals.title">
+  <textarea id="hospitalsText" data-field="help.hospitals.text"></textarea>
+<label for="hospitalsPageTitle">Заголовок отдельной страницы</label><input id="hospitalsPageTitle" data-field="help.hospitals.pageTitle">
+<label for="hospitalsPageText">Вводный текст отдельной страницы</label><textarea id="hospitalsPageText" data-field="help.hospitals.pageText"></textarea>
+<div data-media-group="help.hospitals"></div>
+</div>
+
+<div class="field">
+  <label for="crisisTitle">Люди в трудной ситуации</label>
+  <input id="crisisTitle" data-field="help.crisis.title">
+  <textarea id="crisisText" data-field="help.crisis.text"></textarea>
+<label for="crisisPageTitle">Заголовок отдельной страницы</label><input id="crisisPageTitle" data-field="help.crisis.pageTitle">
+<label for="crisisPageText">Вводный текст отдельной страницы</label><textarea id="crisisPageText" data-field="help.crisis.pageText"></textarea>
+<div data-media-group="help.crisis"></div>
+</div>
+
+
+<h2 class="section">Поддержка фонда</h2>
+
+<div class="field">
+  <label for="supportTitle">Заголовок</label>
+  <input id="supportTitle" data-field="support.title">
+</div>
+
+<div class="field">
+  <label for="supportText">Описание</label>
+  <textarea id="supportText" data-field="support.text"></textarea>
+</div>
+
+
+<h2 class="section">Социальные сети</h2>
+<p class="small">Кнопки появятся внизу страниц сайта после сохранения. Пустое поле скрывает соответствующую кнопку.</p>
+<div class="field"><label for="social-telegram">Telegram — ссылка</label><input type="url" id="social-telegram" data-field="socials.telegram" placeholder="https://t.me/…" autocomplete="off"></div>
+<div class="field"><label for="social-vk">ВК — ссылка</label><input type="url" id="social-vk" data-field="socials.vk" placeholder="https://vk.com/…" autocomplete="off"></div>
+<div class="field"><label for="social-instagram">Instagram — ссылка</label><input type="url" id="social-instagram" data-field="socials.instagram" placeholder="https://www.instagram.com/…" autocomplete="off"></div>
+<div class="field"><label for="social-youtube">YouTube — ссылка</label><input type="url" id="social-youtube" data-field="socials.youtube" placeholder="https://www.youtube.com/@…" autocomplete="off"></div>
+
+<h2 class="section">Реквизиты и банковские счета</h2>
+<div class="field"><label for="req-name">Полное наименование получателя</label><input id="req-name" data-field="requisites.legalName"></div>
+<div class="grid"><div class="field"><label for="req-inn">ИНН</label><input id="req-inn" data-field="requisites.inn"></div><div class="field"><label for="req-kpp">КПП</label><input id="req-kpp" data-field="requisites.kpp"></div><div class="field"><label for="req-ogrn">ОГРН</label><input id="req-ogrn" data-field="requisites.ogrn"></div><div class="field"><label for="req-address">Юридический адрес</label><input id="req-address" data-field="requisites.address"></div></div>
+<div id="accounts"></div><button type="button" id="addAccount" class="secondary">Добавить банковский счёт</button>
+<h2 class="section">Кнопка «Пожертвовать»</h2>
+<div class="field"><label for="donationText">Текст кнопки</label><input id="donationText" data-field="donation.text"></div>
+<div class="field"><label for="donationUrl">Куда ведёт кнопка</label><input id="donationUrl" data-field="donation.url" placeholder="donate.html или https://…"><p class="small">Можно указать платёжную ссылку банка, donate.html или requisites.html.</p></div>
+<div class="field"><label for="donationPurpose">Назначение пожертвования</label><textarea id="donationPurpose" data-field="donation.purpose"></textarea></div>
+<h2 class="section">Оплата и QR-код</h2>
+<div class="field"><label for="paymentUrl">Платёжная ссылка фонда</label><input type="url" id="paymentUrl" data-field="donation.paymentUrl" placeholder="https://…"><p class="small">Вставьте ссылку, выданную платёжным сервисом или банком. Пока поле пустое, сайт предлагает перевод по реквизитам.</p><details><summary>Если ссылка поддерживает выбранную сумму</summary><p class="small">Только если это предусмотрено вашим сервисом: вместо суммы в рублях можно указать {amount}. Сайт подставит выбранную сумму. В обычную ссылку сумма автоматически не добавляется — посетитель подтвердит её на странице оплаты.</p></details></div>
+<div class="field"><label for="donationQrFile">Загрузить банковский QR-код для пожертвований</label><input type="file" id="donationQrFile" accept=".png,.jpg,.jpeg,.webp"><p class="small">PNG, JPG или WEBP, до 200 КБ. Используйте QR-код, выданный банком для счёта фонда. Картинка сохраняется после нажатия «Сохранить изменения».</p><div id="qrPreview"></div><button type="button" id="removeQr" class="danger" hidden>Удалить QR-код</button></div>
+<div class="field"><label for="qrNote">Подпись к QR-коду</label><textarea id="qrNote" data-field="donation.qrNote"></textarea></div>
+<div class="actions">
+  <button type="button" id="checkPublication" class="secondary">Проверить обновление сайта</button>
+
+  <button id="saveButton" class="save">
+    Сохранить изменения
+  </button>
+
+  <button id="reloadButton" class="secondary">
+    Обновить данные
+  </button>
+
+  <button id="logoutButton" class="danger">
+    Выйти
+  </button>
+
+</div>
+
+<p class="small">
+  После сохранения изменения записываются в GitHub.
+  GitHub Pages автоматически обновит сайт.
+</p>
+
+</section>
+
+</main>
+
+
+<script src="../yarilo-model.js?v=20260917.3"></script>
+<script src="config.js"></script>
+<script src="admin.js?v=20260917.3"></script>
+</body>
+</html>
