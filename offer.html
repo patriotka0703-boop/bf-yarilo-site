@@ -5,34 +5,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Контакты благотворительного фонда «Ярило»</title>
-<meta name="description" content="Контакты благотворительного фонда «Ярило» в Московской области: телефон, сайт и информация для партнёров.">
-<meta name="robots" content="index,follow,max-image-preview:large">
+<title>Публичная оферта — фонд «Ярило»</title>
+
+<meta name="description" content="Публичная оферта благотворительного фонда «Ярило».">
+
+<meta name="robots" content="index,follow">
 <meta name="theme-color" content="#10251f">
 
-<link rel="canonical" href="https://bf-yarilo.ru/contacts.html">
+<link rel="canonical" href="https://bf-yarilo.ru/offer.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="styles.css?v=20260919.1">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Благотворительный фонд «Ярило»">
-<meta property="og:title" content="Контакты благотворительного фонда «Ярило»">
-<meta property="og:description" content="Контакты благотворительного фонда «Ярило» в Московской области: телефон, сайт и информация для партнёров.">
-<meta property="og:url" content="https://bf-yarilo.ru/contacts.html">
-
-<meta name="twitter:card" content="summary">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "NGO",
-  "name": "Благотворительный фонд «Ярило»",
-  "url": "https://bf-yarilo.ru/",
-  "telephone": "+79660577755",
-  "areaServed": "Московская область",
-  "description": "Фонд помощи тем, кто попал в беду."
-}
-</script>
+<meta property="og:title" content="Публичная оферта — фонд «Ярило»">
+<meta property="og:description" content="Публичная оферта благотворительного фонда «Ярило».">
+<meta property="og:url" content="https://bf-yarilo.ru/offer.html">
 
 </head>
 
@@ -74,7 +62,7 @@ aria-expanded="false"
 <a href="news.html">Новости</a>
 <a href="reports.html">Отчётность</a>
 <a href="requisites.html">Реквизиты</a>
-<a class="active" href="contacts.html">Контакты</a>
+<a href="contacts.html">Контакты</a>
 
 <a class="btn btn-small donate-nav" href="donate.html">
 Пожертвовать
@@ -87,111 +75,12 @@ aria-expanded="false"
 </header>
 
 
-<main>
-
-<section class="page-hero">
-
-<div class="container narrow">
-
-<p class="breadcrumbs">
-<a href="index.html">Главная</a> / Контакты
-</p>
-
-<p class="eyebrow">
-Контакты
-</p>
-
-<h1>
-Связаться с фондом «Ярило»
-</h1>
-
-<p class="lead">
-По вопросам помощи, сотрудничества, передачи товаров и логистики.
-</p>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="container contact-grid">
-
-
-<div class="contact-panel">
-
-<p>
-<span>Телефон</span>
-
-<a id="contact-phone" href="tel:+79660577755">
-+7 966 057-77-55
-</a>
-</p>
-
-
-<p>
-<span>Сайт</span>
-
-<a href="https://bf-yarilo.ru/">
-bf-yarilo.ru
-</a>
-</p>
-
-
-<p>
-<span>Регион</span>
-
-<b id="contact-region">
-Московская область
-</b>
-</p>
-
-
-<p>
-<span>Руководитель</span>
-
-<b id="contact-director">
-Невзорова Эльвира Викторовна
-</b>
-</p>
-
-</div>
-
-
-<div>
-
-<p class="eyebrow">
-Помочь
-</p>
-
-<h2>
-Хотите передать помощь?
-</h2>
-
-<p class="lead small">
-Позвоните фонду, если хотите передать товары, предложить транспорт,
-доставку или другую поддержку.
-</p>
-
-<a id="call-button" class="btn" href="tel:+79660577755">
-Позвонить
-</a>
-
-</div>
-
-
-</div>
-
-</section>
-
-</main>
+<main><section class="page-hero"><div class="container narrow"><p class="breadcrumbs"><a href="index.html">Главная</a> / Публичная оферта</p><p class="eyebrow">Документы фонда</p><h1>Публичная оферта</h1><p class="lead">Ознакомьтесь с опубликованными условиями пожертвования.</p></div></section><section class="section foundation-document-section" id="offer"><div class="container"><h2>Публичная оферта</h2><div class="foundation-document-list" data-public-documents="offer"><p class="document-empty">Документ пока не опубликован.</p></div></div></section></main>
 
 
 <footer>
 
 <div class="container footer-main">
-
 
 <div>
 
@@ -225,7 +114,7 @@ alt="Логотип благотворительного фонда Ярило"
 <a href="help.html">Кому помогаем</a>
 <a href="reports.html">Отчётность</a>
 <a href="requisites.html">Реквизиты</a>
-<a class="active" href="contacts.html">Контакты</a>
+<a href="contacts.html">Контакты</a>
 
 </div>
 
@@ -291,27 +180,19 @@ bf-yarilo.ru
   setText("foundation-short-name", data.foundation.shortName);
   setText("footer-short-name", data.foundation.shortName);
   setText("foundation-slogan", data.foundation.slogan);
-
-  setText("contact-region", data.foundation.region);
   setText("footer-region", data.foundation.region);
-  setText("contact-director", data.foundation.director);
 
-  const contactPhone = document.getElementById("contact-phone");
+  const privacyPhone = document.getElementById("privacy-phone");
   const footerPhone = document.getElementById("footer-phone");
-  const callButton = document.getElementById("call-button");
 
-  if (contactPhone) {
-    contactPhone.textContent = data.foundation.phone;
-    contactPhone.href = "tel:" + data.foundation.phoneLink;
+  if (privacyPhone) {
+    privacyPhone.textContent = data.foundation.phone;
+    privacyPhone.href = "tel:" + data.foundation.phoneLink;
   }
 
   if (footerPhone) {
     footerPhone.textContent = data.foundation.phone;
     footerPhone.href = "tel:" + data.foundation.phoneLink;
-  }
-
-  if (callButton) {
-    callButton.href = "tel:" + data.foundation.phoneLink;
   }
 
 })();

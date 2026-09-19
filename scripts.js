@@ -1,8 +1,9 @@
-/* YARILO browser bundle 20260917.3 — built by work/build-browser.cjs */
+/* YARILO browser bundle 20260919.1 — built by work/build-browser.cjs */
 /* Shared data model: used by the website, editor and the standalone Worker. */
 (function (root) {
   'use strict';
   const kinds = ['disabled', 'rehab', 'hospitals', 'crisis'];
+  const documentKinds = {charter: 'Устав фонда', privacy: 'Политика конфиденциальности', offer: 'Публичная оферта'};
   const imageExt = /\.(jpe?g|png|webp)$/i;
   const videoExt = /\.(mp4|webm)$/i;
   function list(value) {
@@ -28,6 +29,10 @@
     d.donation.paymentUrl ??= '';
     d.donation.qrImage ??= '';
     d.donation.qrNote ??= 'Откройте приложение банка и отсканируйте QR-код. Перед переводом проверьте получателя и сумму.';
+    d.documents ??= {};
+    if (d.documents && typeof d.documents === 'object' && !Array.isArray(d.documents)) {
+      for (const k of Object.keys(documentKinds)) d.documents[k] ??= [];
+    }
     // One-time defaults explicitly supplied by the foundation. Persist the flag
     // with the next save so later edits or deletion are respected.
     d.editorSetup ||= {};
@@ -81,13 +86,31 @@
     }
     return socialURL(value);
   }
-  function mediaPaths(d) { return [...new Set(groups(normalize(d)).flatMap(g => [...g.photos, ...g.videos]))]; }
+  function documentURL(value, base = 'https://bf-yarilo.ru/') {
+    return typeof value === 'string' && /^uploads\/admin-[a-f0-9-]+\.(pdf|jpe?g|png|webp)$/i.test(value) ? safeURL(value, base) : '';
+  }
+  function documentPaths(d) { return Object.keys(documentKinds).flatMap(k => Array.isArray(d.documents?.[k]) ? d.documents[k].map(file => file.path) : []); }
+  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos]), ...documentPaths(normalized)])]; }
   function validate(d) {
     if (!d || typeof d !== 'object' || Array.isArray(d)) throw new Error('Некорректные данные сайта.');
     for (const key of ['foundation', 'home', 'aboutPage', 'help', 'results', 'support', 'requisites', 'donation']) {
       if (!d[key] || typeof d[key] !== 'object' || Array.isArray(d[key])) throw new Error('Отсутствует раздел: ' + key);
     }
     if (JSON.stringify(d).length > 500000) throw new Error('Слишком большой объём текстовых данных.');
+    if (d.documents !== undefined) {
+      if (!d.documents || typeof d.documents !== 'object' || Array.isArray(d.documents)) throw new Error('Некорректный раздел документов.');
+      for (const [key,title] of Object.entries(documentKinds)) {
+        const files=d.documents[key];
+        if (!Array.isArray(files) || files.length>20) throw new Error('В разделе «'+title+'» допускается до 20 файлов.');
+        const unique=new Set();
+        for (const file of files) {
+          if (!file || typeof file!=='object' || Array.isArray(file) || !documentURL(file.path) || unique.has(file.path)) throw new Error('Некорректный или повторяющийся файл в разделе «'+title+'».');
+          unique.add(file.path);
+          if (typeof file.name!=='string' || !file.name.trim() || file.name.length>180 || typeof file.title!=='string' || !file.title.trim() || file.title.length>200) throw new Error('Укажите название документа (до 200 символов).');
+          if (!Number.isInteger(file.size) || file.size<1 || file.size>8*1024*1024) throw new Error('Размер документа должен быть не больше 8 МБ.');
+        }
+      }
+    }
     for (const group of groups(d)) {
       if (!group) throw new Error('Отсутствует направление помощи.');
       if (group.mediaDescriptions) {
@@ -123,7 +146,7 @@
     if (d.donation.qrImage && !qrImage(d.donation.qrImage)) throw new Error('Загрузите QR-код в PNG, JPG или WEBP размером до 200 КБ.');
     return d;
   }
-  root.YariloModel = {kinds, normalize, parse, serialize, safeURL, socialURL, description, qrImage, amount, paymentLink, mediaPaths, validate};
+  root.YariloModel = {kinds, documentKinds, documentURL, documentPaths, normalize, parse, serialize, safeURL, socialURL, description, qrImage, amount, paymentLink, mediaPaths, validate};
 })(globalThis);
 
 /* Shared rendering for content managed by the editor. Menu/year stay in script.js. */
@@ -133,6 +156,22 @@
   if (!window.YARILO || !window.YariloModel) return;
   const M=window.YariloModel, d=M.normalize(window.YARILO);
   const text=(tag,value,cls)=>{const e=document.createElement(tag);e.textContent=value ?? '';if(cls)e.className=cls;return e;};
+  document.querySelectorAll('[data-public-documents]').forEach(container=>{
+    const key=container.dataset.publicDocuments,files=d.documents[key]||[];container.replaceChildren();
+    if(!files.length){container.append(text('p','Документ пока не опубликован.','document-empty'));return;}
+    for(const file of files){
+      const href=M.documentURL(file.path,location.href);if(!href)continue;
+      const card=text('article','','foundation-document');
+      const format=file.path.split('.').pop().toUpperCase(),size=(file.size/1024/1024).toLocaleString('ru-RU',{maximumFractionDigits:2});
+      const details=text('div','','document-details');details.append(text('h3',file.title),text('p',format+' · '+size+' МБ'));
+      const actions=text('div','','document-actions');
+      const open=text('a','Открыть','btn btn-small');open.href=href;open.target='_blank';open.rel='noopener noreferrer';open.setAttribute('aria-label','Открыть: '+file.title+' — в новой вкладке');
+      const download=text('a','Скачать','document-download');download.href=href;download.download=file.name;download.setAttribute('aria-label','Скачать: '+file.title);
+      actions.append(open,download);card.append(details,actions);container.append(card);
+    }
+  });
+  const privacyFallback=document.getElementById('privacy-text-fallback');
+  if(privacyFallback)privacyFallback.hidden=!!d.documents.privacy.length;
   function enlarge(src, description) {
     const dialog=document.createElement('dialog');dialog.className='photo-dialog';
     const close=text('button','Закрыть','btn btn-small');close.onclick=()=>dialog.close();
