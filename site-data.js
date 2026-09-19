@@ -53,58 +53,38 @@ window.YARILO = {
     "disabled": {
       "title": "Дети и взрослые с инвалидностью",
       "text": "Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.",
-      "photos": [
-        "uploads/admin-168e216a-c85e-4ddb-aedd-6ddaed27ae8e.jpg",
-        "uploads/admin-4d8b0b6d-3d72-47df-8767-54f29c3946b1.jpg",
-        "uploads/admin-6f0337df-e717-4325-bdc5-3b21db6e4515.jpg"
-      ],
+      "photos": [],
       "videos": [],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы.",
-      "mediaDescriptions": {
-        "uploads/admin-168e216a-c85e-4ddb-aedd-6ddaed27ae8e.jpg": "ночной город тест",
-        "uploads/admin-4d8b0b6d-3d72-47df-8767-54f29c3946b1.jpg": "тест",
-        "uploads/admin-6f0337df-e717-4325-bdc5-3b21db6e4515.jpg": "тест"
-      }
+      "mediaDescriptions": {}
     },
     "rehab": {
       "title": "Реабилитационные центры",
       "text": "Подарки, предметы ухода и необходимые расходные материалы.",
-      "photos": [
-        "uploads/admin-4640c5fa-b62b-4560-bcae-2ca016aa86a3.jpg"
-      ],
+      "photos": [],
       "videos": [],
       "pageTitle": "Помощь реабилитационным центрам",
       "pageText": "Поддерживаем учреждения Московской области, где помощь требуется детям и взрослым с ограниченными возможностями.",
-      "mediaDescriptions": {
-        "uploads/admin-4640c5fa-b62b-4560-bcae-2ca016aa86a3.jpg": "тест"
-      }
+      "mediaDescriptions": {}
     },
     "hospitals": {
       "title": "Госпитали и учреждения",
       "text": "Постельное бельё, ткань, техника, моющие средства.",
-      "photos": [
-        "uploads/admin-7b65a8a6-4a63-4fd9-8789-ce6dba54f97e.jpg"
-      ],
+      "photos": [],
       "videos": [],
       "pageTitle": "Помощь госпиталям и учреждениям",
       "pageText": "Передаём необходимые бытовые и расходные товары по конкретным запросам.",
-      "mediaDescriptions": {
-        "uploads/admin-7b65a8a6-4a63-4fd9-8789-ce6dba54f97e.jpg": "тест"
-      }
+      "mediaDescriptions": {}
     },
     "crisis": {
       "title": "Люди в трудной ситуации",
       "text": "Одежда, предметы первой необходимости и адресная поддержка.",
-      "photos": [
-        "uploads/admin-9715326e-66d9-4ece-b06b-edfbf75cd689.jpg"
-      ],
+      "photos": [],
       "videos": [],
       "pageTitle": "Помощь людям в трудной жизненной ситуации",
       "pageText": "Поддерживаем людей, которым не хватает базовых вещей и ресурсов.",
-      "mediaDescriptions": {
-        "uploads/admin-9715326e-66d9-4ece-b06b-edfbf75cd689.jpg": "тест"
-      }
+      "mediaDescriptions": {}
     }
   },
   "support": {
