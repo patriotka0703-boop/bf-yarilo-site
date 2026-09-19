@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex,nofollow">
 
 <meta name="referrer" content="no-referrer">
-<link rel="stylesheet" href="admin.css?v=20260917.2">
+
 <style>
 *{box-sizing:border-box}
 
@@ -235,6 +235,7 @@ textarea.long{
   display:none;
 }
 </style>
+<link rel="stylesheet" href="admin.css?v=20260919.3">
 </head>
 
 <body>
@@ -283,7 +284,7 @@ textarea.long{
 </p>
 
 
-<h2 class="section">Основные данные фонда</h2>
+<nav class="editor-nav" id="editor-menu" aria-label="Разделы админки"><h2>Разделы админки</h2><p class="small">Нажмите на нужный раздел. После редактирования нажмите кнопку сохранения внизу экрана.</p><div class="editor-nav-links"><a href="#editor-news">Новости</a><a href="#editor-projects">Проекты</a><a href="#reporting">Отчётность</a><a href="#foundation-documents">Документы фонда</a><a href="#editor-section-1">Основные данные фонда</a><a href="#editor-section-2">Главная страница</a><a href="#editor-section-3">О фонде и история фонда</a><a href="#editor-section-4">Результаты</a><a href="#editor-section-5">Направления помощи</a><a href="#editor-section-6">Поддержка фонда</a><a href="#editor-section-7">Социальные сети</a><a href="#editor-section-8">Реквизиты и банковские счета</a><a href="#editor-section-9">Кнопка «Пожертвовать»</a><a href="#editor-section-10">Оплата и QR-код</a></div></nav><p class="editor-version">Версия админки 20260919.3</p><h2 class="section" id="editor-section-1">Основные данные фонда</h2>
 
 <div class="field">
   <label for="foundationName">Полное название</label>
@@ -325,7 +326,7 @@ textarea.long{
 </div>
 
 
-<h2 class="section">Главная страница</h2>
+<h2 class="section" id="editor-section-2">Главная страница</h2>
 
 <div class="field">
   <label for="homeTitle">Главный заголовок</label>
@@ -359,7 +360,7 @@ textarea.long{
 
 
 
-<h2 class="section">О фонде и история фонда</h2>
+<h2 class="section" id="editor-section-3">О фонде и история фонда</h2>
 
 <div class="field">
   <label for="aboutPageEyebrow">Метка над заголовком</label>
@@ -450,7 +451,7 @@ textarea.long{
 </div>
 
 
-<h2 class="section">Результаты</h2>
+<h2 class="section" id="editor-section-4">Результаты</h2>
 
 <div class="grid">
   <div class="field">
@@ -470,7 +471,7 @@ textarea.long{
 </div>
 
 
-<h2 class="section">Направления помощи</h2>
+<h2 class="section" id="editor-section-5">Направления помощи</h2>
 
 <div class="field">
   <label for="disabledTitle">Дети и взрослые с инвалидностью</label>
@@ -509,7 +510,7 @@ textarea.long{
 </div>
 
 
-<h2 class="section">Поддержка фонда</h2>
+<h2 class="section" id="editor-section-6">Поддержка фонда</h2>
 
 <div class="field">
   <label for="supportTitle">Заголовок</label>
@@ -522,20 +523,34 @@ textarea.long{
 </div>
 
 
-<h2 class="section">Социальные сети</h2>
+<h2 class="section" id="editor-news">Новости</h2><p class="small">Редактируйте записи и добавляйте фото или видео. Изменения появятся на сайте после сохранения.</p><div class="field"><label for="news-title">Заголовок страницы</label><input id="news-title" data-field="publications.news.title" maxlength="200"></div><div class="field"><label for="news-intro">Вводный текст страницы</label><textarea id="news-intro" data-field="publications.news.intro" maxlength="5000"></textarea></div><div id="newsEditor"></div><button type="button" class="secondary" id="add-news">Добавить новость</button><h2 class="section" id="editor-projects">Проекты</h2><p class="small">Редактируйте записи и добавляйте фото или видео. Изменения появятся на сайте после сохранения.</p><div class="field"><label for="projects-title">Заголовок страницы</label><input id="projects-title" data-field="publications.projects.title" maxlength="200"></div><div class="field"><label for="projects-intro">Вводный текст страницы</label><textarea id="projects-intro" data-field="publications.projects.intro" maxlength="5000"></textarea></div><div class="field"><label for="projects-ctaTitle">Заголовок блока поддержки проектов</label><input id="projects-ctaTitle" data-field="publications.projects.ctaTitle" maxlength="200"></div><div class="field"><label for="projects-ctaText">Текст блока поддержки проектов</label><textarea id="projects-ctaText" data-field="publications.projects.ctaText" maxlength="5000"></textarea></div><div id="projectsEditor"></div><button type="button" class="secondary" id="add-projects">Добавить проект</button><h2 class="section" id="reporting">Отчётность</h2><p class="small">Здесь редактируется страница «Отчётность»: её тексты, годовые отчёты и материалы о переданной помощи. Прикрепите файлы и нажмите «Сохранить изменения».</p><div class="field"><label for="reporting-title">Заголовок страницы отчётности</label><input id="reporting-title" data-field="reporting.title" maxlength="200"></div>
+<div class="field"><label for="reporting-intro">Вводный текст страницы отчётности</label><textarea id="reporting-intro" data-field="reporting.intro" maxlength="5000"></textarea></div>
+<div class="field"><label for="reporting-noticeTitle">Заголовок блока «Прозрачность работы фонда»</label><input id="reporting-noticeTitle" data-field="reporting.noticeTitle" maxlength="200"></div>
+<div class="field"><label for="reporting-noticeText">Текст блока «Прозрачность работы фонда»</label><textarea id="reporting-noticeText" data-field="reporting.noticeText" maxlength="5000"></textarea></div><div id="reportsEditor"></div><button type="button" id="addReport" class="secondary">Добавить отчёт</button>
+<h2 class="section" id="foundation-documents">Документы фонда</h2><p class="small">Загрузите утверждённые документы фонда. Файлы появятся на сайте после сохранения изменений.</p><section class="document-editor-section"><h3>Устав фонда</h3><div data-document-group="charter"></div></section>
+<section class="document-editor-section"><h3>Политика конфиденциальности</h3><div data-document-group="privacy"></div></section>
+<section class="document-editor-section"><h3>Публичная оферта</h3><div data-document-group="offer"></div></section>
+<h2 class="section" id="editor-section-7">Социальные сети</h2>
 <p class="small">Кнопки появятся внизу страниц сайта после сохранения. Пустое поле скрывает соответствующую кнопку.</p>
+<div class="field"><label for="social-telegram">Telegram — ссылка</label><input type="url" id="social-telegram" data-field="socials.telegram" placeholder="https://t.me/…" autocomplete="off"></div>
 <div class="field"><label for="social-vk">ВК — ссылка</label><input type="url" id="social-vk" data-field="socials.vk" placeholder="https://vk.com/…" autocomplete="off"></div>
 <div class="field"><label for="social-instagram">Instagram — ссылка</label><input type="url" id="social-instagram" data-field="socials.instagram" placeholder="https://www.instagram.com/…" autocomplete="off"></div>
 <div class="field"><label for="social-youtube">YouTube — ссылка</label><input type="url" id="social-youtube" data-field="socials.youtube" placeholder="https://www.youtube.com/@…" autocomplete="off"></div>
 
-<h2 class="section">Реквизиты и банковские счета</h2>
+<h2 class="section" id="editor-section-8">Реквизиты и банковские счета</h2>
+<div class="field"><label for="req-name">Полное наименование получателя</label><input id="req-name" data-field="requisites.legalName"></div>
 <div class="grid"><div class="field"><label for="req-inn">ИНН</label><input id="req-inn" data-field="requisites.inn"></div><div class="field"><label for="req-kpp">КПП</label><input id="req-kpp" data-field="requisites.kpp"></div><div class="field"><label for="req-ogrn">ОГРН</label><input id="req-ogrn" data-field="requisites.ogrn"></div><div class="field"><label for="req-address">Юридический адрес</label><input id="req-address" data-field="requisites.address"></div></div>
 <div id="accounts"></div><button type="button" id="addAccount" class="secondary">Добавить банковский счёт</button>
-<h2 class="section">Кнопка «Пожертвовать»</h2>
+<h2 class="section" id="editor-section-9">Кнопка «Пожертвовать»</h2>
 <div class="field"><label for="donationText">Текст кнопки</label><input id="donationText" data-field="donation.text"></div>
 <div class="field"><label for="donationUrl">Куда ведёт кнопка</label><input id="donationUrl" data-field="donation.url" placeholder="donate.html или https://…"><p class="small">Можно указать платёжную ссылку банка, donate.html или requisites.html.</p></div>
 <div class="field"><label for="donationPurpose">Назначение пожертвования</label><textarea id="donationPurpose" data-field="donation.purpose"></textarea></div>
-<div class="actions">
+<h2 class="section" id="editor-section-10">Оплата и QR-код</h2>
+<div class="field"><label for="paymentUrl">Платёжная ссылка фонда</label><input type="url" id="paymentUrl" data-field="donation.paymentUrl" placeholder="https://…"><p class="small">Вставьте ссылку, выданную платёжным сервисом или банком. Пока поле пустое, сайт предлагает перевод по реквизитам.</p><details><summary>Если ссылка поддерживает выбранную сумму</summary><p class="small">Только если это предусмотрено вашим сервисом: вместо суммы в рублях можно указать {amount}. Сайт подставит выбранную сумму. В обычную ссылку сумма автоматически не добавляется — посетитель подтвердит её на странице оплаты.</p></details></div>
+<div class="field"><label for="donationQrFile">Загрузить банковский QR-код для пожертвований</label><input type="file" id="donationQrFile" accept=".png,.jpg,.jpeg,.webp"><p class="small">PNG, JPG или WEBP, до 200 КБ. Используйте QR-код, выданный банком для счёта фонда. Картинка сохраняется после нажатия «Сохранить изменения».</p><div id="qrPreview"></div><button type="button" id="removeQr" class="danger" hidden>Удалить QR-код</button></div>
+<div class="field"><label for="qrNote">Подпись к QR-коду</label><textarea id="qrNote" data-field="donation.qrNote"></textarea></div>
+<div class="actions" aria-label="Сохранение изменений"><a class="back-to-menu" href="#editor-menu">К разделам ↑</a>
+  <button type="button" id="checkPublication" class="secondary">Проверить обновление сайта</button>
 
   <button id="saveButton" class="save">
     Сохранить изменения
@@ -561,8 +576,8 @@ textarea.long{
 </main>
 
 
-<script src="../yarilo-model.js?v=20260917.2"></script>
+<script src="../yarilo-model.js?v=20260919.3"></script>
 <script src="config.js"></script>
-<script src="admin.js?v=20260917.2"></script>
+<script src="admin.js?v=20260919.3"></script>
 </body>
 </html>
