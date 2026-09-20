@@ -105,7 +105,7 @@ window.YARILO = {
         "bik": "044525225",
         "correspondent": "30101810400000000225",
         "currency": "RUB",
-        "purpose": "",
+        "purpose": "Пожертвование на уставную деятельность фонда",
         "bankInn": "7707083893",
         "bankKpp": "773643002"
       },
