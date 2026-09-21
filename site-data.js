@@ -2,7 +2,7 @@ window.YARILO = {
   "foundation": {
     "name": "Благотворительный фонд «Ярило»",
     "shortName": "ЯРИЛО",
-    "slogan": "Мы мост -между теми кто может ,и теми кому нужно.",
+    "slogan": "Мы мост -между теми кто может, и теми кому нужно.",
     "director": "Невзорова Эльвира Викторовна",
     "region": "городе Ступино, Московская область",
     "phone": "+79917593068",
@@ -147,7 +147,14 @@ window.YARILO = {
         "size": 626450
       }
     ],
-    "privacy": [],
+    "privacy": [
+      {
+        "path": "uploads/admin-613c309e-f926-44fa-b6a2-113b876b20de.pdf",
+        "name": "Politika_konfidencialnosti_BF_YARILO.pdf",
+        "title": "Politika_konfidencialnosti_BF_YARILO",
+        "size": 89118
+      }
+    ],
     "offer": []
   },
   "publications": {
