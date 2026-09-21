@@ -155,7 +155,14 @@ window.YARILO = {
         "size": 89118
       }
     ],
-    "offer": []
+    "offer": [
+      {
+        "path": "uploads/admin-03a37eb6-9192-4cdd-8ebd-8c5f2cce4ea2.pdf",
+        "name": "Publichnaya_oferta_BF_YARILO.pdf",
+        "title": "Publichnaya_oferta_BF_YARILO",
+        "size": 82890
+      }
+    ]
   },
   "publications": {
     "news": {
