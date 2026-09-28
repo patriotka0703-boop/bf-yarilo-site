@@ -42,7 +42,7 @@
       if(!/^-?\d{1,20}$/.test(oid||'')||!/^\d{1,20}$/.test(vid||''))return null;
       const params=new URLSearchParams({oid,id:vid,hd:'2'});
       const hash=u.searchParams.get('hash');if(hash&&/^[a-zA-Z0-9_-]{1,128}$/.test(hash))params.set('hash',hash);
-      return {provider:'ВК',embed:'https://vk.com/video_ext.php?'+params,url:'https://vk.ru/video'+oid+'_'+vid};
+      return {provider:'ВК',embed:'https://vk.ru/video_ext.php?'+params,url:'https://vk.ru/video'+oid+'_'+vid};
     }
     return null;
   }
