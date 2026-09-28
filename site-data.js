@@ -190,7 +190,7 @@ window.YARILO = {
           "date": "",
           "label": "Постоянная помощь",
           "text": "Подгузники, пелёнки, средства ухода и моющие средства нужны на постоянной основе.",
-          "link": "help-disabled.html",
+          "link": "https://vk.ru/video1980996_456239914",
           "photos": [],
           "videos": [],
           "mediaDescriptions": {}
@@ -201,7 +201,7 @@ window.YARILO = {
           "date": "",
           "label": "Московская область",
           "text": "Фонд передаёт подарки и необходимые товары учреждениям в городах Московской области.",
-          "link": "help-rehab.html",
+          "link": "",
           "photos": [],
           "videos": [],
           "mediaDescriptions": {}
