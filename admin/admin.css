@@ -11,3 +11,12 @@
 @media(max-width:700px){main{margin:16px auto;padding:0 12px 195px}.panel{padding:18px 14px}.editor-nav{padding:14px}.editor-nav-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.editor-nav a{font-size:14px}.report-editor,.document-editor-section{padding:14px}.document-editor-card{padding:12px}.report-editor-actions button,.document-actions button,.document-actions a{min-height:44px}input,textarea,select,input[type=file]{font-size:16px!important}.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:10px 12px max(10px,env(safe-area-inset-bottom))}.actions #saveButton{grid-column:1/3;grid-row:1;font-size:16px;padding:12px 8px}.actions .back-to-menu{grid-column:3;grid-row:1;white-space:normal;text-align:center;font-size:13px}.actions #checkPublication{margin:0}.actions button{padding:8px 5px;min-width:0;white-space:normal;font-size:12px!important}.status{font-size:14px;padding:12px;max-height:100px;overflow-y:auto}.section{font-size:24px}.media-grid{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}.header{gap:12px}header{padding:20px 16px}}
 
 html{scroll-padding-bottom:175px}.publication-editor-media{margin-top:22px}.publication-editor{scroll-margin-top:110px}#editor-news,#editor-projects{scroll-margin-top:110px}@media(max-width:700px){.actions #saveButton{font-size:14px!important}.publication-editor-media .media-grid{grid-template-columns:minmax(0,1fr)}.publication-editor-media .media-item img,.publication-editor-media .media-item video{height:150px}}
+
+/* External players load only after a click. */
+.external-video{width:100%;min-width:0;display:flex;flex-direction:column;gap:10px}
+.external-video iframe,.external-video-play{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px}
+.external-video-play{background:#10251f;color:#fff;font:600 16px/1.4 sans-serif;padding:20px;cursor:pointer}
+.external-video a{font-size:14px;overflow-wrap:anywhere}
+.hero-cover{margin:0;min-width:0;overflow:hidden;border-radius:24px;background:#10251f}
+.hero-cover img{display:block;width:100%;height:auto}
+.hero-cover a{display:block;padding:14px 20px;color:#ffe7a0;font-weight:600}

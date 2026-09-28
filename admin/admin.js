@@ -20,6 +20,41 @@
   }
   const imageExt = /\.(jpe?g|png|webp)$/i;
   const videoExt = /\.(mp4|webm)$/i;
+
+  // URL-only allowlist. Never insert pasted HTML into the document.
+  function externalVideo(value) {
+    if(typeof value!=='string'||value.length>4096)return null;
+    let raw=value.trim();
+    if(raw.startsWith('<iframe')) {const m=raw.match(/\bsrc\s*=\s*["']([^"']+)["']/i);if(!m)return null;raw=m[1].replace(/&amp;/g,'&');}
+    let u;try {u=new URL(raw);}catch{return null;}
+    if(u.protocol!=='https:'||u.username||u.password||u.port)return null;
+    const host=u.hostname.toLowerCase().replace(/^www\./,'');
+    let id;
+    if(['youtube.com','m.youtube.com','youtube-nocookie.com','youtu.be'].includes(host)) {
+      id=host==='youtu.be'?u.pathname.slice(1):u.pathname==='/watch'?u.searchParams.get('v'):(u.pathname.match(/^\/(?:embed|shorts|live)\/([^/]+)\/?$/)||[])[1];
+      if(!/^[A-Za-z0-9_-]{11}$/.test(id||''))return null;
+      return {provider:'YouTube',embed:'https://www.youtube-nocookie.com/embed/'+id,url:'https://www.youtube.com/watch?v='+id};
+    }
+    if(['vk.com','vk.ru','m.vk.com','m.vk.ru','vkvideo.ru','vkvideo.com'].includes(host)) {
+      let oid,vid;
+      if(u.pathname==='/video_ext.php'){oid=u.searchParams.get('oid');vid=u.searchParams.get('id');}
+      else {const m=(u.pathname.match(/^\/video(-?\d+)_(\d+)\/?$/)|| (u.searchParams.get('z')||'').match(/^video(-?\d+)_(\d+)(?:\/|$)/));if(m){oid=m[1];vid=m[2];}}
+      if(!/^-?\d{1,20}$/.test(oid||'')||!/^\d{1,20}$/.test(vid||''))return null;
+      const params=new URLSearchParams({oid,id:vid,hd:'2'});
+      const hash=u.searchParams.get('hash');if(hash&&/^[a-zA-Z0-9_-]{1,128}$/.test(hash))params.set('hash',hash);
+      return {provider:'ВК',embed:'https://vk.com/video_ext.php?'+params,url:'https://vk.ru/video'+oid+'_'+vid};
+    }
+    return null;
+  }
+  function videoElement(value, caption='') {
+    const external=externalVideo(value);
+    if(!external){const v=document.createElement('video');v.src=value;v.controls=true;v.preload='none';v.playsInline=true;return v;}
+    const box=document.createElement('div');box.className='external-video';
+    const play=document.createElement('button');play.type='button';play.className='external-video-play';play.textContent='Смотреть видео · '+external.provider;
+    play.onclick=()=>{const frame=document.createElement('iframe');frame.src=external.embed;frame.title=caption||'Видео фонда «Ярило» · '+external.provider;frame.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';play.replaceWith(frame);};
+    const link=document.createElement('a');link.href=external.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Открыть на '+external.provider;box.append(play,link);return box;
+  }
+
   function list(value) {
     if (Array.isArray(value)) return value.filter(x => typeof x === 'string' && x.trim()).map(x => x.trim());
     return typeof value === 'string' ? value.split(',').map(x => x.trim()).filter(Boolean) : [];
@@ -131,7 +166,7 @@
       if (!Number.isInteger(file.size) || file.size<1 || file.size>8*1024*1024) throw new Error('Размер документа должен быть не больше 8 МБ.');
     }
   }
-  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos]), ...documentPaths(normalized)])]; }
+  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized)])]; }
   function validate(d) {
     if (!d || typeof d !== 'object' || Array.isArray(d)) throw new Error('Некорректные данные сайта.');
     for (const key of ['foundation', 'home', 'aboutPage', 'help', 'results', 'support', 'requisites', 'donation']) {
@@ -187,10 +222,10 @@
         }
       }
       for (const [key, ext] of [['photos', imageExt], ['videos', videoExt]]) {
-        if (!Array.isArray(group[key]) || group[key].length > 200) throw new Error('Допускается до 200 файлов каждого типа в разделе.');
+        if (!Array.isArray(group[key])) throw new Error('Некорректный список медиафайлов.');
         for (const p of group[key]) {
           const url = safeURL(p);
-          if (!url || !ext.test(new URL(url).pathname)) throw new Error('Недопустимый адрес фото или видео.');
+          if (!(key==='videos' && externalVideo(p)) && (!url || !ext.test(new URL(url).pathname))) throw new Error('Недопустимый адрес фото или видео.');
         }
       }
     }
@@ -213,7 +248,7 @@
     if (d.donation.qrImage && !qrImage(d.donation.qrImage)) throw new Error('Загрузите QR-код в PNG, JPG или WEBP размером до 200 КБ.');
     return d;
   }
-  root.YariloModel = {kinds, documentKinds, reportKinds, publicationKinds, fileSize, documentURL, documentPaths, normalize, parse, serialize, safeURL, socialURL, description, qrImage, amount, paymentLink, mediaPaths, validate};
+  root.YariloModel = {externalVideo, videoElement, kinds, documentKinds, reportKinds, publicationKinds, fileSize, documentURL, documentPaths, normalize, parse, serialize, safeURL, socialURL, description, qrImage, amount, paymentLink, mediaPaths, validate};
 })(globalThis);
 
 (function () {
@@ -374,13 +409,13 @@
       const label=element('label',title); label.htmlFor=id;
       const input=element('input'); input.type='file'; input.id=id; input.accept=accept; input.multiple=true;
       input.onchange=()=>stageFiles(container,key,input);
-      const hint=element('p',key==='photos'?'JPG, JPEG, PNG, WEBP. До 8 МБ на фото. Можно выбрать несколько файлов.':'MP4, WEBM. До 20 МБ на видео. Можно выбрать несколько файлов.','media-hint');
+      const hint=element('p',key==='photos'?'JPG, JPEG, PNG, WEBP. Выберите несколько фото до 40 МБ каждое: крупные снимки автоматически уменьшаются перед загрузкой.':'Видео любого размера храните в ВК или YouTube и добавляйте ссылку ниже. Прямая загрузка MP4/WEBM пока до 20 МБ на файл.','media-hint');
       const grid=element('div',undefined,'media-grid'); grid.dataset.mediaList=key;
       group[key].forEach((p,index)=>{
         const card=element('div',undefined,'media-item');
         const src=mediaURL(p);
         if(key==='photos') { const button=element('button',undefined,'media-open'); button.type='button'; button.setAttribute('aria-label','Увеличить фото '+(index+1)); const img=element('img'); img.src=src; img.alt='Фото '+(index+1); img.loading='lazy'; button.append(img); button.onclick=()=>openImage(src,M.description(getPath(data,groupPath),p)); card.append(button); }
-        else { const video=element('video'); video.controls=true; video.preload='metadata'; video.src=src; card.append(video); }
+        else { card.append(M.videoElement(src,M.description(group,p))); }
         const remove=element('button',key==='photos'?'Удалить фото':'Удалить видео','danger'); remove.type='button';
         remove.onclick=()=>{const current=getPath(data,groupPath);current[key].splice(index,1);if(![...current.photos,...current.videos].includes(p))delete current.mediaDescriptions[p];changed();renderMedia(container);status('Файл убран из раздела. Нажмите «Сохранить изменения».');};
         const captionLabel=element('label',key==='photos'?'Описание фото':'Описание видео','media-caption-label');
@@ -389,7 +424,17 @@
         caption.oninput=()=>{const descriptions=getPath(data,groupPath).mediaDescriptions;if(caption.value.trim())descriptions[p]=caption.value;else delete descriptions[p];changed();};
         card.append(element('p',p.split('/').pop()),captionLabel,caption,remove); grid.append(card);
       });
-      container.append(label,input,hint,grid);
+      container.append(label,input,hint);
+      if(key==='videos') {
+        const urlLabel=element('label','Ссылка ВК / YouTube или код встраивания ВК');urlLabel.htmlFor=id+'-link';
+        const url=element('textarea');url.id=id+'-link';url.rows=2;url.placeholder='https://vk.ru/video… или https://youtu.be/…';
+        const add=element('button','Добавить видео по ссылке');add.type='button';
+        add.onclick=()=>{const info=M.externalVideo(url.value);if(!info){status('Нужна ссылка на конкретное видео ВК или YouTube.','error');return;}
+          if(group.videos.some(v=>M.externalVideo(v)?.embed===info.embed)){status('Это видео уже добавлено.','error');return;}
+          group.videos.push(info.embed);changed();renderMedia(container);status('Видео добавлено в форму. Для публикации нажмите «Сохранить изменения».');};
+        container.append(urlLabel,url,add,element('p','Ролик должен быть доступен для встраивания. Если ВК не воспроизводится, скопируйте код из «Поделиться → Экспортировать».','media-hint'));
+      }
+      container.append(grid);
     }
   }
   function renderQR() {
@@ -425,21 +470,45 @@
     });
   }
   async function asBase64(file) { return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result).split(',')[1]);r.onerror=()=>reject(new Error('Не удалось прочитать файл '+file.name));r.readAsDataURL(file);}); }
+  async function preparePhoto(file) {
+    const bitmap=await createImageBitmap(file);
+    try {
+      if(file.size<=2*1024*1024 && Math.max(bitmap.width,bitmap.height)<=2560)return file;
+      const scale=Math.min(1,2560/Math.max(bitmap.width,bitmap.height));
+      const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+      canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);
+      const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',0.86));
+      if(!blob||blob.size>8*1024*1024)throw new Error('Не удалось уменьшить фото '+file.name+'. Сохраните его в JPG и повторите.');
+      const ext=blob.type==='image/webp'?'webp':'png';
+      return new File([blob],file.name.replace(/\.[^.]+$/,'')+'.'+ext,{type:blob.type});
+    } finally {bitmap.close();}
+  }
+  function needsMediaV2(d) {
+    const groups=[d.aboutPage,...Object.values(d.help||{}),...Object.values(d.publications||{}).flatMap(p=>p.items||[])];
+    return groups.some(g=>['photos','videos'].some(k=>(g[k]||[]).length>200)||(g.videos||[]).some(M.externalVideo));
+  }
+  async function requireMediaV2(d) {
+    if(!needsMediaV2(d))return;
+    const health=await api('/health');
+    if(!health.features?.mediaV2)throw new Error('Для сохранения видеоссылок и более 200 файлов нужно обновить сервер сайта. Изменения остаются в форме.');
+  }
   async function stageFiles(container,key,input) {
     const files=Array.from(input.files || []); if(!files.length || busy)return;
     let completed=0;
     try {
       const group=getPath(data,container.dataset.mediaGroup);
-      if(group[key].length+files.length>200)throw new Error('В разделе допускается до 200 файлов каждого типа.');
+
       for(const file of files) {
         const allowed=key==='photos'?/\.(jpe?g|png|webp)$/i:/\.(mp4|webm)$/i;
-        const limit=(key==='photos'?8:20)*1024*1024;
+        const limit=(key==='photos'?40:20)*1024*1024;
         if(!allowed.test(file.name))throw new Error('Недопустимый формат: '+file.name);
         if(!file.size || file.size>limit)throw new Error('Файл '+file.name+' пуст или превышает '+(limit/1024/1024)+' МБ.');
       }
       lock(true);
+      if(group[key].length+files.length>200){const health=await api('/health');if(!health.features?.mediaV2)throw new Error('Для более 200 файлов сначала обновите сервер сайта.');}
       if(container.dataset.mediaGroup.startsWith('publications.'))await requirePublications();
-      for(const file of files) {
+      for(const original of files) {
+        const file=key==='photos'?await preparePhoto(original):original;
         status('Загружаю '+(completed+1)+' из '+files.length+': '+file.name);
         const result=await post('/upload',{name:file.name,content:await asBase64(file)});
         uploads.set(result.path,result.receipt);previews.set(result.path,URL.createObjectURL(file)); group[key].push(result.path);completed++;changed();
@@ -461,6 +530,7 @@
     if(busy || !data || !sha)return;
     try {
       const next=M.validate(collect());lock(true);status('Сохраняю данные и файлы…');
+      await requireMediaV2(next);
       if(JSON.stringify(next.documents)!==savedDocuments)await requireDocuments();
       if(JSON.stringify([next.reports,next.reporting])!==savedReports)await requireDocuments(true);
       if(JSON.stringify(next.publications)!==savedPublications)await requirePublications();

@@ -1,11 +1,60 @@
-/* YARILO browser bundle 20260919.1 — built by work/build-browser.cjs */
+/* YARILO browser bundle 20260919.3 — built by work/build-browser.cjs */
 /* Shared data model: used by the website, editor and the standalone Worker. */
 (function (root) {
   'use strict';
   const kinds = ['disabled', 'rehab', 'hospitals', 'crisis'];
   const documentKinds = {charter: 'Устав фонда', privacy: 'Политика конфиденциальности', offer: 'Публичная оферта'};
+  const reportKinds = {annual:'Годовой отчёт', financial:'Финансовая отчётность', aid:'Отчёт о переданной помощи', other:'Другой отчёт'};
+  const publicationKinds = {news:'Новости',projects:'Проекты'};
+  function publicationDefaults(kind) {
+    const content=kind==='news' ? [
+      ['post-00000001','Обновляем сайт фонда','2026-09-13','','Создаём удобный раздел с отчётностью, направлениями помощи и новостями фонда.',''],
+      ['post-00000002','Средства ухода для детей и взрослых с инвалидностью','','Постоянная помощь','Подгузники, пелёнки, средства ухода и моющие средства нужны на постоянной основе.','help-disabled.html'],
+      ['post-00000003','Поддержка реабилитационных центров','','Московская область','Фонд передаёт подарки и необходимые товары учреждениям в городах Московской области.','help-rehab.html']
+    ] : [
+      ['post-00000004','Помощь реабилитационным центрам','','Постоянно','Передача подарков и необходимых товаров центрам Московской области.',''],
+      ['post-00000005','Средства ухода','','Постоянно','Поддержка детей и взрослых с инвалидностью расходными материалами.',''],
+      ['post-00000006','Доставка помощи','','Логистика','Формирование, погрузка и адресная доставка гуманитарных грузов.','']
+    ];
+    return {title:kind==='news'?'Что делает «Ярило»':'Помощь, которую можно увидеть',intro:kind==='news'?'Здесь будут появляться новости, истории помощи, фотоотчёты и объявления об актуальных потребностях.':'На этой странице публикуются текущие и завершённые проекты фонда.',ctaTitle:kind==='projects'?'Поддержите текущие проекты':'',ctaText:kind==='projects'?'Средства направляются на уставную деятельность фонда и помощь подопечным.':'',items:content.map(([id,title,date,label,text,link])=>({id,title,date,label,text,link,photos:[],videos:[],mediaDescriptions:{}}))};
+  }
   const imageExt = /\.(jpe?g|png|webp)$/i;
   const videoExt = /\.(mp4|webm)$/i;
+
+  // URL-only allowlist. Never insert pasted HTML into the document.
+  function externalVideo(value) {
+    if(typeof value!=='string'||value.length>4096)return null;
+    let raw=value.trim();
+    if(raw.startsWith('<iframe')) {const m=raw.match(/\bsrc\s*=\s*["']([^"']+)["']/i);if(!m)return null;raw=m[1].replace(/&amp;/g,'&');}
+    let u;try {u=new URL(raw);}catch{return null;}
+    if(u.protocol!=='https:'||u.username||u.password||u.port)return null;
+    const host=u.hostname.toLowerCase().replace(/^www\./,'');
+    let id;
+    if(['youtube.com','m.youtube.com','youtube-nocookie.com','youtu.be'].includes(host)) {
+      id=host==='youtu.be'?u.pathname.slice(1):u.pathname==='/watch'?u.searchParams.get('v'):(u.pathname.match(/^\/(?:embed|shorts|live)\/([^/]+)\/?$/)||[])[1];
+      if(!/^[A-Za-z0-9_-]{11}$/.test(id||''))return null;
+      return {provider:'YouTube',embed:'https://www.youtube-nocookie.com/embed/'+id,url:'https://www.youtube.com/watch?v='+id};
+    }
+    if(['vk.com','vk.ru','m.vk.com','m.vk.ru','vkvideo.ru','vkvideo.com'].includes(host)) {
+      let oid,vid;
+      if(u.pathname==='/video_ext.php'){oid=u.searchParams.get('oid');vid=u.searchParams.get('id');}
+      else {const m=(u.pathname.match(/^\/video(-?\d+)_(\d+)\/?$/)|| (u.searchParams.get('z')||'').match(/^video(-?\d+)_(\d+)(?:\/|$)/));if(m){oid=m[1];vid=m[2];}}
+      if(!/^-?\d{1,20}$/.test(oid||'')||!/^\d{1,20}$/.test(vid||''))return null;
+      const params=new URLSearchParams({oid,id:vid,hd:'2'});
+      const hash=u.searchParams.get('hash');if(hash&&/^[a-zA-Z0-9_-]{1,128}$/.test(hash))params.set('hash',hash);
+      return {provider:'ВК',embed:'https://vk.com/video_ext.php?'+params,url:'https://vk.ru/video'+oid+'_'+vid};
+    }
+    return null;
+  }
+  function videoElement(value, caption='') {
+    const external=externalVideo(value);
+    if(!external){const v=document.createElement('video');v.src=value;v.controls=true;v.preload='none';v.playsInline=true;return v;}
+    const box=document.createElement('div');box.className='external-video';
+    const play=document.createElement('button');play.type='button';play.className='external-video-play';play.textContent='Смотреть видео · '+external.provider;
+    play.onclick=()=>{const frame=document.createElement('iframe');frame.src=external.embed;frame.title=caption||'Видео фонда «Ярило» · '+external.provider;frame.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';play.replaceWith(frame);};
+    const link=document.createElement('a');link.href=external.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Открыть на '+external.provider;box.append(play,link);return box;
+  }
+
   function list(value) {
     if (Array.isArray(value)) return value.filter(x => typeof x === 'string' && x.trim()).map(x => x.trim());
     return typeof value === 'string' ? value.split(',').map(x => x.trim()).filter(Boolean) : [];
@@ -30,6 +79,22 @@
     d.donation.qrImage ??= '';
     d.donation.qrNote ??= 'Откройте приложение банка и отсканируйте QR-код. Перед переводом проверьте получателя и сумму.';
     d.documents ??= {};
+    d.publications ??= {};
+    if(d.publications && typeof d.publications==='object'&&!Array.isArray(d.publications))for(const kind of Object.keys(publicationKinds)) {
+      d.publications[kind] ??= {};
+      const page=d.publications[kind];if(!page||typeof page!=='object'||Array.isArray(page))continue;
+      for(const [key,value]of Object.entries(publicationDefaults(kind)))page[key] ??= value;
+      if(Array.isArray(page.items))for(const item of page.items)if(item&&typeof item==='object'&&!Array.isArray(item)){item.photos=list(item.photos);item.videos=list(item.videos);}
+    }
+    d.reports ??= [
+      {id:'report-20240000',title:'Годовой отчёт за 2024 год',year:'2024',category:'annual',description:'Отчётность о деятельности фонда',files:[]},
+      {id:'report-20250000',title:'Годовой отчёт за 2025 год',year:'2025',category:'annual',description:'Отчётность о деятельности фонда',files:[]},
+      {id:'report-a1d00000',title:'Отчёты о переданной помощи',year:'',category:'aid',description:'Фото и документы по отдельным проектам фонда',files:[]}
+    ];
+    d.reporting ??= {};
+    if(d.reporting && typeof d.reporting==='object'&&!Array.isArray(d.reporting)) {
+      for(const [key,value]of Object.entries({title:'Документы и отчётность фонда',intro:'Здесь публикуются официальные документы, годовая отчётность и материалы, подтверждающие деятельность фонда.',noticeTitle:'Прозрачность работы фонда',noticeText:'Мы постепенно размещаем в этом разделе документы и отчёты о деятельности благотворительного фонда «Ярило». Информация будет дополняться по мере подготовки материалов.'})) d.reporting[key] ??= value;
+    }
     if (d.documents && typeof d.documents === 'object' && !Array.isArray(d.documents)) {
       for (const k of Object.keys(documentKinds)) d.documents[k] ??= [];
     }
@@ -61,7 +126,7 @@
     if (typeof value !== 'string' || !value.trim() || /[\u0000-\u001f\\]/.test(value)) return '';
     try { const u = new URL(value, base); return ['https:', 'http:'].includes(u.protocol) && !u.username && !u.password ? u.href : ''; } catch { return ''; }
   }
-  function groups(d) { return [d.aboutPage, ...kinds.map(k => d.help[k])]; }
+  function groups(d) { return [d.aboutPage, ...kinds.map(k => d.help[k]), ...Object.keys(publicationKinds).flatMap(k=>Array.isArray(d.publications?.[k]?.items)?d.publications[k].items:[])]; }
   function socialURL(value) {
     return typeof value === 'string' && /^https?:\/\//i.test(value.trim()) ? safeURL(value.trim()) : '';
   }
@@ -89,8 +154,19 @@
   function documentURL(value, base = 'https://bf-yarilo.ru/') {
     return typeof value === 'string' && /^uploads\/admin-[a-f0-9-]+\.(pdf|jpe?g|png|webp)$/i.test(value) ? safeURL(value, base) : '';
   }
-  function documentPaths(d) { return Object.keys(documentKinds).flatMap(k => Array.isArray(d.documents?.[k]) ? d.documents[k].map(file => file.path) : []); }
-  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos]), ...documentPaths(normalized)])]; }
+  function documentPaths(d) { return [...Object.keys(documentKinds).flatMap(k => Array.isArray(d.documents?.[k]) ? d.documents[k].map(file => file.path) : []), ...(Array.isArray(d.reports) ? d.reports.flatMap(report=>Array.isArray(report?.files)?report.files.map(file=>file.path):[]) : [])]; }
+  function fileSize(size) { return size<1024*1024 ? Math.max(1,Math.ceil(size/1024)).toLocaleString('ru-RU')+' КБ' : (size/1024/1024).toLocaleString('ru-RU',{maximumFractionDigits:2})+' МБ'; }
+  function validateDocuments(files,title) {
+    if (!Array.isArray(files) || files.length>20) throw new Error('В разделе «'+title+'» допускается до 20 файлов.');
+    const unique=new Set();
+    for (const file of files) {
+      if (!file || typeof file!=='object' || Array.isArray(file) || !documentURL(file.path) || unique.has(file.path)) throw new Error('Некорректный или повторяющийся файл в разделе «'+title+'».');
+      unique.add(file.path);
+      if (typeof file.name!=='string' || !file.name.trim() || file.name.length>180 || typeof file.title!=='string' || !file.title.trim() || file.title.length>200) throw new Error('Укажите название документа (до 200 символов).');
+      if (!Number.isInteger(file.size) || file.size<1 || file.size>8*1024*1024) throw new Error('Размер документа должен быть не больше 8 МБ.');
+    }
+  }
+  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized)])]; }
   function validate(d) {
     if (!d || typeof d !== 'object' || Array.isArray(d)) throw new Error('Некорректные данные сайта.');
     for (const key of ['foundation', 'home', 'aboutPage', 'help', 'results', 'support', 'requisites', 'donation']) {
@@ -100,14 +176,40 @@
     if (d.documents !== undefined) {
       if (!d.documents || typeof d.documents !== 'object' || Array.isArray(d.documents)) throw new Error('Некорректный раздел документов.');
       for (const [key,title] of Object.entries(documentKinds)) {
-        const files=d.documents[key];
-        if (!Array.isArray(files) || files.length>20) throw new Error('В разделе «'+title+'» допускается до 20 файлов.');
-        const unique=new Set();
-        for (const file of files) {
-          if (!file || typeof file!=='object' || Array.isArray(file) || !documentURL(file.path) || unique.has(file.path)) throw new Error('Некорректный или повторяющийся файл в разделе «'+title+'».');
-          unique.add(file.path);
-          if (typeof file.name!=='string' || !file.name.trim() || file.name.length>180 || typeof file.title!=='string' || !file.title.trim() || file.title.length>200) throw new Error('Укажите название документа (до 200 символов).');
-          if (!Number.isInteger(file.size) || file.size<1 || file.size>8*1024*1024) throw new Error('Размер документа должен быть не больше 8 МБ.');
+        validateDocuments(d.documents[key],title);
+      }
+    }
+    if(d.reports!==undefined) {
+      if(!Array.isArray(d.reports)||d.reports.length>100)throw new Error('Допускается до 100 отчётов.');
+      const ids=new Set();
+      for(const report of d.reports) {
+        if(!report||typeof report!=='object'||Array.isArray(report)||typeof report.id!=='string'||!/^report-[a-f0-9-]{8,64}$/.test(report.id)||ids.has(report.id))throw new Error('Некорректный или повторяющийся отчёт.');
+        ids.add(report.id);
+        if(typeof report.title!=='string'||!report.title.trim()||report.title.length>200)throw new Error('Укажите название отчёта (до 200 символов).');
+        if(!Object.hasOwn(reportKinds,report.category))throw new Error('Выберите вид отчётности.');
+        if(typeof report.year!=='string'||(report.year!==''&&!/^(19|20|21)\d{2}$/.test(report.year)))throw new Error('Год отчёта должен состоять из четырёх цифр: 1900–2199.');
+        if(typeof report.description!=='string'||report.description.length>5000)throw new Error('Описание отчёта должно содержать не больше 5000 символов.');
+        validateDocuments(report.files,report.title);
+      }
+    }
+    if(d.reporting!==undefined) {
+      if(!d.reporting||typeof d.reporting!=='object'||Array.isArray(d.reporting))throw new Error('Некорректные настройки страницы отчётности.');
+      for(const [key,limit]of [['title',200],['intro',5000],['noticeTitle',200],['noticeText',5000]])if(typeof d.reporting[key]!=='string'||d.reporting[key].length>limit)throw new Error('Проверьте текст страницы отчётности.');
+      if(!d.reporting.title.trim())throw new Error('Укажите заголовок страницы отчётности.');
+    }
+    if(d.publications!==undefined) {
+      if(!d.publications||typeof d.publications!=='object'||Array.isArray(d.publications))throw new Error('Некорректный раздел новостей и проектов.');
+      for(const [kind,title]of Object.entries(publicationKinds)) {
+        const page=d.publications[kind];if(!page||typeof page!=='object'||Array.isArray(page))throw new Error('Отсутствует раздел «'+title+'».');
+        for(const [key,limit]of [['title',200],['intro',5000],['ctaTitle',200],['ctaText',5000]])if(typeof page[key]!=='string'||page[key].length>limit)throw new Error('Проверьте тексты раздела «'+title+'».');
+        if(!page.title.trim()||!Array.isArray(page.items)||page.items.length>100)throw new Error('Укажите заголовок раздела; допускается до 100 записей.');
+        const ids=new Set();
+        for(const item of page.items) {
+          if(!item||typeof item!=='object'||Array.isArray(item)||typeof item.id!=='string'||!/^post-[a-f0-9-]{8,64}$/.test(item.id)||ids.has(item.id))throw new Error('Некорректная или повторяющаяся запись в разделе «'+title+'».');ids.add(item.id);
+          for(const [key,limit]of [['title',200],['label',100],['text',10000],['link',2000],['date',10]])if(typeof item[key]!=='string'||item[key].length>limit)throw new Error('Проверьте поля новости или проекта.');
+          if(!item.title.trim())throw new Error('Укажите название новости или проекта.');
+          if(item.link&&!safeURL(item.link))throw new Error('Укажите безопасную ссылку новости или проекта.');
+          if(item.date&&(!/^\d{4}-\d{2}-\d{2}$/.test(item.date)||!Number.isFinite(Date.parse(item.date+'T12:00:00Z'))||new Date(item.date+'T12:00:00Z').toISOString().slice(0,10)!==item.date))throw new Error('Укажите корректную дату новости или проекта.');
         }
       }
     }
@@ -120,10 +222,10 @@
         }
       }
       for (const [key, ext] of [['photos', imageExt], ['videos', videoExt]]) {
-        if (!Array.isArray(group[key]) || group[key].length > 200) throw new Error('Допускается до 200 файлов каждого типа в разделе.');
+        if (!Array.isArray(group[key])) throw new Error('Некорректный список медиафайлов.');
         for (const p of group[key]) {
           const url = safeURL(p);
-          if (!url || !ext.test(new URL(url).pathname)) throw new Error('Недопустимый адрес фото или видео.');
+          if (!(key==='videos' && externalVideo(p)) && (!url || !ext.test(new URL(url).pathname))) throw new Error('Недопустимый адрес фото или видео.');
         }
       }
     }
@@ -146,7 +248,7 @@
     if (d.donation.qrImage && !qrImage(d.donation.qrImage)) throw new Error('Загрузите QR-код в PNG, JPG или WEBP размером до 200 КБ.');
     return d;
   }
-  root.YariloModel = {kinds, documentKinds, documentURL, documentPaths, normalize, parse, serialize, safeURL, socialURL, description, qrImage, amount, paymentLink, mediaPaths, validate};
+  root.YariloModel = {externalVideo, videoElement, kinds, documentKinds, reportKinds, publicationKinds, fileSize, documentURL, documentPaths, normalize, parse, serialize, safeURL, socialURL, description, qrImage, amount, paymentLink, mediaPaths, validate};
 })(globalThis);
 
 // Refresh published content on every visit. The existing script is a fallback
