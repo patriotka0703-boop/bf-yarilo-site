@@ -60,7 +60,10 @@ window.YARILO = {
       ],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы.",
-      "mediaDescriptions": {}
+      "mediaDescriptions": {
+        "https://vk.ru/video_ext.php?oid=1980996&id=456239914&hd=2": "тест ",
+        "https://vk.ru/video_ext.php?oid=1980996&id=456239907&hd=2": "тест"
+      }
     },
     "rehab": {
       "title": "Реабилитационные центры",
