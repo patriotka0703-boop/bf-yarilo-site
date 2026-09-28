@@ -292,6 +292,20 @@
     return result;
   }
   function post(endpoint, value) { return api(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)}); }
+  function videoBatch(value,provider) {
+    const entries=[];
+    const rest=value.trim().replace(/<iframe\b[^>]*>[\s\S]*?<\/iframe\s*>/gi,code=>{entries.push(code);return '\n';});
+    entries.push(...rest.split(/\r?\n/).map(x=>x.trim()).filter(Boolean));
+    if(!entries.length)throw new Error('Вставьте ссылки '+provider+', каждую с новой строки.');
+    return entries.map((entry,i)=>{const info=M.externalVideo(entry);if(!info||info.provider!==provider)throw new Error('Проверьте видео '+provider+' №'+(i+1)+'. Вставляйте по одной ссылке или коду плеера на строку.');return info;});
+  }
+  function mergeVideos(group,infos) {
+    for(const info of infos){
+      const index=group.videos.findIndex(v=>M.externalVideo(v)?.url===info.url);
+      if(index<0)group.videos.push(info.embed);
+      else {const old=group.videos[index];group.videos[index]=info.embed;if(old!==info.embed&&group.mediaDescriptions[old]){group.mediaDescriptions[info.embed]=group.mediaDescriptions[old];delete group.mediaDescriptions[old];}}
+    }
+  }
   function collect() {
     const d=structuredClone(data);
     document.querySelectorAll('[data-field]').forEach(el=>putPath(d,el.dataset.field,el.value.trim()));
@@ -303,12 +317,7 @@
     });
     document.querySelectorAll('[data-video-group]').forEach(input=>{
       if(!input.value.trim())return;
-      const info=M.externalVideo(input.value);
-      if(!info||info.provider!==input.dataset.videoProvider)throw new Error('Проверьте введённую ссылку '+input.dataset.videoProvider+'. Она не сохранена; исправьте её или очистите поле.');
-      const group=getPath(d,input.dataset.videoGroup);
-      const index=group.videos.findIndex(v=>M.externalVideo(v)?.url===info.url);
-      if(index<0)group.videos.push(info.embed);
-      else {const old=group.videos[index];group.videos[index]=info.embed;if(old!==info.embed&&group.mediaDescriptions[old]){group.mediaDescriptions[info.embed]=group.mediaDescriptions[old];delete group.mediaDescriptions[old];}}
+      mergeVideos(getPath(d,input.dataset.videoGroup),videoBatch(input.value,input.dataset.videoProvider));
     });
     // Keep legacy keys consistent for any external consumers.
     d.aboutPage.historyImage=d.aboutPage.photos.join(',');
@@ -452,18 +461,17 @@
         for(const provider of ['ВК','YouTube']) {
           const suffix=provider==='ВК'?'vk':'youtube';
           const urlLabel=element('label','Видео '+provider);urlLabel.htmlFor=id+'-'+suffix+'-link';
-          const url=element('textarea');url.id=id+'-'+suffix+'-link';url.rows=2;url.dataset.videoGroup=groupPath;url.dataset.videoProvider=provider;url.value=videoDrafts.get(draftKey+'-'+provider)||'';url.oninput=()=>{videoDrafts.set(draftKey+'-'+provider,url.value);changed();};
-          url.placeholder=provider==='ВК'?'Ссылка на ролик ВК или полный код плеера <iframe …>':'https://youtu.be/… или https://www.youtube.com/watch?v=…';
+          const url=element('textarea');url.id=id+'-'+suffix+'-link';url.rows=4;url.dataset.videoGroup=groupPath;url.dataset.videoProvider=provider;url.value=videoDrafts.get(draftKey+'-'+provider)||'';url.oninput=()=>{videoDrafts.set(draftKey+'-'+provider,url.value);changed();};
+          url.placeholder='Можно добавить много видео '+provider+'. Каждую ссылку или полный код iframe вставляйте с новой строки.';
           const add=element('button','Добавить видео '+provider);add.type='button';
-          add.onclick=()=>{const group=getPath(data,groupPath);const info=M.externalVideo(url.value);if(!info||info.provider!==provider){status('Вставьте ссылку на видео '+provider+(provider==='ВК'?' или код его плеера.':'.'),'error');return;}
-            const existing=group.videos.findIndex(v=>M.externalVideo(v)?.url===info.url);
-            if(existing>=0){const old=group.videos[existing];if(old===info.embed){status('Это видео уже добавлено.','error');return;}group.videos[existing]=info.embed;if(group.mediaDescriptions[old]){group.mediaDescriptions[info.embed]=group.mediaDescriptions[old];delete group.mediaDescriptions[old];}}
-            else group.videos.push(info.embed);
-            videoDrafts.delete(draftKey+'-'+provider);changed();renderMedia(container);status('Видео добавлено в форму. Для публикации нажмите «Сохранить изменения».');};
+          add.onclick=()=>{try{const infos=videoBatch(url.value,provider);const group=getPath(data,groupPath);mergeVideos(group,infos);
+            videoDrafts.delete(draftKey+'-'+provider);changed();renderMedia(container);status('Обработано ссылок: '+infos.length+'. Всего видео в разделе: '+group.videos.length+'. Нажмите «Сохранить изменения».');
+          }catch(e){status(e.message,'error');}};
           container.append(urlLabel,url,add,element('p',provider==='ВК'?'Если плеер пишет «Видеофайл не найден», откройте ролик в ВК, выберите «Поделиться → Экспортировать» и вставьте полный код плеера сюда. Повторное добавление обновит ссылку существующего ролика.':'Вставьте ссылку на конкретный ролик YouTube. Автор должен разрешить показ на других сайтах.','media-hint'));
         }
       }
       if(key==='videos'){const files=element('details');files.append(element('summary','Или загрузить небольшой видеофайл'),input,hint);container.append(files);}
+      if(key==='videos')container.append(element('p','Всего видео в этом разделе: '+group.videos.length+'. Новые ролики добавляются к существующим.','media-hint'));
       container.append(grid);
     }
   }
