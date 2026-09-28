@@ -50,9 +50,18 @@
     const external=externalVideo(value);
     if(!external){const v=document.createElement('video');v.src=value;v.controls=true;v.preload='none';v.playsInline=true;return v;}
     const box=document.createElement('div');box.className='external-video';
-    const play=document.createElement('button');play.type='button';play.className='external-video-play';play.textContent='Смотреть видео · '+external.provider;
-    play.onclick=()=>{const frame=document.createElement('iframe');frame.src=external.embed;frame.title=caption||'Видео фонда «Ярило» · '+external.provider;frame.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';play.replaceWith(frame);};
-    const link=document.createElement('a');link.href=external.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Открыть на '+external.provider;box.append(play,link);return box;
+    const frame=document.createElement('iframe');frame.src=external.embed;frame.loading='lazy';frame.title=caption||'Видео фонда «Ярило» · '+external.provider;frame.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';
+    const expand=document.createElement('button');expand.type='button';expand.className='video-expand';expand.textContent='На весь экран';
+    const close=()=>{box.classList.remove('video-expanded');expand.textContent='На весь экран';};
+    expand.onclick=async()=>{
+      if(document.fullscreenElement===box){await document.exitFullscreen();return;}
+      if(box.classList.contains('video-expanded')){close();return;}
+      if(box.requestFullscreen){try{await box.requestFullscreen();expand.textContent='Свернуть';return;}catch{}}
+      box.classList.add('video-expanded');expand.textContent='Свернуть';
+    };
+    box.addEventListener('fullscreenchange',()=>{expand.textContent=document.fullscreenElement===box?'Свернуть':'На весь экран';});
+    box.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+    box.append(frame,expand);return box;
   }
 
   function list(value) {
