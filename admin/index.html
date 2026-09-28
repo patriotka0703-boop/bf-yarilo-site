@@ -7,7 +7,7 @@
 <title>Админка — БФ «ЯРИЛО»</title>
 <meta name="robots" content="noindex,nofollow">
 
-<meta name="referrer" content="no-referrer">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 
 <style>
 *{box-sizing:border-box}
@@ -235,7 +235,7 @@ textarea.long{
   display:none;
 }
 </style>
-<link rel="stylesheet" href="admin.css?v=20260928.2">
+<link rel="stylesheet" href="admin.css?v=20260928.6">
 </head>
 
 <body>
@@ -329,7 +329,8 @@ textarea.long{
 <h2 class="section" id="editor-section-2">Главная страница</h2>
 
 <div class="field">
-  <label for="homeTitle">Главный заголовок</label>
+  <div id="coverEditor"></div>
+<label for="homeTitle">Главный заголовок</label>
   <input id="homeTitle" data-field="home.title">
 </div>
 
@@ -479,7 +480,7 @@ textarea.long{
   <textarea id="disabledText" data-field="help.disabled.text"></textarea>
 <label for="disabledPageTitle">Заголовок отдельной страницы</label><input id="disabledPageTitle" data-field="help.disabled.pageTitle">
 <label for="disabledPageText">Вводный текст отдельной страницы</label><textarea id="disabledPageText" data-field="help.disabled.pageText"></textarea>
-<div data-media-group="help.disabled"></div>
+<p class="small">Видео этого направления появятся в карточке на главной, в разделе «Кому помогаем» и на отдельной странице. Добавьте ссылку ниже и сохраните изменения.</p><div data-media-group="help.disabled"></div>
 </div>
 
 <div class="field">
@@ -488,7 +489,7 @@ textarea.long{
   <textarea id="rehabText" data-field="help.rehab.text"></textarea>
 <label for="rehabPageTitle">Заголовок отдельной страницы</label><input id="rehabPageTitle" data-field="help.rehab.pageTitle">
 <label for="rehabPageText">Вводный текст отдельной страницы</label><textarea id="rehabPageText" data-field="help.rehab.pageText"></textarea>
-<div data-media-group="help.rehab"></div>
+<p class="small">Видео этого направления появятся в карточке на главной, в разделе «Кому помогаем» и на отдельной странице. Добавьте ссылку ниже и сохраните изменения.</p><div data-media-group="help.rehab"></div>
 </div>
 
 <div class="field">
@@ -497,7 +498,7 @@ textarea.long{
   <textarea id="hospitalsText" data-field="help.hospitals.text"></textarea>
 <label for="hospitalsPageTitle">Заголовок отдельной страницы</label><input id="hospitalsPageTitle" data-field="help.hospitals.pageTitle">
 <label for="hospitalsPageText">Вводный текст отдельной страницы</label><textarea id="hospitalsPageText" data-field="help.hospitals.pageText"></textarea>
-<div data-media-group="help.hospitals"></div>
+<p class="small">Видео этого направления появятся в карточке на главной, в разделе «Кому помогаем» и на отдельной странице. Добавьте ссылку ниже и сохраните изменения.</p><div data-media-group="help.hospitals"></div>
 </div>
 
 <div class="field">
@@ -506,7 +507,7 @@ textarea.long{
   <textarea id="crisisText" data-field="help.crisis.text"></textarea>
 <label for="crisisPageTitle">Заголовок отдельной страницы</label><input id="crisisPageTitle" data-field="help.crisis.pageTitle">
 <label for="crisisPageText">Вводный текст отдельной страницы</label><textarea id="crisisPageText" data-field="help.crisis.pageText"></textarea>
-<div data-media-group="help.crisis"></div>
+<p class="small">Видео этого направления появятся в карточке на главной, в разделе «Кому помогаем» и на отдельной странице. Добавьте ссылку ниже и сохраните изменения.</p><div data-media-group="help.crisis"></div>
 </div>
 
 
@@ -576,8 +577,8 @@ textarea.long{
 </main>
 
 
-<script src="../yarilo-model.js?v=20260928.2"></script>
+<script src="../yarilo-model.js?v=20260928.6"></script>
 <script src="config.js"></script>
-<script src="admin.js?v=20260928.2"></script>
+<script src="admin.js?v=20260928.6"></script>
 </body>
 </html>

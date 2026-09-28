@@ -166,12 +166,13 @@
       if (!Number.isInteger(file.size) || file.size<1 || file.size>8*1024*1024) throw new Error('Размер документа должен быть не больше 8 МБ.');
     }
   }
-  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized)])]; }
+  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized), ...(normalized.home.coverImage?[normalized.home.coverImage]:[])])]; }
   function validate(d) {
     if (!d || typeof d !== 'object' || Array.isArray(d)) throw new Error('Некорректные данные сайта.');
     for (const key of ['foundation', 'home', 'aboutPage', 'help', 'results', 'support', 'requisites', 'donation']) {
       if (!d[key] || typeof d[key] !== 'object' || Array.isArray(d[key])) throw new Error('Отсутствует раздел: ' + key);
     }
+    if(d.home.coverImage && !/^uploads\/admin-[a-f0-9-]+\.(jpe?g|png|webp)$/i.test(d.home.coverImage))throw new Error('Некорректное фото главной страницы.');
     if (JSON.stringify(d).length > 500000) throw new Error('Слишком большой объём текстовых данных.');
     if (d.documents !== undefined) {
       if (!d.documents || typeof d.documents !== 'object' || Array.isArray(d.documents)) throw new Error('Некорректный раздел документов.');
@@ -280,12 +281,12 @@
     const img=document.createElement('img');img.src=src;img.alt='Увеличенное фото';
     dialog.append(close,img);if(description)dialog.append(text('p',description,'media-caption'));dialog.addEventListener('close',()=>dialog.remove());dialog.onclick=e=>{if(e.target===dialog)dialog.close();};document.body.append(dialog);dialog.showModal();
   }
-  function media(container,group) {
+  function media(container,group,pageSize=24) {
     if(!container)return;container.replaceChildren();
     const entries=[...group.photos.map(p=>[p,'photo']),...group.videos.map(p=>[p,'video'])];
     let shown=0;const more=text('button','Показать ещё','btn btn-ghost');more.type='button';
     function appendPage(){more.remove();
-      for(const [p,type] of entries.slice(shown,shown+24)) {
+      for(const [p,type] of entries.slice(shown,shown+pageSize)) {
         const src=M.safeURL(p,location.href);if(!src)continue;
         const caption=M.description(group,p), figure=text('figure','','media-figure');
         if(type==='photo') {
@@ -298,13 +299,17 @@
         if(caption)figure.append(text('figcaption',caption,'media-caption'));
         container.append(figure);
       }
-      shown+=24;if(shown<entries.length)container.append(more);
+      shown+=pageSize;if(shown<entries.length)container.append(more);
     }
     more.onclick=appendPage;appendPage();
     container.hidden=!container.children.length;
   }
   media(document.getElementById('history-media'),d.aboutPage);
   document.querySelectorAll('[data-direction]').forEach(el=>{media(el,d.help[el.dataset.direction]);document.getElementById('direction-media-section').hidden=el.hidden;});
+  document.querySelectorAll('[data-card-videos]').forEach(container=>{
+    const group=d.help[container.dataset.cardVideos];
+    if(group)media(container,{photos:[],videos:group.videos,mediaDescriptions:group.mediaDescriptions},1);
+  });
   const publicationKind=location.pathname.endsWith('/news.html')?'news':location.pathname.endsWith('/projects.html')?'projects':null;
   if(publicationKind) {
     const page=d.publications[publicationKind];
@@ -321,6 +326,7 @@
       grid.append(card);
     }}
   }
+  const cover=document.querySelector('.hero-cover img');if(cover&&d.home.coverImage){const fallback=cover.src;cover.onerror=()=>{cover.onerror=null;cover.src=fallback;};cover.src=d.home.coverImage;}
   const donationURL=M.safeURL(d.donation.url,location.href), donationText=d.donation.text || 'Пожертвовать';
   document.querySelectorAll('a.btn[href="donate.html"],a[data-donation]').forEach(a=>{if(donationURL)a.href=donationURL;a.textContent=donationText;});
   const purpose=document.getElementById('donation-purpose');if(purpose)purpose.textContent=d.donation.purpose || '';

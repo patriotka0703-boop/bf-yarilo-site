@@ -166,12 +166,13 @@
       if (!Number.isInteger(file.size) || file.size<1 || file.size>8*1024*1024) throw new Error('Размер документа должен быть не больше 8 МБ.');
     }
   }
-  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized)])]; }
+  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized), ...(normalized.home.coverImage?[normalized.home.coverImage]:[])])]; }
   function validate(d) {
     if (!d || typeof d !== 'object' || Array.isArray(d)) throw new Error('Некорректные данные сайта.');
     for (const key of ['foundation', 'home', 'aboutPage', 'help', 'results', 'support', 'requisites', 'donation']) {
       if (!d[key] || typeof d[key] !== 'object' || Array.isArray(d[key])) throw new Error('Отсутствует раздел: ' + key);
     }
+    if(d.home.coverImage && !/^uploads\/admin-[a-f0-9-]+\.(jpe?g|png|webp)$/i.test(d.home.coverImage))throw new Error('Некорректное фото главной страницы.');
     if (JSON.stringify(d).length > 500000) throw new Error('Слишком большой объём текстовых данных.');
     if (d.documents !== undefined) {
       if (!d.documents || typeof d.documents !== 'object' || Array.isArray(d.documents)) throw new Error('Некорректный раздел документов.');

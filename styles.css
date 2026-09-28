@@ -90,3 +90,21 @@ img[src*="history-image"] {
 .hero-cover{margin:0;min-width:0;overflow:hidden;border-radius:24px;background:#10251f}
 .hero-cover img{display:block;width:100%;height:auto}
 .hero-cover a{display:block;padding:14px 20px;color:#ffe7a0;font-weight:600}
+
+/* Bound every media item to its container, including news and projects. */
+.cards,.news-grid,.public-media{min-width:0}
+.cards>*,.news-grid>*,.public-media>*,.publication-media,.direction-videos{min-width:0;max-width:100%}
+.media-figure{margin:0;min-width:0;max-width:100%;overflow:hidden}
+.gallery-photo{display:block;width:100%;max-width:100%;padding:0;border:0;background:transparent;cursor:zoom-in}
+.media-figure img,.media-figure video,.media-figure iframe{display:block;width:100%;max-width:100%;height:auto;box-sizing:border-box}
+.media-figure img{max-height:360px;object-fit:contain;border-radius:12px;background:#f4f4f0}
+.media-figure video,.media-figure iframe{aspect-ratio:16/9;object-fit:contain;border-radius:12px;background:#10251f}
+.publication-media,.direction-videos{display:grid;gap:16px;margin:18px 0}
+.direction-card{display:flex;flex-direction:column;min-width:0}
+.direction-card>.more{margin-top:auto;display:block;padding-top:12px}
+.direction-card .external-video-play{min-height:110px;font-size:15px}
+.media-caption,.news-card p{overflow-wrap:anywhere;white-space:pre-line}
+.media-caption{margin:8px 0;font-size:14px;line-height:1.5}
+.external-video a{overflow-wrap:anywhere}
+.publication-media>.btn,.direction-videos>.btn{width:100%;white-space:normal}
+@media(max-width:620px){.media-figure img{max-height:300px}.news-card{padding:20px}.direction-card{padding:24px}}

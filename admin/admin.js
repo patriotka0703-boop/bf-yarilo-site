@@ -166,12 +166,13 @@
       if (!Number.isInteger(file.size) || file.size<1 || file.size>8*1024*1024) throw new Error('Размер документа должен быть не больше 8 МБ.');
     }
   }
-  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized)])]; }
+  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized), ...(normalized.home.coverImage?[normalized.home.coverImage]:[])])]; }
   function validate(d) {
     if (!d || typeof d !== 'object' || Array.isArray(d)) throw new Error('Некорректные данные сайта.');
     for (const key of ['foundation', 'home', 'aboutPage', 'help', 'results', 'support', 'requisites', 'donation']) {
       if (!d[key] || typeof d[key] !== 'object' || Array.isArray(d[key])) throw new Error('Отсутствует раздел: ' + key);
     }
+    if(d.home.coverImage && !/^uploads\/admin-[a-f0-9-]+\.(jpe?g|png|webp)$/i.test(d.home.coverImage))throw new Error('Некорректное фото главной страницы.');
     if (JSON.stringify(d).length > 500000) throw new Error('Слишком большой объём текстовых данных.');
     if (d.documents !== undefined) {
       if (!d.documents || typeof d.documents !== 'object' || Array.isArray(d.documents)) throw new Error('Некорректный раздел документов.');
@@ -299,6 +300,7 @@
   function fill() {
     document.querySelectorAll('[data-field]').forEach(el=>el.value=getPath(data,el.dataset.field) ?? '');
     document.querySelectorAll('[data-media-group]').forEach(container=>{if(!container.dataset.mediaGroup.startsWith('publications.'))renderMedia(container);});
+    renderCover();
     renderAccounts();
     renderQR();
     document.querySelectorAll('[data-document-group]').forEach(renderDocuments);
@@ -424,18 +426,40 @@
         caption.oninput=()=>{const descriptions=getPath(data,groupPath).mediaDescriptions;if(caption.value.trim())descriptions[p]=caption.value;else delete descriptions[p];changed();};
         card.append(element('p',p.split('/').pop()),captionLabel,caption,remove); grid.append(card);
       });
-      container.append(label,input,hint);
+      container.append(label);
+      if(key==='photos')container.append(input,hint);
       if(key==='videos') {
-        const urlLabel=element('label','Ссылка ВК / YouTube или код встраивания ВК');urlLabel.htmlFor=id+'-link';
-        const url=element('textarea');url.id=id+'-link';url.rows=2;url.placeholder='https://vk.ru/video… или https://youtu.be/…';
-        const add=element('button','Добавить видео по ссылке');add.type='button';
-        add.onclick=()=>{const info=M.externalVideo(url.value);if(!info){status('Нужна ссылка на конкретное видео ВК или YouTube.','error');return;}
-          if(group.videos.some(v=>M.externalVideo(v)?.embed===info.embed)){status('Это видео уже добавлено.','error');return;}
-          group.videos.push(info.embed);changed();renderMedia(container);status('Видео добавлено в форму. Для публикации нажмите «Сохранить изменения».');};
-        container.append(urlLabel,url,add,element('p','Ролик должен быть доступен для встраивания. Если ВК не воспроизводится, скопируйте код из «Поделиться → Экспортировать».','media-hint'));
+        for(const provider of ['ВК','YouTube']) {
+          const suffix=provider==='ВК'?'vk':'youtube';
+          const urlLabel=element('label','Видео '+provider);urlLabel.htmlFor=id+'-'+suffix+'-link';
+          const url=element('textarea');url.id=id+'-'+suffix+'-link';url.rows=2;
+          url.placeholder=provider==='ВК'?'Ссылка на ролик ВК или полный код плеера <iframe …>':'https://youtu.be/… или https://www.youtube.com/watch?v=…';
+          const add=element('button','Добавить видео '+provider);add.type='button';
+          add.onclick=()=>{const info=M.externalVideo(url.value);if(!info||info.provider!==provider){status('Вставьте ссылку на видео '+provider+(provider==='ВК'?' или код его плеера.':'.'),'error');return;}
+            const existing=group.videos.findIndex(v=>M.externalVideo(v)?.url===info.url);
+            if(existing>=0){const old=group.videos[existing];if(old===info.embed){status('Это видео уже добавлено.','error');return;}group.videos[existing]=info.embed;if(group.mediaDescriptions[old]){group.mediaDescriptions[info.embed]=group.mediaDescriptions[old];delete group.mediaDescriptions[old];}}
+            else group.videos.push(info.embed);
+            changed();renderMedia(container);status('Видео добавлено в форму. Для публикации нажмите «Сохранить изменения».');};
+          container.append(urlLabel,url,add,element('p',provider==='ВК'?'Если плеер пишет «Видеофайл не найден», откройте ролик в ВК, выберите «Поделиться → Экспортировать» и вставьте полный код плеера сюда. Повторное добавление обновит ссылку существующего ролика.':'Вставьте ссылку на конкретный ролик YouTube. Автор должен разрешить показ на других сайтах.','media-hint'));
+        }
       }
+      if(key==='videos'){const files=element('details');files.append(element('summary','Или загрузить небольшой видеофайл'),input,hint);container.append(files);}
       container.append(grid);
     }
+  }
+  function renderCover() {
+    const box=$('coverEditor');if(!box)return;box.replaceChildren();
+    const label=element('label','Фото на главной странице');label.htmlFor='coverFile';
+    const img=element('img');img.src=data.home.coverImage?mediaURL(data.home.coverImage):'../assets/yarilo-cover.png';img.alt='Обложка главной страницы';img.style.cssText='display:block;max-width:100%;width:320px;max-height:240px;object-fit:contain;margin:12px 0';
+    const input=element('input');input.id='coverFile';input.type='file';input.accept='.jpg,.jpeg,.png,.webp';
+    input.onchange=async()=>{const original=input.files?.[0];if(!original||busy)return;try{
+      if(!/\.(jpe?g|png|webp)$/i.test(original.name)||original.size>40*1024*1024)throw new Error('Выберите JPG, PNG или WEBP до 40 МБ.');
+      lock(true);status('Загружаю обложку…');const health=await api('/health');if(!health.features?.coverImage)throw new Error('Для смены обложки установите Worker версии 6 из обновления.');
+      const file=await preparePhoto(original);const result=await post('/upload',{name:file.name,content:await asBase64(file)});
+      uploads.set(result.path,result.receipt);previews.set(result.path,URL.createObjectURL(file));data.home.coverImage=result.path;changed();status('Фото выбрано. Нажмите «Сохранить изменения».');
+    }catch(e){status(e.message,'error');}finally{renderCover();lock(false);}};
+    const reset=element('button','Вернуть исходную обложку');reset.type='button';reset.onclick=()=>{data.home.coverImage='';changed();renderCover();status('Исходная обложка выбрана. Нажмите «Сохранить изменения».');};
+    box.append(label,img,input,element('p','Выберите фото с компьютера или телефона, затем сохраните изменения.','small'),reset);
   }
   function renderQR() {
     if (!$('qrPreview')) return;

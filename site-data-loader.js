@@ -166,12 +166,13 @@
       if (!Number.isInteger(file.size) || file.size<1 || file.size>8*1024*1024) throw new Error('Размер документа должен быть не больше 8 МБ.');
     }
   }
-  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized)])]; }
+  function mediaPaths(d) { const normalized=normalize(d); return [...new Set([...groups(normalized).flatMap(g => [...g.photos, ...g.videos.filter(v=>!externalVideo(v))]), ...documentPaths(normalized), ...(normalized.home.coverImage?[normalized.home.coverImage]:[])])]; }
   function validate(d) {
     if (!d || typeof d !== 'object' || Array.isArray(d)) throw new Error('Некорректные данные сайта.');
     for (const key of ['foundation', 'home', 'aboutPage', 'help', 'results', 'support', 'requisites', 'donation']) {
       if (!d[key] || typeof d[key] !== 'object' || Array.isArray(d[key])) throw new Error('Отсутствует раздел: ' + key);
     }
+    if(d.home.coverImage && !/^uploads\/admin-[a-f0-9-]+\.(jpe?g|png|webp)$/i.test(d.home.coverImage))throw new Error('Некорректное фото главной страницы.');
     if (JSON.stringify(d).length > 500000) throw new Error('Слишком большой объём текстовых данных.');
     if (d.documents !== undefined) {
       if (!d.documents || typeof d.documents !== 'object' || Array.isArray(d.documents)) throw new Error('Некорректный раздел документов.');
@@ -251,16 +252,36 @@
   root.YariloModel = {externalVideo, videoElement, kinds, documentKinds, reportKinds, publicationKinds, fileSize, documentURL, documentPaths, normalize, parse, serialize, safeURL, socialURL, description, qrImage, amount, paymentLink, mediaPaths, validate};
 })(globalThis);
 
-// Refresh published content on every visit. The existing script is a fallback
-// when the network fails, so the original static pages remain usable.
-window.yariloDataReady = (async function () {
-  try {
-    const response=await fetch(new URL('site-data.js?content='+Date.now(),location.href),{cache:'no-store',signal:AbortSignal.timeout(10000)});
-    if(!response.ok)throw new Error('Content unavailable');
-    window.YARILO=window.YariloModel.parse(await response.text());
-  } catch {
-    const note=document.createElement('p');note.className='content-refresh-note';note.setAttribute('role','status');
-    note.textContent='Не удалось обновить данные сайта. Показана ранее загруженная версия; попробуйте обновить страницу.';
-    document.body.prepend(note);
+// Use the data script loaded by this page; retry only if it is unavailable.
+(function () {
+  const usable=value=>!!(value && value.foundation && value.home && value.help && value.aboutPage);
+  const fallback=usable(window.YARILO)?window.YARILO:null;
+  async function refresh() {
+    for(let attempt=0;attempt<2;attempt++) {
+      const controller=typeof AbortController==='function'?new AbortController():null;
+      const timer=controller?setTimeout(()=>controller.abort(),15000):null;
+      try {
+        const response=await fetch(new URL('site-data.js',document.baseURI||location.href),{cache:'no-store',...(controller?{signal:controller.signal}:{})});
+        if(!response.ok)throw new Error('Content unavailable');
+        const parsed=window.YariloModel.parse(await response.text());
+        if(!usable(parsed))throw new Error('Invalid data');
+        window.YARILO=parsed;
+        return parsed;
+      } catch(error) {
+        if(attempt===1) {
+          if(fallback)return fallback;
+          const note=document.createElement('p');note.className='content-refresh-note';note.setAttribute('role','status');
+          note.textContent='Не удалось загрузить данные сайта. Проверьте соединение и обновите страницу.';
+          document.body.prepend(note);
+          return null;
+        }
+      } finally {if(timer!==null)clearTimeout(timer);}
+    }
   }
+  // A loaded script is already a complete snapshot. Avoid a redundant request
+  // that delays rendering and reports an error when valid data is available.
+  if(fallback) {
+    window.YARILO=window.YariloModel.normalize(fallback);
+    window.yariloDataReady=Promise.resolve(window.YARILO);
+  } else window.yariloDataReady=refresh();
 })();
