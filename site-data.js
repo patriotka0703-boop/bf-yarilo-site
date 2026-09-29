@@ -56,19 +56,10 @@ window.YARILO = {
       "title": "Дети и взрослые с инвалидностью",
       "text": "Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.",
       "photos": [],
-      "videos": [
-        "https://vk.ru/video_ext.php?oid=1980996&id=456239914&hd=2",
-        "https://vk.ru/video_ext.php?oid=1980996&id=456239907&hd=2",
-        "https://vk.ru/video_ext.php?oid=-52603688&id=456240219&hd=2",
-        "https://www.youtube-nocookie.com/embed/b0gDgrEzdKo"
-      ],
+      "videos": [],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы.",
-      "mediaDescriptions": {
-        "https://vk.ru/video_ext.php?oid=1980996&id=456239914&hd=2": "тест ",
-        "https://vk.ru/video_ext.php?oid=1980996&id=456239907&hd=2": "тест",
-        "https://vk.ru/video_ext.php?oid=-52603688&id=456240219&hd=2": "тест"
-      }
+      "mediaDescriptions": {}
     },
     "rehab": {
       "title": "Реабилитационные центры",
