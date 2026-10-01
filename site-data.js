@@ -270,12 +270,14 @@ window.YARILO = {
         },
         {
           "id": "post-00000006",
-          "title": "Доставка помощи",
+          "title": "Доставка помощи в различные города, профронтовые зоны, ЛДНР",
           "date": "",
           "label": "Логистика",
-          "text": "Формирование, погрузка и адресная доставка гуманитарных грузов.",
+          "text": "Формирование, погрузка и адресная доставка гуманитарных грузов.\nБыло отправлено уже несколько тысяч тонн гуманитарного груза, который мы сами развозими и отправляли транспортными компаниями ",
           "link": "",
-          "photos": [],
+          "photos": [
+            "uploads/admin-034900d4-945b-48c7-8e38-b65eeea79efa.webp"
+          ],
           "videos": [
             "https://www.youtube-nocookie.com/embed/kCKcef0gEtY",
             "https://www.youtube-nocookie.com/embed/3JD1n2PB-4g",
@@ -285,7 +287,9 @@ window.YARILO = {
             "https://www.youtube-nocookie.com/embed/t6mlBQksmJM",
             "https://www.youtube-nocookie.com/embed/VZQSgt3bjag"
           ],
-          "mediaDescriptions": {}
+          "mediaDescriptions": {
+            "uploads/admin-034900d4-945b-48c7-8e38-b65eeea79efa.webp": "Эльвира и Елена, создатели фонда, сами лично развозили и завозят гуманитарный груз. И передают его лично тем, для кого он предназначался. "
+          }
         }
       ]
     }
