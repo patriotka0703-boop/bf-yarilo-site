@@ -250,7 +250,9 @@ window.YARILO = {
           "text": "Поддержка детей и взрослых с инвалидностью расходными материалами.",
           "link": "",
           "photos": [],
-          "videos": [],
+          "videos": [
+            "https://www.youtube-nocookie.com/embed/5V723OvAULc"
+          ],
           "mediaDescriptions": {}
         },
         {
