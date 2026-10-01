@@ -273,7 +273,8 @@ window.YARILO = {
             "https://www.youtube-nocookie.com/embed/3JD1n2PB-4g",
             "https://www.youtube-nocookie.com/embed/P-ooVk5rDwI",
             "https://www.youtube-nocookie.com/embed/AYyGoyC-GMs",
-            "https://www.youtube-nocookie.com/embed/9h3UIbxluiA"
+            "https://www.youtube-nocookie.com/embed/9h3UIbxluiA",
+            "https://www.youtube-nocookie.com/embed/t6mlBQksmJM"
           ],
           "mediaDescriptions": {}
         }
