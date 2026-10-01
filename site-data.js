@@ -261,7 +261,9 @@ window.YARILO = {
           "text": "Формирование, погрузка и адресная доставка гуманитарных грузов.",
           "link": "",
           "photos": [],
-          "videos": [],
+          "videos": [
+            "https://www.youtube-nocookie.com/embed/kCKcef0gEtY"
+          ],
           "mediaDescriptions": {}
         }
       ]
