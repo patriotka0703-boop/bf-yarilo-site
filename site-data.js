@@ -344,7 +344,20 @@ window.YARILO = {
       "year": "2025",
       "category": "annual",
       "description": "Отчётность о деятельности фонда",
-      "files": []
+      "files": [
+        {
+          "path": "uploads/admin-d703e9cd-785e-4f19-8a5d-d321cfce801e.pdf",
+          "name": "03_Finansovyy_otchet_BF_YARILO_2025.pdf",
+          "title": "Финансовый отчёт БФ «ЯРИЛО» за 2025 год",
+          "size": 78414
+        },
+        {
+          "path": "uploads/admin-bc1081aa-4c77-4927-95e0-65610a749ff9.pdf",
+          "name": "01_Godovoy_otchet_BF_YARILO_2025.pdf",
+          "title": "Годовой отчёт БФ «ЯРИЛО» за 2025 год",
+          "size": 77552
+        }
+      ]
     },
     {
       "id": "report-a1d00000",
@@ -352,7 +365,14 @@ window.YARILO = {
       "year": "",
       "category": "aid",
       "description": "Фото и документы по отдельным проектам фонда",
-      "files": []
+      "files": [
+        {
+          "path": "uploads/admin-d4bf4376-50a4-4418-ba05-8b7ff3272fdc.pdf",
+          "name": "02_Otchet_o_peredannoy_pomoschi_2025.pdf",
+          "title": "Отчёт о переданной помощи БФ «ЯРИЛО» за 2025 год",
+          "size": 77441
+        }
+      ]
     }
   ],
   "reporting": {
