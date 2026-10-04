@@ -280,7 +280,8 @@ window.YARILO = {
             "https://www.youtube-nocookie.com/embed/JZcRS_DClM4",
             "https://www.youtube-nocookie.com/embed/ya0G86EwTjE",
             "https://www.youtube-nocookie.com/embed/3JD1n2PB-4g",
-            "https://www.youtube-nocookie.com/embed/ofEBCQqRv7U"
+            "https://www.youtube-nocookie.com/embed/ofEBCQqRv7U",
+            "https://www.youtube-nocookie.com/embed/hDeul8qvgsw"
           ],
           "mediaDescriptions": {
             "uploads/admin-267f0e38-7544-4ff0-b0ae-655ff9835424.webp": "Так выглядит сейчас наш личный прицеп, который большой путь проехал по фронтовым дорогам и наколесил тысячи километров между городами",
