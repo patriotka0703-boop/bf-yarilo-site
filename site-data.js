@@ -201,7 +201,9 @@ window.YARILO = {
           "photos": [
             "uploads/admin-6342f258-a4c0-4159-bff4-5412b7df4d48.jpg"
           ],
-          "videos": [],
+          "videos": [
+            "https://www.youtube-nocookie.com/embed/joclt2IpOQk"
+          ],
           "mediaDescriptions": {}
         },
         {
