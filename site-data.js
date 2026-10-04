@@ -81,7 +81,8 @@ window.YARILO = {
       "text": "Постельное бельё, ткань, техника, моющие средства.",
       "photos": [],
       "videos": [
-        "https://www.youtube-nocookie.com/embed/sZ5tSnzewBo"
+        "https://www.youtube-nocookie.com/embed/sZ5tSnzewBo",
+        "https://www.youtube-nocookie.com/embed/rJSzresPwtQ"
       ],
       "pageTitle": "Помощь госпиталям и учреждениям",
       "pageText": "Передаём необходимые бытовые и расходные товары по конкретным запросам.",
