@@ -102,7 +102,8 @@ window.YARILO = {
       "pageText": "Поддерживаем людей, которым не хватает базовых вещей и ресурсов.",
       "mediaDescriptions": {
         "https://www.youtube-nocookie.com/embed/pqPsstbDAGQ": "Это маленький фильм о том, как мы осуществляем свою волортерскую деятельность. ",
-        "https://www.youtube-nocookie.com/embed/uxZWmUQTlms": "Лена закупает гуманитарный груз"
+        "https://www.youtube-nocookie.com/embed/uxZWmUQTlms": "Лена закупает гуманитарный груз",
+        "https://www.youtube-nocookie.com/embed/t6mlBQksmJM": "Мы всегда делимся гуманитарным грузом с другими волонтерами"
       }
     }
   },
