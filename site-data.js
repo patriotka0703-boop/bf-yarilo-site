@@ -204,7 +204,9 @@ window.YARILO = {
           "videos": [
             "https://www.youtube-nocookie.com/embed/joclt2IpOQk"
           ],
-          "mediaDescriptions": {}
+          "mediaDescriptions": {
+            "https://www.youtube-nocookie.com/embed/joclt2IpOQk": "Несколько тысяч инвалидов и детей инвалидов уже получили наши подарки. Также сами реабилитационные центры получили от нас помощь в виде посуды, моющих средств и многого другого. "
+          }
         },
         {
           "id": "post-00000002",
