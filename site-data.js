@@ -331,13 +331,13 @@ window.YARILO = {
         {
           "path": "uploads/admin-f260f966-edcf-4e40-ac29-128f01517600.pdf",
           "name": "Otchet_Minjust_BF_YARILO_2024.pdf",
-          "title": "Otchet_Minjust_BF_YARILO_2024",
+          "title": "Отчёт в Минюст БФ «ЯРИЛО» за 2024 год",
           "size": 83419
         },
         {
           "path": "uploads/admin-392c80c2-6cc7-4464-b823-fd4493ba35b8.pdf",
           "name": "01_Godovoy_otchet_BF_YARILO_2024.pdf",
-          "title": "01_Godovoy_otchet_BF_YARILO_2024",
+          "title": "Годовой отчёт БФ «ЯРИЛО» за 2024 год",
           "size": 77537
         },
         {
