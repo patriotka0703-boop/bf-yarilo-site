@@ -311,7 +311,14 @@ window.YARILO = {
       "year": "2024",
       "category": "annual",
       "description": "Отчётность о деятельности фонда",
-      "files": []
+      "files": [
+        {
+          "path": "uploads/admin-ddef1353-656a-4ff0-8b82-54cde1094f60.pdf",
+          "name": "01_Godovoy_otchet_BF_YARILO_2024.pdf",
+          "title": "01_Godovoy_otchet_BF_YARILO_2024",
+          "size": 77537
+        }
+      ]
     },
     {
       "id": "report-20250000",
@@ -327,32 +334,7 @@ window.YARILO = {
       "year": "",
       "category": "aid",
       "description": "Фото и документы по отдельным проектам фонда",
-      "files": [
-        {
-          "path": "uploads/admin-f260f966-edcf-4e40-ac29-128f01517600.pdf",
-          "name": "Otchet_Minjust_BF_YARILO_2024.pdf",
-          "title": "Отчёт в Минюст БФ «ЯРИЛО» за 2024 год",
-          "size": 83419
-        },
-        {
-          "path": "uploads/admin-392c80c2-6cc7-4464-b823-fd4493ba35b8.pdf",
-          "name": "01_Godovoy_otchet_BF_YARILO_2024.pdf",
-          "title": "Годовой отчёт БФ «ЯРИЛО» за 2024 год",
-          "size": 77537
-        },
-        {
-          "path": "uploads/admin-e16208a6-2a36-473d-88b0-a69e156a87a0.pdf",
-          "name": "02_Finansovyy_otchet_BF_YARILO_2024.pdf",
-          "title": "02_Finansovyy_otchet_BF_YARILO_2024",
-          "size": 75476
-        },
-        {
-          "path": "uploads/admin-71d4b092-157d-41ec-a8a4-bb8c10ec3852.pdf",
-          "name": "03_Zayavlenie_o_prodolzhenii_deyatelnosti_2024.pdf",
-          "title": "03_Zayavlenie_o_prodolzhenii_deyatelnosti_2024",
-          "size": 75147
-        }
-      ]
+      "files": []
     }
   ],
   "reporting": {
