@@ -86,7 +86,8 @@ window.YARILO = {
       "photos": [],
       "videos": [
         "https://www.youtube-nocookie.com/embed/sZ5tSnzewBo",
-        "https://www.youtube-nocookie.com/embed/rJSzresPwtQ"
+        "https://www.youtube-nocookie.com/embed/rJSzresPwtQ",
+        "https://www.youtube-nocookie.com/embed/kCKcef0gEtY"
       ],
       "pageTitle": "Помощь госпиталям и учреждениям",
       "pageText": "Передаём необходимые бытовые и расходные товары по конкретным запросам.",
