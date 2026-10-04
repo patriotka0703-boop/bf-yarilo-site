@@ -317,7 +317,14 @@ window.YARILO = {
       "year": "",
       "category": "aid",
       "description": "Фото и документы по отдельным проектам фонда",
-      "files": []
+      "files": [
+        {
+          "path": "uploads/admin-f260f966-edcf-4e40-ac29-128f01517600.pdf",
+          "name": "Otchet_Minjust_BF_YARILO_2024.pdf",
+          "title": "Otchet_Minjust_BF_YARILO_2024",
+          "size": 83419
+        }
+      ]
     }
   ],
   "reporting": {
