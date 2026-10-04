@@ -59,11 +59,14 @@ window.YARILO = {
       "text": "Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.",
       "photos": [],
       "videos": [
-        "https://www.youtube-nocookie.com/embed/ya0G86EwTjE"
+        "https://www.youtube-nocookie.com/embed/ya0G86EwTjE",
+        "https://www.youtube-nocookie.com/embed/joclt2IpOQk"
       ],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы.",
-      "mediaDescriptions": {}
+      "mediaDescriptions": {
+        "https://www.youtube-nocookie.com/embed/ya0G86EwTjE": "Часть подарков для детей-инвалидов мы развесили сами лично в реабилитационные центры. "
+      }
     },
     "rehab": {
       "title": "Реабилитационные центры",
