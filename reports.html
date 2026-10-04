@@ -32,6 +32,31 @@
   "description": "Фонд помощи тем, кто попал в беду."
 }
 </script>
+
+<style>
+#reports-list{display:contents}
+.report-files{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+  max-width:48%;
+}
+.report-file-link{
+  display:inline-block;
+  text-align:right;
+  overflow-wrap:anywhere;
+}
+@media (max-width:700px){
+  .doc{align-items:flex-start}
+  .report-files{
+    max-width:100%;
+    align-items:flex-start;
+  }
+  .report-file-link{text-align:left}
+}
+</style>
+
 </head>
 
 <body>
@@ -103,31 +128,8 @@
 <a href="#charter">Открыть устав фонда →</a>
 </div>
 
-
-<div class="doc">
-<div>
-<b>Годовой отчёт за 2024 год</b>
-<span>Отчётность о деятельности фонда</span>
-</div>
-<span class="status">PDF будет добавлен</span>
-</div>
-
-
-<div class="doc">
-<div>
-<b>Годовой отчёт за 2025 год</b>
-<span>Отчётность о деятельности фонда</span>
-</div>
-<span class="status">PDF будет добавлен</span>
-</div>
-
-
-<div class="doc">
-<div>
-<b>Отчёты о переданной помощи</b>
-<span>Фото и документы по отдельным проектам фонда</span>
-</div>
-<span class="status">Материалы добавляются</span>
+<div id="reports-list">
+<p class="document-empty">Загрузка отчётности…</p>
 </div>
 
 </div>
@@ -231,8 +233,9 @@ bf-yarilo.ru
 </footer>
 
 
-<script src="site-data.js?v=20260928.12"></script>
-<script src="site-data-loader.js?v=20260928.12"></script>
+<script src="site-data.js?v=20261004.1"></script>
+<script src="site-data-loader.js?v=20261004.1"></script>
+<script src="yarilo-model.js?v=20261004.1"></script>
 
 <script>
 (async function () {
@@ -244,30 +247,117 @@ bf-yarilo.ru
 
   function setText(id, value) {
     const element = document.getElementById(id);
-
     if (element && value !== undefined && value !== null) {
       element.textContent = value;
     }
   }
 
-  setText("foundation-short-name", data.foundation.shortName);
-  setText("footer-short-name", data.foundation.shortName);
-  setText("foundation-slogan", data.foundation.slogan);
-  setText("footer-region", data.foundation.region);
-
-  const phone = document.getElementById("foundation-phone");
-
-  if (phone) {
-    phone.textContent = data.foundation.phone;
-    phone.href = "tel:" + data.foundation.phoneLink;
+  function safeText(value) {
+    return typeof value === 'string' ? value.trim() : '';
   }
 
+  function fileHref(path) {
+    if (window.YariloModel && typeof window.YariloModel.documentURL === 'function') {
+      return window.YariloModel.documentURL(path);
+    }
+    return typeof path === 'string' && /^uploads\/admin-[a-f0-9-]+\.(pdf|jpe?g|png|webp)$/i.test(path)
+      ? new URL(path, location.href).href
+      : '';
+  }
+
+  function fileSize(size) {
+    if (window.YariloModel && typeof window.YariloModel.fileSize === 'function') {
+      return window.YariloModel.fileSize(size);
+    }
+    return '';
+  }
+
+  function renderReports() {
+    const root = document.getElementById('reports-list');
+    if (!root) return;
+
+    root.replaceChildren();
+
+    const reports = Array.isArray(data.reports) ? data.reports : [];
+
+    if (!reports.length) {
+      const empty = document.createElement('p');
+      empty.className = 'document-empty';
+      empty.textContent = 'Отчёты пока не опубликованы.';
+      root.append(empty);
+      return;
+    }
+
+    for (const report of reports) {
+      if (!report || typeof report !== 'object') continue;
+
+      const card = document.createElement('div');
+      card.className = 'doc';
+
+      const info = document.createElement('div');
+      const title = document.createElement('b');
+      title.textContent = safeText(report.title) || 'Отчёт фонда';
+
+      const description = document.createElement('span');
+      description.textContent = safeText(report.description) || 'Документы фонда';
+
+      info.append(title, description);
+
+      const filesBox = document.createElement('div');
+      filesBox.className = 'report-files';
+
+      const files = Array.isArray(report.files) ? report.files : [];
+      let shown = 0;
+
+      for (const file of files) {
+        if (!file || typeof file !== 'object') continue;
+
+        const href = fileHref(file.path);
+        if (!href) continue;
+
+        const link = document.createElement('a');
+        link.className = 'report-file-link';
+        link.href = href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+
+        const label = safeText(file.title) || safeText(file.name) || 'Открыть документ';
+        const size = Number.isInteger(file.size) && file.size > 0 ? fileSize(file.size) : '';
+
+        link.textContent = size ? label + ' · ' + size : label;
+        filesBox.append(link);
+        shown++;
+      }
+
+      if (!shown) {
+        const status = document.createElement('span');
+        status.className = 'status';
+        status.textContent = 'Документы пока не опубликованы';
+        filesBox.append(status);
+      }
+
+      card.append(info, filesBox);
+      root.append(card);
+    }
+  }
+
+  setText("foundation-short-name", data.foundation?.shortName);
+  setText("footer-short-name", data.foundation?.shortName);
+  setText("foundation-slogan", data.foundation?.slogan);
+  setText("footer-region", data.foundation?.region);
+
+  const phone = document.getElementById("foundation-phone");
+  if (phone && data.foundation) {
+    phone.textContent = data.foundation.phone || '';
+    phone.href = "tel:" + (data.foundation.phoneLink || '');
+  }
+
+  renderReports();
 })();
 </script>
 
-<script src="yarilo-model.js?v=20260928.12"></script>
 <script src="script.js"></script>
-<script src="scripts.js?v=20260928.12"></script>
+<script src="scripts.js?v=20261004.1"></script>
 
 </body>
 </html>
