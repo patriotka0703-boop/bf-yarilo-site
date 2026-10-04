@@ -69,10 +69,7 @@ window.YARILO = {
       "title": "Реабилитационные центры",
       "text": "Подарки, предметы ухода и необходимые расходные материалы.",
       "photos": [],
-      "videos": [
-        "https://www.youtube-nocookie.com/embed/b0gDgrEzdKo",
-        "https://www.youtube-nocookie.com/embed/3DzInwgsWxY"
-      ],
+      "videos": [],
       "pageTitle": "Помощь реабилитационным центрам",
       "pageText": "Поддерживаем учреждения Московской области, где помощь требуется детям и взрослым с ограниченными возможностями.",
       "mediaDescriptions": {}
