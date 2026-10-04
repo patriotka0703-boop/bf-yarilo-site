@@ -95,7 +95,8 @@ window.YARILO = {
       "photos": [],
       "videos": [
         "https://www.youtube-nocookie.com/embed/pqPsstbDAGQ",
-        "https://www.youtube-nocookie.com/embed/uxZWmUQTlms"
+        "https://www.youtube-nocookie.com/embed/uxZWmUQTlms",
+        "https://www.youtube-nocookie.com/embed/t6mlBQksmJM"
       ],
       "pageTitle": "Помощь людям в трудной жизненной ситуации",
       "pageText": "Поддерживаем людей, которым не хватает базовых вещей и ресурсов.",
