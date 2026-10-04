@@ -100,7 +100,9 @@ window.YARILO = {
       ],
       "pageTitle": "Помощь людям в трудной жизненной ситуации",
       "pageText": "Поддерживаем людей, которым не хватает базовых вещей и ресурсов.",
-      "mediaDescriptions": {}
+      "mediaDescriptions": {
+        "https://www.youtube-nocookie.com/embed/pqPsstbDAGQ": "Это маленький фильм о том, как мы осуществляем свою волортерскую деятельность. "
+      }
     }
   },
   "support": {
