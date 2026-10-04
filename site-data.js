@@ -95,7 +95,9 @@ window.YARILO = {
       "title": "Люди в трудной ситуации",
       "text": "Одежда, предметы первой необходимости и адресная поддержка.",
       "photos": [],
-      "videos": [],
+      "videos": [
+        "https://www.youtube-nocookie.com/embed/pqPsstbDAGQ"
+      ],
       "pageTitle": "Помощь людям в трудной жизненной ситуации",
       "pageText": "Поддерживаем людей, которым не хватает базовых вещей и ресурсов.",
       "mediaDescriptions": {}
