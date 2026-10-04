@@ -315,25 +315,25 @@ window.YARILO = {
         {
           "path": "uploads/admin-ddef1353-656a-4ff0-8b82-54cde1094f60.pdf",
           "name": "01_Godovoy_otchet_BF_YARILO_2024.pdf",
-          "title": "01_Godovoy_otchet_BF_YARILO_2024",
+          "title": "Годовой отчёт БФ «ЯРИЛО» за 2024 год",
           "size": 77537
         },
         {
           "path": "uploads/admin-d024517d-cb23-4a98-bc4f-76fb9d4d2098.pdf",
           "name": "02_Finansovyy_otchet_BF_YARILO_2024.pdf",
-          "title": "02_Finansovyy_otchet_BF_YARILO_2024",
+          "title": "Финансовый отчёт БФ «ЯРИЛО» за 2024 год",
           "size": 75476
         },
         {
           "path": "uploads/admin-7a972867-038f-4cfc-b9d1-b151373f7e24.pdf",
           "name": "03_Zayavlenie_o_prodolzhenii_deyatelnosti_2024.pdf",
-          "title": "03_Zayavlenie_o_prodolzhenii_deyatelnosti_2024",
+          "title": "Заявление о продолжении деятельности за 2024 год",
           "size": 75147
         },
         {
           "path": "uploads/admin-f00ffb82-9e80-4ba7-82fe-709a517ce3e0.pdf",
           "name": "Otchet_Minjust_BF_YARILO_2024.pdf",
-          "title": "Otchet_Minjust_BF_YARILO_2024",
+          "title": "Отчёт в Минюст БФ «ЯРИЛО» за 2024 год",
           "size": 83419
         }
       ]
