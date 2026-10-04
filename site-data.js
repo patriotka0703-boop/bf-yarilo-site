@@ -323,6 +323,24 @@ window.YARILO = {
           "name": "Otchet_Minjust_BF_YARILO_2024.pdf",
           "title": "Otchet_Minjust_BF_YARILO_2024",
           "size": 83419
+        },
+        {
+          "path": "uploads/admin-392c80c2-6cc7-4464-b823-fd4493ba35b8.pdf",
+          "name": "01_Godovoy_otchet_BF_YARILO_2024.pdf",
+          "title": "01_Godovoy_otchet_BF_YARILO_2024",
+          "size": 77537
+        },
+        {
+          "path": "uploads/admin-e16208a6-2a36-473d-88b0-a69e156a87a0.pdf",
+          "name": "02_Finansovyy_otchet_BF_YARILO_2024.pdf",
+          "title": "02_Finansovyy_otchet_BF_YARILO_2024",
+          "size": 75476
+        },
+        {
+          "path": "uploads/admin-71d4b092-157d-41ec-a8a4-bb8c10ec3852.pdf",
+          "name": "03_Zayavlenie_o_prodolzhenii_deyatelnosti_2024.pdf",
+          "title": "03_Zayavlenie_o_prodolzhenii_deyatelnosti_2024",
+          "size": 75147
         }
       ]
     }
