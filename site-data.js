@@ -61,7 +61,8 @@ window.YARILO = {
       "videos": [
         "https://www.youtube-nocookie.com/embed/ya0G86EwTjE",
         "https://www.youtube-nocookie.com/embed/joclt2IpOQk",
-        "https://www.youtube-nocookie.com/embed/5V723OvAULc"
+        "https://www.youtube-nocookie.com/embed/5V723OvAULc",
+        "https://www.youtube-nocookie.com/embed/PUPn0ZGkOc0"
       ],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы.",
