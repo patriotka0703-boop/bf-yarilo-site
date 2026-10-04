@@ -47,6 +47,24 @@
   text-align:right;
   overflow-wrap:anywhere;
 }
+.report-file-row{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.report-download{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:8px;
+  background:#10251f;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  white-space:nowrap;
+}
+.report-download:hover{opacity:.9}
 @media (max-width:700px){
   .doc{align-items:flex-start}
   .report-files{
@@ -54,6 +72,7 @@
     align-items:flex-start;
   }
   .report-file-link{text-align:left}
+  .report-file-row{justify-content:flex-start}
 }
 </style>
 
@@ -315,6 +334,9 @@ bf-yarilo.ru
         const href = fileHref(file.path);
         if (!href) continue;
 
+        const row = document.createElement('div');
+        row.className = 'report-file-row';
+
         const link = document.createElement('a');
         link.className = 'report-file-link';
         link.href = href;
@@ -325,7 +347,15 @@ bf-yarilo.ru
         const size = Number.isInteger(file.size) && file.size > 0 ? fileSize(file.size) : '';
 
         link.textContent = size ? label + ' · ' + size : label;
-        filesBox.append(link);
+
+        const download = document.createElement('a');
+        download.className = 'report-download';
+        download.href = href;
+        download.setAttribute('download', safeText(file.name) || '');
+        download.textContent = 'Скачать';
+
+        row.append(link, download);
+        filesBox.append(row);
         shown++;
       }
 
