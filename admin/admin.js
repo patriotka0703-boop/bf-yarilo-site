@@ -639,3 +639,24 @@
     }catch(e){status(e.message,'error');}finally{lock(false);}
   })();
 })();
+
+
+/* YARILO programs admin shortcut 20261007.1 */
+(()=>{
+  function addProgramsShortcut(){
+    if(document.querySelector('[data-yarilo-programs-link]'))return;
+    const candidates=[...document.querySelectorAll('button,a')];
+    const project=candidates.find(el=>el.textContent.trim()==='Проекты');
+    const host=project?.parentElement;
+    if(!host)return;
+    const a=document.createElement('a');
+    a.href='programs.html';
+    a.textContent='Программы';
+    a.dataset.yariloProgramsLink='1';
+    a.style.cssText='display:flex;align-items:center;padding:12px;border:1px solid #cbd5d1;border-radius:10px;background:#fff;color:#10251f;font-weight:700;text-decoration:none;min-height:48px';
+    host.insertBefore(a,project.nextSibling);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addProgramsShortcut);
+  else addProgramsShortcut();
+  new MutationObserver(addProgramsShortcut).observe(document.documentElement,{childList:true,subtree:true});
+})();
