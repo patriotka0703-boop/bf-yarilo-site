@@ -3,223 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>Отчётность — БФ «ЯРИЛО»</title>
 <meta name="description" content="Официальные документы и отчётность Благотворительного фонда «ЯРИЛО».">
-
 <style>
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f6f5;
-  color:#17231f;
-  line-height:1.6;
-}
-
-header{
-  background:#10251f;
-  color:#fff;
-  padding:18px 20px;
-}
-
-.header-inner{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-}
-
-.brand{
-  color:#fff;
-  text-decoration:none;
-  font-size:20px;
-  font-weight:700;
-}
-
-nav{
-  display:flex;
-  flex-wrap:wrap;
-  gap:18px;
-}
-
-nav a{
-  color:#fff;
-  text-decoration:none;
-}
-
-nav a:hover{
-  text-decoration:underline;
-}
-
-main{
-  max-width:1000px;
-  margin:auto;
-  padding:50px 20px 70px;
-}
-
-.breadcrumbs{
-  font-size:14px;
-  margin-bottom:10px;
-}
-
-.breadcrumbs a{
-  color:#315c51;
-}
-
-.eyebrow{
-  text-transform:uppercase;
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:.05em;
-  color:#60746d;
-  margin-bottom:8px;
-}
-
-h1{
-  font-size:42px;
-  line-height:1.15;
-  margin:0 0 18px;
-}
-
-.lead{
-  font-size:19px;
-  max-width:800px;
-  margin-bottom:35px;
-}
-
-.notice{
-  background:#eaf3ef;
-  border-left:5px solid #10251f;
-  padding:22px;
-  border-radius:10px;
-  margin-bottom:32px;
-}
-
-.notice b{
-  display:block;
-  font-size:20px;
-  margin-bottom:8px;
-}
-
-.section-title{
-  font-size:28px;
-  margin:38px 0 18px;
-}
-
-.doc-list{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-
-.doc{
-  background:#fff;
-  border-radius:14px;
-  padding:22px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  box-shadow:0 5px 18px rgba(0,0,0,.06);
-}
-
-.doc b{
-  display:block;
-  font-size:19px;
-  margin-bottom:4px;
-}
-
-.doc span{
-  color:#56655f;
-}
-
-.doc a{
-  display:inline-block;
-  white-space:nowrap;
-  background:#10251f;
-  color:#fff;
-  padding:11px 18px;
-  border-radius:9px;
-  text-decoration:none;
-  font-weight:700;
-}
-
-.doc a:hover{
-  opacity:.9;
-}
-
-.status-ok{
-  display:block;
-  color:#1e6b42 !important;
-  font-weight:700;
-  margin-top:5px;
-}
-
-.status-update{
-  display:block;
-  color:#a26700 !important;
-  font-weight:700;
-  margin-top:5px;
-}
-
-footer{
-  background:#10251f;
-  color:#fff;
-  padding:30px 20px;
-}
-
-.footer-inner{
-  max-width:1000px;
-  margin:auto;
-}
-
-.footer-inner a{
-  color:#fff;
-}
-
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f5;color:#17231f;line-height:1.6}
+header{background:#10251f;color:#fff;padding:18px 20px}
+.header-inner{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{color:#fff;text-decoration:none;font-size:20px;font-weight:700}
+nav{display:flex;flex-wrap:wrap;gap:18px}
+nav a{color:#fff;text-decoration:none}
+nav a:hover{text-decoration:underline}
+main{max-width:1000px;margin:auto;padding:50px 20px 70px}
+.breadcrumbs{font-size:14px;margin-bottom:10px}
+.breadcrumbs a{color:#315c51}
+.eyebrow{text-transform:uppercase;font-size:14px;font-weight:700;letter-spacing:.05em;color:#60746d;margin-bottom:8px}
+h1{font-size:42px;line-height:1.15;margin:0 0 18px}
+.lead{font-size:19px;max-width:800px;margin-bottom:35px}
+.notice{background:#eaf3ef;border-left:5px solid #10251f;padding:22px;border-radius:10px;margin-bottom:32px}
+.notice b{display:block;font-size:20px;margin-bottom:8px}
+.section-title{font-size:28px;margin:38px 0 18px}
+.doc-list{display:flex;flex-direction:column;gap:16px}
+.doc{background:#fff;border-radius:14px;padding:22px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 5px 18px rgba(0,0,0,.06)}
+.doc b{display:block;font-size:19px;margin-bottom:4px}
+.doc span{color:#56655f}
+.doc a{display:inline-block;white-space:nowrap;background:#10251f;color:#fff;padding:11px 18px;border-radius:9px;text-decoration:none;font-weight:700}
+.doc a:hover{opacity:.9}
+.status-ok{display:block;color:#1e6b42!important;font-weight:700;margin-top:5px}
+footer{background:#10251f;color:#fff;padding:30px 20px}
+.footer-inner{max-width:1000px;margin:auto}
+.footer-inner a{color:#fff}
 @media(max-width:750px){
-
-  .header-inner{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  nav{
-    gap:10px 14px;
-  }
-
-  h1{
-    font-size:32px;
-  }
-
-  .doc{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .doc a{
-    width:100%;
-    text-align:center;
-  }
+  .header-inner{flex-direction:column;align-items:flex-start}
+  nav{gap:10px 14px}
+  h1{font-size:32px}
+  .doc{flex-direction:column;align-items:flex-start}
+  .doc a{width:100%;text-align:center}
 }
 </style>
 </head>
-
 <body>
-
 <header>
   <div class="header-inner">
-
-    <a class="brand" href="index.html">
-      БФ «ЯРИЛО»
-    </a>
-
+    <a class="brand" href="index.html">БФ «ЯРИЛО»</a>
     <nav>
       <a href="about.html">О фонде</a>
       <a href="help.html">Кому помогаем</a>
@@ -231,361 +57,129 @@ footer{
       <a href="contacts.html">Контакты</a>
       <a href="donate.html">Пожертвовать</a>
     </nav>
-
   </div>
 </header>
 
-
 <main>
-
-  <div class="breadcrumbs">
-    <a href="index.html">Главная</a> / Отчётность
-  </div>
-
+  <div class="breadcrumbs"><a href="index.html">Главная</a> / Отчётность</div>
   <div class="eyebrow">Прозрачность</div>
-
   <h1>Документы и отчётность фонда</h1>
-
   <p class="lead">
     Здесь публикуются официальные документы, годовая и финансовая отчётность,
-    отчёты о деятельности и материалы, подтверждающие работу
-    Благотворительного фонда «ЯРИЛО».
+    отчёты о деятельности и материалы, подтверждающие работу Благотворительного фонда «ЯРИЛО».
   </p>
 
-
   <div class="notice">
-
-    <b>
-      Отчётность представлена в Министерство юстиции Российской Федерации
-    </b>
-
-    <p>
-      Благотворительный фонд «ЯРИЛО» представил годовую отчётность
-      в Министерство юстиции Российской Федерации.
-    </p>
-
-    <p>
-      Отчёт за 2024 год и отчёт за 2025 год имеют статус
-      <strong>«Принято»</strong> в личном кабинете НКО Минюста России.
-      Документы опубликованы на сайте фонда для открытого ознакомления.
-    </p>
-
+    <b>Отчётность представлена в Министерство юстиции Российской Федерации</b>
+    <p>Отчёты за 2024 и 2025 годы опубликованы на сайте фонда для открытого ознакомления.</p>
   </div>
 
-
-  <!-- ================= 2025 ================= -->
-
   <h2 class="section-title">Отчётность за 2025 год</h2>
-
   <div class="doc-list">
-
     <div class="doc">
       <div>
         <b>Годовой отчёт БФ «ЯРИЛО» за 2025 год</b>
-
-        <span>
-          Отчёт о деятельности фонда и подтверждённой гуманитарной работе за 2025 год.
-        </span>
+        <span>Отчёт о деятельности фонда за 2025 год.</span>
       </div>
-
-      <a
-        href="01_Godovoy_otchet_BF_YARILO_2025.pdf"
-        target="_blank"
-        rel="noopener"
-      >
-        Открыть PDF
-      </a>
+      <a href="01_Godovoy_otchet_BF_YARILO_2025.pdf" target="_blank" rel="noopener">Открыть PDF</a>
     </div>
-
 
     <div class="doc">
       <div>
         <b>Отчёт о переданной помощи за 2025 год</b>
-
-        <span>
-          Сведения о гуманитарной помощи и благотворительной деятельности фонда.
-        </span>
+        <span>Сведения о гуманитарной и благотворительной деятельности фонда.</span>
       </div>
-
-      <a
-        href="02_Otchet_o_peredannoy_pomoschi_2025.pdf"
-        target="_blank"
-        rel="noopener"
-      >
-        Открыть PDF
-      </a>
+      <a href="02_Otchet_o_peredannoy_pomoschi_2025.pdf" target="_blank" rel="noopener">Открыть PDF</a>
     </div>
-
 
     <div class="doc">
       <div>
         <b>Финансовый отчёт БФ «ЯРИЛО» за 2025 год</b>
-
-        <span>
-          Сведения о поступлениях, расходах и остатках денежных средств фонда за 2025 год.
-        </span>
-
-        <span class="status-update">
-          Будет актуализирован после окончательной сверки банковских выписок.
-        </span>
+        <span>Сведения о поступлениях, расходах и остатках денежных средств фонда за 2025 год.</span>
       </div>
-
-      <a
-        href="03_Finansovyy_otchet_BF_YARILO_2025.pdf"
-        target="_blank"
-        rel="noopener"
-      >
-        Открыть PDF
-      </a>
+      <a href="03_Finansovyy_otchet_BF_YARILO_2025.pdf" target="_blank" rel="noopener">Открыть PDF</a>
     </div>
-
 
     <div class="doc">
       <div>
         <b>Отчёт в Минюст России за 2025 год</b>
-
-        <span>
-          Годовая отчётность Благотворительного фонда «ЯРИЛО» за 2025 год.
-        </span>
-
-        <span class="status-ok">
-          Статус в личном кабинете Минюста: «Принято»
-        </span>
+        <span>Годовая отчётность Благотворительного фонда «ЯРИЛО» за 2025 год.</span>
       </div>
-
-      <a
-        href="minjust-report-2025.pdf"
-        target="_blank"
-        rel="noopener"
-      >
-        Открыть PDF
-      </a>
+      <a href="minjust-report-2025.pdf" target="_blank" rel="noopener">Открыть PDF</a>
     </div>
-
   </div>
 
-
-  <!-- ================= 2024 ================= -->
-
   <h2 class="section-title">Отчётность за 2024 год</h2>
-
   <div class="doc-list">
-
     <div class="doc">
       <div>
         <b>Годовой отчёт БФ «ЯРИЛО» за 2024 год</b>
-
-        <span>
-          Отчёт о деятельности фонда за период с 22.03.2024 по 31.12.2024.
-        </span>
+        <span>Отчёт о деятельности фонда за период с 22.03.2024 по 31.12.2024.</span>
       </div>
-
-      <a
-        href="01_Godovoy_otchet_BF_YARILO_2024.pdf"
-        target="_blank"
-        rel="noopener"
-      >
-        Открыть PDF
-      </a>
+      <a href="01_Godovoy_otchet_BF_YARILO_2024.pdf" target="_blank" rel="noopener">Открыть PDF</a>
     </div>
-
 
     <div class="doc">
       <div>
         <b>Финансовый отчёт БФ «ЯРИЛО» за 2024 год</b>
-
-        <span>
-          Сведения о поступлениях, расходовании и остатке денежных средств фонда.
-        </span>
+        <span>Сведения о поступлениях, расходовании и остатке денежных средств фонда.</span>
       </div>
-
-      <a
-        href="02_Finansovyy_otchet_BF_YARILO_2024.pdf"
-        target="_blank"
-        rel="noopener"
-      >
-        Открыть PDF
-      </a>
+      <a href="02_Finansovyy_otchet_BF_YARILO_2024.pdf" target="_blank" rel="noopener">Открыть PDF</a>
     </div>
-
 
     <div class="doc">
       <div>
         <b>Заявление о продолжении деятельности за 2024 год</b>
-
-        <span>
-          Документ о соответствии требованиям законодательства о НКО
-          и продолжении деятельности фонда.
-        </span>
+        <span>Документ о продолжении деятельности фонда.</span>
       </div>
-
-      <a
-        href="03_Zayavlenie_o_prodolzhenii_deyatelnosti_2024.pdf"
-        target="_blank"
-        rel="noopener"
-      >
-        Открыть PDF
-      </a>
+      <a href="03_Zayavlenie_o_prodolzhenii_deyatelnosti_2024.pdf" target="_blank" rel="noopener">Открыть PDF</a>
     </div>
-
 
     <div class="doc">
       <div>
         <b>Отчёт в Минюст России за 2024 год</b>
-
-        <span>
-          Годовая отчётность Благотворительного фонда «ЯРИЛО»
-          за период с 22.03.2024 по 31.12.2024.
-        </span>
-
-        <span class="status-ok">
-          Статус в личном кабинете Минюста: «Принято»
-        </span>
+        <span>Годовая отчётность Благотворительного фонда «ЯРИЛО» за 2024 год.</span>
       </div>
-
-      <a
-        href="minjust-report-2024.pdf"
-        target="_blank"
-        rel="noopener"
-      >
-        Открыть PDF
-      </a>
+      <a href="minjust-report-2024.pdf" target="_blank" rel="noopener">Открыть PDF</a>
     </div>
-
   </div>
 
-
-  <!-- ================= ФНС ================= -->
-
   <h2 class="section-title">Бухгалтерская и налоговая отчётность</h2>
-
   <div class="doc-list">
-
     <div class="doc">
       <div>
         <b>Бухгалтерская отчётность на ресурсе ФНС России</b>
-
-        <span>
-          Официальная карточка Благотворительного фонда «ЯРИЛО»
-          на государственном информационном ресурсе бухгалтерской
-          (финансовой) отчётности.
-        </span>
+        <span>Официальная карточка фонда на государственном ресурсе бухгалтерской отчётности.</span>
       </div>
-
-      <a
-        href="https://bo.nalog.gov.ru/organizations-card/12419139"
-        target="_blank"
-        rel="noopener"
-      >
-        Открыть ФНС
-      </a>
+      <a href="https://bo.nalog.gov.ru/organizations-card/12419139" target="_blank" rel="noopener">Открыть ФНС</a>
     </div>
-
-
-    <div class="doc">
-      <div>
-        <b>Регистрационные сведения фонда</b>
-
-        <span>
-          ИНН 5045071931<br>
-          КПП 504501001<br>
-          ОГРН 1245000038062
-        </span>
-      </div>
-    </div>
-
   </div>
 
-
-  <!-- ================= ДОКУМЕНТЫ ================= -->
-
   <h2 class="section-title">Документы фонда</h2>
-
   <div class="doc-list">
-
-    <div class="doc">
-      <div>
-        <b>Устав фонда</b>
-
-        <span>
-          Учредительный документ Благотворительного фонда «ЯРИЛО».
-        </span>
-      </div>
-
-      <a href="documents.html">
-        Документы фонда
-      </a>
-    </div>
-
-
     <div class="doc">
       <div>
         <b>Благотворительные программы</b>
-
-        <span>
-          Утверждённые благотворительные программы БФ «ЯРИЛО».
-        </span>
+        <span>Утверждённые благотворительные программы БФ «ЯРИЛО».</span>
       </div>
-
-      <a href="programs.html">
-        Открыть программы
-      </a>
+      <a href="programs.html">Открыть программы</a>
     </div>
-
 
     <div class="doc">
       <div>
         <b>Проекты и помощь</b>
-
-        <span>
-          Материалы по гуманитарной и благотворительной деятельности фонда.
-        </span>
+        <span>Материалы по гуманитарной и благотворительной деятельности фонда.</span>
       </div>
-
-      <a href="projects.html">
-        Смотреть проекты
-      </a>
+      <a href="projects.html">Смотреть проекты</a>
     </div>
-
   </div>
-
-
-  <div class="notice" style="margin-top:40px;">
-
-    <b>Открытость деятельности фонда</b>
-
-    <p>
-      Благотворительный фонд «ЯРИЛО» обеспечивает открытый доступ
-      к годовой отчётности, благотворительным программам и сведениям
-      о своей деятельности.
-    </p>
-
-    <p>
-      Раздел дополняется и актуализируется по мере подготовки,
-      утверждения и представления документов.
-    </p>
-
-  </div>
-
 </main>
 
-
 <footer>
-
   <div class="footer-inner">
-
     <strong>Благотворительный фонд «ЯРИЛО»</strong>
-
-    <p>
-      Официальный сайт фонда:
-      <a href="https://bf-yarilo.ru/">
-        bf-yarilo.ru
-      </a>
-    </p>
-
+    <p>Официальный сайт фонда: <a href="https://bf-yarilo.ru/">bf-yarilo.ru</a></p>
   </div>
-
 </footer>
-
 </body>
 </html>
