@@ -2,392 +2,378 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Отчётность и документы благотворительного фонда «Ярило»</title>
-<meta name="description" content="Учредительные документы, годовая отчётность и отчёты о помощи благотворительного фонда «Ярило».">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#10251f">
-
-<link rel="canonical" href="https://bf-yarilo.ru/reports.html">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css?v=20260928.12">
-
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Благотворительный фонд «Ярило»">
-<meta property="og:title" content="Отчётность и документы благотворительного фонда «Ярило»">
-<meta property="og:description" content="Учредительные документы, годовая отчётность и отчёты о помощи благотворительного фонда «Ярило».">
-<meta property="og:url" content="https://bf-yarilo.ru/reports.html">
-
-<meta name="twitter:card" content="summary">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "NGO",
-  "name": "Благотворительный фонд «Ярило»",
-  "url": "https://bf-yarilo.ru/",
-  "telephone": "+79660577755",
-  "areaServed": "Московская область",
-  "description": "Фонд помощи тем, кто попал в беду."
-}
-</script>
+<title>Отчётность — БФ «ЯРИЛО»</title>
+<meta name="description" content="Официальные документы и отчётность Благотворительного фонда «ЯРИЛО».">
 
 <style>
-#reports-list{display:contents}
-.report-files{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:8px;
-  max-width:48%;
+*{
+  box-sizing:border-box;
 }
-.report-file-link{
-  display:inline-block;
-  text-align:right;
-  overflow-wrap:anywhere;
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f5;
+  color:#17231f;
+  line-height:1.6;
 }
-.report-file-row{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.report-download{
-  display:inline-block;
-  padding:7px 12px;
-  border-radius:8px;
+
+header{
   background:#10251f;
   color:#fff;
+  padding:18px 20px;
+}
+
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.brand{
+  color:#fff;
+  text-decoration:none;
+  font-size:20px;
+  font-weight:700;
+}
+
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+}
+
+nav a:hover{
+  text-decoration:underline;
+}
+
+main{
+  max-width:1000px;
+  margin:auto;
+  padding:50px 20px 70px;
+}
+
+.breadcrumbs{
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+.breadcrumbs a{
+  color:#315c51;
+}
+
+.eyebrow{
+  text-transform:uppercase;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.05em;
+  color:#60746d;
+  margin-bottom:8px;
+}
+
+h1{
+  font-size:42px;
+  line-height:1.15;
+  margin:0 0 18px;
+}
+
+.lead{
+  font-size:19px;
+  max-width:800px;
+  margin-bottom:35px;
+}
+
+.notice{
+  background:#eaf3ef;
+  border-left:5px solid #10251f;
+  padding:22px;
+  border-radius:10px;
+  margin-bottom:32px;
+}
+
+.notice b{
+  display:block;
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.section-title{
+  font-size:28px;
+  margin:38px 0 18px;
+}
+
+.doc-list{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.doc{
+  background:#fff;
+  border-radius:14px;
+  padding:22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.doc b{
+  display:block;
+  font-size:19px;
+  margin-bottom:4px;
+}
+
+.doc span{
+  color:#56655f;
+}
+
+.doc a{
+  display:inline-block;
+  white-space:nowrap;
+  background:#10251f;
+  color:#fff;
+  padding:11px 18px;
+  border-radius:9px;
   text-decoration:none;
   font-weight:700;
-  white-space:nowrap;
 }
-.report-download:hover{opacity:.9}
-@media (max-width:700px){
-  .doc{align-items:flex-start}
-  .report-files{
-    max-width:100%;
+
+.doc a:hover{
+  opacity:.9;
+}
+
+.status-ok{
+  display:inline-block;
+  color:#1e6b42 !important;
+  font-weight:700;
+  margin-top:5px;
+}
+
+footer{
+  background:#10251f;
+  color:#fff;
+  padding:30px 20px;
+}
+
+.footer-inner{
+  max-width:1000px;
+  margin:auto;
+}
+
+.footer-inner a{
+  color:#fff;
+}
+
+@media(max-width:750px){
+
+  .header-inner{
+    flex-direction:column;
     align-items:flex-start;
   }
-  .report-file-link{text-align:left}
-  .report-file-row{justify-content:flex-start}
+
+  nav{
+    gap:10px 14px;
+  }
+
+  h1{
+    font-size:32px;
+  }
+
+  .doc{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .doc a{
+    width:100%;
+    text-align:center;
+  }
 }
 </style>
-
 </head>
 
 <body>
 
-<header class="site-header">
-<div class="container nav">
+<header>
+  <div class="header-inner">
 
-<a class="brand" href="index.html" aria-label="Благотворительный фонд Ярило">
-<img class="brand-logo-img" src="logo-yarilo.jpg" alt="Логотип благотворительного фонда Ярило">
+    <a class="brand" href="index.html">
+      БФ «ЯРИЛО»
+    </a>
 
-<span>
-<b id="foundation-short-name">ЯРИЛО</b>
-<small>благотворительный фонд</small>
-</span>
-</a>
+    <nav>
+      <a href="about.html">О фонде</a>
+      <a href="help.html">Кому помогаем</a>
+      <a href="projects.html">Проекты</a>
+      <a href="news.html">Новости</a>
+      <a href="reports.html">Отчётность</a>
+      <a href="requisites.html">Реквизиты</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="donate.html">Пожертвовать</a>
+    </nav>
 
-<button class="menu-btn" aria-label="Открыть меню" aria-expanded="false">☰</button>
-
-<nav class="menu" aria-label="Основная навигация">
-<a href="about.html">О фонде</a>
-<a href="help.html">Кому помогаем</a>
-<a href="projects.html">Проекты</a>
-<a href="news.html">Новости</a>
-<a class="active" href="reports.html">Отчётность</a>
-<a href="requisites.html">Реквизиты</a>
-<a href="contacts.html">Контакты</a>
-<a class="btn btn-small donate-nav" href="donate.html">Пожертвовать</a>
-</nav>
-
-</div>
+  </div>
 </header>
 
 
 <main>
 
-<section class="page-hero">
-<div class="container narrow">
+  <div class="breadcrumbs">
+    <a href="index.html">Главная</a> / Отчётность
+  </div>
 
-<p class="breadcrumbs">
-<a href="index.html">Главная</a> / Отчётность
-</p>
+  <div class="eyebrow">Прозрачность</div>
 
-<p class="eyebrow">Прозрачность</p>
+  <h1>Документы и отчётность фонда</h1>
 
-<h1>Документы и отчётность фонда</h1>
-
-<p class="lead">
-Здесь публикуются официальные документы, годовая отчётность
-и материалы, подтверждающие деятельность фонда.
-</p>
-
-</div>
-</section>
+  <p class="lead">
+    Здесь публикуются официальные документы, годовая отчётность
+    и материалы, подтверждающие деятельность Благотворительного фонда «ЯРИЛО».
+  </p>
 
 
-<section class="section foundation-document-section" id="charter"><div class="container"><h2>Устав фонда</h2><div class="foundation-document-list" data-public-documents="charter"><p class="document-empty">Документ пока не опубликован.</p></div></div></section>
-<section class="section foundation-document-section" id="privacy"><div class="container"><h2>Политика конфиденциальности</h2><div class="foundation-document-list" data-public-documents="privacy"><p class="document-empty">Документ пока не опубликован.</p></div></div></section>
-<section class="section foundation-document-section" id="offer"><div class="container"><h2>Публичная оферта</h2><div class="foundation-document-list" data-public-documents="offer"><p class="document-empty">Документ пока не опубликован.</p></div></div></section>
-<section class="section">
-<div class="container">
+  <div class="notice">
 
-<div class="doc-list">
+    <b>
+      Отчётность представлена в Министерство юстиции Российской Федерации
+    </b>
 
-<div class="doc">
-<div>
-<b>Учредительные документы</b>
-<span>Устав, сведения о регистрации и другие официальные документы</span>
-</div>
-<a href="#charter">Открыть устав фонда →</a>
-</div>
+    <p>
+      Благотворительный фонд «ЯРИЛО» представил годовую отчётность
+      в Министерство юстиции Российской Федерации.
+    </p>
 
-<div id="reports-list">
-<p class="document-empty">Загрузка отчётности…</p>
-</div>
+    <p>
+      Отчёт за 2024 год и отчёт за 2025 год имеют статус
+      <strong>«Принято»</strong> в личном кабинете НКО Минюста России.
+      Документы опубликованы на сайте фонда для открытого ознакомления.
+    </p>
 
-</div>
+  </div>
 
 
-<div class="notice">
+  <h2 class="section-title">Отчётность в Минюст России</h2>
 
-<b>Прозрачность работы фонда</b>
+  <div class="doc-list">
 
-<p>
-Мы постепенно размещаем в этом разделе документы и отчёты
-о деятельности благотворительного фонда «Ярило».
-Информация будет дополняться по мере подготовки материалов.
-</p>
+    <div class="doc">
 
-</div>
+      <div>
+        <b>Отчёт в Минюст России за 2024 год</b>
 
-</div>
-</section>
+        <span>
+          Годовая отчётность Благотворительного фонда «ЯРИЛО»
+          за период с 22.03.2024 по 31.12.2024.
+        </span>
+
+        <span class="status-ok">
+          Статус в личном кабинете Минюста: «Принято»
+        </span>
+      </div>
+
+      <a
+        href="minjust-report-2024.pdf"
+        target="_blank"
+        rel="noopener"
+      >
+        Открыть PDF
+      </a>
+
+    </div>
+
+
+    <div class="doc">
+
+      <div>
+        <b>Отчёт в Минюст России за 2025 год</b>
+
+        <span>
+          Годовая отчётность Благотворительного фонда «ЯРИЛО»
+          за 2025 год.
+        </span>
+
+        <span class="status-ok">
+          Статус в личном кабинете Минюста: «Принято»
+        </span>
+      </div>
+
+      <a
+        href="minjust-report-2025.pdf"
+        target="_blank"
+        rel="noopener"
+      >
+        Открыть PDF
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <h2 class="section-title">Документы фонда</h2>
+
+  <div class="doc-list">
+
+    <div class="doc">
+      <div>
+        <b>Устав фонда</b>
+        <span>
+          Учредительный документ Благотворительного фонда «ЯРИЛО».
+        </span>
+      </div>
+
+      <a href="#charter">
+        Устав фонда
+      </a>
+    </div>
+
+
+    <div class="doc">
+      <div>
+        <b>Отчёты о переданной помощи</b>
+        <span>
+          Материалы и документы по гуманитарной и благотворительной деятельности фонда.
+        </span>
+      </div>
+
+      <a href="projects.html">
+        Смотреть проекты
+      </a>
+    </div>
+
+  </div>
 
 </main>
 
 
 <footer>
 
-<div class="container footer-main">
+  <div class="footer-inner">
 
-<div>
+    <strong>Благотворительный фонд «ЯРИЛО»</strong>
 
-<a class="brand footer-brand" href="index.html">
+    <p>
+      Официальный сайт фонда:
+      <a href="https://bf-yarilo.ru/">
+        bf-yarilo.ru
+      </a>
+    </p>
 
-<img
-class="brand-logo-img"
-src="logo-yarilo.jpg"
-alt="Логотип благотворительного фонда Ярило"
->
-
-<span>
-<b id="footer-short-name">ЯРИЛО</b>
-<small>благотворительный фонд</small>
-</span>
-
-</a>
-
-<p id="foundation-slogan">
-Фонд помощи тем, кто попал в беду.
-</p>
-
-</div>
-
-
-<div>
-
-<b>Разделы</b>
-
-<a href="about.html">О фонде</a>
-<a href="help.html">Кому помогаем</a>
-<a href="reports.html">Отчётность</a>
-<a href="requisites.html">Реквизиты</a>
-<a href="contacts.html">Контакты</a>
-
-</div>
-
-
-<div>
-
-<b>Связь</b>
-
-<a id="foundation-phone" href="tel:+79660577755">
-+7 966 057-77-55
-</a>
-
-<a href="https://bf-yarilo.ru/">
-bf-yarilo.ru
-</a>
-
-<span id="footer-region">
-Московская область
-</span>
-
-</div>
-
-</div>
-
-
-<div class="container footer-bottom">
-
-<span>
-© <span id="year"></span>
-Благотворительный фонд «Ярило»
-</span>
-
-<a href="privacy.html">
-Политика конфиденциальности
-</a>
-<a href="reports.html#charter">Устав фонда</a>
-<a href="offer.html">Публичная оферта</a>
-
-</div>
+  </div>
 
 </footer>
-
-
-<script src="site-data.js?v=20261004.1"></script>
-<script src="site-data-loader.js?v=20261004.1"></script>
-<script src="yarilo-model.js?v=20261004.1"></script>
-
-<script>
-(async function () {
-  await window.yariloDataReady;
-
-  if (!window.YARILO) return;
-
-  const data = window.YARILO;
-
-  function setText(id, value) {
-    const element = document.getElementById(id);
-    if (element && value !== undefined && value !== null) {
-      element.textContent = value;
-    }
-  }
-
-  function safeText(value) {
-    return typeof value === 'string' ? value.trim() : '';
-  }
-
-  function fileHref(path) {
-    if (window.YariloModel && typeof window.YariloModel.documentURL === 'function') {
-      return window.YariloModel.documentURL(path);
-    }
-    return typeof path === 'string' && /^uploads\/admin-[a-f0-9-]+\.(pdf|jpe?g|png|webp)$/i.test(path)
-      ? new URL(path, location.href).href
-      : '';
-  }
-
-  function fileSize(size) {
-    if (window.YariloModel && typeof window.YariloModel.fileSize === 'function') {
-      return window.YariloModel.fileSize(size);
-    }
-    return '';
-  }
-
-  function renderReports() {
-    const root = document.getElementById('reports-list');
-    if (!root) return;
-
-    root.replaceChildren();
-
-    const reports = Array.isArray(data.reports) ? data.reports : [];
-
-    if (!reports.length) {
-      const empty = document.createElement('p');
-      empty.className = 'document-empty';
-      empty.textContent = 'Отчёты пока не опубликованы.';
-      root.append(empty);
-      return;
-    }
-
-    for (const report of reports) {
-      if (!report || typeof report !== 'object') continue;
-
-      const card = document.createElement('div');
-      card.className = 'doc';
-
-      const info = document.createElement('div');
-      const title = document.createElement('b');
-      title.textContent = safeText(report.title) || 'Отчёт фонда';
-
-      const description = document.createElement('span');
-      description.textContent = safeText(report.description) || 'Документы фонда';
-
-      info.append(title, description);
-
-      const filesBox = document.createElement('div');
-      filesBox.className = 'report-files';
-
-      const files = Array.isArray(report.files) ? report.files : [];
-      let shown = 0;
-
-      for (const file of files) {
-        if (!file || typeof file !== 'object') continue;
-
-        const href = fileHref(file.path);
-        if (!href) continue;
-
-        const row = document.createElement('div');
-        row.className = 'report-file-row';
-
-        const link = document.createElement('a');
-        link.className = 'report-file-link';
-        link.href = href;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-
-        const label = safeText(file.title) || safeText(file.name) || 'Открыть документ';
-        const size = Number.isInteger(file.size) && file.size > 0 ? fileSize(file.size) : '';
-
-        link.textContent = size ? label + ' · ' + size : label;
-
-        const download = document.createElement('a');
-        download.className = 'report-download';
-        download.href = href;
-        download.setAttribute('download', safeText(file.name) || '');
-        download.textContent = 'Скачать';
-
-        row.append(link, download);
-        filesBox.append(row);
-        shown++;
-      }
-
-      if (!shown) {
-        const status = document.createElement('span');
-        status.className = 'status';
-        status.textContent = 'Документы пока не опубликованы';
-        filesBox.append(status);
-      }
-
-      card.append(info, filesBox);
-      root.append(card);
-    }
-  }
-
-  setText("foundation-short-name", data.foundation?.shortName);
-  setText("footer-short-name", data.foundation?.shortName);
-  setText("foundation-slogan", data.foundation?.slogan);
-  setText("footer-region", data.foundation?.region);
-
-  const phone = document.getElementById("foundation-phone");
-  if (phone && data.foundation) {
-    phone.textContent = data.foundation.phone || '';
-    phone.href = "tel:" + (data.foundation.phoneLink || '');
-  }
-
-  renderReports();
-})();
-</script>
-
-<script src="script.js"></script>
-<script src="scripts.js?v=20261004.1"></script>
 
 </body>
 </html>
