@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Редактор программ — БФ «ЯРИЛО»</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f5;color:#17231f}
+header{background:#10251f;color:#fff;padding:20px}
+main{max-width:1000px;margin:auto;padding:35px 20px 60px}
+.panel{background:#fff;border-radius:16px;padding:24px;margin-bottom:24px;box-shadow:0 6px 24px rgba(0,0,0,.07)}
+h1{margin-top:0}
+label{display:block;font-weight:700;margin-top:14px}
+input,textarea{width:100%;padding:12px 14px;margin-top:6px;border:1px solid #cbd4d0;border-radius:9px;font:inherit}
+textarea{min-height:100px;resize:vertical}
+button,.btn{display:inline-block;margin:14px 8px 0 0;padding:12px 18px;border:0;border-radius:9px;background:#10251f;color:#fff;font-weight:700;cursor:pointer;text-decoration:none}
+.secondary{background:#fff;color:#10251f;border:2px solid #10251f}
+.danger{background:#7b1e1e}
+.card{border-top:1px solid #e5e8e7;padding:18px 0}
+.small{font-size:14px;color:#59645f}
+code{background:#eef1ef;padding:2px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<header><strong>БФ «ЯРИЛО» — редактор программ</strong></header>
+<main>
+  <div class="panel">
+    <h1>Добавить программу</h1>
+    <p class="small">Этот редактор не отправляет данные в GitHub автоматически. Он создаёт новый файл <code>programs.json</code>. После скачивания замените им старый файл в GitHub.</p>
+
+    <label>Название программы</label>
+    <input id="title">
+
+    <label>Краткое описание</label>
+    <textarea id="description"></textarea>
+
+    <label>Дополнительная информация</label>
+    <textarea id="details" placeholder="Например: срок программы, номер и дата протокола"></textarea>
+
+    <label>Ссылка на отдельную страницу программы</label>
+    <input id="page" placeholder="/nazvanie-programmy.html">
+
+    <label>Ссылка на PDF программы</label>
+    <input id="pdf" placeholder="/programma.pdf">
+
+    <label>Ссылка на PDF протокола</label>
+    <input id="protocol" placeholder="/protokol.pdf">
+
+    <label>Ссылка на пожертвование</label>
+    <input id="donate" value="/donate.html">
+
+    <label>Ссылка на изображение</label>
+    <input id="image" placeholder="/photo.jpg">
+
+    <button id="add">Добавить программу</button>
+    <button id="clear" class="secondary">Очистить поля</button>
+  </div>
+
+  <div class="panel">
+    <h2>Программы</h2>
+    <div id="list"></div>
+    <button id="download">Скачать новый programs.json</button>
+    <a class="btn secondary" href="/programs.html">Открыть страницу программ</a>
+  </div>
+</main>
+
+<script>
+let programs = [];
+
+function esc(s){
+  return String(s || "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+}
+
+function load(){
+  fetch('/programs.json?ts=' + Date.now())
+    .then(r => r.ok ? r.json() : [])
+    .then(data => { programs = Array.isArray(data) ? data : []; render(); })
+    .catch(() => { programs = []; render(); });
+}
+
+function render(){
+  const list = document.getElementById('list');
+  if(!programs.length){
+    list.innerHTML = '<p>Пока программ нет.</p>';
+    return;
+  }
+  list.innerHTML = programs.map((p,i)=>`
+    <div class="card">
+      <b>${esc(p.title)}</b>
+      <div class="small">${esc(p.description || '')}</div>
+      <button class="secondary" onclick="editItem(${i})">Изменить</button>
+      <button class="danger" onclick="removeItem(${i})">Удалить</button>
+      <button class="secondary" onclick="moveUp(${i})">↑</button>
+      <button class="secondary" onclick="moveDown(${i})">↓</button>
+    </div>
+  `).join('');
+}
+
+function getForm(){
+  return {
+    title: document.getElementById('title').value.trim(),
+    description: document.getElementById('description').value.trim(),
+    details: document.getElementById('details').value.trim(),
+    page: document.getElementById('page').value.trim(),
+    pdf: document.getElementById('pdf').value.trim(),
+    protocol: document.getElementById('protocol').value.trim(),
+    donate: document.getElementById('donate').value.trim(),
+    image: document.getElementById('image').value.trim()
+  };
+}
+
+function setForm(p={}){
+  ['title','description','details','page','pdf','protocol','donate','image'].forEach(k=>{
+    document.getElementById(k).value = p[k] || (k==='donate' ? '/donate.html' : '');
+  });
+}
+
+let editIndex = null;
+
+document.getElementById('add').onclick = () => {
+  const p = getForm();
+  if(!p.title){ alert('Введите название программы'); return; }
+  if(editIndex === null) programs.push(p);
+  else { programs[editIndex] = p; editIndex = null; document.getElementById('add').textContent='Добавить программу'; }
+  setForm();
+  render();
+};
+
+document.getElementById('clear').onclick = () => {
+  editIndex = null;
+  setForm();
+  document.getElementById('add').textContent='Добавить программу';
+};
+
+window.editItem = i => {
+  editIndex = i;
+  setForm(programs[i]);
+  document.getElementById('add').textContent='Сохранить изменения';
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+
+window.removeItem = i => {
+  if(confirm('Удалить эту программу из списка?')){
+    programs.splice(i,1);
+    render();
+  }
+};
+
+window.moveUp = i => {
+  if(i<=0) return;
+  [programs[i-1],programs[i]]=[programs[i],programs[i-1]];
+  render();
+};
+
+window.moveDown = i => {
+  if(i>=programs.length-1) return;
+  [programs[i+1],programs[i]]=[programs[i],programs[i+1]];
+  render();
+};
+
+document.getElementById('download').onclick = () => {
+  const blob = new Blob([JSON.stringify(programs,null,2)], {type:'application/json;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'programs.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+
+load();
+</script>
+</body>
+</html>
