@@ -1,0 +1,93 @@
+
+name: YARILO Yandex Metrika
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install-metrika:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Add Metrika to HTML pages
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          counter_id = "113599500"
+
+          snippet = """
+          <!-- Yandex.Metrika counter -->
+          <script type="text/javascript">
+          (function(m,e,t,r,i,k,a){
+              m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j=0; j<document.scripts.length; j++) {
+                  if (document.scripts[j].src === r) return;
+              }
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],
+              k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+          })(window,document,'script',
+          'https://mc.yandex.ru/metrika/tag.js','ym');
+
+          ym(113599500,'init',{
+              ssr:true,
+              webvisor:true,
+              clickmap:true,
+              accurateTrackBounce:true,
+              trackLinks:true
+          });
+          </script>
+          <noscript><div><img src="https://mc.yandex.ru/watch/113599500" style="position:absolute;left:-9999px" alt="" /></div></noscript>
+          <!-- /Yandex.Metrika counter -->
+          """
+
+          count = 0
+
+          for path in Path(".").rglob("*.html"):
+              if any(p in {".git", "node_modules", "vendor"} for p in path.parts):
+                  continue
+
+              html = path.read_text(encoding="utf-8")
+
+              if counter_id in html or "Yandex.Metrika counter" in html:
+                  continue
+
+              if not re.search(r"<head\b[^>]*>", html, re.I):
+                  continue
+
+              updated = re.sub(
+                  r"(<head\b[^>]*>)",
+                  lambda m: m.group(1) + "\n" + snippet,
+                  html,
+                  count=1,
+                  flags=re.I
+              )
+
+              path.write_text(updated, encoding="utf-8")
+              count += 1
+
+          print(f"Updated HTML files: {count}")
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html'
+          if ! git diff --cached --quiet; then
+            git commit -m "Install Yandex Metrika on HTML pages"
+            git push
+          fi
