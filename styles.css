@@ -171,7 +171,6 @@ img[src*="history-image"] {
 .external-video:fullscreen .video-expand,.external-video.video-expanded .video-expand{flex:0 0 auto;width:auto;align-self:center}
 
 /* Compact responsive media grid */
-#direction-media-section,
 .direction-videos,
 #history-media{
   display:grid;
@@ -210,7 +209,6 @@ img[src*="history-image"] {
 }
 
 @media(max-width:900px){
-  #direction-media-section,
   .direction-videos,
   #history-media{
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -218,7 +216,6 @@ img[src*="history-image"] {
 }
 
 @media(max-width:620px){
-  #direction-media-section,
   .direction-videos,
   #history-media{
     grid-template-columns:1fr;
@@ -355,32 +352,18 @@ img[src*="history-image"] {
     grid-template-columns: 1fr;
   }
 }
-/* ЯРИЛО — фото и видео плиткой */
 
-/* ЯРИЛО — широкая галерея фото и видео */
-
-#direction-media-section > .container {
-  width: min(100% - 32px, 1200px) !important;
-  max-width: 1200px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
+/* Gallery: the section spans the page; only the media container forms columns. */
+#direction-media-section { display: block; }
+#direction-media-section > .container { width: min(1160px, calc(100% - 36px)); margin-inline: auto; }
 #direction-media-section .public-media {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 24px !important;
-  width: 100% !important;
-  max-width: none !important;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
   align-items: start;
 }
-
-#direction-media-section .public-media > * {
-  min-width: 0 !important;
-  width: 100% !important;
-  max-width: none !important;
-}
-
+#direction-media-section .public-media > * { min-width: 0; width: 100%; }
 #direction-media-section .public-media img,
 #direction-media-section .public-media video {
   display: block;
@@ -390,15 +373,10 @@ img[src*="history-image"] {
   object-fit: cover;
   border-radius: 14px;
 }
-
+#direction-media-section .public-media video { object-fit: contain; }
 @media (max-width: 900px) {
-  #direction-media-section .public-media {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
+  #direction-media-section .public-media { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-
 @media (max-width: 600px) {
-  #direction-media-section .public-media {
-    grid-template-columns: 1fr !important;
-  }
+  #direction-media-section .public-media { grid-template-columns: 1fr; }
 }
