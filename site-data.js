@@ -71,19 +71,10 @@ window.YARILO = {
         "uploads/admin-83964d5e-2c45-4c34-a18b-0604e6ffa442.webp",
         "uploads/admin-a0f0ce5a-4cf0-4e81-ba56-7e84c804dee3.webp"
       ],
-      "videos": [
-        "https://www.youtube-nocookie.com/embed/ya0G86EwTjE",
-        "https://www.youtube-nocookie.com/embed/joclt2IpOQk",
-        "https://www.youtube-nocookie.com/embed/5V723OvAULc",
-        "https://www.youtube-nocookie.com/embed/PUPn0ZGkOc0"
-      ],
+      "videos": [],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы.",
       "mediaDescriptions": {
-        "https://www.youtube-nocookie.com/embed/ya0G86EwTjE": "Часть подарков для детей-инвалидов мы развесили сами лично в реабилитационные центры. ",
-        "https://www.youtube-nocookie.com/embed/joclt2IpOQk": "В общей сложности от нас помощь получили более 11 городов Московской области",
-        "https://www.youtube-nocookie.com/embed/5V723OvAULc": "Мы постарались для каждого центра выделись моющие средства, т.к в них постоянная потребность. Они нужны постоянно и много из-за понятных причин. ",
-        "https://www.youtube-nocookie.com/embed/PUPn0ZGkOc0": "Мы часто сами развозим груз. Мы сами его грузим и сами разгружаем. Но самое главное, мы лично передаем туда, куда это нужно. Мы реально закрываем потребности не только отделениях лиц, но и организаций и населенных пунктов. ",
         "uploads/admin-d7ca530d-bc47-492f-b9a2-710fd9128db0.jpg": "Мы отвезли огромное количество гуманитарного груза для детейв ЛДНР, в том числе, детям  с ограниченными возможностями",
         "uploads/admin-1c566497-5937-46a7-8dbf-4fbf08644887.jpg": "Основную част груза мы отправляли транспортной компанией  в ЛДНР, а оттуда уже развозили лично на своем авто с прицепом ",
         "uploads/admin-83964d5e-2c45-4c34-a18b-0604e6ffa442.webp": "Мы лично закупали продукты и средства первой необходимости как для малышей, так и для взрослых",
@@ -121,17 +112,10 @@ window.YARILO = {
         "uploads/admin-e0115f08-ca12-434b-9494-19cddbfccf9f.jpg",
         "uploads/admin-109c9847-0e00-4643-aae1-4603da3553b3.jpg"
       ],
-      "videos": [
-        "https://www.youtube-nocookie.com/embed/sZ5tSnzewBo",
-        "https://www.youtube-nocookie.com/embed/rJSzresPwtQ",
-        "https://www.youtube-nocookie.com/embed/kCKcef0gEtY"
-      ],
+      "videos": [],
       "pageTitle": "Помощь госпиталям и учреждениям",
       "pageText": "Передаём необходимые бытовые и расходные товары по конкретным запросам.",
       "mediaDescriptions": {
-        "https://www.youtube-nocookie.com/embed/sZ5tSnzewBo": "Спасибо магазину Магнит в г. Воскресенске за предоставленную возможность собрать необходимые средства для госпиталей в ЛДНР",
-        "https://www.youtube-nocookie.com/embed/rJSzresPwtQ": "Эти женщины лечат и заботятся о раненых солдатах в госпитале им Калинина в ДНР.",
-        "https://www.youtube-nocookie.com/embed/kCKcef0gEtY": "Мы постоянно пишем запросы в различные организации, с целью закрытия списков потребностей наших адресатов",
         "uploads/admin-89b86cbf-63fa-41f4-8890-342613631c34.jpg": "В госпиталь ДНР были привезены в больших количествах хирургические одноразовые халаты и гипсовые бинты. Гипсовые бинты значительно сокращают время на обработку переломов у прибывших в госпиталь бойцов с передовой, что значительно упрощает и ускоряет работу медсестер и врачей. ",
         "uploads/admin-b5ae1bea-5102-4a05-abb4-4cb163e4fb78.jpg": "В ЛДНР большая проблема с водой и на госпитали постоянно требуются моющие средства. Также туда нужна бязь, местные волонтеры из нее шьют простыни для раненых бойцов. Наша задача поставить туда достаточное количество моющих средствээ, бязи, влажных салфеток, подгузников для взрослых. ",
         "uploads/admin-14ddf009-bbdd-4ace-b292-7df3d527d65c.jpg": "Было отправлено большое количество гуманитарного груза на госпитали ДНР",
@@ -151,17 +135,10 @@ window.YARILO = {
         "uploads/admin-7dc179f3-25a6-4cce-b49a-d680a24c7f35.webp",
         "uploads/admin-5ffcd750-e71b-4c04-96ab-f582d972cdbc.jpg"
       ],
-      "videos": [
-        "https://www.youtube-nocookie.com/embed/pqPsstbDAGQ",
-        "https://www.youtube-nocookie.com/embed/uxZWmUQTlms",
-        "https://www.youtube-nocookie.com/embed/t6mlBQksmJM"
-      ],
+      "videos": [],
       "pageTitle": "Помощь людям в трудной жизненной ситуации",
       "pageText": "Поддерживаем людей, которым не хватает базовых вещей и ресурсов.",
       "mediaDescriptions": {
-        "https://www.youtube-nocookie.com/embed/pqPsstbDAGQ": "Это маленький фильм о том, как мы осуществляем свою волортерскую деятельность. ",
-        "https://www.youtube-nocookie.com/embed/uxZWmUQTlms": "Лена закупает гуманитарный груз",
-        "https://www.youtube-nocookie.com/embed/t6mlBQksmJM": "Мы всегда делимся гуманитарным грузом с другими волонтерами",
         "uploads/admin-4e7f9f31-1afd-4f3a-8e49-623f48b6c280.webp": "Было поставлено большое количество пленки для того, чтобы закрыть разбитые от обстрелов окна. ",
         "uploads/admin-bdac0f5c-0812-434a-a13c-9b86a929085b.jpg": "Мы постоянно собираем продукты, средства первой необходимости, стройматериалы, одежду, моющие средства для людей, которые оказали в сложной жизненной ситуации",
         "uploads/admin-981ad6d0-279c-4156-9cae-19d9d985f778.webp": "Есть люди, которые \"выживают\" на пенсию или не имеют источников дохода. Им постоянно требуются лекарства, продукты, средства первой необходимости. Мы не проходим стороной и стараемся им помочь. Таких людей очень много. Многие стесняются обратиться за помощью. ",
@@ -266,12 +243,8 @@ window.YARILO = {
           "photos": [
             "uploads/admin-6342f258-a4c0-4159-bff4-5412b7df4d48.jpg"
           ],
-          "videos": [
-            "https://www.youtube-nocookie.com/embed/joclt2IpOQk"
-          ],
-          "mediaDescriptions": {
-            "https://www.youtube-nocookie.com/embed/joclt2IpOQk": "Несколько тысяч инвалидов и детей инвалидов уже получили наши подарки. Также сами реабилитационные центры получили от нас помощь в виде посуды, моющих средств и многого другого. "
-          }
+          "videos": [],
+          "mediaDescriptions": {}
         },
         {
           "id": "post-00000002",
@@ -339,22 +312,13 @@ window.YARILO = {
             "uploads/admin-563058bb-9f39-46e6-b3d2-a79daabf0647.webp"
           ],
           "videos": [
-            "https://www.youtube-nocookie.com/embed/5V723OvAULc",
-            "https://www.youtube-nocookie.com/embed/PUPn0ZGkOc0",
-            "https://www.youtube-nocookie.com/embed/tjIZdaEOKDE",
-            "https://www.youtube-nocookie.com/embed/JZcRS_DClM4",
-            "https://www.youtube-nocookie.com/embed/ya0G86EwTjE",
-            "https://www.youtube-nocookie.com/embed/3JD1n2PB-4g",
-            "https://www.youtube-nocookie.com/embed/ofEBCQqRv7U",
-            "https://www.youtube-nocookie.com/embed/hDeul8qvgsw",
-            "https://www.youtube-nocookie.com/embed/Ci02OZvCPzE"
+            "https://www.youtube-nocookie.com/embed/5V723OvAULc"
           ],
           "mediaDescriptions": {
             "uploads/admin-267f0e38-7544-4ff0-b0ae-655ff9835424.webp": "Так выглядит сейчас наш личный прицеп, который большой путь проехал по фронтовым дорогам и наколесил тысячи километров между городами",
             "uploads/admin-2a8ed46e-7e85-479d-a612-05057da854bb.webp": "Подкатное колесо погнулось из-за разбитых снарядами дорог прифронтовых зон. Гружёный прицеп очень тяжело катить по ухабам и ямам. ",
             "uploads/admin-563058bb-9f39-46e6-b3d2-a79daabf0647.webp": "От старости тент истерся в местах натяжения на каркас. И пришлось его латать специальным ремкомплектом. ",
-            "https://www.youtube-nocookie.com/embed/5V723OvAULc": "История наших автомобилей, которые намотали много тысяч километров волонтёрского пути ",
-            "https://www.youtube-nocookie.com/embed/PUPn0ZGkOc0": "Фильм второй про нашу волонтерскую деятельность"
+            "https://www.youtube-nocookie.com/embed/5V723OvAULc": "История наших автомобилей, которые намотали много тысяч километров волонтёрского пути "
           }
         },
         {
