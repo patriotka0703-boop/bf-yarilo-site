@@ -143,7 +143,8 @@ window.YARILO = {
       "title": "Люди в трудной ситуации",
       "text": "Одежда, предметы первой необходимости и адресная поддержка.",
       "photos": [
-        "uploads/admin-4e7f9f31-1afd-4f3a-8e49-623f48b6c280.webp"
+        "uploads/admin-4e7f9f31-1afd-4f3a-8e49-623f48b6c280.webp",
+        "uploads/admin-bdac0f5c-0812-434a-a13c-9b86a929085b.jpg"
       ],
       "videos": [
         "https://www.youtube-nocookie.com/embed/pqPsstbDAGQ",
@@ -156,7 +157,8 @@ window.YARILO = {
         "https://www.youtube-nocookie.com/embed/pqPsstbDAGQ": "Это маленький фильм о том, как мы осуществляем свою волортерскую деятельность. ",
         "https://www.youtube-nocookie.com/embed/uxZWmUQTlms": "Лена закупает гуманитарный груз",
         "https://www.youtube-nocookie.com/embed/t6mlBQksmJM": "Мы всегда делимся гуманитарным грузом с другими волонтерами",
-        "uploads/admin-4e7f9f31-1afd-4f3a-8e49-623f48b6c280.webp": "Было поставлено большое количество пленки для того, чтобы закрыть разбитые от обстрелов окна. "
+        "uploads/admin-4e7f9f31-1afd-4f3a-8e49-623f48b6c280.webp": "Было поставлено большое количество пленки для того, чтобы закрыть разбитые от обстрелов окна. ",
+        "uploads/admin-bdac0f5c-0812-434a-a13c-9b86a929085b.jpg": "Мы постоянно собираем продукты, средства первой необходимости, стройматериалы, одежду, моющие средства для людей, которые оказали в сложной жизненной ситуации"
       }
     }
   },
