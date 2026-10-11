@@ -357,22 +357,32 @@ img[src*="history-image"] {
 }
 /* ЯРИЛО — фото и видео плиткой */
 
-.public-media {
+/* ЯРИЛО — широкая галерея фото и видео */
+
+#direction-media-section > .container {
+  width: min(100% - 32px, 1200px) !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#direction-media-section .public-media {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   gap: 24px !important;
-  width: 100%;
+  width: 100% !important;
+  max-width: none !important;
   align-items: start;
 }
 
-.public-media > * {
-  min-width: 0;
-  width: 100%;
-  max-width: none;
+#direction-media-section .public-media > * {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
 }
 
-.public-media img,
-.public-media video {
+#direction-media-section .public-media img,
+#direction-media-section .public-media video {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -382,13 +392,13 @@ img[src*="history-image"] {
 }
 
 @media (max-width: 900px) {
-  .public-media {
+  #direction-media-section .public-media {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
 @media (max-width: 600px) {
-  .public-media {
+  #direction-media-section .public-media {
     grid-template-columns: 1fr !important;
   }
 }
