@@ -397,16 +397,46 @@ window.YARILO = {
     },
     {
       "id": "report-a1d00000",
-      "title": "Отчёты о переданной помощи",
-      "year": "",
-      "category": "aid",
-      "description": "Фото и документы по отдельным проектам фонда",
+      "title": "Благодарственные письма",
+      "year": "2026",
+      "category": "other",
+      "description": "",
       "files": [
         {
           "path": "uploads/admin-d4bf4376-50a4-4418-ba05-8b7ff3272fdc.pdf",
           "name": "02_Otchet_o_peredannoy_pomoschi_2025.pdf",
           "title": "Отчёт о переданной помощи БФ «ЯРИЛО» за 2025 год",
           "size": 77441
+        },
+        {
+          "path": "uploads/admin-57ead73f-5230-4720-8ea4-d4e038f5576a.jpg",
+          "name": "1000231795.jpg",
+          "title": "1000231795",
+          "size": 195618
+        },
+        {
+          "path": "uploads/admin-76dea470-9373-416d-a012-08d6f0a96c07.jpg",
+          "name": "1000231804.jpg",
+          "title": "1000231804",
+          "size": 151816
+        },
+        {
+          "path": "uploads/admin-a6a5f7ed-d391-4840-8b62-d8603b27ed49.jpg",
+          "name": "1000231805.jpg",
+          "title": "1000231805",
+          "size": 217505
+        },
+        {
+          "path": "uploads/admin-a9476b59-81b2-4eac-bd85-82e9de23623f.jpg",
+          "name": "1000231798.jpg",
+          "title": "1000231798",
+          "size": 209511
+        },
+        {
+          "path": "uploads/admin-eeb2029f-c000-4f84-be9b-11d5a98448cc.jpg",
+          "name": "1000231803.jpg",
+          "title": "1000231803",
+          "size": 165359
         }
       ]
     }
