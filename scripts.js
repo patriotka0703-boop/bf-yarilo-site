@@ -360,14 +360,33 @@
       amountError.hidden=valid;amountError.textContent=valid?'':'Введите сумму от 1 ₽, не больше двух знаков после запятой.';
       amountInput.setAttribute('aria-invalid',String(!valid));payment.setAttribute('aria-disabled',String(!valid));
       document.querySelectorAll('[data-amount]').forEach(b=>{const selected=Number(b.dataset.amount)===sum;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected));});
-      const link=M.paymentLink(d.donation.paymentUrl,sum);
-      payment.href=link||'#donation-bank';payment.textContent=link?'Перейти к оплате':'Перевести по реквизитам';
-      document.getElementById('payment-state').textContent=d.donation.paymentUrl?'Оплата проходит на защищённой странице банка или платёжного сервиса.':'Онлайн-оплата пока не подключена. Вы можете перевести средства на расчётный счёт фонда.';
-      note.textContent=!valid?'':link&&!/\{amount\}|%7Bamount%7D/i.test(d.donation.paymentUrl)?'Вы выбрали '+money(sum)+'. Укажите или подтвердите эту сумму на странице оплаты.':'Выбранная сумма: '+money(sum)+'.';
+     
+      payment.href='#donation-bank';
+      payment.textContent='Пожертвовать банковской картой';
+      document.getElementById('payment-state').textContent='Безопасная оплата банковской картой через CloudPayments. Также можно пожертвовать по QR-коду или реквизитам.';
+      note.textContent=valid?'Выбранная сумма: '+money(sum)+'.':'';
       return valid;
     }
+
     document.querySelectorAll('[data-amount]').forEach(b=>b.onclick=()=>{amountInput.value=b.dataset.amount;updateAmount();});
-    amountInput.addEventListener('input',updateAmount);payment.addEventListener('click',e=>{if(!updateAmount()){e.preventDefault();amountInput.focus();}});updateAmount();
+    amountInput.addEventListener('input',updateAmount);
+    payment.addEventListener('click',e=>{
+      e.preventDefault();
+      if(!updateAmount()){amountInput.focus();return;}
+      if(!window.cp || !window.cp.CloudPayments){
+        alert('Платёжная форма временно недоступна. Используйте QR-код или реквизиты фонда.');
+        return;
+      }
+      const widget=new cp.CloudPayments();
+      widget.pay('charge',{
+        publicId:'pk_0a3cdfc018f293b701c077cbda191',
+        description:d.donation.purpose || 'Благотворительное пожертвование БФ «ЯРИЛО»',
+        amount:M.amount(amountInput.value),
+        currency:'RUB'
+      });
+    });
+    updateAmount();
+
     const qr=M.qrImage(d.donation.qrImage),qrBox=document.getElementById('donation-qr-image');
     if(qr){const img=document.createElement('img');img.src=qr;img.alt='Банковский QR-код для пожертвования фонду ЯРИЛО';qrBox.append(img);qrBox.hidden=false;document.getElementById('donation-qr-placeholder').hidden=true;document.getElementById('donation-qr-note').textContent=d.donation.qrNote;}
     const bankBox=document.getElementById('donation-bank-accounts');
