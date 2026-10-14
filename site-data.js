@@ -400,14 +400,8 @@ window.YARILO = {
       "title": "Благодарственные письма",
       "year": "2026",
       "category": "other",
-      "description": "",
+      "description": "Благодарственные письма от реабилитационных центров инвалидов и детей инвалидов Московской области ",
       "files": [
-        {
-          "path": "uploads/admin-d4bf4376-50a4-4418-ba05-8b7ff3272fdc.pdf",
-          "name": "02_Otchet_o_peredannoy_pomoschi_2025.pdf",
-          "title": "Отчёт о переданной помощи БФ «ЯРИЛО» за 2025 год",
-          "size": 77441
-        },
         {
           "path": "uploads/admin-57ead73f-5230-4720-8ea4-d4e038f5576a.jpg",
           "name": "1000231795.jpg",
