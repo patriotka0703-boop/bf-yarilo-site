@@ -64,7 +64,8 @@ window.YARILO = {
         "uploads/admin-8cb09269-8625-416c-8fa3-df7882db3ef9.jpg",
         "uploads/admin-385e3c7d-2211-4096-910c-16ed5dea86c3.jpg",
         "uploads/admin-23aa7726-657f-4858-9afb-c654a8c94208.jpg",
-        "uploads/admin-f35ca723-a5ca-4b04-985a-08a1dce50b4a.jpg"
+        "uploads/admin-f35ca723-a5ca-4b04-985a-08a1dce50b4a.jpg",
+        "uploads/admin-18b84117-ca8c-4c44-9b24-2a97a49d1296.jpg"
       ],
       "videos": [],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
