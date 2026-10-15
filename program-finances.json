@@ -1,0 +1,23 @@
+{
+  "doroga-dobra": {
+    "goal": 3000000,
+    "received": null,
+    "spent": null,
+    "updated_at": null,
+    "expenses": []
+  },
+  "transport": {
+    "goal": 12000000,
+    "received": null,
+    "spent": null,
+    "updated_at": null,
+    "expenses": []
+  },
+  "emergency": {
+    "goal": null,
+    "received": null,
+    "spent": null,
+    "updated_at": null,
+    "expenses": []
+  }
+}
