@@ -1,77 +1,21 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <url>
-    <loc>https://bf-yarilo.ru/</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/about.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/help.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/help-disabled.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/help-rehab.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/help-hospitals.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/help-crisis.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/projects.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/programs.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/doroga-dobra.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/ekstrennaya-pomoshch.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/transport-dlya-dobryh-del.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/news.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/reports.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/contacts.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/donate.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/privacy.html</loc>
-  </url>
-
-  <url>
-    <loc>https://bf-yarilo.ru/requisites.html</loc>
-  </url>
-
+  <url><loc>https://bf-yarilo.ru/</loc></url>
+  <url><loc>https://bf-yarilo.ru/about.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/help.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/help-disabled.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/help-rehab.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/help-hospitals.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/help-crisis.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/projects.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/programs.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/doroga-dobra.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/ekstrennaya-pomoshch.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/transport-dlya-dobryh-del.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/news.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/reports.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/contacts.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/donate.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/privacy.html</loc></url>
+  <url><loc>https://bf-yarilo.ru/requisites.html</loc></url>
 </urlset>
