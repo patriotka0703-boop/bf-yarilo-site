@@ -1,522 +1,616 @@
 <!doctype html>
 <html lang="ru">
-<head><!-- Yandex.Metrika counter -->
+<head>
+
+<!-- Yandex.Metrika counter -->
 <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113599500', 'ym');
+(function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j=0; j<document.scripts.length; j++) {
+        if (document.scripts[j].src === r) return;
+    }
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],
+    k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+})(window,document,'script',
+'https://mc.yandex.ru/metrika/tag.js','ym');
 
-    ym(113599500, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+ym(113599500,'init',{
+    ssr:true,
+    webvisor:true,
+    clickmap:true,
+    accurateTrackBounce:true,
+    trackLinks:true
+});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/113599500" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/113599500" style="position:absolute;left:-9999px" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Благотворительный фонд «ЯРИЛО» — помощь нуждающимся | Ступино</title>
+<title>Админка — БФ «ЯРИЛО»</title>
+<meta name="robots" content="noindex,nofollow">
 
-<meta name="description" content="Благотворительный фонд «ЯРИЛО»: гуманитарная помощь мирным жителям прифронтовых и приграничных территорий, пенсионерам, детям, людям с инвалидностью и вынужденным переселенцам.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#10251f">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 
-<link rel="canonical" href="https://bf-yarilo.ru/">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css?v=20261011.2">
+<style>
+*{box-sizing:border-box}
 
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Благотворительный фонд «ЯРИЛО»">
-<meta property="og:title" content="Благотворительный фонд «ЯРИЛО» — помощь нуждающимся | Ступино">
-<meta property="og:description" content="Благотворительный фонд «ЯРИЛО»: гуманитарная помощь мирным жителям прифронтовых и приграничных территорий, пенсионерам, детям, людям с инвалидностью и вынужденным переселенцам.">
-<meta property="og:url" content="https://bf-yarilo.ru/">
-
-<meta name="twitter:card" content="summary">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "NGO",
-  "name": "Благотворительный фонд «Ярило»",
-  "url": "https://bf-yarilo.ru/",
-  "telephone": "+79660577755",
-  "areaServed": ["Донецкая Народная Республика", "Луганская Народная Республика", "Курская область", "Брянская область", "Белгородская область"],
-  "description": "Адресная гуманитарная поддержка мирных жителей прифронтовых и приграничных территорий."
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f5;
+  color:#17231f
 }
-</script>
-<meta name="yandex-verification" content="a08a449f998f12a9" />
 
-<meta name="yandex-verification" content="77d8ecd0c089b103" />
-    </head>
+header{
+  background:#10251f;
+  color:#fff;
+  padding:24px 20px
+}
+
+.header{
+  max-width:1000px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px
+}
+
+h1{margin:0 0 5px;font-size:28px}
+header p{margin:0;opacity:.8}
+
+.site{
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.4);
+  padding:10px 14px;
+  border-radius:8px
+}
+
+main{
+  max-width:1000px;
+  margin:30px auto;
+  padding:0 20px 60px
+}
+
+.panel{
+  background:#fff;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+  margin-bottom:20px
+}
+
+.login{
+  text-align:center;
+  padding:50px 25px
+}
+
+.hidden{display:none!important}
+
+.status{
+  display:none;
+  padding:14px 16px;
+  margin-bottom:20px;
+  border-radius:9px
+}
+
+.status.info{
+  display:block;
+  background:#edf2f0
+}
+
+.status.ok{
+  display:block;
+  background:#e7f5eb;
+  color:#176238
+}
+
+.status.error{
+  display:block;
+  background:#fdeaea;
+  color:#8a2222
+}
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:13px 20px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer
+}
+
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed
+}
+
+.primary{background:#10251f;color:#fff}
+.save{background:#18794e;color:#fff}
+.secondary{background:#e7ece9;color:#17231f}
+.danger{background:#8d2727;color:#fff}
+
+.field{margin-bottom:18px}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px
+}
+
+input,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd5d1;
+  border-radius:8px;
+  font:inherit
+}
+
+textarea{
+  min-height:105px;
+  resize:vertical
+}
+
+textarea.long{
+  min-height:150px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px
+}
+
+.section{
+  margin:32px 0 20px;
+  padding-bottom:10px;
+  border-bottom:1px solid #e3e8e5
+}
+
+.section:first-of-type{
+  margin-top:20px
+}
+
+.subsection{
+  margin:25px 0 15px;
+  font-size:18px
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px
+}
+
+.small{
+  color:#69736f;
+  font-size:13px;
+  line-height:1.5
+}
+
+
+.media-preview{
+  margin:12px 0;
+  padding:12px;
+  border:1px solid #e3e8e5;
+  border-radius:10px;
+  background:#f8faf9
+}
+
+.media-preview img{
+  display:block;
+  width:140px;
+  height:100px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:10px;
+  cursor:zoom-in;
+}
+
+.media-preview video{
+  display:block;
+  width:100%;
+  max-width:520px;
+  max-height:360px;
+  object-fit:contain;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+@media(max-width:700px){
+  .grid{grid-template-columns:1fr}
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start
+  }
+}
+  /* Галерея фотографий в админке */
+.admin-photo-gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.admin-photo-gallery img{
+  width:120px;
+  height:90px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid #d8ddd9;
+  cursor:pointer;
+  background:#f5f5f5;
+}
+
+.admin-photo-gallery img:hover{
+  transform:scale(1.04);
+}
+
+#historyImagePreviewBox{
+  padding:14px;
+}
+
+#historyImagePreviewBox.hidden{
+  display:none;
+}
+</style>
+<link rel="stylesheet" href="admin.css?v=20260928.13">
+</head>
+
 <body>
 
-<header class="site-header">
-<div class="container nav">
+<header>
+<div class="header">
+  <div>
+    <h1>БФ «ЯРИЛО»</h1>
+    <p>Управление сайтом</p>
+  </div>
 
-<a class="brand" href="/" aria-label="Благотворительный фонд Ярило">
-<img class="brand-logo-img" src="logo-yarilo.jpg" alt="Логотип благотворительного фонда Ярило">
-<span>
-<b id="foundation-short-name">ЯРИЛО</b>
-<small>благотворительный фонд</small>
-</span>
-</a>
-
-<button class="menu-btn" aria-label="Открыть меню" aria-expanded="false">☰</button>
-
-<nav class="menu" aria-label="Основная навигация">
-<a href="about.html">О фонде</a>
-<a href="help.html">Кому помогаем</a>
-<a href="projects.html">Проекты</a>
-<a href="programs.html">Программы</a>
-<a href="news.html">Новости</a>
-<a href="reports.html">Отчётность</a>
-<a href="requisites.html">Реквизиты</a>
-<a href="contacts.html">Контакты</a>
-<a class="btn btn-small donate-nav" href="donate.html">Пожертвовать</a>
-</nav>
-
+  <a class="site"
+     href="https://bf-yarilo.ru/"
+     target="_blank">
+    Открыть сайт →
+  </a>
 </div>
 </header>
 
 <main>
 
-<section class="hero">
-<div class="container hero-grid">
+<div id="status" class="status" role="status" aria-live="polite"></div>
 
-<div>
-<p class="eyebrow" id="foundation-name">Благотворительный фонд «Ярило»</p>
+<section id="loginPanel" class="panel login">
+  <h2>Вход в админку</h2>
 
-<h1 id="home-title">Помогаем тем, кто <span>попал в беду</span></h1>
+  <p>
+    Войдите через GitHub, чтобы редактировать сайт фонда.
+  </p>
 
-<p class="lead" id="home-description">
-Адресная помощь детям и взрослым с инвалидностью, реабилитационным центрам,
-медицинским учреждениям и людям, оказавшимся в трудной жизненной ситуации.
-</p>
+  <button id="loginButton" class="primary">
+    Войти через GitHub
+  </button>
 
-<div class="actions">
-<a class="btn btn-large" href="donate.html">Пожертвовать</a>
-</div>
-
-<div class="micro-trust">
-<span>✓ Адресная помощь</span>
-<span>✓ Отчётность</span>
-<span>✓ Реальные потребности</span>
-</div>
-</div>
-
-<aside class="hero-cover">
-<img
-  src="assets/yarilo-cover.png"
-  loading="eager"
-  decoding="sync"
-  width="1536"
-  height="1024"
-  fetchpriority="high"
-  alt="Благотворительный фонд Ярило. Помощь, которая доходит: поездка в Макеевку, закупка и доставка помощи."
->
-<a href="about.html">Подробнее о фонде →</a>
-</aside>
-
-</div>
+  <p class="small">
+    Пароль GitHub здесь не сохраняется.
+  </p>
 </section>
 
 
-<section class="section">
-<div class="container">
-
-<div class="section-head">
-<div>
-<h2>Направления помощи</h2>
-</div>
-<a class="text-link" href="help.html">Все направления →</a>
-</div>
-
-<div class="cards">
-
-<article class="card direction-card">
-<span class="icon">♿</span>
-<h3 id="disabled-title">Дети и взрослые с инвалидностью</h3>
-<p id="disabled-text">Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.</p>
-<a class="more" href="help-disabled.html">Подробнее →</a>
-</article>
-
-<article class="card direction-card">
-<span class="icon">❤</span>
-<h3 id="rehab-title">Реабилитационные центры</h3>
-<p id="rehab-text">Подарки, предметы ухода и необходимые расходные материалы.</p>
-<a class="more" href="help-rehab.html">Подробнее →</a>
-</article>
-
-<article class="card direction-card">
-<span class="icon">✚</span>
-
-<h3 id="hospitals-title">Больницы прифронтовых и приграничных районов</h3>
-<p id="hospitals-text">Помогаем больницам, оказывающим медицинскую помощь мирным жителям, в том числе пострадавшим от боевых действий. Передаём постельное бельё, средства гигиены и необходимые вещи.</p>
-
-<a class="more" href="help-hospitals.html">Подробнее →</a>
-</article>
-
-<article class="card direction-card">
-<span class="icon">⌂</span>
-<h3 id="crisis-title">Люди в трудной ситуации</h3>
-<p id="crisis-text">Одежда, предметы первой необходимости и адресная поддержка.</p>
-<a class="more" href="help-crisis.html">Подробнее →</a>
-</article>
-
-</div>
-</div>
-</section>
-
-
-<section class="section" aria-labelledby="geography-title">
-<div class="container">
-<div class="section-head">
-<div>
-<p class="eyebrow">Где мы помогаем</p>
-<h2 id="geography-title">География оказания гуманитарной помощи</h2>
-</div>
-</div>
-<div class="prose">
-<p>Благотворительный фонд «ЯРИЛО» оказывает адресную гуманитарную поддержку <strong>мирным жителям прифронтовых и приграничных территорий</strong>, пострадавшим от боевых действий.</p>
-<p><strong>Основные территории оказания помощи:</strong> Донецкая Народная Республика (ДНР), Луганская Народная Республика (ЛНР), Курская, Брянская и Белгородская области, а также другие прифронтовые и приграничные территории, где гражданское население нуждается в гуманитарной поддержке.</p>
-<p>Помощь предоставляется пенсионерам, людям с инвалидностью, детям, семьям с детьми, вынужденным переселенцам и другим гражданским лицам, оказавшимся в тяжёлой жизненной ситуации вследствие боевых действий.</p>
-</div>
-</div>
-</section>
-
-<section class="section section-alt">
-<div class="container split">
-
-<div>
-<p class="eyebrow">О фонде</p>
-<h2 id="about-title">Помощь без лишних слов</h2>
-</div>
-
-<div class="prose">
-
-<p id="about-text">
-«Ярило» работает с конкретными запросами: выясняет потребность,
-собирает необходимые вещи, формирует груз, организует доставку
-и передаёт помощь получателям.
-</p>
+<section id="editorPanel" class="panel hidden">
 
 <p>
-Фонд зарегистрирован в <span id="foundation-region">Московской области</span>.
-Генеральный директор — <span id="foundation-director">Невзорова Эльвира Викторовна</span>.
+  Вы вошли как:
+  <strong id="githubUser"></strong>
 </p>
 
-<a class="btn btn-ghost" href="about.html">История фонда</a>
 
-</div>
-</div>
-</section>
+<nav class="editor-nav" id="editor-menu" aria-label="Разделы админки"><h2>Разделы админки</h2><p class="small">Нажмите на нужный раздел. После редактирования нажмите кнопку сохранения внизу экрана.</p><div class="editor-nav-links"><a href="#editor-news">Новости</a><a href="#editor-projects">Проекты</a><a href="#reporting">Отчётность</a><a href="#foundation-documents">Документы фонда</a><a href="#editor-section-1">Основные данные фонда</a><a href="#editor-section-2">Главная страница</a><a href="#editor-section-3">О фонде и история фонда</a><a href="#editor-section-4">Результаты</a><a href="#editor-section-5">Направления помощи</a><a href="#editor-section-6">Поддержка фонда</a><a href="#editor-section-7">Социальные сети</a><a href="#editor-section-8">Реквизиты и банковские счета</a><a href="#editor-section-9">Кнопка «Пожертвовать»</a><a href="#editor-section-10">Оплата и QR-код</a></div></nav><p class="editor-version">Версия админки 20260919.3</p><h2 class="section" id="editor-section-1">Основные данные фонда</h2>
 
-
-<section class="section">
-<div class="container">
-
-<p class="eyebrow">Результаты</p>
-<h2>Помощь доходит до людей</h2>
-
-<div class="stats">
-
-<div>
-<b id="result-recipients">1000+</b>
-<span>получателей подарков и помощи</span>
+<div class="field">
+  <label for="foundationName">Полное название</label>
+  <input id="foundationName" data-field="foundation.name">
 </div>
 
-<div>
-<b id="result-cities">10+</b>
-<span>городов Московской области</span>
+<div class="grid">
+  <div class="field">
+    <label for="shortName">Короткое название</label>
+    <input id="shortName" data-field="foundation.shortName">
+  </div>
+
+  <div class="field">
+    <label for="region">Регион</label>
+    <input id="region" data-field="foundation.region">
+  </div>
 </div>
 
-<div>
-<b>Адресно</b>
-<span>работаем с конкретными запросами</span>
+<div class="field">
+  <label for="foundationEmail">Электронная почта фонда</label>
+  <input id="foundationEmail" type="email" data-field="foundation.email" autocomplete="email">
 </div>
+
+<div class="field">
+  <label for="slogan">Девиз</label>
+  <input id="slogan" data-field="foundation.slogan">
+</div>
+
+<div class="field">
+  <label for="director">Генеральный директор</label>
+  <input id="director" data-field="foundation.director">
+</div>
+
+<div class="grid">
+  <div class="field">
+    <label for="phone">Телефон</label>
+    <input id="phone" data-field="foundation.phone">
+  </div>
+
+  <div class="field">
+    <label for="website">Адрес сайта</label>
+    <input id="website" data-field="foundation.website">
+  </div>
+</div>
+
+
+<h2 class="section" id="editor-section-2">Главная страница</h2>
+
+<div class="field">
+  <div id="coverEditor"></div>
+<label for="homeTitle">Главный заголовок</label>
+  <input id="homeTitle" data-field="home.title">
+</div>
+
+<div class="field">
+  <label for="homeDescription">Описание</label>
+  <textarea id="homeDescription" data-field="home.description"></textarea>
+</div>
+
+<div class="field">
+  <label for="missionTitle">Заголовок миссии</label>
+  <input id="missionTitle" data-field="home.missionTitle">
+</div>
+
+<div class="field">
+  <label for="missionText">Текст миссии</label>
+  <textarea id="missionText" data-field="home.missionText"></textarea>
+</div>
+
+<div class="field">
+  <label for="aboutTitle">Заголовок блока о фонде на главной</label>
+  <input id="aboutTitle" data-field="home.aboutTitle">
+</div>
+
+<div class="field">
+  <label for="aboutText">Текст блока о фонде на главной</label>
+  <textarea id="aboutText" data-field="home.aboutText"></textarea>
+</div>
+
+
+
+<h2 class="section" id="editor-section-3">О фонде и история фонда</h2>
+
+<div class="field">
+  <label for="aboutPageEyebrow">Метка над заголовком</label>
+  <input id="aboutPageEyebrow" data-field="aboutPage.eyebrow">
+</div>
+
+<div class="field">
+  <label for="aboutPageTitle">Заголовок страницы</label>
+  <input id="aboutPageTitle" data-field="aboutPage.title">
+</div>
+
+<div class="field">
+  <label>Вводный текст о фонде</label>
+  <textarea class="long" id="aboutPageLead" data-field="aboutPage.lead"></textarea>
+</div>
+
+<h3 class="subsection">История фонда</h3>
+
+<div class="field">
+  <label for="historyTitle">Заголовок истории</label>
+  <input id="historyTitle" data-field="aboutPage.historyTitle">
+</div>
+
+<div class="field">
+  <label>История фонда — первый абзац</label>
+  <textarea class="long" id="historyText1" data-field="aboutPage.historyText1"></textarea>
+</div>
+
+<div class="field">
+  <label>История фонда — второй абзац</label>
+  <textarea class="long" id="historyText2" data-field="aboutPage.historyText2"></textarea>
+</div>
+<div data-media-group="aboutPage"></div>
+<h3 class="subsection">Принципы работы</h3>
+
+<div class="grid">
+  <div class="field">
+    <label for="principlesEyebrow">Метка раздела</label>
+    <input id="principlesEyebrow" data-field="aboutPage.principlesEyebrow">
+  </div>
+
+  <div class="field">
+    <label for="principlesTitle">Заголовок раздела</label>
+    <input id="principlesTitle" data-field="aboutPage.principlesTitle">
+  </div>
+</div>
+
+<div class="field">
+  <label for="principle1Title">Принцип №1 — название</label>
+  <input id="principle1Title" data-field="aboutPage.principle1Title">
+</div>
+
+<div class="field">
+  <label for="principle1Text">Принцип №1 — описание</label>
+  <textarea id="principle1Text" data-field="aboutPage.principle1Text"></textarea>
+</div>
+
+<div class="field">
+  <label for="principle2Title">Принцип №2 — название</label>
+  <input id="principle2Title" data-field="aboutPage.principle2Title">
+</div>
+
+<div class="field">
+  <label for="principle2Text">Принцип №2 — описание</label>
+  <textarea id="principle2Text" data-field="aboutPage.principle2Text"></textarea>
+</div>
+
+<div class="field">
+  <label for="principle3Title">Принцип №3 — название</label>
+  <input id="principle3Title" data-field="aboutPage.principle3Title">
+</div>
+
+<div class="field">
+  <label for="principle3Text">Принцип №3 — описание</label>
+  <textarea id="principle3Text" data-field="aboutPage.principle3Text"></textarea>
+</div>
+
+<h3 class="subsection">Блок «Хотите помочь?»</h3>
+
+<div class="field">
+  <label for="aboutCtaTitle">Заголовок</label>
+  <input id="aboutCtaTitle" data-field="aboutPage.ctaTitle">
+</div>
+
+<div class="field">
+  <label for="aboutCtaText">Текст</label>
+  <textarea id="aboutCtaText" data-field="aboutPage.ctaText"></textarea>
+</div>
+
+
+<h2 class="section" id="editor-section-4">Результаты</h2>
+
+<div class="grid">
+  <div class="field">
+    <label for="recipients">Получателей помощи</label>
+    <input id="recipients" data-field="results.recipients">
+  </div>
+
+  <div class="field">
+    <label for="cities">Количество городов</label>
+    <input id="cities" data-field="results.cities">
+  </div>
+</div>
+
+<div class="field">
+  <label for="citiesText">Города</label>
+  <textarea id="citiesText" data-field="results.citiesText"></textarea>
+</div>
+
+
+<h2 class="section" id="editor-section-5">Направления помощи</h2>
+
+<div class="field">
+  <label for="disabledTitle">Дети и взрослые с инвалидностью</label>
+  <input id="disabledTitle" data-field="help.disabled.title">
+  <textarea id="disabledText" data-field="help.disabled.text"></textarea>
+<label for="disabledPageTitle">Заголовок отдельной страницы</label><input id="disabledPageTitle" data-field="help.disabled.pageTitle">
+<label for="disabledPageText">Вводный текст отдельной страницы</label><textarea id="disabledPageText" data-field="help.disabled.pageText"></textarea>
+<p class="small">Фото и видео появятся на отдельной странице этого направления, которая открывается по ссылке «Подробнее». Добавьте материалы ниже и сохраните изменения.</p><div data-media-group="help.disabled"></div>
+</div>
+
+<div class="field">
+  <label for="rehabTitle">Реабилитационные центры</label>
+  <input id="rehabTitle" data-field="help.rehab.title">
+  <textarea id="rehabText" data-field="help.rehab.text"></textarea>
+<label for="rehabPageTitle">Заголовок отдельной страницы</label><input id="rehabPageTitle" data-field="help.rehab.pageTitle">
+<label for="rehabPageText">Вводный текст отдельной страницы</label><textarea id="rehabPageText" data-field="help.rehab.pageText"></textarea>
+<p class="small">Фото и видео появятся на отдельной странице этого направления, которая открывается по ссылке «Подробнее». Добавьте материалы ниже и сохраните изменения.</p><div data-media-group="help.rehab"></div>
+</div>
+
+<div class="field">
+
+<label for="hospitalsTitle">Больницы прифронтовых и приграничных районов</label>
+
+  <input id="hospitalsTitle" data-field="help.hospitals.title">
+  <textarea id="hospitalsText" data-field="help.hospitals.text"></textarea>
+<label for="hospitalsPageTitle">Заголовок отдельной страницы</label><input id="hospitalsPageTitle" data-field="help.hospitals.pageTitle">
+<label for="hospitalsPageText">Вводный текст отдельной страницы</label><textarea id="hospitalsPageText" data-field="help.hospitals.pageText"></textarea>
+<p class="small">Фото и видео появятся на отдельной странице этого направления, которая открывается по ссылке «Подробнее». Добавьте материалы ниже и сохраните изменения.</p><div data-media-group="help.hospitals"></div>
+</div>
+
+<div class="field">
+  <label for="crisisTitle">Люди в трудной ситуации</label>
+  <input id="crisisTitle" data-field="help.crisis.title">
+  <textarea id="crisisText" data-field="help.crisis.text"></textarea>
+<label for="crisisPageTitle">Заголовок отдельной страницы</label><input id="crisisPageTitle" data-field="help.crisis.pageTitle">
+<label for="crisisPageText">Вводный текст отдельной страницы</label><textarea id="crisisPageText" data-field="help.crisis.pageText"></textarea>
+<p class="small">Фото и видео появятся на отдельной странице этого направления, которая открывается по ссылке «Подробнее». Добавьте материалы ниже и сохраните изменения.</p><div data-media-group="help.crisis"></div>
+</div>
+
+
+<h2 class="section" id="editor-section-6">Поддержка фонда</h2>
+
+<div class="field">
+  <label for="supportTitle">Заголовок</label>
+  <input id="supportTitle" data-field="support.title">
+</div>
+
+<div class="field">
+  <label for="supportText">Описание</label>
+  <textarea id="supportText" data-field="support.text"></textarea>
+</div>
+
+
+<h2 class="section" id="editor-news">Новости</h2><p class="small">Редактируйте записи и добавляйте фото или видео. Изменения появятся на сайте после сохранения.</p><div class="field"><label for="news-title">Заголовок страницы</label><input id="news-title" data-field="publications.news.title" maxlength="200"></div><div class="field"><label for="news-intro">Вводный текст страницы</label><textarea id="news-intro" data-field="publications.news.intro" maxlength="5000"></textarea></div><div id="newsEditor"></div><button type="button" class="secondary" id="add-news">Добавить новость</button><h2 class="section" id="editor-projects">Проекты</h2><p class="small">Редактируйте записи и добавляйте фото или видео. Изменения появятся на сайте после сохранения.</p><div class="field"><label for="projects-title">Заголовок страницы</label><input id="projects-title" data-field="publications.projects.title" maxlength="200"></div><div class="field"><label for="projects-intro">Вводный текст страницы</label><textarea id="projects-intro" data-field="publications.projects.intro" maxlength="5000"></textarea></div><div class="field"><label for="projects-ctaTitle">Заголовок блока поддержки проектов</label><input id="projects-ctaTitle" data-field="publications.projects.ctaTitle" maxlength="200"></div><div class="field"><label for="projects-ctaText">Текст блока поддержки проектов</label><textarea id="projects-ctaText" data-field="publications.projects.ctaText" maxlength="5000"></textarea></div><div id="projectsEditor"></div><button type="button" class="secondary" id="add-projects">Добавить проект</button><h2 class="section" id="reporting">Отчётность</h2><p class="small">Здесь редактируется страница «Отчётность»: её тексты, годовые отчёты и материалы о переданной помощи. Прикрепите файлы и нажмите «Сохранить изменения».</p><div class="field"><label for="reporting-title">Заголовок страницы отчётности</label><input id="reporting-title" data-field="reporting.title" maxlength="200"></div>
+<div class="field"><label for="reporting-intro">Вводный текст страницы отчётности</label><textarea id="reporting-intro" data-field="reporting.intro" maxlength="5000"></textarea></div>
+<div class="field"><label for="reporting-noticeTitle">Заголовок блока «Прозрачность работы фонда»</label><input id="reporting-noticeTitle" data-field="reporting.noticeTitle" maxlength="200"></div>
+<div class="field"><label for="reporting-noticeText">Текст блока «Прозрачность работы фонда»</label><textarea id="reporting-noticeText" data-field="reporting.noticeText" maxlength="5000"></textarea></div><div id="reportsEditor"></div><button type="button" id="addReport" class="secondary">Добавить отчёт</button>
+<h2 class="section" id="foundation-documents">Документы фонда</h2><p class="small">Загрузите утверждённые документы фонда. Файлы появятся на сайте после сохранения изменений.</p><section class="document-editor-section"><h3>Устав фонда</h3><div data-document-group="charter"></div></section>
+<section class="document-editor-section"><h3>Политика конфиденциальности</h3><div data-document-group="privacy"></div></section>
+<section class="document-editor-section"><h3>Публичная оферта</h3><div data-document-group="offer"></div></section>
+<h2 class="section" id="editor-section-7">Социальные сети</h2>
+<p class="small">Кнопки появятся внизу страниц сайта после сохранения. Пустое поле скрывает соответствующую кнопку.</p>
+<div class="field"><label for="social-telegram">Telegram — ссылка</label><input type="url" id="social-telegram" data-field="socials.telegram" placeholder="https://t.me/…" autocomplete="off"></div>
+<div class="field"><label for="social-vk">ВК — ссылка</label><input type="url" id="social-vk" data-field="socials.vk" placeholder="https://vk.com/…" autocomplete="off"></div>
+<div class="field"><label for="social-instagram">Instagram — ссылка</label><input type="url" id="social-instagram" data-field="socials.instagram" placeholder="https://www.instagram.com/…" autocomplete="off"></div>
+<div class="field"><label for="social-youtube">YouTube — ссылка</label><input type="url" id="social-youtube" data-field="socials.youtube" placeholder="https://www.youtube.com/@…" autocomplete="off"></div>
+
+<h2 class="section" id="editor-section-8">Реквизиты и банковские счета</h2>
+<div class="field"><label for="req-name">Полное наименование получателя</label><input id="req-name" data-field="requisites.legalName"></div>
+<div class="grid"><div class="field"><label for="req-inn">ИНН</label><input id="req-inn" data-field="requisites.inn"></div><div class="field"><label for="req-kpp">КПП</label><input id="req-kpp" data-field="requisites.kpp"></div><div class="field"><label for="req-ogrn">ОГРН</label><input id="req-ogrn" data-field="requisites.ogrn"></div><div class="field"><label for="req-address">Юридический адрес</label><input id="req-address" data-field="requisites.address"></div></div>
+<div id="accounts"></div><button type="button" id="addAccount" class="secondary">Добавить банковский счёт</button>
+<h2 class="section" id="editor-section-9">Кнопка «Пожертвовать»</h2>
+<div class="field"><label for="donationText">Текст кнопки</label><input id="donationText" data-field="donation.text"></div>
+<div class="field"><label for="donationUrl">Куда ведёт кнопка</label><input id="donationUrl" data-field="donation.url" placeholder="donate.html или https://…"><p class="small">Можно указать платёжную ссылку банка, donate.html или requisites.html.</p></div>
+<div class="field"><label for="donationPurpose">Назначение пожертвования</label><textarea id="donationPurpose" data-field="donation.purpose"></textarea></div>
+<h2 class="section" id="editor-section-10">Оплата и QR-код</h2>
+<div class="field"><label for="paymentUrl">Платёжная ссылка фонда</label><input type="url" id="paymentUrl" data-field="donation.paymentUrl" placeholder="https://…"><p class="small">Вставьте ссылку, выданную платёжным сервисом или банком. Пока поле пустое, сайт предлагает перевод по реквизитам.</p><details><summary>Если ссылка поддерживает выбранную сумму</summary><p class="small">Только если это предусмотрено вашим сервисом: вместо суммы в рублях можно указать {amount}. Сайт подставит выбранную сумму. В обычную ссылку сумма автоматически не добавляется — посетитель подтвердит её на странице оплаты.</p></details></div>
+<div class="field"><label for="donationQrFile">Загрузить банковский QR-код для пожертвований</label><input type="file" id="donationQrFile" accept=".png,.jpg,.jpeg,.webp"><p class="small">PNG, JPG или WEBP, до 200 КБ. Используйте QR-код, выданный банком для счёта фонда. Картинка сохраняется после нажатия «Сохранить изменения».</p><div id="qrPreview"></div><button type="button" id="removeQr" class="danger" hidden>Удалить QR-код</button></div>
+<div class="field"><label for="qrNote">Подпись к QR-коду</label><textarea id="qrNote" data-field="donation.qrNote"></textarea></div>
+<div class="actions" aria-label="Сохранение изменений"><a class="back-to-menu" href="#editor-menu">К разделам ↑</a>
+  <button type="button" id="checkPublication" class="secondary">Проверить обновление сайта</button>
+
+  <button id="saveButton" class="save">
+    Сохранить изменения
+  </button>
+
+  <button id="reloadButton" class="secondary">
+    Обновить данные
+  </button>
+
+  <button id="logoutButton" class="danger">
+    Выйти
+  </button>
 
 </div>
 
-<p class="note">
-Помощь передавалась в <span id="result-cities-text">Мытищи, Королёв, Щёлково,
-Лосино-Петровский, Егорьевск, Орехово-Зуево, Люберцы, Ступино,
-Каширу, Пушкино и Ивантеевку.</span>
+<p class="small">
+  После сохранения изменения записываются в GitHub.
+  GitHub Pages автоматически обновит сайт.
 </p>
 
-</div>
-</section>
-
-
-<section class="section story">
-<div class="container split">
-
-<div>
-<p class="eyebrow">Как это работает</p>
-<h2>От запроса до передачи</h2>
-</div>
-
-<ol class="steps">
-
-<li>
-<b>1</b>
-<span>
-<strong>Получаем запрос</strong>
-Уточняем реальную потребность.
-</span>
-</li>
-
-<li>
-<b>2</b>
-<span>
-<strong>Собираем помощь</strong>
-Работаем с благотворителями и партнёрами.
-</span>
-</li>
-
-<li>
-<b>3</b>
-<span>
-<strong>Формируем груз</strong>
-Сортируем и готовим к отправке.
-</span>
-</li>
-
-<li>
-<b>4</b>
-<span>
-<strong>Доставляем</strong>
-Передаём помощь адресно.
-</span>
-</li>
-
-</ol>
-
-</div>
-</section>
-
-
-<section class="section" aria-labelledby="doroga-dobra-home-title">
-<div class="container">
-<div class="section-head">
-<div>
-<p class="eyebrow">Благотворительная программа</p>
-<h2 id="doroga-dobra-home-title">Дорога добра в прифронтовых районах</h2>
-</div>
-<a class="text-link" href="programs.html">Все программы →</a>
-</div>
-
-<article class="card" style="overflow:hidden;">
-<a href="doroga-dobra.html" aria-label="Подробнее о программе «Дорога добра в прифронтовых районах»">
-<img src="doroga-dobra-cover.webp"
-     alt="Иллюстрация благотворительной программы «Дорога добра в прифронтовых районах» — сбор и доставка гуманитарной помощи"
-     loading="lazy" decoding="async"
-     style="display:block;width:100%;height:auto;border-radius:12px;">
-</a>
-<h3>Продукты и предметы первой необходимости для мирных жителей</h3>
-<p>Собираем продукты длительного хранения, одежду, постельное бельё, пелёнки,
-средства гигиены и ухода для нуждающихся граждан и гражданских учреждений
-ДНР, ЛНР, Курской, Брянской и Белгородской областей.</p>
-<p>Отдельное направление — пожертвования на топливо и доставку гуманитарной помощи.</p>
-<a class="btn btn-ghost" href="doroga-dobra.html">Подробнее о программе →</a>
-</article>
-</div>
-</section>
-
-
-<section class="section">
-<div class="container cta">
-
-<div>
-<p class="eyebrow light-text" id="support-title">Поддержать «Ярило»</p>
-
-<h2>Даже небольшая помощь становится конкретным делом</h2>
-
-<p id="support-text">
-Помочь можно пожертвованием, товарами, транспортом, топливом или доставкой.
-</p>
-</div>
-
-<a class="btn btn-large" href="donate.html">Пожертвовать фонду</a>
-
-</div>
-</section>
-
-
-<section class="section">
-<div class="container section-head">
-
-<div>
-<p class="eyebrow">Прозрачность</p>
-<h2>Документы и отчётность</h2>
-<p class="lead small">Публикуем документы фонда и отчёты о деятельности.</p>
-</div>
-
-<a class="btn btn-ghost" href="reports.html">Смотреть отчётность</a>
-
-</div>
-</section>
-
-
-<section class="section faq-section">
-<div class="container narrow">
-
-<p class="eyebrow">Вопросы</p>
-<h2>Часто спрашивают</h2>
-
-<details>
-<summary>Как помочь фонду?</summary>
-<p>Можно сделать пожертвование, передать необходимые товары, помочь с транспортом, топливом или доставкой.</p>
-</details>
-
-<details>
-<summary>Можно ли передать вещи?</summary>
-<p>Да, если они соответствуют актуальной потребности. Перед передачей лучше связаться с фондом.</p>
-</details>
-
-<details>
-<summary>Где посмотреть отчёты?</summary>
-<p>Учредительные документы и отчётность публикуются в разделе «Отчётность».</p>
-</details>
-
-</div>
 </section>
 
 </main>
 
 
-<footer>
-
-<div class="container footer-main">
-
-<div>
-
-<a class="brand footer-brand" href="/">
-<img class="brand-logo-img" src="logo-yarilo.jpg" alt="Логотип благотворительного фонда Ярило">
-
-<span>
-<b id="footer-short-name">ЯРИЛО</b>
-<small>благотворительный фонд</small>
-</span>
-</a>
-
-<p id="foundation-slogan">Фонд помощи тем, кто попал в беду.</p>
-
-</div>
-
-
-<div>
-<b>Разделы</b>
-<a href="about.html">О фонде</a>
-<a href="help.html">Кому помогаем</a>
-<a href="projects.html">Проекты</a>
-<a href="programs.html">Программы</a>
-<a href="news.html">Новости</a>
-<a href="reports.html">Отчётность</a>
-<a href="requisites.html">Реквизиты</a>
-<a href="contacts.html">Контакты</a>
-</div>
-
-
-<div>
-<b>Связь</b>
-
-<a id="foundation-phone" href="tel:+79660577755">
-+7 966 057-77-55
-</a>
-
-<a href="https://bf-yarilo.ru/">
-bf-yarilo.ru
-</a>
-
-<span id="footer-region">Московская область</span>
-
-</div>
-
-</div>
-
-
-<div class="container footer-bottom">
-
-<span>
-© <span id="year"></span>
-Благотворительный фонд «Ярило»
-</span>
-
-<a href="privacy.html">Политика конфиденциальности</a>
-<a href="reports.html#charter">Устав фонда</a>
-<a href="offer.html">Публичная оферта</a>
-
-</div>
-
-</footer>
-
-
-<script src="site-data.js?v=20260928.12"></script>
-<script src="site-data-loader.js?v=20260928.12"></script>
-
-<script>
-(async function () {
-  await window.yariloDataReady;
-  if (!window.YARILO) return;
-
-  const data = window.YARILO;
-
-  function setText(id, value) {
-    const el = document.getElementById(id);
-    if (el && value !== undefined && value !== null) {
-      el.textContent = value;
-    }
-  }
-
-  setText("foundation-short-name", data.foundation.shortName);
-  setText("footer-short-name", data.foundation.shortName);
-  setText("foundation-name", data.foundation.name);
-  setText("foundation-slogan", data.foundation.slogan);
-  setText("foundation-director", data.foundation.director);
-  setText("foundation-region", data.foundation.region);
-  setText("footer-region", data.foundation.region);
-
-  setText("home-title", data.home.title);
-  setText("home-description", data.home.description);
-
-  setText("mission-title", data.home.missionTitle);
-  setText("mission-text", data.home.missionText);
-
-  setText("about-title", data.home.aboutTitle);
-  setText("about-text", data.home.aboutText);
-
-  setText("result-recipients", data.results.recipients);
-  setText("result-cities", data.results.cities);
-  setText("result-cities-text", data.results.citiesText);
-
-  setText("disabled-title", data.help.disabled.title);
-  setText("disabled-text", data.help.disabled.text);
-
-  setText("rehab-title", data.help.rehab.title);
-  setText("rehab-text", data.help.rehab.text);
-
-  setText("hospitals-title", data.help.hospitals.title);
-  setText("hospitals-text", data.help.hospitals.text);
-
-  setText("crisis-title", data.help.crisis.title);
-  setText("crisis-text", data.help.crisis.text);
-
-  setText("support-title", data.support.title);
-  setText("support-text", data.support.text);
-
-  const phone = document.getElementById("foundation-phone");
-
-  if (phone) {
-    phone.textContent = data.foundation.phone;
-    phone.href = "tel:" + data.foundation.phoneLink;
-  }
-})();
-</script>
-
-<script src="yarilo-model.js?v=20261020.rutube1"></script>
-<script src="script.js"></script>
-<script src="scripts.js?v=20261020.rutube1"></script>
-
+<script src="../yarilo-model.js?v=20261020.audit1"></script>
+<script src="config.js"></script>
+<script src="admin.js?v=20261020.audit1"></script>
 </body>
 </html>
