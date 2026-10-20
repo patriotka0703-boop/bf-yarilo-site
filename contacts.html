@@ -88,7 +88,7 @@ ym(113599500,'init',{
 </p>
 <p>
 <span>Электронная почта</span>
-<a href="mailto:bf.yarilo@yandex.ru">bf.yarilo@yandex.ru</a>
+<a id="contact-email" href="mailto:bf.yarilo@yandex.ru">bf.yarilo@yandex.ru</a>
 </p>
 <p>
 <span>Сайт</span>
@@ -132,7 +132,7 @@ ym(113599500,'init',{
 <div>
 <b>Связь</b>
 <a id="footer-phone" href="tel:+79660577755">+7 966 057-77-55</a>
-<a href="mailto:bf.yarilo@yandex.ru">bf.yarilo@yandex.ru</a>
+<a id="footer-email" href="mailto:bf.yarilo@yandex.ru">bf.yarilo@yandex.ru</a>
 <a href="https://bf-yarilo.ru/">bf-yarilo.ru</a>
 <span id="footer-region">Московская область</span>
 </div>
@@ -161,6 +161,14 @@ ym(113599500,'init',{
   setText("contact-region", data.foundation.region);
   setText("footer-region", data.foundation.region);
   setText("contact-director", data.foundation.director);
+  for (const id of ["contact-email", "footer-email"]) {
+    const link = document.getElementById(id);
+    const email = data.foundation.email || "bf.yarilo@yandex.ru";
+    if (link) {
+      link.textContent = email;
+      link.href = "mailto:" + email;
+    }
+  }
   const contactPhone = document.getElementById("contact-phone");
   const footerPhone = document.getElementById("footer-phone");
   const callButton = document.getElementById("call-button");
