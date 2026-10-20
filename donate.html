@@ -129,39 +129,14 @@ aria-expanded="false"
 
 <main>
 
-<section class="section section-alt donation-bank-first" id="donation-bank">
+<section class="section section-alt donation-bank-first">
 <div class="container">
 <p class="breadcrumbs"><a href="index.html">Главная</a> / Пожертвовать</p>
 <p class="eyebrow">Поддержать фонд</p>
 <h1 class="donate-compact-title">Пожертвовать фонду «ЯРИЛО»</h1>
-<p class="donate-intro">Выберите удобный способ: перевод по банковским реквизитам, QR-код или банковская карта.</p>
-<div class="donation-top-grid">
-<div>
-<h2>Банковские реквизиты</h2>
-<div id="donation-bank-accounts" class="donation-bank-grid"></div>
-<p id="copy-status" role="status" aria-live="polite"></p>
-<a href="requisites.html" class="text-link">Все реквизиты фонда →</a>
-</div>
-<div>
-<div class="donation-qr-card">
-<p class="eyebrow">Помочь с телефона</p>
-<h2>Пожертвование по QR-коду</h2>
-<div id="donation-qr-image" hidden></div>
-<div id="donation-qr-placeholder" class="qr-placeholder"><span aria-hidden="true">↗</span><p>Здесь появится банковский QR-код фонда.</p></div>
-<p id="donation-qr-note">Пока можно сделать перевод по реквизитам ниже.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<section class="section">
-
-<div class="container donate-layout">
-
-
+<p class="donate-intro">Сначала можно воспользоваться QR-кодом или выбрать сумму помощи. Банковские реквизиты фонда находятся ниже на этой странице.</p>
+<div class="donate-layout">
 <div class="donation-box">
-
 <p class="eyebrow">Ваше участие</p>
 <h2>Выберите сумму помощи</h2>
 <p>Каждое пожертвование помогает передать нужные вещи тем, кто их ждёт.</p>
@@ -177,36 +152,48 @@ aria-expanded="false"
 <a id="donation-payment" class="btn btn-large full" href="#donation-bank">Перевести по реквизитам</a>
 <p id="payment-state" class="payment-note">Сейчас доступны пожертвования переводом на расчётный счёт фонда.</p>
 <p id="selected-amount-note" class="payment-note" aria-live="polite"></p>
-
 </div>
 
+<div>
+<div class="donation-qr-card">
+<p class="eyebrow">Помочь с телефона</p>
+<h2>Пожертвование по QR-коду</h2>
+<div id="donation-qr-image" hidden></div>
+<div id="donation-qr-placeholder" class="qr-placeholder"><span aria-hidden="true">↗</span><p>Здесь появится банковский QR-код фонда.</p></div>
+<p id="donation-qr-note">Откройте приложение банка и отсканируйте QR-код. Ниже на странице также указаны банковские реквизиты фонда.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="donation-bank">
+<div class="container donate-layout">
+<div>
+<h2>Банковские реквизиты фонда</h2>
+<div id="donation-bank-accounts" class="donation-bank-grid"></div>
+<p id="copy-status" role="status" aria-live="polite"></p>
+<a href="requisites.html" class="text-link">Все реквизиты фонда →</a>
+</div>
 
 <div class="donate-info">
-
-
-
 <h2>
 Другие способы помочь
 </h2>
 
 <ul class="checklist">
-
 <li>
 Передать необходимые товары
 </li>
-
 <li>
 Помочь с транспортом или доставкой
 </li>
-
 <li>
 Помочь с топливом для поездок
 </li>
-
 <li>
 Стать партнёром фонда
 </li>
-
 </ul>
 
 <a
@@ -218,8 +205,6 @@ href="tel:+79660577755"
 </a>
 
 </div>
-
-
 </div>
 
 </section>
