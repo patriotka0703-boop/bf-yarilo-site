@@ -348,7 +348,10 @@
       'external-video-play';
 
     play.textContent =
-      '▶ Смотреть видео YouTube';
+    play.textContent =
+  external.provider === 'RUTUBE'
+    ? '▶ Смотреть видео RUTUBE'
+    : '▶ Смотреть видео YouTube';
 
     const expand =
       document.createElement('button');
