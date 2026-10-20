@@ -27,7 +27,7 @@ window.YARILO = {
     "historyText1": "Фонд «Ярило» создавался для адресной помощи людям и учреждениям, оказавшимся в трудной ситуации. Мы не ограничиваемся сбором: проверяем потребности, формируем грузы, организуем логистику и передачу.",
     "historyText2": "Одно из важных направлений — помощь детям и взрослым с инвалидностью, реабилитационным центрам и учреждениям, где постоянно нужны расходные материалы, средства ухода и бытовые товары.",
     "historyImage": "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg",
-    "historyVideo": "",
+    "historyVideo": "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2",
     "principlesEyebrow": "Принципы",
     "principlesTitle": "Как мы работаем",
     "principle1Title": "Адресно",
@@ -41,7 +41,9 @@ window.YARILO = {
     "photos": [
       "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg"
     ],
-    "videos": [],
+    "videos": [
+      "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2"
+    ],
     "mediaDescriptions": {
       "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg": "Благотворительной деятельностью мы занимаемся с 2014 года. А официально фонд зарегистрировали в 2024г."
     }
