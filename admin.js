@@ -30,6 +30,15 @@
     if(u.protocol!=='https:'||u.username||u.password||u.port)return null;
     const host=u.hostname.toLowerCase().replace(/^www\./,'');
     let id;
+
+    // RUTUBE: accept a public video link or official embed URL.
+    if(host==='rutube.ru') {
+      const m=u.pathname.match(/^\/(?:video|play\/embed)\/([a-f0-9]{32})\/?$/i);
+      if(!m)return null;
+      id=m[1].toLowerCase();
+      return {provider:'RUTUBE',embed:'https://rutube.ru/play/embed/'+id,url:'https://rutube.ru/video/'+id+'/'};
+    }
+
     if(['youtube.com','m.youtube.com','youtube-nocookie.com','youtu.be'].includes(host)) {
       id=host==='youtu.be'?u.pathname.slice(1):u.pathname==='/watch'?u.searchParams.get('v'):(u.pathname.match(/^\/(?:embed|shorts|live)\/([^/]+)\/?$/)||[])[1];
       if(!/^[A-Za-z0-9_-]{11}$/.test(id||''))return null;
@@ -440,7 +449,7 @@
       const label=element('label',title); label.htmlFor=id;
       const input=element('input'); input.type='file'; input.id=id; input.accept=accept; input.multiple=true;
       input.onchange=()=>stageFiles(container,key,input);
-      const hint=element('p',key==='photos'?'JPG, JPEG, PNG, WEBP. Выберите несколько фото до 40 МБ каждое: крупные снимки автоматически уменьшаются перед загрузкой.':'Видео любого размера храните в ВК или YouTube и добавляйте ссылку ниже. Прямая загрузка MP4/WEBM пока до 20 МБ на файл.','media-hint');
+      const hint=element('p',key==='photos'?'JPG, JPEG, PNG, WEBP. Выберите несколько фото до 40 МБ каждое: крупные снимки автоматически уменьшаются перед загрузкой.':'Большие видео загрузите на RUTUBE и вставьте ссылку ниже. Существующие видео ВК и YouTube сохраняются. Прямая загрузка MP4/WEBM пока до 20 МБ на файл.','media-hint');
       const grid=element('div',undefined,'media-grid'); grid.dataset.mediaList=key;
       group[key].forEach((p,index)=>{
         const card=element('div',undefined,'media-item');
@@ -458,8 +467,8 @@
       container.append(label);
       if(key==='photos')container.append(input,hint);
       if(key==='videos') {
-        for(const provider of ['ВК','YouTube']) {
-          const suffix=provider==='ВК'?'vk':'youtube';
+        for(const provider of ['RUTUBE','ВК','YouTube']) {
+          const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
           const urlLabel=element('label','Видео '+provider);urlLabel.htmlFor=id+'-'+suffix+'-link';
           const url=element('textarea');url.id=id+'-'+suffix+'-link';url.rows=4;url.dataset.videoGroup=groupPath;url.dataset.videoProvider=provider;url.value=videoDrafts.get(draftKey+'-'+provider)||'';url.oninput=()=>{videoDrafts.set(draftKey+'-'+provider,url.value);changed();};
           url.placeholder='Можно добавить много видео '+provider+'. Каждую ссылку или полный код iframe вставляйте с новой строки.';
@@ -467,7 +476,7 @@
           add.onclick=()=>{try{const infos=videoBatch(url.value,provider);const group=getPath(data,groupPath);mergeVideos(group,infos);
             videoDrafts.delete(draftKey+'-'+provider);changed();renderMedia(container);status('Обработано ссылок: '+infos.length+'. Всего видео в разделе: '+group.videos.length+'. Нажмите «Сохранить изменения».');
           }catch(e){status(e.message,'error');}};
-          container.append(urlLabel,url,add,element('p',provider==='ВК'?'Если плеер пишет «Видеофайл не найден», откройте ролик в ВК, выберите «Поделиться → Экспортировать» и вставьте полный код плеера сюда. Повторное добавление обновит ссылку существующего ролика.':'Вставьте ссылку на конкретный ролик YouTube. Автор должен разрешить показ на других сайтах.','media-hint'));
+          container.append(urlLabel,url,add,element('p',provider==='RUTUBE'?'Вставьте ссылку вида https://rutube.ru/video/…/ после обработки ролика на RUTUBE. Видео должно разрешать встраивание.':provider==='ВК'?'Если плеер пишет «Видеофайл не найден», откройте ролик в ВК, выберите «Поделиться → Экспортировать» и вставьте полный код плеера сюда. Повторное добавление обновит ссылку существующего ролика.':'Вставьте ссылку на конкретный ролик YouTube. Автор должен разрешить показ на других сайтах.','media-hint'));
         }
       }
       if(key==='videos'){const files=element('details');files.append(element('summary','Или загрузить небольшой видеофайл'),input,hint);container.append(files);}

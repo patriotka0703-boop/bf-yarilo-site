@@ -88,7 +88,7 @@ ym(113599500,'init',{
 </p>
 <p>
 <span>Электронная почта</span>
-<a id="contact-email" href="mailto:bf.yarilo@yandex.ru">bf.yarilo@yandex.ru</a>
+<a href="mailto:bf.yarilo@yandex.ru">bf.yarilo@yandex.ru</a>
 </p>
 <p>
 <span>Сайт</span>
@@ -133,7 +133,6 @@ ym(113599500,'init',{
 <b>Связь</b>
 <a id="footer-phone" href="tel:+79660577755">+7 966 057-77-55</a>
 <a href="mailto:bf.yarilo@yandex.ru">bf.yarilo@yandex.ru</a>
-<a id="footer-email" href="mailto:bf.yarilo@yandex.ru">bf.yarilo@yandex.ru</a>
 <a href="https://bf-yarilo.ru/">bf-yarilo.ru</a>
 <span id="footer-region">Московская область</span>
 </div>
@@ -162,15 +161,6 @@ ym(113599500,'init',{
   setText("contact-region", data.foundation.region);
   setText("footer-region", data.foundation.region);
   setText("contact-director", data.foundation.director);
-  const contactEmail = document.getElementById("contact-email");
-  const footerEmail = document.getElementById("footer-email");
-  const email = (data.foundation.email || "bf.yarilo@yandex.ru").trim();
-  for (const node of [contactEmail, footerEmail]) {
-    if (node) {
-      node.textContent = email;
-      node.href = "mailto:" + email;
-    }
-  }
   const contactPhone = document.getElementById("contact-phone");
   const footerPhone = document.getElementById("footer-phone");
   const callButton = document.getElementById("call-button");
@@ -185,8 +175,8 @@ ym(113599500,'init',{
   if (callButton) callButton.href = "tel:" + data.foundation.phoneLink;
 })();
 </script>
-<script src="yarilo-model.js?v=20260928.12"></script>
+<script src="yarilo-model.js?v=20261020.rutube1"></script>
 <script src="script.js"></script>
-<script src="scripts.js?v=20260928.12"></script>
+<script src="scripts.js?v=20261020.rutube1"></script>
 </body>
 </html>

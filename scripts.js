@@ -30,6 +30,15 @@
     if(u.protocol!=='https:'||u.username||u.password||u.port)return null;
     const host=u.hostname.toLowerCase().replace(/^www\./,'');
     let id;
+
+    // RUTUBE: accept a public video link or official embed URL.
+    if(host==='rutube.ru') {
+      const m=u.pathname.match(/^\/(?:video|play\/embed)\/([a-f0-9]{32})\/?$/i);
+      if(!m)return null;
+      id=m[1].toLowerCase();
+      return {provider:'RUTUBE',embed:'https://rutube.ru/play/embed/'+id,url:'https://rutube.ru/video/'+id+'/'};
+    }
+
     if(['youtube.com','m.youtube.com','youtube-nocookie.com','youtu.be'].includes(host)) {
       id=host==='youtu.be'?u.pathname.slice(1):u.pathname==='/watch'?u.searchParams.get('v'):(u.pathname.match(/^\/(?:embed|shorts|live)\/([^/]+)\/?$/)||[])[1];
       if(!/^[A-Za-z0-9_-]{11}$/.test(id||''))return null;
