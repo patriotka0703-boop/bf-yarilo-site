@@ -44,7 +44,18 @@
       const hash=u.searchParams.get('hash');if(hash&&/^[a-zA-Z0-9_-]{1,128}$/.test(hash))params.set('hash',hash);
       return {provider:'ВК',embed:'https://vk.ru/video_ext.php?'+params,url:'https://vk.ru/video'+oid+'_'+vid};
     }
-    return null;
+    
+    if (host === 'rutube.ru') {
+      const match = u.pathname.match(/^\/(?:video|play\/embed)\/([a-f0-9-]{36})\/?$/i);
+      if (!match) return null;
+      const id = match[1].toLowerCase();
+      return {
+        provider: 'RUTUBE',
+        embed: 'https://rutube.ru/play/embed/' + id,
+        url: 'https://rutube.ru/video/' + id + '/'
+      };
+    }
+return null;
   }
   function videoElement(value, caption='') {
     const external=externalVideo(value);
@@ -458,8 +469,12 @@
       container.append(label);
       if(key==='photos')container.append(input,hint);
       if(key==='videos') {
-        for(const provider of ['ВК','YouTube']) {
-          const suffix=provider==='ВК'?'vk':'youtube';
+        
+for(const provider of ['RUTUBE','ВК','YouTube']) {
+
+        
+const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
+
           const urlLabel=element('label','Видео '+provider);urlLabel.htmlFor=id+'-'+suffix+'-link';
           const url=element('textarea');url.id=id+'-'+suffix+'-link';url.rows=4;url.dataset.videoGroup=groupPath;url.dataset.videoProvider=provider;url.value=videoDrafts.get(draftKey+'-'+provider)||'';url.oninput=()=>{videoDrafts.set(draftKey+'-'+provider,url.value);changed();};
           url.placeholder='Можно добавить много видео '+provider+'. Каждую ссылку или полный код iframe вставляйте с новой строки.';
