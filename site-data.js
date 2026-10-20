@@ -7,7 +7,8 @@ window.YARILO = {
     "region": "городе Ступино, Московская область",
     "phone": "+79917593068",
     "phoneLink": "+79917593068",
-    "website": "https://bf-yarilo.ru/"
+    "website": "https://bf-yarilo.ru/",
+    "email": "bf.yarilo@yandex.ru"
   },
   "home": {
     "title": "Помогаем тем, кто попал в беду",
