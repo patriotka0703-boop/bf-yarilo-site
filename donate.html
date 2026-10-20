@@ -61,6 +61,19 @@ ym(113599500,'init',{
 }
 </script>
 
+<style>
+.donation-bank-first{padding:30px 0 48px;scroll-margin-top:85px}
+.donate-compact-title{font-size:clamp(30px,4vw,46px);letter-spacing:-.03em;margin:12px 0}
+.donate-intro{font-size:17px;margin:0 0 24px;color:#40504a}
+.donation-top-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(270px,.8fr);gap:22px;align-items:start}
+.donation-top-grid h2{font-size:clamp(23px,3vw,30px);margin:0 0 16px}
+.donation-top-grid .donation-bank-grid{grid-template-columns:1fr;margin-top:0}
+.donation-top-grid .donation-bank-card{padding:20px;margin:0}
+.donation-top-grid .donation-qr-card{margin:0;padding:18px;position:sticky;top:100px}
+.donation-top-grid #donation-qr-image img{width:min(220px,100%);margin:12px auto;padding:6px}
+.donation-top-grid .donation-qr-card h2{font-size:23px}
+@media(max-width:780px){.donation-top-grid{grid-template-columns:1fr}.donation-top-grid .donation-qr-card{position:static}.donation-bank-first{padding:22px 0 35px}}
+</style>
 </head>
 
 
@@ -116,32 +129,31 @@ aria-expanded="false"
 
 <main>
 
-<section class="page-hero donate-hero">
-
-<div class="container narrow">
-
-<p class="breadcrumbs">
-<a href="index.html">Главная</a> / Пожертвовать
-</p>
-
-<p class="eyebrow">
-Поддержать фонд
-</p>
-
-<h1>
-Сделать пожертвование
-</h1>
-
-<p class="lead">
-Ваша поддержка помогает фонду организовывать адресную помощь,
-доставлять необходимые товары и поддерживать тех, кто оказался
-в трудной жизненной ситуации.
-</p>
-
+<section class="section section-alt donation-bank-first" id="donation-bank">
+<div class="container">
+<p class="breadcrumbs"><a href="index.html">Главная</a> / Пожертвовать</p>
+<p class="eyebrow">Поддержать фонд</p>
+<h1 class="donate-compact-title">Пожертвовать фонду «ЯРИЛО»</h1>
+<p class="donate-intro">Выберите удобный способ: перевод по банковским реквизитам, QR-код или банковская карта.</p>
+<div class="donation-top-grid">
+<div>
+<h2>Банковские реквизиты</h2>
+<div id="donation-bank-accounts" class="donation-bank-grid"></div>
+<p id="copy-status" role="status" aria-live="polite"></p>
+<a href="requisites.html" class="text-link">Все реквизиты фонда →</a>
 </div>
-
+<div>
+<div class="donation-qr-card">
+<p class="eyebrow">Помочь с телефона</p>
+<h2>Пожертвование по QR-коду</h2>
+<div id="donation-qr-image" hidden></div>
+<div id="donation-qr-placeholder" class="qr-placeholder"><span aria-hidden="true">↗</span><p>Здесь появится банковский QR-код фонда.</p></div>
+<p id="donation-qr-note">Пока можно сделать перевод по реквизитам ниже.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
-
 
 <section class="section">
 
@@ -171,13 +183,7 @@ aria-expanded="false"
 
 <div class="donate-info">
 
-<div class="donation-qr-card">
-<p class="eyebrow">Помочь с телефона</p>
-<h2>Пожертвование по QR-коду</h2>
-<div id="donation-qr-image" hidden></div>
-<div id="donation-qr-placeholder" class="qr-placeholder"><span aria-hidden="true">↗</span><p>Здесь появится банковский QR-код фонда.</p></div>
-<p id="donation-qr-note">Пока можно сделать перевод по реквизитам ниже.</p>
-</div>
+
 
 <h2>
 Другие способы помочь
@@ -219,16 +225,7 @@ href="tel:+79660577755"
 </section>
 
 
-<section class="section section-alt" id="donation-bank">
-<div class="container">
-<p class="eyebrow">Прямой перевод</p>
-<h2>Реквизиты фонда</h2>
-<p>Можно переводить средства на расчётный счёт фонда по реквизитам.</p>
-<div id="donation-bank-accounts" class="donation-bank-grid"></div>
-<p id="copy-status" role="status" aria-live="polite"></p>
-<a href="requisites.html" class="text-link">Все реквизиты фонда →</a>
-</div>
-</section>
+
 
 <section class="section section-alt">
 
