@@ -380,3 +380,44 @@ img[src*="history-image"] {
 @media (max-width: 600px) {
   #direction-media-section .public-media { grid-template-columns: 1fr; }
 }
+/* YARILO: fixed navigation */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+body {
+  padding-top: 80px;
+}
+
+@media (max-width: 620px) {
+  body {
+    padding-top: 70px;
+  }
+}
+
+html {
+  scroll-padding-top: 100px;
+}
+
+/* YARILO: larger history videos */
+#history-media {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+#history-media .external-video iframe,
+#history-media .external-video-play {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 700px) {
+  #history-media {
+    grid-template-columns: 1fr;
+  }
+}
