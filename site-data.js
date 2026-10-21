@@ -42,7 +42,8 @@ window.YARILO = {
       "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg"
     ],
     "videos": [
-      "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2"
+      "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2",
+      "https://rutube.ru/play/embed/3183aa991a0457b44ffdcee835b53193"
     ],
     "mediaDescriptions": {
       "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg": "Благотворительной деятельностью мы занимаемся с 2014 года. А официально фонд зарегистрировали в 2024г."
