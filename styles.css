@@ -445,3 +445,29 @@ img[src*="history-image"] {
     font-size: 16px;
   }
 }
+/* ЯРИЛО: фотографии и видео на странице О фонде */
+#history-media {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+#history-media .gallery-photo img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+}
+
+#history-media .external-video iframe,
+#history-media .external-video-play {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 700px) {
+  #history-media {
+    grid-template-columns: 1fr;
+  }
+}
