@@ -406,30 +406,7 @@ img[src*="history-image"] {
   }
 }
 
-/* YARILO: показываем фотографии полностью */
-#history-media img {
-  width: 100%;
-  height: auto;
-  max-height: 500px;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-}
 
-/* Фото в разделе О фонде без обрезки */
-#history-media img {
-  width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
-  aspect-ratio: auto !important;
-  object-fit: contain !important;
-}
-
-/* Убираем обрезку контейнера фотографии */
-#history-media .public-media-item:has(img) {
-  height: auto !important;
-  aspect-ratio: auto !important;
-  overflow: visible !important;
 }
 
 /* YARILO: компактные заголовки внутренних страниц */
