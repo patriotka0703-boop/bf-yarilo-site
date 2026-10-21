@@ -405,3 +405,13 @@ img[src*="history-image"] {
     grid-template-columns: 1fr;
   }
 }
+
+/* YARILO: показываем фотографии полностью */
+#history-media img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
