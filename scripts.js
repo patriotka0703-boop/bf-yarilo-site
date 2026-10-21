@@ -428,6 +428,15 @@
       icon.append(svg);a.append(icon,text('span',label));
       links.append(a);
     }
+    const rutube=text('a','','social-link social-rutube');
+    rutube.href='https://rutube.ru/channel/56682149/shorts/';
+    rutube.target='_blank';
+    rutube.rel='noopener noreferrer';
+    rutube.setAttribute('aria-label','RUTUBE фонда ЯРИЛО — открыть в новой вкладке');
+    const rutubeIcon=text('span','▶','social-icon');
+    rutube.append(rutubeIcon,text('span','RUTUBE'));
+    links.append(rutube);
+
     if(links.children.length)footer.append(links);
   }
   document.documentElement.dataset.siteReady='true';
