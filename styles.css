@@ -471,3 +471,19 @@ img[src*="history-image"] {
     grid-template-columns: 1fr;
   }
 }
+/* ЯРИЛО: аккуратная галерея */
+#history-media {
+  margin-top: 36px;
+  margin-bottom: 30px;
+}
+
+#history-media .gallery-photo img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+
+#history-media .media-figure {
+  align-self: start;
+}
