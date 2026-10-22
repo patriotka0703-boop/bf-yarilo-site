@@ -1,202 +1,74 @@
 <!doctype html>
 <html lang="ru">
 <head>
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-(function(m,e,t,r,i,k,a){
-    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j=0; j<document.scripts.length; j++) {
-        if (document.scripts[j].src === r) return;
-    }
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],
-    k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-})(window,document,'script',
-'https://mc.yandex.ru/metrika/tag.js','ym');
-
-ym(113599500,'init',{
-    ssr:true,
-    webvisor:true,
-    clickmap:true,
-    accurateTrackBounce:true,
-    trackLinks:true
-});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/113599500" style="position:absolute;left:-9999px" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Редактор программ — БФ «ЯРИЛО»</title>
+<meta name="robots" content="noindex,nofollow">
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f6f5;color:#17231f}
-header{background:#10251f;color:#fff;padding:20px}
-main{max-width:1000px;margin:auto;padding:35px 20px 60px}
-.panel{background:#fff;border-radius:16px;padding:24px;margin-bottom:24px;box-shadow:0 6px 24px rgba(0,0,0,.07)}
-h1{margin-top:0}
-label{display:block;font-weight:700;margin-top:14px}
-input,textarea{width:100%;padding:12px 14px;margin-top:6px;border:1px solid #cbd4d0;border-radius:9px;font:inherit}
-textarea{min-height:100px;resize:vertical}
-button,.btn{display:inline-block;margin:14px 8px 0 0;padding:12px 18px;border:0;border-radius:9px;background:#10251f;color:#fff;font-weight:700;cursor:pointer;text-decoration:none}
-.secondary{background:#fff;color:#10251f;border:2px solid #10251f}
-.danger{background:#7b1e1e}
-.card{border-top:1px solid #e5e8e7;padding:18px 0}
-.small{font-size:14px;color:#59645f}
-code{background:#eef1ef;padding:2px 5px;border-radius:4px}
+*{box-sizing:border-box}body{margin:0;background:#f4f6f5;color:#17231f;font:16px/1.55 Arial,sans-serif}header{background:#10251f;color:white;padding:20px}main{max-width:1010px;margin:auto;padding:28px 16px 60px}.panel{background:white;border-radius:16px;padding:24px;margin-bottom:22px;box-shadow:0 6px 24px #0000000d}h1{margin-top:0}label{display:block;font-weight:bold;margin:14px 0 4px}input,textarea{width:100%;padding:11px 12px;border:1px solid #bfcac4;border-radius:8px;font:inherit}textarea{min-height:100px}button,.btn{border:0;border-radius:9px;background:#10251f;color:#fff;padding:12px 16px;font-weight:bold;cursor:pointer;display:inline-block;margin:8px 6px 4px 0;text-decoration:none}button.secondary,.btn.secondary{background:#fff;color:#10251f;border:2px solid #10251f;padding:10px 14px}button.danger{background:#7b1e1e}.card{padding:18px 0;border-top:1px solid #dfe6e0}.small{font-size:14px;color:#52635a}.status{border-radius:10px;padding:14px 16px;margin:14px 0;background:#fff5d8}.status.ok{background:#e5f4e8}.status.bad{background:#ffdddd}.actions{display:flex;flex-wrap:wrap;gap:4px}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.hidden{display:none}code{background:#edf1ee;padding:2px 5px;border-radius:5px}a{color:#145b40}@media(max-width:650px){.row{grid-template-columns:1fr}.panel{padding:16px}}
 </style>
 </head>
 <body>
-<header><strong>БФ «ЯРИЛО» — редактор программ</strong></header>
+<header><strong>БФ «ЯРИЛО» — редактор благотворительных программ</strong></header>
 <main>
-  <div class="panel">
-    <h1>Добавить программу</h1>
-    <p class="small">Этот редактор не отправляет данные в GitHub автоматически. Он создаёт новый файл <code>programs.json</code>. После скачивания замените им старый файл в GitHub.</p>
-
-    <label>Название программы</label>
-    <input id="title">
-
-    <label>Краткое описание</label>
-    <textarea id="description"></textarea>
-
-    <label>Дополнительная информация</label>
-    <textarea id="details" placeholder="Например: срок программы, номер и дата протокола"></textarea>
-
-    <label>Ссылка на отдельную страницу программы</label>
-    <input id="page" placeholder="/nazvanie-programmy.html">
-
-    <label>Ссылка на PDF программы</label>
-    <input id="pdf" placeholder="/programma.pdf">
-
-    <label>Ссылка на PDF протокола</label>
-    <input id="protocol" placeholder="/protokol.pdf">
-
-    <label>Ссылка на пожертвование</label>
-    <input id="donate" value="/donate.html">
-
-    <label>Ссылка на изображение</label>
-    <input id="image" placeholder="/photo.jpg">
-
-    <button id="add">Добавить программу</button>
-    <button id="clear" class="secondary">Очистить поля</button>
-  </div>
-
-  <div class="panel">
-    <h2>Программы</h2>
-    <div id="list"></div>
-    <button id="download">Скачать новый programs.json</button>
-    <a class="btn secondary" href="/programs.html">Открыть страницу программ</a>
-  </div>
+<section class="panel">
+<h1>Управление программами</h1>
+<p>Сайт работает на GitHub Pages. Он не может сам записывать файлы на GitHub без отдельной защищённой авторизации. Поэтому здесь предусмотрены <strong>автосохранение черновика</strong>, скачивание готового <code>programs.json</code> и <strong>проверка публикации</strong>. Сообщение об успешной публикации появится только после фактической проверки файла на сайте.</p>
+<div id="status" class="status" role="status" aria-live="polite">Загружаем программы…</div>
+<div class="actions">
+<button type="button" id="check" class="secondary">Проверить публикацию</button>
+<button type="button" id="download">Скачать programs.json</button>
+<a class="btn secondary" href="/programs.html" target="_blank" rel="noopener">Посмотреть программы на сайте</a>
+</div>
+<p class="small">После скачивания откройте файл <code>programs.json</code> в репозитории GitHub, замените его содержимое и нажмите <strong>Commit changes</strong>. Затем нажмите «Проверить публикацию» здесь. Черновик сохраняется только в этом браузере.</p>
+</section>
+<section class="panel">
+<h2 id="form-heading">Добавить программу</h2>
+<label for="title">Название программы *</label><input id="title" required maxlength="180">
+<label for="description">Краткое описание</label><textarea id="description"></textarea>
+<label for="details">Дополнительная информация</label><textarea id="details" placeholder="Срок программы, протокол, бюджет (если утверждён)"></textarea>
+<div class="row"><div><label for="page">Страница программы</label><input id="page" placeholder="/nazvanie.html"></div><div><label for="image">Изображение</label><input id="image" placeholder="/uploads/foto.webp"></div></div>
+<div class="row"><div><label for="pdf">PDF программы</label><input id="pdf" placeholder="/programma.pdf"></div><div><label for="protocol">PDF протокола</label><input id="protocol" placeholder="/protokol.pdf"></div></div>
+<label for="donate">Ссылка для поддержки</label><input id="donate" value="/donate.html">
+<div class="actions"><button id="save" type="button">Добавить программу в черновик</button><button class="secondary" id="clear" type="button">Очистить поля</button></div>
+</section>
+<section class="panel"><h2>Программы в редакторе</h2><p class="small">Удаление и изменение здесь сначала затрагивают только черновик, а не опубликованный сайт.</p><div id="list"></div>
+<button id="download2" type="button">Скачать programs.json</button>
+<button id="restore" class="secondary" type="button">Отменить черновик и загрузить с сайта</button>
+</section>
 </main>
-
 <script>
-let programs = [];
-
-function esc(s){
-  return String(s || "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-}
-
-function load(){
-  fetch('/programs.json?ts=' + Date.now())
-    .then(r => r.ok ? r.json() : [])
-    .then(data => { programs = Array.isArray(data) ? data : []; render(); })
-    .catch(() => { programs = []; render(); });
-}
-
-function render(){
-  const list = document.getElementById('list');
-  if(!programs.length){
-    list.innerHTML = '<p>Пока программ нет.</p>';
-    return;
-  }
-  list.innerHTML = programs.map((p,i)=>`
-    <div class="card">
-      <b>${esc(p.title)}</b>
-      <div class="small">${esc(p.description || '')}</div>
-      <button class="secondary" onclick="editItem(${i})">Изменить</button>
-      <button class="danger" onclick="removeItem(${i})">Удалить</button>
-      <button class="secondary" onclick="moveUp(${i})">↑</button>
-      <button class="secondary" onclick="moveDown(${i})">↓</button>
-    </div>
-  `).join('');
-}
-
-function getForm(){
-  return {
-    title: document.getElementById('title').value.trim(),
-    description: document.getElementById('description').value.trim(),
-    details: document.getElementById('details').value.trim(),
-    page: document.getElementById('page').value.trim(),
-    pdf: document.getElementById('pdf').value.trim(),
-    protocol: document.getElementById('protocol').value.trim(),
-    donate: document.getElementById('donate').value.trim(),
-    image: document.getElementById('image').value.trim()
-  };
-}
-
-function setForm(p={}){
-  ['title','description','details','page','pdf','protocol','donate','image'].forEach(k=>{
-    document.getElementById(k).value = p[k] || (k==='donate' ? '/donate.html' : '');
-  });
-}
-
-let editIndex = null;
-
-document.getElementById('add').onclick = () => {
-  const p = getForm();
-  if(!p.title){ alert('Введите название программы'); return; }
-  if(editIndex === null) programs.push(p);
-  else { programs[editIndex] = p; editIndex = null; document.getElementById('add').textContent='Добавить программу'; }
-  setForm();
-  render();
-};
-
-document.getElementById('clear').onclick = () => {
-  editIndex = null;
-  setForm();
-  document.getElementById('add').textContent='Добавить программу';
-};
-
-window.editItem = i => {
-  editIndex = i;
-  setForm(programs[i]);
-  document.getElementById('add').textContent='Сохранить изменения';
-  window.scrollTo({top:0,behavior:'smooth'});
-};
-
-window.removeItem = i => {
-  if(confirm('Удалить эту программу из списка?')){
-    programs.splice(i,1);
-    render();
-  }
-};
-
-window.moveUp = i => {
-  if(i<=0) return;
-  [programs[i-1],programs[i]]=[programs[i],programs[i-1]];
-  render();
-};
-
-window.moveDown = i => {
-  if(i>=programs.length-1) return;
-  [programs[i+1],programs[i]]=[programs[i],programs[i+1]];
-  render();
-};
-
-document.getElementById('download').onclick = () => {
-  const blob = new Blob([JSON.stringify(programs,null,2)], {type:'application/json;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'programs.json';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-};
-
-load();
+'use strict';
+const DRAFT_KEY='yarilo-programs-draft-v2';
+const fields=['title','description','details','page','pdf','protocol','donate','image'];
+let programs=[], editIndex=null, baseline=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const clean=p=>Object.fromEntries(fields.map(k=>[k,String(p?.[k]??'').trim()]));
+const normalize=a=>a.map(clean);
+const serialize=a=>JSON.stringify(normalize(a));
+function status(s,t=''){ $('status').className='status'+(t?' '+t:'');$('status').textContent=s; }
+function saveDraft(){try{localStorage.setItem(DRAFT_KEY,JSON.stringify(programs));}catch(e){status('Внимание: браузер не смог сохранить резервный черновик. Скачайте programs.json.','bad');}}
+function dirty(){return baseline===null||serialize(programs)!==serialize(baseline)}
+function refreshStatus(){if(baseline===null){status('Данные сайта не загружены: работаем с локальным черновиком. Проверьте подключение.','bad');return;}
+if(dirty())status('Есть неопубликованные изменения. Скачайте programs.json, замените файл в GitHub и проверьте публикацию.');
+else status('Черновик совпадает с опубликованным programs.json.','ok');}
+function render(){ $('list').innerHTML=programs.length?programs.map((p,i)=>`<div class="card"><b>${i+1}. ${esc(p.title)}</b><div class="small">${esc(p.description)}</div><div class="actions"><button class="secondary" type="button" data-op="edit" data-i="${i}">Изменить</button><button class="danger" type="button" data-op="delete" data-i="${i}">Удалить</button><button class="secondary" type="button" data-op="up" data-i="${i}" ${i===0?'disabled':''}>↑</button><button class="secondary" type="button" data-op="down" data-i="${i}" ${i===programs.length-1?'disabled':''}>↓</button></div></div>`).join(''):'<p>Программ нет.</p>';refreshStatus();}
+function getForm(){return clean(Object.fromEntries(fields.map(k=>[k,$(k).value])))}
+function setForm(p={}){for(const k of fields)$(k).value=p[k]??(k==='donate'?'/donate.html':'')}
+function resetForm(){editIndex=null;setForm();$('save').textContent='Добавить программу в черновик';$('form-heading').textContent='Добавить программу'}
+function validate(p){if(!p.title){alert('Введите название программы.');$('title').focus();return false}for(const k of ['page','pdf','protocol','donate','image']){if(p[k]&&!/^\/(?!\/)[^\s]*$/.test(p[k])&&!/^https:\/\/[^\s]+$/i.test(p[k])){alert('Проверьте поле «'+k+'»: укажите путь /file.html или ссылку https://…');$(k).focus();return false}}return true}
+$('save').onclick=()=>{const p=getForm();if(!validate(p))return;const duplicate=programs.findIndex((x,i)=>i!==editIndex&&x.title.toLowerCase()===p.title.toLowerCase());if(duplicate!==-1){alert('Программа с таким названием уже существует. Используйте «Изменить».');return}if(editIndex===null)programs.push(p);else programs[editIndex]=p;saveDraft();resetForm();render();};
+$('clear').onclick=resetForm;
+$('list').onclick=e=>{const b=e.target.closest('button[data-op]');if(!b)return;const i=Number(b.dataset.i),op=b.dataset.op;if(op==='edit'){editIndex=i;setForm(programs[i]);$('save').textContent='Сохранить в черновик';$('form-heading').textContent='Редактировать программу';window.scrollTo({top:0,behavior:'smooth'});return}if(op==='delete'){if(!confirm('Удалить «'+programs[i].title+'» из черновика?'))return;programs.splice(i,1)}if(op==='up'&&i>0)[programs[i],programs[i-1]]=[programs[i-1],programs[i]];if(op==='down'&&i<programs.length-1)[programs[i],programs[i+1]]=[programs[i+1],programs[i]];saveDraft();render()};
+async function siteData(){const r=await fetch('/programs.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();if(!Array.isArray(data)||data.some(p=>!p||typeof p.title!=='string'))throw Error('Неверный формат programs.json');return normalize(data)}
+$('check').onclick=async()=>{try{const remote=await siteData();baseline=remote;if(serialize(remote)===serialize(programs)){localStorage.removeItem(DRAFT_KEY);status('Проверено: programs.json на сайте совпадает с редактором. Изменения опубликованы.','ok')}else status('Проверено: программы на сайте отличаются от черновика. Нужно опубликовать programs.json или дождаться обновления GitHub Pages.');}catch(e){status('Не удалось проверить опубликованный файл: '+e.message,'bad')}};
+async function restore(){if(!confirm('Удалить локальный черновик и загрузить список с сайта?'))return;try{const remote=await siteData();baseline=remote;programs=remote;localStorage.removeItem(DRAFT_KEY);resetForm();render()}catch(e){status('Не удалось загрузить список. Черновик не удалён: '+e.message,'bad')}}
+$('restore').onclick=restore;
+function download(){if(!programs.length&&!confirm('Список пуст. Вы уверены, что хотите скачать пустой programs.json?'))return;const blob=new Blob([JSON.stringify(programs,null,2)+'\n'],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='programs.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);status('Файл programs.json скачан. Это НЕ публикация. Замените файл в GitHub и затем проверьте публикацию.');}
+$('download').onclick=download;$('download2').onclick=download;
+(async()=>{let draft=null;try{const raw=localStorage.getItem(DRAFT_KEY);if(raw){const parsed=JSON.parse(raw);if(Array.isArray(parsed))draft=normalize(parsed)}}catch(e){}try{baseline=await siteData();programs=draft??baseline;render();if(draft&&dirty())status('Восстановлен неопубликованный черновик из этого браузера. Не забудьте скачать и опубликовать programs.json.')}catch(e){if(draft){programs=draft;render();status('Сайт недоступен: восстановлен локальный черновик.','bad')}else{programs=[];render();status('Не получилось загрузить programs.json. Не добавляйте новые программы, пока не восстановится загрузка: '+e.message,'bad');$('save').disabled=true}}})();
 </script>
 </body>
 </html>
