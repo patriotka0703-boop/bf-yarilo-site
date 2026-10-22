@@ -406,6 +406,7 @@ img[src*="history-image"] {
   }
 }
 
+
 /* YARILO: компактные заголовки внутренних страниц */
 .page-hero {
   padding-top: 38px;
@@ -485,22 +486,14 @@ img[src*="history-image"] {
   align-self: start;
 }
 
-/* YARILO: убираем большой пустой промежуток после заголовка внутренних страниц.
-   Коррекция только первого содержательного раздела, остальные секции не трогаем. */
-.page-hero + .section {
-  padding-top: 30px;
-}
-.page-hero + .section .cards {
-  margin-top: 20px;
-}
+/* ЯРИЛО: уменьшение пустого промежутка сразу под заголовком страницы */
+.page-hero + .section { padding-top: 30px; }
+.page-hero + .section .cards { margin-top: 20px; }
 @media (max-width: 620px) {
-  .page-hero + .section {
-    padding-top: 22px;
-  }
+  .page-hero + .section { padding-top: 22px; }
 }
 
-
-/* YARILO: фиксированный размер логотипа во всех шапках и подвалах */
+/* ЯРИЛО: защита логотипа от растягивания */
 .site-header .brand-logo-img,
 .footer-brand .brand-logo-img {
   display: block;
