@@ -1,0 +1,16 @@
+[
+  {
+    "type": "photo",
+    "src": "media/hospitals/photo-001.jpg",
+    "title": "Передача помощи",
+    "date": "2026-10-22",
+    "description": "Описание подтверждённого события"
+  },
+  {
+    "type": "video",
+    "src": "https://rutube.ru/video/ЗАМЕНИТЕ_НА_ССЫЛКУ/",
+    "title": "Видеоотчёт о поездке",
+    "date": "2026-10-22",
+    "description": "Подробности поездки"
+  }
+]
