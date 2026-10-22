@@ -1967,19 +1967,15 @@
     }
   }
 
+
+  // Используем старые данные только как запасной вариант.
   if (fallback) {
-    window.YARILO =
-      window.YariloModel.normalize(
-        fallback
-      );
+    window.YARILO = window.YariloModel.normalize(fallback);
+  }
 
-    window.yariloDataReady =
-      Promise.resolve(
-        window.YARILO
-      );
+  // Каждый раз проверяем актуальные опубликованные данные.
+  window.yariloDataReady = refresh();
+})();
 
-  } else {
-    window.yariloDataReady =
-      refresh();
   }
 })();
