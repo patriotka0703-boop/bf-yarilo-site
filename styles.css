@@ -157,4 +157,17 @@
 .hero {
   padding-bottom: 30px;
 }
+
 .hero + .directions-section {
+  padding-top: 30px;
+}
+
+@media (max-width: 620px) {
+  .hero {
+    padding-bottom: 20px;
+  }
+
+  .hero + .directions-section {
+    padding-top: 20px;
+  }
+}
