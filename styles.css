@@ -504,32 +504,3 @@ img[src*="history-image"] {
   object-fit: contain !important;
   flex-shrink: 0;
 }
-
-/* ЯРИЛО: исправление верхнего блока главной страницы */
-.hero-grid {
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
-  gap: 36px;
-}
-
-.hero-grid > * {
-  min-width: 0;
-}
-
-.hero-cover {
-  width: 100%;
-  max-width: 100%;
-}
-
-.hero-cover img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
-
-@media (max-width: 940px) {
-  .hero-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-  }
-}
