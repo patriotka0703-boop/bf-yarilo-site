@@ -122,51 +122,139 @@
 </section>
 
 
-<section class="section">
-<div class="container">
 
-<div class="section-head">
-<div>
-<h2>Направления помощи</h2>
-</div>
-<a class="text-link" href="help.html">Все направления →</a>
-</div>
+<section class="section directions-section">
+  <div class="container">
 
-<div class="cards">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Наши добрые дела</p>
+        <h2>Направления помощи</h2>
+      </div>
+      <a class="text-link" href="help.html">
+        Все направления →
+      </a>
+    </div>
 
-<article class="card direction-card">
-<span class="icon">♿</span>
-<h3 id="disabled-title">Дети и взрослые с инвалидностью</h3>
-<p id="disabled-text">Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.</p>
-<a class="more" href="help-disabled.html">Подробнее →</a>
-</article>
+    <div class="cards directions-grid">
 
-<article class="card direction-card">
-<span class="icon">❤</span>
-<h3 id="rehab-title">Реабилитационные центры</h3>
-<p id="rehab-text">Подарки, предметы ухода и необходимые расходные материалы.</p>
-<a class="more" href="help-rehab.html">Подробнее →</a>
-</article>
+      <a class="card direction-card" href="help-disabled.html">
+        <span class="direction-icon">♿</span>
+        <h3 id="disabled-title">Помощь детям и взрослым с инвалидностью</h3>
+        <p id="disabled-text">Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.</p>
+        <span class="direction-more">Подробнее →</span>
+      </a>
 
-<article class="card direction-card">
-<span class="icon">✚</span>
+      <a class="card direction-card" href="help-rehab.html">
+        <span class="direction-icon">❤</span>
+        <h3 id="rehab-title">Реабилитационные центры</h3>
+        <p id="rehab-text">Подарки, предметы ухода и необходимые расходные материалы.</p>
+        <span class="direction-more">Подробнее →</span>
+      </a>
 
-<h3 id="hospitals-title">Больницы прифронтовых и приграничных районов</h3>
-<p id="hospitals-text">Помогаем больницам, оказывающим медицинскую помощь мирным жителям, в том числе пострадавшим от боевых действий. Передаём постельное бельё, средства гигиены и необходимые вещи.</p>
+      <a class="card direction-card" href="help-hospitals.html">
+        <span class="direction-icon">✚</span>
+        <h3 id="hospitals-title">Помощь больницам</h3>
+        <p id="hospitals-text">Постельное бельё, средства гигиены и необходимые вещи.</p>
+        <span class="direction-more">Подробнее →</span>
+      </a>
 
-<a class="more" href="help-hospitals.html">Подробнее →</a>
-</article>
+      <a class="card direction-card" href="help-crisis.html">
+        <span class="direction-icon">⌂</span>
+        <h3 id="crisis-title">Помощь людям в трудной ситуации</h3>
+        <p id="crisis-text">Одежда, предметы первой необходимости и адресная поддержка.</p>
+        <span class="direction-more">Подробнее →</span>
+      </a>
 
-<article class="card direction-card">
-<span class="icon">⌂</span>
-<h3 id="crisis-title">Люди в трудной ситуации</h3>
-<p id="crisis-text">Одежда, предметы первой необходимости и адресная поддержка.</p>
-<a class="more" href="help-crisis.html">Подробнее →</a>
-</article>
-
-</div>
-</div>
+    </div>
+  </div>
 </section>
+
+<style>
+.directions-section .directions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.directions-section .direction-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 30px 25px;
+  border: 1px solid #e4ddce;
+  border-radius: 22px;
+  background: #fff;
+  color: #10251f;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.directions-section .direction-card:hover {
+  transform: translateY(-6px);
+  border-color: #c18a08;
+  box-shadow: 0 14px 32px rgba(16,37,31,.12);
+}
+
+.directions-section .direction-card:focus-visible {
+  outline: 3px solid #c18a08;
+  outline-offset: 4px;
+}
+
+.directions-section .direction-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  background: #faf2dc;
+  color: #bd8900;
+  font-size: 30px;
+}
+
+.directions-section .direction-card h3 {
+  margin: 0 0 18px;
+  color: #10251f;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+}
+
+.directions-section .direction-card p {
+  margin: 0 0 24px;
+  color: #46564e;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.directions-section .direction-more {
+  margin-top: auto;
+  color: #ad7a00;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.directions-section .direction-card:hover .direction-more {
+  color: #10251f;
+}
+
+@media (max-width: 1000px) {
+  .directions-section .directions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .directions-section .directions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
 
 
 <section class="section" aria-labelledby="geography-title">
