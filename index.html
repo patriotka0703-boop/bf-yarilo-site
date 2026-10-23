@@ -136,45 +136,49 @@
       </a>
     </div>
 
-    <div class="cards directions-grid">
+   
+<div class="cards directions-grid">
 
-      <a class="card direction-card" href="help-disabled.html">
-        <span class="direction-icon">♿</span>
-        <h3 id="disabled-title">Помощь детям и взрослым с инвалидностью</h3>
-        <p id="disabled-text">Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.</p>
-        <span class="direction-more">Подробнее →</span>
-      </a>
+  <a class="card direction-card" href="help-disabled.html">
+    <span class="direction-icon disability-icon">♿</span>
+    <h3>Помощь детям и взрослым с инвалидностью</h3>
+    <p>Средства ухода, пелёнки, подгузники, матрасы и бытовая химия.</p>
+    <span class="direction-more">Подробнее →</span>
+  </a>
 
-      <a class="card direction-card" href="help-rehab.html">
-        <span class="direction-icon">❤</span>
-        <h3 id="rehab-title">Реабилитационные центры</h3>
-        <p id="rehab-text">Подарки, предметы ухода и необходимые расходные материалы.</p>
-        <span class="direction-more">Подробнее →</span>
-      </a>
+  <a class="card direction-card" href="doroga-dobra.html">
+    <span class="direction-icon heart-icon">♥</span>
+    <h3>Помощь мирным жителям прифронтовых районов</h3>
+    <p>Продукты, одежда, предметы первой необходимости, средства гигиены и адресная поддержка.</p>
+    <span class="direction-more">Подробнее →</span>
+  </a>
 
-      <a class="card direction-card" href="help-hospitals.html">
-        <span class="direction-icon">✚</span>
-        <h3 id="hospitals-title">Помощь больницам</h3>
-        <p id="hospitals-text">Постельное бельё, средства гигиены и необходимые вещи.</p>
-        <span class="direction-more">Подробнее →</span>
-      </a>
+  <a class="card direction-card" href="help-hospitals.html">
+    <span class="direction-icon medical-icon">✚</span>
+    <h3>Помощь больницам</h3>
+    <p>Постельное бельё, средства гигиены, медицинские принадлежности и необходимые вещи.</p>
+    <span class="direction-more">Подробнее →</span>
+  </a>
 
-      <a class="card direction-card" href="help-crisis.html">
-        <span class="direction-icon">⌂</span>
-        <h3 id="crisis-title">Помощь людям в трудной ситуации</h3>
-        <p id="crisis-text">Одежда, предметы первой необходимости и адресная поддержка.</p>
-        <span class="direction-more">Подробнее →</span>
-      </a>
+  <a class="card direction-card" href="programs.html">
+    <span class="direction-icon military-icon">🛡️</span>
+    <h3>Помощь фронту</h3>
+    <p>Поддержка военнослужащих необходимыми вещами и средствами для выполнения задач.</p>
+    <span class="direction-more">Подробнее →</span>
+  </a>
 
-    </div>
+</div>
+
   </div>
+
 </section>
 
 <style>
 .directions-section .directions-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  gap: 22px;
+  align-items: stretch;
 }
 
 .directions-section .direction-card {
@@ -182,67 +186,84 @@
   flex-direction: column;
   align-items: flex-start;
   min-width: 0;
-  padding: 30px 25px;
-  border: 1px solid #e4ddce;
-  border-radius: 22px;
+  padding: 30px 26px;
   background: #fff;
+  border: 1px solid #e8dfcc;
+  border-radius: 24px;
   color: #10251f;
   text-decoration: none;
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  transition: transform .25s ease,
+              box-shadow .25s ease,
+              border-color .25s ease;
 }
 
 .directions-section .direction-card:hover {
   transform: translateY(-6px);
   border-color: #c18a08;
-  box-shadow: 0 14px 32px rgba(16,37,31,.12);
+  box-shadow: 0 15px 35px rgba(16,37,31,.12);
 }
 
 .directions-section .direction-card:focus-visible {
-  outline: 3px solid #c18a08;
+  outline: 3px solid #bd8900;
   outline-offset: 4px;
 }
 
 .directions-section .direction-icon {
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  margin-bottom: 24px;
-  border-radius: 16px;
-  background: #faf2dc;
-  color: #bd8900;
-  font-size: 30px;
+  align-items: center;
+  width: 82px;
+  height: 82px;
+  margin-bottom: 28px;
+  border-radius: 22px;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.directions-section .disability-icon {
+  background: #e9f2ff;
+  color: #0876e8;
+}
+
+.directions-section .heart-icon {
+  background: #fff0f0;
+  color: #e42d39;
+}
+
+.directions-section .medical-icon {
+  background: #fff0f0;
+  color: #e42d39;
+}
+
+.directions-section .military-icon {
+  background: #faf3e3;
+  color: #b88a16;
 }
 
 .directions-section .direction-card h3 {
-  margin: 0 0 18px;
-  color: #10251f;
+  margin: 0 0 22px;
   font-size: 21px;
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.35;
+  color: #10251f;
   overflow-wrap: break-word;
 }
 
 .directions-section .direction-card p {
-  margin: 0 0 24px;
-  color: #46564e;
+  margin: 0 0 30px;
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.75;
+  color: #40544c;
 }
 
 .directions-section .direction-more {
   margin-top: auto;
-  color: #ad7a00;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 800;
+  color: #b88600;
 }
 
-.directions-section .direction-card:hover .direction-more {
-  color: #10251f;
-}
-
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
   .directions-section .directions-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -254,6 +275,8 @@
   }
 }
 </style>
+
+
 
 
 
@@ -578,17 +601,7 @@ bf-yarilo.ru
   setText("result-cities", data.results.cities);
   setText("result-cities-text", data.results.citiesText);
 
-  setText("disabled-title", data.help.disabled.title);
-  setText("disabled-text", data.help.disabled.text);
 
-  setText("rehab-title", data.help.rehab.title);
-  setText("rehab-text", data.help.rehab.text);
-
-  setText("hospitals-title", data.help.hospitals.title);
-  setText("hospitals-text", data.help.hospitals.text);
-
-  setText("crisis-title", data.help.crisis.title);
-  setText("crisis-text", data.help.crisis.text);
 
   setText("support-title", data.support.title);
   setText("support-text", data.support.text);
