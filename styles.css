@@ -504,3 +504,22 @@ img[src*="history-image"] {
   object-fit: contain !important;
   flex-shrink: 0;
 }
+
+/* ЯРИЛО: убираем лишнее пространство между блоками */
+main > .hero {
+  padding-bottom: 12px;
+}
+
+main > .hero + .directions-section {
+  padding-top: 24px;
+}
+
+@media (max-width: 620px) {
+  main > .hero {
+    padding-bottom: 12px;
+  }
+
+  main > .hero + .directions-section {
+    padding-top: 18px;
+  }
+}
