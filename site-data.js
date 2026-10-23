@@ -26,7 +26,7 @@ window.YARILO = {
     "historyTitle": "Наша работа — довести помощь до получателя",
     "historyText1": "Фонд «Ярило» создавался для адресной помощи людям и учреждениям, оказавшимся в трудной ситуации. Мы не ограничиваемся сбором: проверяем потребности, формируем грузы, организуем логистику и передачу.",
     "historyText2": "Одно из важных направлений — помощь детям и взрослым с инвалидностью, реабилитационным центрам и учреждениям, где постоянно нужны расходные материалы, средства ухода и бытовые товары.",
-    "historyImage": "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg",
+    "historyImage": "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg,uploads/admin-0af4d570-8c80-4c4d-a479-3ac8f8943bcc.webp",
     "historyVideo": "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2",
     "principlesEyebrow": "Принципы",
     "principlesTitle": "Как мы работаем",
@@ -39,7 +39,8 @@ window.YARILO = {
     "ctaTitle": "Хотите помочь?",
     "ctaText": "Поддержите работу фонда удобным способом.",
     "photos": [
-      "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg"
+      "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg",
+      "uploads/admin-0af4d570-8c80-4c4d-a479-3ac8f8943bcc.webp"
     ],
     "videos": [
       "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2",
