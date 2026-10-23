@@ -26,6 +26,37 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="styles.css?v=20261011.2">
 
+<style>
+.mobile-donate-btn {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .hero .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .hero .actions .mobile-donate-btn {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg,#dfa915,#ae7700);
+    color: #ffffff;
+    border: 2px solid #e5b32d;
+    border-radius: 30px;
+  }
+
+  .hero .actions > a {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
+</style>
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Благотворительный фонд «ЯРИЛО»">
 <meta property="og:title" content="Благотворительный фонд «ЯРИЛО» — помощь нуждающимся | Ступино">
@@ -94,22 +125,25 @@
 медицинским учреждениям и людям, оказавшимся в трудной жизненной ситуации.
 </p>
 
-<div class="actions">
 
+<div class="actions">
+  <a href="donate.html"
+     class="btn btn-large mobile-donate-btn">
+    Пожертвовать
+  </a>
+
+  <a class="btn btn-large"
+     href="donate.html#monthly-donations"
+     style="
+       background:linear-gradient(180deg,#22834d,#105532);
+       border:2px solid #e8b52c;
+       color:#ffffff;
+       box-shadow:0 5px 14px rgba(16,85,50,.25);
+     ">
+    ♥ Оформить подписку
+  </a>
 </div>
 
-<a
-  class="btn btn-large"
-  href="donate.html#monthly-donations"
-  style="
-    background:linear-gradient(180deg,#22834d,#105532);
-    border:2px solid #e8b52c;
-    color:#ffffff;
-    box-shadow:0 5px 14px rgba(16,85,50,.25);
-  "
->
-  ♥ Оформить подписку
-</a>
 
 <div class="micro-trust">
 <span>✓ Адресная помощь</span>
