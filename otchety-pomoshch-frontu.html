@@ -13,20 +13,87 @@ ym(113599500,'init',{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:tr
 </style></head><body><header class="top"><div class="wrap top-inner"><a class="brand report-brand" href="/" aria-label="Благотворительный фонд ЯРИЛО — главная">
   <img class="report-brand-logo" src="logo-yarilo.jpg" width="52" height="52" alt="Логотип БФ ЯРИЛО">
   <span class="report-brand-name">ЯРИЛО<small>Благотворительный фонд</small></span>
-</a><nav class="nav"><a href="/">Главная</a><a href="projects.html">Проекты</a><a href="pomoshch-frontu.html">Помощь фронту</a><a href="pomoshch-gospitalyam.html">Помощь госпиталям</a><a href="reports.html">Отчётность</a><a href="donate.html">Пожертвовать</a></nav></div></header><section class="hero"><div class="wrap"><div class="eyebrow">Фото- и видеоотчёты · БФ «ЯРИЛО»</div><h1>Отчёты: помощь фронту</h1><p class="lead">Фото, видео и сведения о переданной помощи по направлению «Помощь фронту».</p><a class="btn alt" href="pomoshch-frontu.html">Перейти к программе</a></div></section><section class="section"><div class="wrap"><div class="report-head"><h2>Наши публикации</h2><a href="reports.html">Общая отчётность фонда →</a></div><div id="report-gallery" data-manifest="media/front/items.json"><div class="empty">Фотографии и видео появятся здесь после добавления материалов в GitHub. Неподтверждённые отчёты не публикуются.</div></div><p class="note">Размещайте только материалы, на публикацию которых есть разрешение. Перед публикацией скрывайте лица, персональные данные, номера частей, геометки и другую чувствительную информацию, когда это необходимо.</p></div></section><footer class="footer"><div class="wrap">Благотворительный фонд «ЯРИЛО» · <a href="/">Главная</a> · <a href="requisites.html">Реквизиты</a> · <a href="reports.html">Отчётность</a></div></footer><script>
-(async()=>{
- const mount=document.getElementById('report-gallery');if(!mount)return;
- try{const resp=await fetch(mount.dataset.manifest,{cache:'no-cache'});if(!resp.ok)throw Error('manifest');const list=await resp.json();
- if(!Array.isArray(list)||!list.length)return;
- mount.textContent='';mount.classList.add('gallery');
- for(const x of list){if(!x||!x.src||!['photo','video'].includes(x.type))continue;
- const figure=document.createElement('figure');figure.className='media';let media;
- if(x.type==='photo'){media=document.createElement('img');media.src=x.src;media.loading='lazy';media.alt=x.title||'Фотоотчёт БФ ЯРИЛО';}
- else{const url=new URL(x.src,location.href);if(!['https:','http:'].includes(url.protocol))continue;
- media=document.createElement('a');media.href=url.href;media.target='_blank';media.rel='noopener noreferrer';media.textContent='▶ Смотреть видео';media.className='btn';}
- figure.appendChild(media);const c=document.createElement('figcaption');const strong=document.createElement('strong');strong.textContent=x.title||'Отчёт';c.appendChild(strong);
- if(x.date){const dt=document.createElement('div');dt.className='date';dt.textContent=x.date;c.appendChild(dt)}
- if(x.description){const d=document.createElement('div');d.textContent=x.description;c.appendChild(d)}figure.appendChild(c);mount.appendChild(figure)}
- }catch(e){console.warn('Галерея ещё не настроена',e)}
+</a><nav class="nav"><a href="/">Главная</a><a href="projects.html">Проекты</a><a href="pomoshch-frontu.html">Помощь фронту</a><a href="pomoshch-gospitalyam.html">Помощь госпиталям</a><a href="reports.html">Отчётность</a><a href="donate.html">Пожертвовать</a></nav></div></header><section class="hero"><div class="wrap"><div class="eyebrow">Фото- и видеоотчёты · БФ «ЯРИЛО»</div><h1>Отчёты: помощь фронту</h1><p class="lead">Фото, видео и сведения о переданной помощи по направлению «Помощь фронту».</p><a class="btn alt" href="pomoshch-frontu.html">Перейти к программе</a></div></section><section class="section"><div class="wrap"><div class="report-head"><h2>Наши публикации</h2><a href="reports.html">Общая отчётность фонда →</a></div><div id="report-gallery" data-manifest="media/front/items.json"><div class="empty">Фотографии и видео появятся здесь после добавления материалов в GitHub. Неподтверждённые отчёты не публикуются.</div></div><p class="note">Размещайте только материалы, на публикацию которых есть разрешение. Перед публикацией скрывайте лица, персональные данные, номера частей, геометки и другую чувствительную информацию, когда это необходимо.</p></div></section><footer class="footer"><div class="wrap">Благотворительный фонд «ЯРИЛО» · <a href="/">Главная</a> · <a href="requisites.html">Реквизиты</a> · <a href="reports.html">Отчётность</a></div></footer>
+<script src="site-data.js?v=20261023"></script>
+<script src="site-data-loader.js?v=20261023"></script>
+<script>
+
+(async () => {
+  const mount = document.getElementById('report-gallery');
+  if (!mount) return;
+
+  try {
+    if (window.yariloDataReady) await window.yariloDataReady;
+  } catch (e) {
+    console.warn('Ошибка загрузки данных', e);
+  }
+
+  const data = window.YARILO?.help?.crisis;
+  if (!data) return;
+
+  const photos = data.photos || [];
+  const videos = data.videos || [];
+  const descriptions = data.mediaDescriptions || {};
+
+  if (!photos.length && !videos.length) return;
+
+  mount.textContent = '';
+  mount.classList.add('gallery');
+
+  function addMedia(element, title, description) {
+    const figure = document.createElement('figure');
+    figure.className = 'media';
+    figure.appendChild(element);
+
+    const caption = document.createElement('figcaption');
+    const heading = document.createElement('strong');
+    heading.textContent = title;
+    caption.appendChild(heading);
+
+    if (description) {
+      const p = document.createElement('p');
+      p.textContent = description;
+      caption.appendChild(p);
+    }
+
+    figure.appendChild(caption);
+    mount.appendChild(figure);
+  }
+
+  for (const src of photos) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.loading = 'lazy';
+    img.alt = 'Фото помощи фронту БФ ЯРИЛО';
+    addMedia(img, 'Фотоотчёт', descriptions[src]);
+  }
+
+  for (const src of videos) {
+    let url;
+    try {
+      url = new URL(src, location.href);
+    } catch (e) {
+      continue;
+    }
+
+    if (
+      url.protocol !== 'https:' ||
+      url.hostname !== 'rutube.ru' ||
+      !/^\/play\/embed\/[a-f0-9]{32}\/?$/.test(url.pathname)
+    ) continue;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = url.href;
+    iframe.loading = 'lazy';
+    iframe.title = 'Видеоотчёт БФ ЯРИЛО';
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+    iframe.allowFullscreen = true;
+
+    addMedia(iframe, 'Видеоотчёт', descriptions[src]);
+  }
 })();
+</script>
+</body>
+</html>
+
 </script></body></html>
