@@ -26,7 +26,7 @@ window.YARILO = {
     "historyTitle": "Наша работа — довести помощь до получателя",
     "historyText1": "Фонд «Ярило» создавался для адресной помощи людям и учреждениям, оказавшимся в трудной ситуации. Мы не ограничиваемся сбором: проверяем потребности, формируем грузы, организуем логистику и передачу.",
     "historyText2": "Одно из важных направлений — помощь детям и взрослым с инвалидностью, реабилитационным центрам и учреждениям, где постоянно нужны расходные материалы, средства ухода и бытовые товары.",
-    "historyImage": "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg,uploads/admin-0af4d570-8c80-4c4d-a479-3ac8f8943bcc.webp",
+    "historyImage": "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg,uploads/admin-0af4d570-8c80-4c4d-a479-3ac8f8943bcc.webp,uploads/admin-a3fa8d1e-2f57-4715-a16c-b63416001a28.jpg",
     "historyVideo": "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2",
     "principlesEyebrow": "Принципы",
     "principlesTitle": "Как мы работаем",
@@ -40,14 +40,17 @@ window.YARILO = {
     "ctaText": "Поддержите работу фонда удобным способом.",
     "photos": [
       "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg",
-      "uploads/admin-0af4d570-8c80-4c4d-a479-3ac8f8943bcc.webp"
+      "uploads/admin-0af4d570-8c80-4c4d-a479-3ac8f8943bcc.webp",
+      "uploads/admin-a3fa8d1e-2f57-4715-a16c-b63416001a28.jpg"
     ],
     "videos": [
       "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2",
       "https://rutube.ru/play/embed/3183aa991a0457b44ffdcee835b53193"
     ],
     "mediaDescriptions": {
-      "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg": "Благотворительной деятельностью мы занимаемся с 2014 года. А официально фонд зарегистрировали в 2024г."
+      "uploads/admin-6fac8e76-4862-4a0c-9394-76e7dd736c80.jpg": "Благотворительной деятельностью мы занимаемся с 2014 года. А официально фонд зарегистрировали в 2024г.",
+      "uploads/admin-0af4d570-8c80-4c4d-a479-3ac8f8943bcc.webp": "Министерство Обороны поощряет нашу волонтерскую деятельность и вручило нам знаки отличия. ",
+      "uploads/admin-a3fa8d1e-2f57-4715-a16c-b63416001a28.jpg": "Мы часто бываем в обстреливаемых районах. И без поддержки военных туда невозможно добраться. А там живут люди, которым очень нужна наша помощь. "
     }
   },
   "results": {
