@@ -159,7 +159,9 @@
 
     // RUTUBE: accept a public video link or official embed URL.
     if(host==='rutube.ru') {
-      const m=u.pathname.match(/^\/(?:video|play\/embed)\/([a-f0-9]{32})\/?$/i);
+      
+const m=u.pathname.match(/^\/(?:video|shorts|play\/embed)\/([a-f0-9]{32}|[a-f0-9-]{36})\/?$/i);
+
       if(!m)return null;
       id=m[1].toLowerCase();
       return {provider:'RUTUBE',embed:'https://rutube.ru/play/embed/'+id,url:'https://rutube.ru/video/'+id+'/'};
