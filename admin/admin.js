@@ -46,7 +46,9 @@
     }
     
     if (host === 'rutube.ru') {
-     const match = u.pathname.match(/^\/(?:video|play\/embed)\/([a-f0-9]{32}|[a-f0-9-]{36})\/?$/i);
+     
+const match = u.pathname.match(/^\/(?:video|shorts|play\/embed)\/([a-f0-9]{32}|[a-f0-9-]{36})\/?$/i);
+
       if (!match) return null;
       const id = match[1].toLowerCase();
       return {
