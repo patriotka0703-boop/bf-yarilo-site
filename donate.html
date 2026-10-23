@@ -602,6 +602,119 @@ bf-yarilo.ru
 <script src="https://widget.cloudpayments.ru/bundles/cloudpayments.js"></script>
 <script src="scripts.js?v=20261014.1"></script>
 
+<!-- ЯРИЛО: подключение ежемесячных пожертвований -->
+<script>
+(function () {
+  "use strict";
+
+  const form = document.getElementById("monthly-form");
+  if (!form) return;
+
+  const amountInput = document.getElementById("monthly-amount");
+  const emailInput = document.getElementById("monthly-email");
+  const consentInput = document.getElementById("monthly-consent");
+  const status = document.getElementById("monthly-status");
+  const submitButton = document.getElementById("monthly-submit");
+  const amountButtons = form.parentElement.querySelectorAll(
+    "[data-monthly-amount]"
+  );
+
+  function selectAmount(value) {
+    amountInput.value = value;
+
+    amountButtons.forEach(function (button) {
+      button.setAttribute(
+        "aria-pressed",
+        String(button.dataset.monthlyAmount === String(value))
+      );
+    });
+  }
+
+  amountButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      selectAmount(button.dataset.monthlyAmount);
+    });
+  });
+
+  amountInput.addEventListener("input", function () {
+    selectAmount(amountInput.value);
+  });
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const amount = Number(amountInput.value);
+    const email = emailInput.value.trim();
+
+    if (!Number.isInteger(amount) ||
+        amount < 1 ||
+        amount > 1000000) {
+      status.textContent = "Укажите корректную сумму.";
+      return;
+    }
+
+    if (!consentInput.checked) {
+      status.textContent =
+        "Для подписки необходимо согласие.";
+      return;
+    }
+
+    if (!window.cp || !window.cp.CloudPayments) {
+      status.textContent =
+        "Платёжный сервис недоступен. Попробуйте позже.";
+      return;
+    }
+
+    status.textContent =
+      "Открываем защищённую форму оплаты...";
+
+    const widget = new cp.CloudPayments();
+
+    submitButton.disabled = true;
+
+    try {
+      widget.pay("charge", {
+        publicId: "pk_0a3cdfc018f293b701c077cbda191",
+        description:
+          "Ежемесячное благотворительное пожертвование БФ ЯРИЛО",
+        amount: amount,
+        currency: "RUB",
+        accountId: email,
+        email: email,
+        data: {
+          cloudPayments: {
+            recurrent: {
+              interval: "Month",
+              period: 1
+            }
+          }
+        }
+      }, {
+        onSuccess: function () {
+          status.textContent =
+            "Первый платёж прошёл. Проверьте подтверждение подписки.";
+        },
+        onFail: function () {
+          status.textContent =
+            "Платёж не завершён. Подписка не подтверждена.";
+        },
+        onComplete: function () {
+          submitButton.disabled = false;
+        }
+      });
+    } catch (error) {
+      submitButton.disabled = false;
+      status.textContent =
+        "Не удалось открыть оплату. Попробуйте позже.";
+      console.error("YARILO subscription:", error);
+    }
+  });
+})();
+</script>
+<!-- Конец обработчика подписки -->
+
 </body>
 
 </html>
