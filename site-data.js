@@ -101,7 +101,8 @@ window.YARILO = {
       "videos": [
         "https://rutube.ru/play/embed/69d6f90a6dc6dbd1c6af8891d4c5521d",
         "https://rutube.ru/play/embed/7b79006981671a9c862b97eedd3684cb",
-        "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2"
+        "https://rutube.ru/play/embed/0b9c988678e1f89ed9b4b2fce10ce5b2",
+        "https://rutube.ru/play/embed/ca063eb625d081073f3308d112461d8f"
       ],
       "pageTitle": "Гражданам, проживающим в прифронтовых районах",
       "pageText": "Человеку, который потерял дом - нужно все. \nМы принимаем и бытовую технику и одежду  и обувь (новую, т.к. нам некогда обрабатывать б/у одежду и обувь)\nПосуда, средства первой необходимости. Мебель. Строй материалы.",
