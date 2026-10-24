@@ -75,9 +75,7 @@ window.YARILO = {
         "uploads/admin-f35ca723-a5ca-4b04-985a-08a1dce50b4a.jpg",
         "uploads/admin-18b84117-ca8c-4c44-9b24-2a97a49d1296.jpg"
       ],
-      "videos": [
-        "https://rutube.ru/play/embed/7b79006981671a9c862b97eedd3684cb"
-      ],
+      "videos": [],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы, особое питание.",
       "mediaDescriptions": {
@@ -101,7 +99,8 @@ window.YARILO = {
         "uploads/admin-e8c71c05-d288-4280-a4fe-beb78d2f1ac4.jpg"
       ],
       "videos": [
-        "https://rutube.ru/play/embed/69d6f90a6dc6dbd1c6af8891d4c5521d"
+        "https://rutube.ru/play/embed/69d6f90a6dc6dbd1c6af8891d4c5521d",
+        "https://rutube.ru/play/embed/7b79006981671a9c862b97eedd3684cb"
       ],
       "pageTitle": "Гражданам, проживающим в прифронтовых районах",
       "pageText": "Человеку, который потерял дом - нужно все. \nМы принимаем и бытовую технику и одежду  и обувь (новую, т.к. нам некогда обрабатывать б/у одежду и обувь)\nПосуда, средства первой необходимости. Мебель. Строй материалы.",
