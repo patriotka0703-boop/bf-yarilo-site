@@ -139,7 +139,8 @@ window.YARILO = {
         "https://rutube.ru/play/embed/e23e120bd8584d9a765e28ccc77c36ad",
         "https://rutube.ru/play/embed/267aa1a1468ccbcf0874d80a19774e3f",
         "https://rutube.ru/play/embed/9528db671f6398983220cd74702c053e",
-        "https://rutube.ru/play/embed/0e5a51af54de996aead39b5bc55f7f79"
+        "https://rutube.ru/play/embed/0e5a51af54de996aead39b5bc55f7f79",
+        "https://rutube.ru/play/embed/6c95a65869be2591062974a5f8b5cfd4"
       ],
       "pageTitle": "Помощь больницам прифронтовых и приграничных районов",
       "pageText": "Поддерживаем больницы и медицинские учреждения прифронтовых и приграничных районов, где получают помощь мирные жители, в том числе пострадавшие от боевых действий. По конкретным запросам передаём постельное бельё, средства гигиены, медицинские принадлежности и другие необходимые вещи.",
