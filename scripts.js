@@ -293,11 +293,85 @@
   });
   const privacyFallback=document.getElementById('privacy-text-fallback');
   if(privacyFallback)privacyFallback.hidden=!!d.documents.privacy.length;
+
+  function formattedCaption(value) {
+    const fragment = document.createDocumentFragment();
+    const pattern = /(https?:\/\/[^\s<>"']+|\*\*[^*]+?\*\*|\n)/g;
+    let last = 0;
+
+    for (const match of value.matchAll(pattern)) {
+      if (match.index > last) {
+        fragment.append(document.createTextNode(value.slice(last, match.index)));
+      }
+
+      const part = match[0];
+
+      if (part === '\n') {
+        fragment.append(document.createElement('br'));
+     
+      } else if (part.startsWith('**')) {
+        const strong = document.createElement('strong');
+        const content = part.slice(2, -2);
+        const urlPattern = /https?:\/\/[^\s<>"']+/g;
+        let pos = 0;
+
+        for (const found of content.matchAll(urlPattern)) {
+          strong.append(document.createTextNode(content.slice(pos, found.index)));
+          const url = found[0].replace(/[.,!?;:)\]]+$/, '');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = '❤️ Пожертвовать';
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          strong.append(link);
+          pos = found.index + url.length;
+        }
+
+        strong.append(document.createTextNode(content.slice(pos)));
+        fragment.append(strong);
+
+      } else {
+        const url = part.replace(/[.,!?;:)\]]+$/, '');
+        const href = M.safeURL(url);
+
+        if (href) {
+          const link = document.createElement('a');
+          link.href = href;
+          link.textContent = url.includes('bf-yarilo.ru/donate.html')
+            ? '❤️ Пожертвовать'
+            : url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          fragment.append(link);
+        } else {
+          fragment.append(document.createTextNode(url));
+        }
+
+        fragment.append(document.createTextNode(part.slice(url.length)));
+      }
+
+      last = match.index + part.length;
+    }
+
+    fragment.append(document.createTextNode(value.slice(last)));
+    return fragment;
+  }
   function enlarge(src, description) {
     const dialog=document.createElement('dialog');dialog.className='photo-dialog';
     const close=text('button','Закрыть','btn btn-small');close.onclick=()=>dialog.close();
     const img=document.createElement('img');img.src=src;img.alt='Увеличенное фото';
-    dialog.append(close,img);if(description)dialog.append(text('p',description,'media-caption'));dialog.addEventListener('close',()=>dialog.remove());dialog.onclick=e=>{if(e.target===dialog)dialog.close();};document.body.append(dialog);dialog.showModal();
+    
+    dialog.append(close, img);
+    if (description) {
+      const caption = text('p', '', 'media-caption');
+      caption.append(formattedCaption(description));
+      dialog.append(caption);
+    }
+    dialog.addEventListener('close', () => dialog.remove());
+    dialog.onclick = e => { if (e.target === dialog) dialog.close(); };
+    document.body.append(dialog);
+    dialog.showModal();
+
   }
   function media(container,group,pageSize=24) {
     if(!container)return;container.replaceChildren();
@@ -314,7 +388,13 @@
         } else {
           figure.append(M.videoElement(src,caption));
         }
-        if(caption)figure.append(text('figcaption',caption,'media-caption'));
+ 
+        if (caption) {
+          const captionElement = text('figcaption', '', 'media-caption');
+          captionElement.append(formattedCaption(caption));
+          figure.append(captionElement);
+        }
+
         container.append(figure);
       }
       shown+=pageSize;if(shown<entries.length)container.append(more);
