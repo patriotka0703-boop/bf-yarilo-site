@@ -93,3 +93,18 @@
 @media(max-width:540px) {
  .hero .container.hero-grid { width:calc(100% - 32px)!important; }
 }
+
+/* A quiet caption, not a second donation button. */
+.hero .hero-qr-caption {
+ margin:0;
+ padding:5px 3px;
+ color:#10251f;
+ font-family:inherit;
+ font-size:14px;
+ font-weight:600;
+ line-height:1.35;
+ text-align:center;
+ background:transparent;
+ border:0;
+ box-shadow:none;
+}
