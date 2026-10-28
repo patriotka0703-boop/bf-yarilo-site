@@ -692,85 +692,7 @@
       }
     }
 
-    d.editorSetup ||= {};
-
-    if (
-      !d.editorSetup
-        .donations20260917
-    ) {
-      for (
-        const [key, value]
-        of Object.entries({
-          legalName:
-            'БЛАГОТВОРИТЕЛЬНЫЙ ФОНД "ЯРИЛО"',
-          inn:
-            '5045071931',
-          kpp:
-            '504501001',
-          ogrn:
-            '1245000038062'
-        })
-      ) {
-        if (
-          !d.requisites[key]
-        ) {
-          d.requisites[key] =
-            value;
-        }
-      }
-
-      const bank = {
-        label:
-          'Основной счёт фонда',
-        recipient:
-          'БЛАГОТВОРИТЕЛЬНЫЙ ФОНД "ЯРИЛО"',
-        account:
-          '40703810940000401257',
-        bank:
-          'ПАО Сбербанк',
-        bik:
-          '044525225',
-        correspondent:
-          '30101810400000000225',
-        bankInn:
-          '7707083893',
-        bankKpp:
-          '773643002',
-        currency:
-          'RUB',
-        purpose:
-          ''
-      };
-
-      const existing =
-        d.requisites.accounts.find(
-          a =>
-            a.account ===
-            bank.account
-        );
-
-      if (existing) {
-        for (
-          const [key, value]
-          of Object.entries(bank)
-        ) {
-          if (
-            !existing[key]
-          ) {
-            existing[key] =
-              value;
-          }
-        }
-      } else {
-        d.requisites.accounts.push(
-          bank
-        );
-      }
-
-      d.editorSetup
-        .donations20260917 =
-        true;
-    }
+    
 
     for (
       const group
@@ -1977,5 +1899,4 @@
   window.yariloDataReady = refresh();
 })();
 
-  }
-})();
+
