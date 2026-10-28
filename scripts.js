@@ -424,7 +424,7 @@
       grid.append(card);
     }}
   }
-  const cover=document.querySelector('.hero-cover img');if(cover&&d.home.coverImage){const fallback=cover.src;cover.onerror=()=>{cover.onerror=null;cover.src=fallback;};cover.src=d.home.coverImage;}
+  // The homepage cover and donation overlay are managed by hero-cover.js.
   const donationURL=M.safeURL(d.donation.url,location.href), donationText=d.donation.text || 'Пожертвовать';
   document.querySelectorAll('a.btn[href="donate.html"],a[data-donation]').forEach(a=>{if(donationURL)a.href=donationURL;a.textContent=donationText;});
   const purpose=document.getElementById('donation-purpose');if(purpose)purpose.textContent=d.donation.purpose || '';

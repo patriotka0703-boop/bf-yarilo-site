@@ -486,17 +486,21 @@
   }
   function renderCover() {
     const box=$('coverEditor');if(!box)return;box.replaceChildren();
-    const label=element('label','Фото на главной странице');label.htmlFor='coverFile';
-    const img=element('img');img.src=data.home.coverImage?mediaURL(data.home.coverImage):'../assets/yarilo-cover.png';img.alt='Обложка главной страницы';img.style.cssText='display:block;max-width:100%;width:320px;max-height:240px;object-fit:contain;margin:12px 0';
-    const input=element('input');input.id='coverFile';input.type='file';input.accept='.jpg,.jpeg,.png,.webp';
+    const label=element('p','Картинка на главной странице');
+    const img=element('img');img.alt='Обложка главной страницы';
+    img.style.cssText='display:block;max-width:100%;width:420px;max-height:300px;object-fit:contain;margin:12px 0';
+    if(data.home.coverImage)img.src=mediaURL(data.home.coverImage);else img.hidden=true;
+    const input=element('input');input.id='coverFile';input.type='file';input.accept='.jpg,.jpeg,.png,.webp';input.hidden=true;
+    const upload=element('button','Загрузить картинку');upload.type='button';upload.onclick=()=>input.click();
     input.onchange=async()=>{const original=input.files?.[0];if(!original||busy)return;try{
       if(!/\.(jpe?g|png|webp)$/i.test(original.name)||original.size>40*1024*1024)throw new Error('Выберите JPG, PNG или WEBP до 40 МБ.');
-      lock(true);status('Загружаю обложку…');const health=await api('/health');if(!health.features?.coverImage)throw new Error('Для смены обложки установите Worker версии 6 из обновления.');
+      lock(true);status('Загружаю обложку…');const health=await api('/health');if(!health.features?.coverImage)throw new Error('Сервер пока не поддерживает смену обложки.');
       const file=await preparePhoto(original);const result=await post('/upload',{name:file.name,content:await asBase64(file)});
-      uploads.set(result.path,result.receipt);previews.set(result.path,URL.createObjectURL(file));data.home.coverImage=result.path;changed();status('Фото выбрано. Нажмите «Сохранить изменения».');
+      uploads.set(result.path,result.receipt);previews.set(result.path,URL.createObjectURL(file));data.home.coverImage=result.path;changed();status('Картинка загружена. Нажмите «Сохранить изменения».');
     }catch(e){status(e.message,'error');}finally{renderCover();lock(false);}};
-    const reset=element('button','Вернуть исходную обложку');reset.type='button';reset.onclick=()=>{data.home.coverImage='';changed();renderCover();status('Исходная обложка выбрана. Нажмите «Сохранить изменения».');};
-    box.append(label,img,input,element('p','Выберите фото с компьютера или телефона, затем сохраните изменения.','small'),reset);
+    const remove=element('button','Удалить картинку','danger');remove.type='button';remove.hidden=!data.home.coverImage;
+    remove.onclick=()=>{data.home.coverImage='';changed();renderCover();status('Картинка убрана с главной страницы. Нажмите «Сохранить изменения».');};
+    box.append(label,img,input,upload,remove,element('p',data.home.coverImage?'Новая картинка заменит текущую. После загрузки или удаления нажмите «Сохранить изменения».':'Картинка не выбрана. Загрузите PNG, WEBP или JPG.','small'));
   }
   function renderQR() {
     if (!$('qrPreview')) return;

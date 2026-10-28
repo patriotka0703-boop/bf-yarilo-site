@@ -145,7 +145,8 @@
 <meta name="yandex-verification" content="a08a449f998f12a9" />
 
 <meta name="yandex-verification" content="77d8ecd0c089b103" />
-    </head>
+    <link rel="stylesheet" href="hero-cover.css?v=20261029.1">
+</head>
 <body>
 
 <header class="site-header">
@@ -217,17 +218,14 @@
 </div>
 </div>
 
-<aside class="hero-cover">
-<img
-  src="assets/yarilo-cover.png"
-  loading="eager"
-  decoding="sync"
-  width="1536"
-  height="1024"
-  fetchpriority="high"
-  alt="Благотворительный фонд Ярило. Помощь, которая доходит: поездка в Макеевку, закупка и доставка помощи."
->
-<a href="about.html">Подробнее о фонде →</a>
+<aside class="hero-cover" aria-label="Помощь мирным жителям">
+  <img class="hero-art" src="uploads/admin-8b43da10-2519-4afd-9053-082589adc690.webp" width="1536" height="1024" fetchpriority="high" alt="Иллюстрация: волонтёр передаёт продукты пожилым жителям у разрушенного дома">
+  <div class="hero-donation">
+    <a class="hero-qr-link" href="qr-sovcombank.png" target="_blank" rel="noopener" aria-label="Открыть QR-код для пожертвования в полном размере">
+      <img class="hero-qr" src="qr-sovcombank.png" width="183" height="183" alt="QR-код Совкомбанка для пожертвования фонду ЯРИЛО">
+    </a>
+    <a class="hero-help" href="donate.html">Помощь</a>
+  </div>
 </aside>
 
 </div>
@@ -590,7 +588,7 @@ bf-yarilo.ru
 </footer>
 
 
-<script src="site-data.js?v=20260928.12"></script>
+<script src="site-data.js?v=20261029.1"></script>
 <script src="site-data-loader.js?v=20260928.12"></script>
 
 <script>
@@ -644,142 +642,7 @@ bf-yarilo.ru
 
 <script src="yarilo-model.js?v=20260928.12"></script>
 <script src="script.js"></script>
-<script src="scripts.js?v=20260928.12"></script>
-<style>
-.hero-cover {
-  position: relative;
-}
-
-.hero-cover img.yarilo-cover-qr {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 112px;
-  height: auto;
-  max-width: 28%;
-  padding: 8px;
-  background: #fff;
-  border: 1px solid #c99c39;
-  border-radius: 10px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, .15);
-  box-sizing: border-box;
-  z-index: 2;
-}
-</style>
-
-<script>
-(function () {
-  const cover = document.querySelector('.hero-cover');
-  if (!cover || cover.querySelector('.yarilo-cover-qr')) return;
-
-  const qr = document.createElement('img');
-  qr.className = 'yarilo-cover-qr';
-  qr.src = '/qr-sovcombank.png';
-  qr.alt = 'QR-код для пожертвования БФ ЯРИЛО';
-  qr.width = 160;
-  qr.height = 160;
-  cover.appendChild(qr);
-})();
-</script>
-  position: fixed;
-  top: 100px;
-  right: 18px;
-  bottom: auto;
-  z-index: 35;
-  width: 210px;
-  max-width: calc(100vw - 32px);
-  max-height: calc(100dvh - 120px);
-  overflow: auto;
-  border: 2px solid #c99c39;
-  border-radius: 18px;
-  background: #fffdf7;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, .18);
-  color: #123d2b;
-  font-family: Arial, sans-serif;
-}
-
-.yarilo-qr-widget summary {
-  padding: 14px 12px;
-  background: #123d2b;
-  color: #fff;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 700;
-  text-align: center;
-}
-
-.yarilo-qr-content {
-  padding: 12px;
-  text-align: center;
-}
-
-.yarilo-qr-content p {
-  margin: 0 0 10px;
-  font-size: 14px;
-}
-
-.yarilo-qr-content img {
-  display: block;
-  width: 160px;
-  height: auto;
-  max-width: 100%;
-  margin: 0 auto 12px;
-  padding: 8px;
-  background: #fff;
-  box-sizing: border-box;
-}
-
-.yarilo-qr-content a {
-  display: block;
-  padding: 12px;
-  border-radius: 10px;
-  background: #b8870b;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.yarilo-qr-content a:hover {
-  background: #936c08;
-}
-
-.yarilo-qr-content small {
-  display: block;
-  margin-top: 9px;
-  font-size: 12px;
-}
-
-.yarilo-qr-widget summary:focus-visible,
-.yarilo-qr-content a:focus-visible {
-  outline: 3px solid #e8b83d;
-  outline-offset: -3px;
-}
-
-@media (max-width: 700px) {
-  .yarilo-qr-widget {
-    top: 90px;
-    right: 12px;
-    bottom: auto;
-    width: 190px;
-    max-height: calc(100dvh - 110px);
-  }
-}
-</style>
-
-<script>
-(function () {
-  const panel = document.querySelector(
-    '.yarilo-qr-widget details'
-  );
-
-  if (
-    panel &&
-    window.matchMedia('(max-width: 700px)').matches
-  ) {
-    panel.open = false;
-  }
-})();
-</script>
+<script src="scripts.js?v=20261029.1"></script>
+<script src="hero-cover.js?v=20261029.1"></script>
 </body>
 </html>
