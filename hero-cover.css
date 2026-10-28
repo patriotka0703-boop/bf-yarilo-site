@@ -63,3 +63,33 @@
 @media(min-width:541px) and (max-width:1000px) {
  .hero .hero-donation { right:0; top:6%; width:21%; }
 }
+
+/* Balanced wider illustration, safe text gutters, fine gold QR outline. */
+.hero .container.hero-grid {
+ box-sizing:border-box;
+ width:calc(100% - 48px)!important;
+ max-width:1600px!important;
+ margin-left:auto!important;
+ margin-right:auto!important;
+ padding:0!important;
+ position:relative;
+ left:auto;
+ right:auto;
+ transform:none;
+}
+.hero .hero-grid > div:first-child { min-width:0; position:relative; z-index:1; }
+.hero .hero-qr-link {
+ border:1px solid #c6a351;
+ padding:5px;
+ background:#fff;
+ border-radius:4px;
+ box-shadow:none;
+}
+@media(min-width:1001px) {
+ .hero .container.hero-grid { grid-template-columns:minmax(0,36fr) minmax(0,64fr); gap:14px!important; }
+ .hero .hero-cover { margin-top:4px; }
+ .hero .hero-donation { right:0; top:2%; width:19%; min-width:138px; }
+}
+@media(max-width:540px) {
+ .hero .container.hero-grid { width:calc(100% - 32px)!important; }
+}

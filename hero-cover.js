@@ -10,7 +10,7 @@
   const path=home && Object.prototype.hasOwnProperty.call(home,'coverImage') ? home.coverImage : initial;
   if(!path){image.hidden=true;box.classList.add('no-art');}
   else {
-    image.src=path;
+    image.src=path===initial?path+'?v=20261029.4':path;
     box.classList.toggle('custom-art',path!==initial);
     image.onerror=()=>{image.hidden=true;box.classList.add('no-art');};
   }
