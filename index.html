@@ -65,8 +65,60 @@
     text-align: center;
   }
 }
-</style>
+<style>
 
+/* Компактный первый экран главной страницы */
+.hero {
+  padding: 36px 0 40px !important;
+  min-height: 0 !important;
+}
+
+.hero .hero-grid {
+  align-items: center !important;
+  gap: 32px !important;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 3.5vw, 48px) !important;
+  line-height: 1.12 !important;
+  margin: 10px 0 16px !important;
+}
+
+.hero .lead {
+  font-size: 17px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 18px !important;
+}
+
+.hero .eyebrow {
+  margin-bottom: 8px !important;
+}
+
+.hero .hero-cover img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 390px !important;
+  object-fit: contain !important;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 24px 0 30px !important;
+  }
+
+  .hero .hero-grid {
+    gap: 20px !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(28px, 7vw, 36px) !important;
+  }
+
+  .hero .hero-cover img {
+    max-height: 270px !important;
+  }
+}
+</style>
 <meta property="og:title" content="БФ «ЯРИЛО» — помощь фронту, бойцам СВО и мирным жителям прифронтовых районов">
 
 <meta property="og:type" content="website">
