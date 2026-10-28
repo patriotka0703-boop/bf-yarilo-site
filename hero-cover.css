@@ -21,3 +21,11 @@
  .hero .hero-donation { position:static; width:183px; margin:8px auto 0; }
  .hero .hero-cover .hero-art { mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent); }
 }
+
+/* Keep the heading readable and align the artwork with the first screen. */
+@media(min-width:1001px) {
+ .hero .hero-grid { grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); align-items:start!important; gap:24px!important; }
+ .hero h1 { font-size:clamp(30px,2.9vw,42px)!important; line-height:1.14!important; }
+ .hero .hero-cover { margin-top:28px; }
+ .hero .lead { font-size:16px!important; line-height:1.48!important; }
+}
