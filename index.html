@@ -645,29 +645,42 @@ bf-yarilo.ru
 <script src="yarilo-model.js?v=20260928.12"></script>
 <script src="script.js"></script>
 <script src="scripts.js?v=20260928.12"></script>
-<!-- ЯРИЛО: QR-код справа сверху -->
-<aside class="yarilo-qr-widget" aria-label="Помочь фонду">
-  <details open>
-    <summary>❤️ Помочь фонду</summary>
-
-    <div class="yarilo-qr-content">
-      <p>Поддержите добрые дела</p>
-
-      <img
-        src="/qr-sovcombank.png"
-        alt="QR-код для пожертвования БФ ЯРИЛО"
-        width="160"
-        height="160"
-      >
-
-      <a href="/donate.html">Пожертвовать</a>
-      <small>Спасибо за вашу помощь!</small>
-    </div>
-  </details>
-</aside>
-
 <style>
-.yarilo-qr-widget {
+.hero-cover {
+  position: relative;
+}
+
+.hero-cover img.yarilo-cover-qr {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 112px;
+  height: auto;
+  max-width: 28%;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #c99c39;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, .15);
+  box-sizing: border-box;
+  z-index: 2;
+}
+</style>
+
+<script>
+(function () {
+  const cover = document.querySelector('.hero-cover');
+  if (!cover || cover.querySelector('.yarilo-cover-qr')) return;
+
+  const qr = document.createElement('img');
+  qr.className = 'yarilo-cover-qr';
+  qr.src = '/qr-sovcombank.png';
+  qr.alt = 'QR-код для пожертвования БФ ЯРИЛО';
+  qr.width = 160;
+  qr.height = 160;
+  cover.appendChild(qr);
+})();
+</script>
   position: fixed;
   top: 100px;
   right: 18px;
