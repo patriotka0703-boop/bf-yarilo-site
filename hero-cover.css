@@ -29,3 +29,14 @@
  .hero .hero-cover { margin-top:28px; }
  .hero .lead { font-size:16px!important; line-height:1.48!important; }
 }
+
+/* QR without decorative frame; keep it clear of the people. */
+.hero .hero-qr-link {
+ padding:0;
+ border:0;
+ background:transparent;
+ box-shadow:none;
+}
+@media(min-width:541px) {
+ .hero .hero-donation { right:-1%; top:2%; }
+}
