@@ -40,3 +40,26 @@
 @media(min-width:541px) {
  .hero .hero-donation { right:-1%; top:2%; }
 }
+
+/* Larger artwork and a donation button matching the site's gold palette. */
+.hero .hero-cover .hero-help {
+ background:var(--brand,#b8870b);
+ border-color:var(--brand,#b8870b);
+ border-radius:999px;
+ color:#fff;
+ font-family:inherit;
+}
+@media(min-width:1001px) {
+ .hero .container.hero-grid {
+  width:calc(100% - 40px);
+  max-width:1600px;
+  grid-template-columns:minmax(0,2fr) minmax(0,3fr);
+  gap:16px!important;
+ }
+ .hero h1 { font-size:clamp(30px,2.5vw,38px)!important; }
+ .hero .hero-cover { margin-top:6px; }
+ .hero .hero-donation { right:0; top:6%; width:21%; min-width:138px; }
+}
+@media(min-width:541px) and (max-width:1000px) {
+ .hero .hero-donation { right:0; top:6%; width:21%; }
+}
