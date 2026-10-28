@@ -219,7 +219,9 @@ window.YARILO = {
     "url": "donate.html",
     "purpose": "Благотворительное пожертвование на уставную деятельность фонда.",
     "paymentUrl": "",
-    "qrImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALcAAAC3AQMAAABqoF3cAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADIElEQVRYhe2XwY3zIBCFx+Lgm90AEm1woyW7gcRuwG6JG20guYH4xgF5/jdOdvc/rcSc14oi7ZeVgeHx5kH09/z+jMx7cTvbh3dbMJs3zFnBBzJ7OtZk1kIPqkMwC6l4OJaer/44o3sRb73Zi5KvxQ59ndkOgbpyqPlezNLTk+sj8OKNkpPZQp2j2ahOvj78Tx2aOOq/+eP/z/e+NHEZApOMKD4W7paQvyXRxMfiNnJLX598XOHghL3ICk6+djFTsHM6tp4mosmTgg/+WME9c3JncWs8znf9GzmFOgUaIwroNo+Bjj2ShtPB0ezRTlhywdnh7VO6Nj6WPCbz8jh3x5lqx5ZIwzGxiwjwCnx5OzOG03C8v2OsEVJ/i5zXRApO/oCWumgHEj1cwXBR8ZBFnwk/5blAEvjW8C5CD3XwdUyYISAvtz6bOdfbRvKIlwdsKP6NFBxy2pM5GcSxiMFhFAUn7F2yM6wJKi0Weuje+mzkA2GB7goQubj3Gev88bc2PhaxtWeCuuBIbvHHy5OCD5AluTOZnSEMIyrtNRx6GJN9+9vtJ3nwGg49oDlC6pfPM6P4+DMrOE4rzGSSAuYH/MRDGKThni+RE1r2x08+/t/M4W/mLHAA6hJ8sj6jho8wAXR8jx008JPJf/lVIx98nmSeMBP5aYWf3Ott5SPqfzsAjswlHo4AkBW8K3AA0cCcCPv4Qj+6ddXKx4RYBdNGfpCpngXOoOFEdrjbkBQNC2fp3Qo+9NhEc6I5RtHDyhgxa7h84CdYrJ0jJgx7IQVHnlmR9OAnAX5rFs/nV85p4kOoaNmd6MGsKF34+H8rHyMCsGNGv4YexE/2lBWc+jqRHJaJEJDwcokTCo42BFkiXHHCt+SZd39s5V2hKeC4GU558rxIXM8KTlimxxqhT0nU2I4rqLi0AOgKqkAfsdTDfknB8UIkEE5Qe5UJI6epuNxf2MoRhh2JJCROaDjuL4iynO/7Ak4fUpaSI1A972QuniDHUMkRXx+9nYgZBSy4XmUNv+8vKBquMDvjFiMJUMHl/kLu1SPMIKrxLvFGw/+e355/u5dhY3sjey4AAAAASUVORK5CYII=",
+    
+"qrImage": "qr-sovcombank.png",
+
     "qrNote": "Откройте приложение банка и отсканируйте QR-код. Перед переводом проверьте получателя и сумму."
   },
   "socials": {
