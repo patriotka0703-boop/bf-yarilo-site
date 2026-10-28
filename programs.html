@@ -21,12 +21,20 @@
   align-self: start;
   border-radius: 18px;
 }
+
 #programs .program-card > img {
+  display: block;
   width: 100%;
-  height: 210px;
-  object-fit: cover;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  object-position: center;
+  background: #f8f6ef;
   border-radius: 12px;
   margin-bottom: 15px;
+
+
+
 }
 #programs .program-card h2 {
   font-size: 22px;
@@ -79,16 +87,35 @@
 body:has(.program-details[open]) #programs {
   align-items: start;
 }
+
+
 @media (max-width: 700px) {
   #programs {
     grid-template-columns: 1fr;
   }
+
   #programs .program-card > img {
-    height: 190px;
+    height: auto;
+    max-height: 280px;
+    object-fit: contain;
   }
 }
+
+/* Крупная обложка отдельной программы */
+#programs[style*="minmax(0, 1fr)"] .program-card > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  object-position: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 </style>
 </head><body>
+
 
 <header><div class="header-inner"><strong>БФ «ЯРИЛО»</strong><a href="/">На главную</a></div></header>
 <main><h1>Благотворительные программы БФ «ЯРИЛО»</h1><div class="intro"><p>Благотворительный фонд «ЯРИЛО» реализует благотворительные программы, направленные на оказание помощи людям, оказавшимся в трудной жизненной ситуации, детям и взрослым с инвалидностью, пенсионерам, малообеспеченным гражданам, семьям с детьми и вынужденным переселенцам.</p><p>Фонд оказывает адресную гуманитарную помощь, передаёт продукты питания, одежду, средства ухода, предметы первой необходимости и другие необходимые товары. Поддерживает социальные учреждения, реабилитационные центры и больницы, оказывающие медицинскую помощь гражданскому населению.</p><p>Особое внимание уделяется мирным жителям прифронтовых и приграничных территорий, пострадавшим от боевых действий. География гуманитарной помощи включает Донецкую Народную Республику, Луганскую Народную Республику, Курскую, Брянскую и Белгородскую области, а также другие территории Российской Федерации, где люди нуждаются в поддержке.</p></div>
