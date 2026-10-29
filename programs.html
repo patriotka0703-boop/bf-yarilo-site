@@ -148,9 +148,13 @@ function programId(p) {
     .replace(/^-|-$/g, '');
 }
 
+
 function programLink(p) {
+  if (p.page) return p.page;
   return '/programs.html?program=' +
     encodeURIComponent(programId(p));
+
+
 }
 
 function renderProgram(p) {
