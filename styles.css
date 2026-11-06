@@ -508,7 +508,7 @@ img[src*="history-image"] {
   background: transparent;
 }
 
-}
+
 
 /* ЯРИЛО: убираем лишнее пространство между блоками */
 main > .hero {
@@ -540,26 +540,13 @@ main > .hero + .directions-section {
   .hero h1 {
     font-size: clamp(30px, 7vw, 38px);
     line-height: 1.15;
-  }
+ 
 }
-/* Обновленная шапка фонда ЯРИЛО */
-
-.site-header .brand-logo-img {
-  width: 80px !important;
-  height: 80px !important;
-  max-width: 80px !important;
-  max-height: 80px !important;
-  object-fit: contain;
-  background: transparent;
-  border-radius: 0;
 }
-
-.site-header .brand-title-gold {
+/* Увеличение золотой надписи над главным заголовком */
+.hero .eyebrow {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
     color: #B8860B;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 21px;
-    font-weight: bold;
-    line-height: 1.2;
-    letter-spacing: 1px;
-    text-shadow: 0 1px 1px rgba(120, 80, 0, 0.15);
 }
