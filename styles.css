@@ -14,7 +14,7 @@ code{background:#eee9dc;padding:2px 6px;border-radius:6px}
 @media(max-width:940px){.menu-btn{display:block}.menu{display:none;position:absolute;top:72px;left:18px;right:18px;flex-direction:column;align-items:stretch;background:white;padding:20px;border-radius:18px;box-shadow:0 20px 55px rgba(0,0,0,.15)}.menu.open{display:flex}.hero-grid,.split,.contact-grid,.donate-layout{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.news-grid{grid-template-columns:1fr}.footer-main{grid-template-columns:1fr 1fr}.cta{flex-direction:column;align-items:flex-start}}
 @media(max-width:620px){.nav{height:70px}.brand small{display:none}.hero{padding:58px 0}.hero h1{font-size:46px}.page-hero h1{font-size:43px}.lead{font-size:18px}.section{padding:62px 0}.section-head{align-items:flex-start;flex-direction:column}.cards,.cards.three,.cards.two,.stats{grid-template-columns:1fr}.amounts{grid-template-columns:repeat(2,1fr)}.cta{padding:32px 23px}.doc{flex-direction:column}.doc .status{white-space:normal}.contact-panel p{flex-direction:column;gap:3px}.contact-panel a,.contact-panel b{text-align:left}.footer-main{grid-template-columns:1fr}.footer-bottom{flex-direction:column}.micro-trust{flex-direction:column;gap:5px}}
 
-.brand-logo-img{width:52px;height:52px;object-fit:contain;border-radius:50%;background:#fff}
+.brand-logo-img{width:52px;height:52px;object-fit:contain;border-radius:50%;background:transparent}
 .requisites-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
 .req-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
 .req-card h3{margin-bottom:14px}
@@ -493,16 +493,21 @@ img[src*="history-image"] {
   .page-hero + .section { padding-top: 22px; }
 }
 
-/* ЯРИЛО: защита логотипа от растягивания */
+
+/* ЯРИЛО: увеличенный логотип */
 .site-header .brand-logo-img,
 .footer-brand .brand-logo-img {
   display: block;
-  width: 52px !important;
-  height: 52px !important;
-  max-width: 52px !important;
-  max-height: 52px !important;
+  width: 66px !important;
+  height: 66px !important;
+  max-width: 66px !important;
+  max-height: 66px !important;
   object-fit: contain !important;
   flex-shrink: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
 }
 
 /* ЯРИЛО: убираем лишнее пространство между блоками */
