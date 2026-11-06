@@ -545,8 +545,17 @@ main > .hero + .directions-section {
 }
 /* Увеличение золотой надписи над главным заголовком */
 .hero .eyebrow {
-    font-size: 15px;
+   font-size: 19px;
     font-weight: 900;
     letter-spacing: 1.5px;
     color: #B8860B;
+}
+/* Увеличенный логотип фонда */
+.site-header .brand-logo-img {
+    width: 85px !important;
+    height: 85px !important;
+    max-width: 85px !important;
+    max-height: 85px !important;
+    object-fit: contain;
+    flex-shrink: 0;
 }
