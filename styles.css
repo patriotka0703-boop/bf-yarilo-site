@@ -552,14 +552,19 @@ main > .hero + .directions-section {
 }
 
 
-/* Крупный логотип в шапке */
+/* ЯРИЛО: правильный размер логотипа в шапке */
 .site-header .brand-logo-img {
-    width: 175px !important;
-    height: 175px !important;
-    max-width: 175px !important;
-    max-height: 175px !important;
-    object-fit: contain;
+    display: block;
+    width: 68px !important;
+    height: 68px !important;
+    max-width: 68px !important;
+    max-height: 68px !important;
+    object-fit: contain !important;
     flex-shrink: 0;
+    border-radius: 0;
+    background: transparent;
+    mix-blend-mode: multiply;
+}
 }
 
 /* Крупная золотая надпись над заголовком */
