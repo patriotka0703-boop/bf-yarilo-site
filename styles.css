@@ -565,7 +565,7 @@ main > .hero + .directions-section {
     background: transparent;
     mix-blend-mode: multiply;
 }
-}
+
 
 /* Крупная золотая надпись над заголовком */
 .hero .eyebrow {
