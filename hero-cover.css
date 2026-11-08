@@ -199,3 +199,20 @@
     margin: 10px auto 0;
   }
 }
+/* Увеличенный логотип БФ «ЯРИЛО» */
+.site-header .brand-logo-img {
+    width: 72px !important;
+    height: 72px !important;
+    max-width: none !important;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Размер логотипа на телефонах */
+@media (max-width: 540px) {
+    .site-header .brand-logo-img {
+        width: 60px !important;
+        height: 60px !important;
+    }
+}
