@@ -181,8 +181,7 @@
 <div class="container hero-grid">
 
 <div>
-<p class="eyebrow" id="foundation-name">БЛАГОТВОРИТЕЛЬНЫЙ <span style="display:block;text-align:center;">ФОНД «ЯРИЛО»</span></p>
-
+<p class="eyebrow" id="foundation-name">БЛАГОТВОРИТЕЛЬНЫЙ ФОНД «ЯРИЛО»</p>
 <h1 id="home-title">Помощь фронту и бойцам СВО. Гуманитарная помощь мирным жителям прифронтовых районов</h1>
 
 <p class="lead" id="home-description">
@@ -605,24 +604,10 @@ bf-yarilo.ru
 
   setText("foundation-short-name", data.foundation.shortName);
   setText("footer-short-name", data.foundation.shortName);
-  const foundationName = document.getElementById("foundation-name");
+ const foundationName = document.getElementById("foundation-name");
+
 if (foundationName && data.foundation.name) {
-  const parts = String(data.foundation.name).trim()
-    .match(/^(.*?)\s+(ФОНД\b.*)$/i);
-
-  if (parts) {
-    const first = document.createElement("span");
-    first.className = "foundation-name-line";
-    first.textContent = parts[1];
-
-    const second = document.createElement("span");
-    second.className = "foundation-name-line";
-    second.textContent = parts[2];
-
-    foundationName.replaceChildren(first, second);
-  } else {
-    foundationName.textContent = data.foundation.name;
-  }
+  foundationName.textContent = data.foundation.name;
 }
   setText("foundation-slogan", data.foundation.slogan);
   setText("foundation-director", data.foundation.director);
