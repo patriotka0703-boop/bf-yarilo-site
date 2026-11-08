@@ -236,11 +236,39 @@
         max-width: 100%;
     }
 
-    .site-header .brand-logo-img {
-        width: min(180px, 55vw) !important;
+ /* ЛОГОТИП БФ ЯРИЛО */
+
+.site-header .brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.site-header .brand-logo-img {
+    display: block;
+    width: 140px !important;
+    height: auto !important;
+    max-width: 140px !important;
+    max-height: 100px !important;
+    object-fit: contain !important;
+    flex-shrink: 0;
+    background: transparent !important;
+}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+
+@media (max-width: 540px) {
+    .site-header .nav {
+        min-height: 82px !important;
         height: auto !important;
-        max-width: 180px !important;
-        max-height: 68px !important;
-        object-fit: contain !important;
+        padding: 8px 12px !important;
+    }
+
+    .site-header .brand-logo-img {
+        width: 112px !important;
+        height: auto !important;
+        max-width: 112px !important;
+        max-height: 72px !important;
     }
 }
