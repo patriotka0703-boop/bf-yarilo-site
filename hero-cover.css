@@ -265,19 +265,50 @@
     flex-shrink: 0;
 }
 
+
+/* Логотип БФ «ЯРИЛО» — единые настройки */
+
+.site-header .nav {
+    min-height: 100px !important;
+    height: auto !important;
+    box-sizing: border-box;
+}
+
+.site-header .brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.site-header .brand-logo-img {
+    display: block;
+    width: 180px !important;
+    height: auto !important;
+    max-width: 180px !important;
+    max-height: 85px !important;
+    object-fit: contain !important;
+    flex-shrink: 0;
+}
+
 /* Мобильная версия */
 
 @media (max-width: 540px) {
-  .site-header .nav {
-    min-height: 112px !important;
-  }
+    .site-header .nav {
+        min-height: 82px !important;
+        height: auto !important;
+        padding: 8px 12px !important;
+    }
 
-  .site-header .brand-logo-img {
-    width: 108px !important;
-    height: 100px !important;
-    max-width: 108px !important;
-    max-height: 100px !important;
-    object-fit: contain !important;
-    flex-shrink: 0;
-  }
+    .site-header .brand {
+        max-width: 100%;
+    }
+
+    .site-header .brand-logo-img {
+        width: min(180px, 55vw) !important;
+        height: auto !important;
+        max-width: 180px !important;
+        max-height: 68px !important;
+        object-fit: contain !important;
+    }
 }
