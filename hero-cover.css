@@ -199,20 +199,85 @@
     margin: 10px auto 0;
   }
 }
+
 /* Увеличенный логотип БФ «ЯРИЛО» */
+
+.site-header .nav {
+    min-height: 112px !important;
+    height: auto !important;
+    box-sizing: border-box;
+}
+
+.site-header .brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
 .site-header .brand-logo-img {
-    width: 72px !important;
-    height: 72px !important;
-    max-width: none !important;
-    object-fit: contain;
     display: block;
+    width: 108px !important;
+    height: 100px !important;
+    max-width: 108px !important;
+    max-height: 100px !important;
+    object-fit: contain !important;
     flex-shrink: 0;
 }
 
-/* Размер логотипа на телефонах */
+/* Мобильная версия */
+
 @media (max-width: 540px) {
-    .site-header .brand-logo-img {
-        width: 60px !important;
-        height: 60px !important;
+    .site-header .nav {
+        min-height: 88px !important;
     }
+
+    .site-header .brand-logo-img {
+        width: 88px !important;
+        height: 82px !important;
+        max-width: 88px !important;
+        max-height: 82px !important;
+    }
+}
+
+/* Увеличенный логотип БФ «ЯРИЛО» */
+
+.site-header .nav {
+    min-height: 112px !important;
+    height: auto !important;
+    box-sizing: border-box;
+}
+
+.site-header .brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.site-header .brand-logo-img {
+    display: block;
+    width: 108px !important;
+    height: 100px !important;
+    max-width: 108px !important;
+    max-height: 100px !important;
+    object-fit: contain !important;
+    flex-shrink: 0;
+}
+
+/* Мобильная версия */
+
+@media (max-width: 540px) {
+  .site-header .nav {
+    min-height: 112px !important;
+  }
+
+  .site-header .brand-logo-img {
+    width: 108px !important;
+    height: 100px !important;
+    max-width: 108px !important;
+    max-height: 100px !important;
+    object-fit: contain !important;
+    flex-shrink: 0;
+  }
 }
