@@ -295,7 +295,8 @@ window.YARILO = {
           "text": "Фонд передаёт подарки и необходимые товары учреждениям в городах Московской области.",
           "link": "",
           "photos": [
-            "uploads/admin-297d4529-62ba-41b8-9200-ac2dab46a695.webp"
+            "uploads/admin-297d4529-62ba-41b8-9200-ac2dab46a695.webp",
+            "uploads/admin-e476b22d-1893-424e-aeba-7fa503120ed8.webp"
           ],
           "videos": [],
           "mediaDescriptions": {}
