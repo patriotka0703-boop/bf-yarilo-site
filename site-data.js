@@ -282,7 +282,8 @@ window.YARILO = {
           "text": "Подгузники, пелёнки, средства ухода и моющие средства нужны на постоянной основе.",
           "link": "",
           "photos": [
-            "uploads/admin-0935207e-940a-4c68-be6f-2d457326fb33.webp"
+            "uploads/admin-0935207e-940a-4c68-be6f-2d457326fb33.webp",
+            "uploads/admin-3498b79a-73cc-4db7-a3b1-27ab2d3cf1ab.webp"
           ],
           "videos": [],
           "mediaDescriptions": {}
