@@ -422,6 +422,34 @@
       const gallery=text('div','','publication-media');media(gallery,item);card.append(gallery);
       if(item.link){const href=M.safeURL(item.link);if(href){const link=text('a','Подробнее →','text-link');link.href=href;card.append(link);}}
       grid.append(card);
+      if (publicationKind === 'news') {
+  const paragraphs = [...card.children];
+  const titleIndex = paragraphs.findIndex(el => el.tagName === 'H2');
+  const body = paragraphs.slice(titleIndex + 1);
+  const fullText = item.text || '';
+
+  const preview = document.createElement('p');
+  preview.textContent = fullText.length > 220
+    ? fullText.slice(0, 220) + '…'
+    : fullText;
+
+  const details = document.createElement('details');
+  const summary = document.createElement('summary');
+  summary.textContent = 'Читать полностью';
+  summary.className = 'text-link';
+  summary.style.cssText = 'cursor:pointer;padding:12px 0';
+
+  details.append(summary, ...body);
+  card.append(preview, details);
+
+  details.addEventListener('toggle', () => {
+    preview.hidden = details.open;
+    summary.textContent = details.open
+      ? 'Свернуть новость'
+      : 'Читать полностью';
+    card.style.gridColumn = details.open ? '1 / -1' : '';
+  });
+}
     }}
   }
   // The homepage cover and donation overlay are managed by hero-cover.js.
