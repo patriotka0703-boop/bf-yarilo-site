@@ -293,17 +293,85 @@ return null;
   function status(message, type='info') { $('status').textContent=message; $('status').className='status '+type; }
   function lock(value) { busy=value; $('editorPanel').querySelectorAll('input,textarea,select,button').forEach(e=>e.disabled=value); $('loginButton').disabled=value; }
   function changed() { dirty=true; status('Есть несохранённые изменения. Нажмите «Сохранить изменения».'); }
-  async function api(endpoint, options={}) {
-    let response;
-    try { response=await fetch(WORKER+endpoint, {...options, cache:'no-store', signal:AbortSignal.timeout(120000), headers:{Authorization:'Bearer '+token,...options.headers}}); }
-    catch { throw new Error('Не удалось связаться с сервером. Проверьте интернет и повторите действие. Ваши изменения остаются в форме.'); }
-    const result=await response.json().catch(()=>({message:'Сервер вернул неверный ответ.'}));
-    if (!response.ok) {
-      if (response.status===401) { token=''; storage.remove('yarilo_session'); $('loginPanel').classList.remove('hidden'); }
-      throw new Error(result.message || 'Ошибка сервера ('+response.status+').');
+   async function api(endpoint, options = {}) {
+    const controller = new AbortController();
+    const timeout = setTimeout(
+      () => controller.abort(),
+      ['/me', '/data', '/health'].includes(endpoint) ? 15000 : 120000
+    );
+
+    try {
+      const response = await fetch(WORKER + endpoint, {
+        ...options,
+        cache: 'no-store',
+        signal: controller.signal,
+        headers: {
+          Authorization: 'Bearer ' + token,
+          ...options.headers
+        }
+      });
+
+      if (response.status === 401) {
+        token = '';
+        storage.remove('yarilo_session');
+        $('loginPanel').classList.remove('hidden');
+        throw new Error(
+          'Срок входа истёк. Нажмите «Войти через GitHub».'
+        );
+      }
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result?.message || 'Ошибка сервера: ' + response.status
+        );
+      }
+
+      if (!result || typeof result !== 'object') {
+        throw new Error('Сервер вернул неверный ответ.');
+      }
+
+      if (endpoint === '/data' && (
+        !result.data ||
+        typeof result.data !== 'object' ||
+        Array.isArray(result.data) ||
+        typeof result.sha !== 'string' ||
+        !result.sha
+      )) {
+        throw new Error(
+          'Сервер не передал данные сайта. Повторите вход.'
+        );
+      }
+
+      return result;
+    } catch (error) {
+      if (controller.signal.aborted) {
+        throw new Error(
+          'Сервер не ответил вовремя. Повторите действие. ' +
+          'Если вход не завершён, нажмите «Войти через GitHub».'
+        );
+      }
+
+      if (error instanceof TypeError) {
+        throw new Error(
+          'Нет связи с сервером. Повторите действие. ' +
+          'Несохранённые изменения остаются в форме.'
+        );
+      }
+
+      if (error instanceof SyntaxError) {
+        throw new Error(
+          'Сервер вернул повреждённый ответ. Повторите действие.'
+        );
+      }
+
+      throw error;
+    } finally {
+      clearTimeout(timeout);
     }
-    return result;
   }
+  
   function post(endpoint, value) { return api(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)}); }
   function videoBatch(value,provider) {
     const entries=[];
