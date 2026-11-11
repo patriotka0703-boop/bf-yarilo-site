@@ -347,9 +347,13 @@ return null;
       return result;
     } catch (error) {
       if (controller.signal.aborted) {
-        throw new Error(
-          'Сервер не ответил вовремя. Повторите действие. ' +
-          'Если вход не завершён, нажмите «Войти через GitHub».'
+               throw new Error(
+          'Нет ответа: ' + endpoint + '. ' +
+          (endpoint === '/me'
+            ? 'Не завершилась проверка сеанса GitHub.'
+            : endpoint === '/data'
+              ? 'Не завершилась загрузка данных сайта из GitHub.'
+              : 'Не завершился запрос к серверу.')
         );
       }
 
