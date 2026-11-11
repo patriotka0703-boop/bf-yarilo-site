@@ -728,7 +728,17 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
       }
       token=storage.get('yarilo_session');if(!token)return;
       lock(true);const user=await api('/me');$('githubUser').textContent=user.name||user.login;
-      await loadData();$('loginPanel').classList.add('hidden');$('editorPanel').classList.remove('hidden');
+      $('loginPanel').classList.add('hidden');
+$('editorPanel').classList.remove('hidden');
+
+try {
+  await loadData();
+} catch (e) {
+  status(
+    e.message + ' Нажмите «Повторить загрузку данных».',
+    'error'
+  );
+}
     }catch(e){status(e.message,'error');}finally{lock(false);}
   })();
 })();
