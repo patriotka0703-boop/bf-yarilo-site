@@ -445,7 +445,7 @@ return null;
     items.forEach((item,index)=>{
       const card=element('section',undefined,'report-editor publication-editor');card.dataset.publicationId=item.id;
       card.append(element('h3',(kind==='news'?'Новость ':'Проект ')+(index+1)));
-      for(const [key,label,type,max]of [['title','Название','input',200],['date','Дата (необязательно)','input',10],['label',kind==='news'?'Метка (необязательно)':'Статус проекта','input',100],['text','Текст','textarea',10000],['link','Ссылка «Подробнее» (необязательно)','input',2000]]) {
+      for(const [key,label,type,max]of [['title','Название','input',200],['date','Дата (необязательно)','input',10],['label',kind==='news'?'Метка (необязательно)':'Статус проекта','input',100],['text','Текст','textarea',100000],['link','Ссылка «Подробнее» (необязательно)','input',2000]]) {
         const field=element(type),caption=element('label',label);field.id=kind+'-'+item.id+'-'+key;caption.htmlFor=field.id;field.maxLength=max;
         if(key==='date')field.type='date';if(key==='link')field.placeholder='help.html или https://…';field.value=item[key];
         field.oninput=()=>{publicationFor(kind,item.id)[key]=field.value;changed();};card.append(caption,field);
