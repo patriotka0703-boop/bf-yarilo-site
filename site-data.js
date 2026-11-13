@@ -76,7 +76,9 @@ window.YARILO = {
         "uploads/admin-18b84117-ca8c-4c44-9b24-2a97a49d1296.jpg",
         "uploads/admin-02ac77ad-0a75-46f5-82fa-6ad0b5efa6b1.webp"
       ],
-      "videos": [],
+      "videos": [
+        "https://rutube.ru/play/embed/22684ac496e915aeabc9191d61fc23ac"
+      ],
       "pageTitle": "Помощь детям и взрослым с инвалидностью",
       "pageText": "Поддерживаем людей, которым постоянно нужны средства ухода и расходные материалы, особое питание.",
       "mediaDescriptions": {
