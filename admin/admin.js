@@ -229,7 +229,7 @@ return null;
         const ids=new Set();
         for(const item of page.items) {
           if(!item||typeof item!=='object'||Array.isArray(item)||typeof item.id!=='string'||!/^post-[a-f0-9-]{8,64}$/.test(item.id)||ids.has(item.id))throw new Error('Некорректная или повторяющаяся запись в разделе «'+title+'».');ids.add(item.id);
-          for(const [key,limit]of [['title',200],['label',100],['text',10000],['link',2000],['date',10]])if(typeof item[key]!=='string'||item[key].length>limit)throw new Error('Проверьте поля новости или проекта.');
+          for(const [key,limit]of [['title',200],['label',100],['text',100000],['link',2000],['date',10]])if(typeof item[key]!=='string'||item[key].length>limit)throw new Error('Проверьте поля новости или проекта.');
           if(!item.title.trim())throw new Error('Укажите название новости или проекта.');
           if(item.link&&!safeURL(item.link))throw new Error('Укажите безопасную ссылку новости или проекта.');
           if(item.date&&(!/^\d{4}-\d{2}-\d{2}$/.test(item.date)||!Number.isFinite(Date.parse(item.date+'T12:00:00Z'))||new Date(item.date+'T12:00:00Z').toISOString().slice(0,10)!==item.date))throw new Error('Укажите корректную дату новости или проекта.');
