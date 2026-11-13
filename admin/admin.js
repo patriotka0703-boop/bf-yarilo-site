@@ -195,7 +195,7 @@ return null;
       if (!d[key] || typeof d[key] !== 'object' || Array.isArray(d[key])) throw new Error('Отсутствует раздел: ' + key);
     }
     if(d.home.coverImage && !/^uploads\/admin-[a-f0-9-]+\.(jpe?g|png|webp)$/i.test(d.home.coverImage))throw new Error('Некорректное фото главной страницы.');
-    if (JSON.stringify(d).length > 500000) throw new Error('Слишком большой объём текстовых данных.');
+    if (JSON.stringify(d).length >2000000) throw new Error('Слишком большой объём текстовых данных.');
     if (d.documents !== undefined) {
       if (!d.documents || typeof d.documents !== 'object' || Array.isArray(d.documents)) throw new Error('Некорректный раздел документов.');
       for (const [key,title] of Object.entries(documentKinds)) {
