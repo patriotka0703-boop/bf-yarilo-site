@@ -44,11 +44,8 @@
       const hash=u.searchParams.get('hash');if(hash&&/^[a-zA-Z0-9_-]{1,128}$/.test(hash))params.set('hash',hash);
       return {provider:'ВК',embed:'https://vk.ru/video_ext.php?'+params,url:'https://vk.ru/video'+oid+'_'+vid};
     }
-    
     if (host === 'rutube.ru') {
-     
 const match = u.pathname.match(/^\/(?:video|shorts|play\/embed)\/([a-f0-9]{32}|[a-f0-9-]{36})\/?$/i);
-
       if (!match) return null;
       const id = match[1].toLowerCase();
       return {
@@ -776,9 +773,10 @@ lock(true);
     status('Повторная загрузка данных сайта…');
     try {
       await loadData();
-      $('editorPanel').classList.remove('hidden');
-      $('loginPanel').classList.add('hidden');
-        } catch (e) {
+     $('editorPanel').classList.remove('hidden');
+$('loginPanel').classList.add('hidden');
+$('reloadPanel').classList.add('hidden');
+} catch (e) {
       $('editorPanel').classList.add('hidden');
       $('reloadPanel').classList.remove('hidden');
       status(e.message, 'error');
@@ -790,8 +788,8 @@ lock(true);
 
   $('retryDataButton').onclick = async () => {
     if (busy || !token) return;
-
-    lock(true);
+dataLoaded = false;
+lock(true);
     $('retryDataButton').disabled = true;
     status('Повторная загрузка данных сайта…');
 
@@ -837,8 +835,9 @@ if (!token) {
   return;
 }
 
-      lock(true);
-      const user = await api('/me');
+    dataLoaded = false;
+lock(true);
+const user = await api('/me');
       $('githubUser').textContent = user.name || user.login;
 
       $('editorPanel').classList.add('hidden');
