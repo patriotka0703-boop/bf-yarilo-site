@@ -732,13 +732,11 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
       await loadData();
       $('editorPanel').classList.remove('hidden');
       $('loginPanel').classList.add('hidden');
-    } catch (e) {
+        } catch (e) {
+      $('editorPanel').classList.add('hidden');
+      $('reloadPanel').classList.remove('hidden');
       status(e.message, 'error');
-
-      if (!data || !sha) {
-        $('editorPanel').classList.add('hidden');
-        $('loginPanel').classList.remove('hidden');
-      }
+    }
     } finally {
       lock(false);
     }
