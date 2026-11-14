@@ -823,9 +823,7 @@ lock(true);
         if(!expected || hash.get('nonce')!==expected)throw new Error('Не удалось подтвердить вход. Нажмите «Войти через GitHub» ещё раз.');
         storage.set('yarilo_session',received);
       }
-   if (!received) {
-  storage.remove('yarilo_session');
-}
+  
 
 token = storage.get('yarilo_session');
 
