@@ -747,7 +747,17 @@ $('reloadButton').onclick = async () => {
         if(!expected || hash.get('nonce')!==expected)throw new Error('Не удалось подтвердить вход. Нажмите «Войти через GitHub» ещё раз.');
         storage.set('yarilo_session',received);
       }
-      token=storage.get('yarilo_session');if(!token)return;
+   if (!received) {
+  storage.remove('yarilo_session');
+}
+
+token = storage.get('yarilo_session');
+
+if (!token) {
+  $('loginPanel').classList.remove('hidden');
+  $('editorPanel').classList.add('hidden');
+  return;
+}
       lock(true);const user=await api('/me');$('githubUser').textContent=user.name||user.login;
       $('loginPanel').classList.add('hidden');
 $('editorPanel').classList.remove('hidden');
