@@ -330,12 +330,11 @@ function lock(value) {
     const controller = new AbortController();
     const timeout = setTimeout(
       () => controller.abort(),
-        
-endpoint === '/data' ? 12000
-: endpoint === '/me' ? 12000
+    endpoint === '/data' ? 60000
+: endpoint === '/me' ? 30000
 : endpoint === '/health' ? 10000
+: 120000    
 
-        : 120000
     );
 
     try {
@@ -702,7 +701,7 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
   }
 
 async function apiWithRetry(endpoint) {
-  for (let attempt = 1; attempt <= 3; attempt++) {
+  for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       return await api(endpoint);
     } catch (error) {
@@ -710,10 +709,9 @@ async function apiWithRetry(endpoint) {
         error.message.startsWith('Нет ответа:') ||
         error.message.startsWith('Нет связи с сервером.');
 
-      if (!retryable || attempt === 3) throw error;
+     if (!retryable || attempt === 2) throw error;
 
-      status('Соединение нестабильно. Повторяю запрос ' +
-        attempt + ' из 2…');
+    status('Сервер отвечает медленно. Повторяю запрос…');
 
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
@@ -823,8 +821,8 @@ $('loginPanel').classList.add('hidden');
 $('reloadPanel').classList.add('hidden');
 } catch (e) {
       $('editorPanel').classList.add('hidden');
-          $('reloadPanel').classList.toggle('hidden', !token);
-      $('loginPanel').classList.toggle('hidden', !!token);
+         $('reloadPanel').classList.toggle('hidden', !!token);
+$('loginPanel').classList.toggle('hidden', !token);
       status(e.message, 'error');
     } finally {
       lock(false);
@@ -845,8 +843,8 @@ lock(true);
       $('editorPanel').classList.remove('hidden');
     } catch (e) {
       $('editorPanel').classList.add('hidden');
-          $('reloadPanel').classList.toggle('hidden', !token);
-      $('loginPanel').classList.toggle('hidden', !!token);
+         $('reloadPanel').classList.toggle('hidden', !!token);
+$('loginPanel').classList.toggle('hidden', !token);
       status(e.message, 'error');
     } finally {
       lock(false);
