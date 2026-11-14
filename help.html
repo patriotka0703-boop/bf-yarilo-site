@@ -32,8 +32,7 @@ ym(113599500,'init',{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:tr
 <section class="page-hero"><div class="container narrow"><p class="breadcrumbs"><a href="index.html">Главная</a> / Кому помогаем</p><p class="eyebrow">Направления помощи</p><h1>Кому помогает фонд «Ярило»</h1><p class="lead">Работаем с конкретными потребностями людей и организаций.</p></div></section>
 <section class="section"><div class="container"><div class="cards two">
 <article class="card direction-card"><h2><a id="disabled-title" href="help-disabled.html">Детям и взрослым с инвалидностью</a></h2><p id="disabled-text">Средства ухода, пелёнки, подгузники, противопролежневые матрасы, влажные салфетки и моющие средства.</p><a class="more" href="help-disabled.html">Подробнее →</a></article>
-<article class="card direction-card"><h2><a id="rehab-title" href="help-rehab.html">Реабилитационным центрам</a></h2><p id="rehab-text">Подарки, предметы ухода, расходные материалы и бытовая химия.</p><a class="more" href="help-rehab.html">Подробнее →</a></article>
-<article class="card direction-card"><h2><a id="hospitals-title" href="help-hospitals.html">Медицинским учреждениям и пациентам</a></h2><p id="hospitals-text">Постельное бельё, ткань, стиральные машины, порошки и другие необходимые вещи.</p><a class="more" href="help-hospitals.html">Подробнее →</a></article>
+<article class="card direction-card"><h2><a id="rehab-title" href="help-crisis.html">Гуманитарная помощь мирным жителям прифронтовых и приграничных районов</a></h2><p id="rehab-text">Продукты питания, питьевая вода, средства гигиены, бытовая химия и предметы первой необходимости.</p><a class="more" href="help-crisis.html">Подробнее →</a></article>
 
 <article class="card direction-card"><h2><a id="crisis-title" href="otchety-pomoshch-frontu.html">Помощь фронту</a></h2><p id="crisis-text">БФ «ЯРИЛО» поддерживает наших бойцов, находящихся на передовой. Мы знаем, что необходимые вещи не всегда удаётся получить вовремя, а помощь порой нужна здесь и сейчас. Волонтёры фонда стараются быстрее откликаться на просьбы бойцов, собирать и лично доставлять всё необходимое, не дожидаясь длительных процедур обеспечения. Наша поддержка — это не просто передача вещей, а забота о тех, кто ежедневно рискует своей жизнью. Своих не оставляем!</p><a class="more" href="otchety-pomoshch-frontu.html">Подробнее →</a></article>
 
@@ -52,7 +51,7 @@ ym(113599500,'init',{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:tr
   if(data.foundation){setText('foundation-short-name',data.foundation.shortName);setText('footer-short-name',data.foundation.shortName);setText('foundation-slogan',data.foundation.slogan);setText('footer-region',data.foundation.region);const phone=document.getElementById('foundation-phone');if(phone&&data.foundation.phone){phone.textContent=data.foundation.phone;phone.href='tel:'+(data.foundation.phoneLink||data.foundation.phone);}}
   if(data.help){
     if(data.help.disabled){setText('disabled-title',data.help.disabled.title);setText('disabled-text',data.help.disabled.text);}
-    if(data.help.rehab){setText('rehab-title',data.help.rehab.title);setText('rehab-text',data.help.rehab.text);}
+    
     if(data.help.hospitals){setText('hospitals-title',data.help.hospitals.title);setText('hospitals-text',data.help.hospitals.text);}
     // Админка хранит четвёртую карточку под ключом crisis.
     // Старые значения не должны возвращать удалённую тему.
