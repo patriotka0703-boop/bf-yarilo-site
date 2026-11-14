@@ -298,7 +298,15 @@ return null;
   const getPath = (obj, p) => p.split('.').reduce((v,k)=>v?.[k], obj);
   function putPath(obj, p, value) { const keys=p.split('.'); const last=keys.pop(); const parent=keys.reduce((v,k)=>(v[k] ||= {}),obj); parent[last]=value; }
   function status(message, type='info') { $('status').textContent=message; $('status').className='status '+type; }
-  function lock(value) { busy=value; $('editorPanel').querySelectorAll('input,textarea,select,button').forEach(e=>e.disabled=value); $('loginButton').disabled=value; }
+ 
+function lock(value) {
+  busy = value;
+  const ready = !!(data && sha);
+  $('editorPanel').querySelectorAll('input,textarea,select,button')
+    .forEach(e => e.disabled = value || !ready);
+  $('loginButton').disabled = value;
+}
+
   function changed() { dirty=true; status('Есть несохранённые изменения. Нажмите «Сохранить изменения».'); }
    async function api(endpoint, options = {}) {
     const controller = new AbortController();
