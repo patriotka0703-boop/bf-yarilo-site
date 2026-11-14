@@ -744,6 +744,28 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     }
   };
 
+  $('retryDataButton').onclick = async () => {
+    if (busy || !token) return;
+
+    lock(true);
+    $('retryDataButton').disabled = true;
+    status('Повторная загрузка данных сайта…');
+
+    try {
+      await loadData();
+      $('reloadPanel').classList.add('hidden');
+      $('loginPanel').classList.add('hidden');
+      $('editorPanel').classList.remove('hidden');
+    } catch (e) {
+      $('editorPanel').classList.add('hidden');
+      $('reloadPanel').classList.remove('hidden');
+      status(e.message, 'error');
+    } finally {
+      lock(false);
+      $('retryDataButton').disabled = false;
+    }
+  };
+
   $('logoutButton').onclick=()=>{if(dirty&&!confirm('Выйти без сохранения изменений?'))return;storage.remove('yarilo_session');dirty=false;location.replace(location.pathname);};
   $('editorPanel').addEventListener('input',changed);
   window.addEventListener('beforeunload',e=>{if(dirty||busy){e.preventDefault();e.returnValue='';}});
