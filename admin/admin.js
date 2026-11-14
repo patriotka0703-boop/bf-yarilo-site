@@ -330,9 +330,11 @@ function lock(value) {
     const controller = new AbortController();
     const timeout = setTimeout(
       () => controller.abort(),
-         endpoint === '/data' ? 60000
-        : endpoint === '/me' ? 45000
-        : endpoint === '/health' ? 15000
+        
+endpoint === '/data' ? 12000
+: endpoint === '/me' ? 12000
+: endpoint === '/health' ? 10000
+
         : 120000
     );
 
@@ -699,8 +701,27 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     finally {renderMedia(container);lock(false);}
   }
 
+async function apiWithRetry(endpoint) {
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      return await api(endpoint);
+    } catch (error) {
+      const retryable =
+        error.message.startsWith('Нет ответа:') ||
+        error.message.startsWith('Нет связи с сервером.');
+
+      if (!retryable || attempt === 3) throw error;
+
+      status('Соединение нестабильно. Повторяю запрос ' +
+        attempt + ' из 2…');
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+  }
+}
+
 async function loadData() {
-  const result = await api('/data');
+ const result = await apiWithRetry('/data');
 
   if (
     !result ||
@@ -864,7 +885,7 @@ if (!token) {
     dataLoaded = false;
 lock(true);
 status('Проверяю вход через GitHub…');
-const user = await api('/me');
+const user = await apiWithRetry('/me');
 if (user) {
   $('githubUser').textContent = user.name || user.login;
 }
