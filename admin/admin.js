@@ -285,7 +285,14 @@ return null;
     return;
   }
   const $ = id => document.getElementById(id);
-  const storage = {get:k=>sessionStorage.getItem(k)||'', set:(k,v)=>sessionStorage.setItem(k,v), remove:k=>sessionStorage.removeItem(k)};
+  const storage = {
+  get: k => (k === 'yarilo_login_nonce' ? sessionStorage : localStorage).getItem(k) || '',
+  set: (k, v) => (k === 'yarilo_login_nonce' ? sessionStorage : localStorage).setItem(k, v),
+  remove: k => {
+    sessionStorage.removeItem(k);
+    localStorage.removeItem(k);
+  }
+};
   let token = '', data, sha = '', dirty = false, busy = false, savedDocuments = '', savedReports = '', savedPublications = '';
   const uploads = new Map(), previews = new Map();
   const getPath = (obj, p) => p.split('.').reduce((v,k)=>v?.[k], obj);
