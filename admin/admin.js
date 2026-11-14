@@ -875,13 +875,19 @@ lock(true);
           );
         }
       }
-token = storage.get('yarilo_session');
 
-if (!token) {
+if (!received) {
+  storage.remove('yarilo_session');
+  token = '';
   $('loginPanel').classList.remove('hidden');
   $('editorPanel').classList.add('hidden');
+  $('reloadPanel').classList.add('hidden');
+  status('Для доступа к админке нажмите «Войти через GitHub».');
   return;
 }
+
+token = storage.get('yarilo_session');
+
     dataLoaded = false;
 lock(true);
 status('Проверяю вход через GitHub…');
