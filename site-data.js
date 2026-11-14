@@ -447,16 +447,28 @@ window.YARILO = {
       "description": "Отчётность о деятельности фонда",
       "files": [
         {
-          "path": "uploads/admin-d703e9cd-785e-4f19-8a5d-d321cfce801e.pdf",
-          "name": "03_Finansovyy_otchet_BF_YARILO_2025.pdf",
-          "title": "Финансовый отчёт БФ «ЯРИЛО» за 2025 год",
-          "size": 78414
+          "path": "uploads/admin-b62c997e-1071-43b3-a93d-8915cf08df14.pdf",
+          "name": "1 финансовый отчет 20225.pdf",
+          "title": "1 финансовый отчет 20225",
+          "size": 202711
         },
         {
-          "path": "uploads/admin-bc1081aa-4c77-4927-95e0-65610a749ff9.pdf",
-          "name": "01_Godovoy_otchet_BF_YARILO_2025.pdf",
-          "title": "Годовой отчёт БФ «ЯРИЛО» за 2025 год",
-          "size": 77552
+          "path": "uploads/admin-4341fe74-92ea-455c-b7e1-eef3866beb98.jpg",
+          "name": "годовой отчет в минюст 2025.jpg",
+          "title": "годовой отчет в минюст 2025",
+          "size": 911645
+        },
+        {
+          "path": "uploads/admin-ff27641d-bb6f-4a4f-9810-93cdcd29007a.jpg",
+          "name": "отчет за 2025.jpg",
+          "title": "отчет за 2025",
+          "size": 915802
+        },
+        {
+          "path": "uploads/admin-dc28c14e-a2eb-4ccd-9110-0824a1db7355.jpg",
+          "name": "отчет о предоставленной помощи 2025.jpg",
+          "title": "отчет о предоставленной помощи 2025",
+          "size": 815402
         }
       ]
     },
