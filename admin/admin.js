@@ -282,14 +282,35 @@ return null;
     return;
   }
   const $ = id => document.getElementById(id);
-  const storage = {
-  get: k => (k === 'yarilo_login_nonce' ? sessionStorage : localStorage).getItem(k) || '',
-  set: (k, v) => (k === 'yarilo_login_nonce' ? sessionStorage : localStorage).setItem(k, v),
-  remove: k => {
-    sessionStorage.removeItem(k);
-    localStorage.removeItem(k);
-  }
-};
+    const storage = {
+    get: k => {
+      try {
+        const target = k === 'yarilo_login_nonce'
+          ? sessionStorage
+          : localStorage;
+        return target.getItem(k) || '';
+      } catch {
+        return '';
+      }
+    },
+
+    set: (k, v) => {
+      const target = k === 'yarilo_login_nonce'
+        ? sessionStorage
+        : localStorage;
+      target.setItem(k, v);
+    },
+
+    remove: k => {
+      try {
+        sessionStorage.removeItem(k);
+      } catch {}
+
+      try {
+        localStorage.removeItem(k);
+      } catch {}
+    }
+  };
  let token = '', data, sha = '', dirty = false, busy = false, dataLoaded = false, savedDocuments = '', savedReports = '', savedPublications = '';
   const uploads = new Map(), previews = new Map();
   const getPath = (obj, p) => p.split('.').reduce((v,k)=>v?.[k], obj);
@@ -309,7 +330,10 @@ function lock(value) {
     const controller = new AbortController();
     const timeout = setTimeout(
       () => controller.abort(),
-   endpoint === '/data' ? 60000 : ['/me', '/health'].includes(endpoint) ? 15000 : 120000
+         endpoint === '/data' ? 60000
+        : endpoint === '/me' ? 45000
+        : endpoint === '/health' ? 15000
+        : 120000
     );
 
     try {
@@ -778,9 +802,9 @@ $('loginPanel').classList.add('hidden');
 $('reloadPanel').classList.add('hidden');
 } catch (e) {
       $('editorPanel').classList.add('hidden');
-      $('reloadPanel').classList.remove('hidden');
+          $('reloadPanel').classList.toggle('hidden', !token);
+      $('loginPanel').classList.toggle('hidden', !!token);
       status(e.message, 'error');
-    
     } finally {
       lock(false);
     }
@@ -800,7 +824,8 @@ lock(true);
       $('editorPanel').classList.remove('hidden');
     } catch (e) {
       $('editorPanel').classList.add('hidden');
-      $('reloadPanel').classList.remove('hidden');
+          $('reloadPanel').classList.toggle('hidden', !token);
+      $('loginPanel').classList.toggle('hidden', !!token);
       status(e.message, 'error');
     } finally {
       lock(false);
@@ -821,10 +846,14 @@ lock(true);
       if(received) {
         const expected=storage.get('yarilo_login_nonce');storage.remove('yarilo_login_nonce');
         if(!expected || hash.get('nonce')!==expected)throw new Error('Не удалось подтвердить вход. Нажмите «Войти через GitHub» ещё раз.');
-        storage.set('yarilo_session',received);
+                try {
+          storage.set('yarilo_session', received);
+        } catch {
+          throw new Error(
+            'Браузер запретил сохранение сеанса. Разрешите хранение данных для bf-yarilo.ru и повторите вход.'
+          );
+        }
       }
-  
-
 token = storage.get('yarilo_session');
 
 if (!token) {
@@ -832,30 +861,25 @@ if (!token) {
   $('editorPanel').classList.add('hidden');
   return;
 }
-
     dataLoaded = false;
 lock(true);
-
-const user = await api('/me').catch(() => null);
+status('Проверяю вход через GitHub…');
+const user = await api('/me');
 if (user) {
   $('githubUser').textContent = user.name || user.login;
 }
-
       $('editorPanel').classList.add('hidden');
       $('loginPanel').classList.add('hidden');
-
       try {
         await loadData();
         $('editorPanel').classList.remove('hidden');
-     
       } catch (e) {
-        $('editorPanel').classList.add('hidden');
-        $('loginPanel').classList.add('hidden');
-        $('reloadPanel').classList.remove('hidden');
+              $('editorPanel').classList.add('hidden');
+        $('loginPanel').classList.toggle('hidden', !!token);
+        $('reloadPanel').classList.toggle('hidden', !token);
 
         status(e.message, 'error');
       }
-
     } catch (e) {
       $('editorPanel').classList.add('hidden');
       $('loginPanel').classList.remove('hidden');
@@ -866,8 +890,6 @@ if (user) {
       
   })();
 })();
-
-
 /* YARILO programs admin shortcut 20261007.1 */
 (()=>{
   function addProgramsShortcut(){
