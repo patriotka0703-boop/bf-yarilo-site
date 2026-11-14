@@ -51,8 +51,6 @@ ym(113599500,'init',{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:tr
   if(data.foundation){setText('foundation-short-name',data.foundation.shortName);setText('footer-short-name',data.foundation.shortName);setText('foundation-slogan',data.foundation.slogan);setText('footer-region',data.foundation.region);const phone=document.getElementById('foundation-phone');if(phone&&data.foundation.phone){phone.textContent=data.foundation.phone;phone.href='tel:'+(data.foundation.phoneLink||data.foundation.phone);}}
   if(data.help){
     if(data.help.disabled){setText('disabled-title',data.help.disabled.title);setText('disabled-text',data.help.disabled.text);}
-    
-    if(data.help.hospitals){setText('hospitals-title',data.help.hospitals.title);setText('hospitals-text',data.help.hospitals.text);}
     // Админка хранит четвёртую карточку под ключом crisis.
     // Старые значения не должны возвращать удалённую тему.
     if(data.help.crisis){
