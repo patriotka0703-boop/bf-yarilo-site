@@ -874,9 +874,9 @@ $('loginPanel').classList.toggle('hidden', !token);
         }
       }
 
-if (!received) {
-  storage.remove('yarilo_session');
-  token = '';
+token = storage.get('yarilo_session');
+
+if (!token) {
   $('loginPanel').classList.remove('hidden');
   $('editorPanel').classList.add('hidden');
   $('reloadPanel').classList.add('hidden');
