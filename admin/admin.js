@@ -717,21 +717,33 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     }catch{status('Не удалось проверить публикацию. Сохранённые в GitHub данные не изменены.','error');}finally{lock(false);}
   };
   $('addAccount').onclick=()=>{data=collect();data.requisites.accounts.push({label:'',recipient:data.foundation.name,bank:'',account:'',bik:'',correspondent:'',currency:'RUB',purpose:''});changed();renderAccounts();};
-$('reloadButton').onclick = async () => {
-  if (busy) return;
-  if (dirty && !confirm('Загрузить сохранённые данные и отменить изменения в форме?')) return;
 
-  lock(true);
-  status('Повторная загрузка данных сайта…');
+  $('reloadButton').onclick = async () => {
+    if (busy) return;
 
-  try {
-    await loadData();
-  } catch (e) {
-    status(e.message, 'error');
-  } finally {
-    lock(false);
-  }
-};
+    if (dirty && !confirm(
+      'Загрузить сохранённые данные и отменить изменения в форме?'
+    )) return;
+
+    lock(true);
+    status('Повторная загрузка данных сайта…');
+
+    try {
+      await loadData();
+      $('editorPanel').classList.remove('hidden');
+      $('loginPanel').classList.add('hidden');
+    } catch (e) {
+      status(e.message, 'error');
+
+      if (!data || !sha) {
+        $('editorPanel').classList.add('hidden');
+        $('loginPanel').classList.remove('hidden');
+      }
+    } finally {
+      lock(false);
+    }
+  };
+
   $('logoutButton').onclick=()=>{if(dirty&&!confirm('Выйти без сохранения изменений?'))return;storage.remove('yarilo_session');dirty=false;location.replace(location.pathname);};
   $('editorPanel').addEventListener('input',changed);
   window.addEventListener('beforeunload',e=>{if(dirty||busy){e.preventDefault();e.returnValue='';}});
