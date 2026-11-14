@@ -835,8 +835,11 @@ if (!token) {
 
     dataLoaded = false;
 lock(true);
-const user = await api('/me');
-      $('githubUser').textContent = user.name || user.login;
+
+const user = await api('/me').catch(() => null);
+if (user) {
+  $('githubUser').textContent = user.name || user.login;
+}
 
       $('editorPanel').classList.add('hidden');
       $('loginPanel').classList.add('hidden');
