@@ -803,14 +803,15 @@ if (!token) {
       try {
         await loadData();
         $('editorPanel').classList.remove('hidden');
+     
       } catch (e) {
         $('editorPanel').classList.add('hidden');
-        $('loginPanel').classList.remove('hidden');
-        status(
-          e.message + ' Повторите вход через GitHub.',
-          'error'
-        );
+        $('loginPanel').classList.add('hidden');
+        $('reloadPanel').classList.remove('hidden');
+
+        status(e.message, 'error');
       }
+
     } catch (e) {
       $('editorPanel').classList.add('hidden');
       $('loginPanel').classList.remove('hidden');
