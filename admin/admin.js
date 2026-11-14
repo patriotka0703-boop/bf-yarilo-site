@@ -758,19 +758,33 @@ if (!token) {
   $('editorPanel').classList.add('hidden');
   return;
 }
-      lock(true);const user=await api('/me');$('githubUser').textContent=user.name||user.login;
-      $('loginPanel').classList.add('hidden');
-$('editorPanel').classList.remove('hidden');
 
-try {
-  await loadData();
-} catch (e) {
-  status(
-    e.message + ' Нажмите «Повторить загрузку данных».',
-    'error'
-  );
-}
-    }catch(e){status(e.message,'error');}finally{lock(false);}
+      lock(true);
+      const user = await api('/me');
+      $('githubUser').textContent = user.name || user.login;
+
+      $('editorPanel').classList.add('hidden');
+      $('loginPanel').classList.add('hidden');
+
+      try {
+        await loadData();
+        $('editorPanel').classList.remove('hidden');
+      } catch (e) {
+        $('editorPanel').classList.add('hidden');
+        $('loginPanel').classList.remove('hidden');
+        status(
+          e.message + ' Повторите вход через GitHub.',
+          'error'
+        );
+      }
+    } catch (e) {
+      $('editorPanel').classList.add('hidden');
+      $('loginPanel').classList.remove('hidden');
+      status(e.message, 'error');
+    } finally {
+      lock(false);
+    }
+      
   })();
 })();
 
