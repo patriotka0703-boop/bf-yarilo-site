@@ -293,7 +293,7 @@ return null;
     localStorage.removeItem(k);
   }
 };
-  let token = '', data, sha = '', dirty = false, busy = false, savedDocuments = '', savedReports = '', savedPublications = '';
+ let token = '', data, sha = '', dirty = false, busy = false, dataLoaded = false, savedDocuments = '', savedReports = '', savedPublications = '';
   const uploads = new Map(), previews = new Map();
   const getPath = (obj, p) => p.split('.').reduce((v,k)=>v?.[k], obj);
   function putPath(obj, p, value) { const keys=p.split('.'); const last=keys.pop(); const parent=keys.reduce((v,k)=>(v[k] ||= {}),obj); parent[last]=value; }
@@ -301,7 +301,7 @@ return null;
  
 function lock(value) {
   busy = value;
-  const ready = !!(data && sha);
+ const ready = dataLoaded && !!(data && sha);
   $('editorPanel').querySelectorAll('input,textarea,select,button')
     .forEach(e => e.disabled = value || !ready);
   $('loginButton').disabled = value;
@@ -677,17 +677,57 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     } catch(e) {status(e.message+(completed?' Успешно добавлено: '+completed+'. Их можно сохранить.':''),'error');}
     finally {renderMedia(container);lock(false);}
   }
-  async function loadData() {
-    const result=await api('/data');
-    data=M.normalize(result.data);sha=result.sha;dirty=false;uploads.clear();videoDrafts.clear();
-    savedDocuments=JSON.stringify(data.documents);
-    savedReports=JSON.stringify([data.reports,data.reporting]);
-    savedPublications=JSON.stringify(data.publications);
-    for(const url of previews.values())URL.revokeObjectURL(url);previews.clear();fill();
-    status('Данные сайта загружены.','ok');
+
+async function loadData() {
+  const result = await api('/data');
+
+  if (
+    !result ||
+    typeof result !== 'object' ||
+    !result.data ||
+    typeof result.data !== 'object' ||
+    Array.isArray(result.data) ||
+    typeof result.sha !== 'string' ||
+    !/^[a-f0-9]{40}$/i.test(result.sha)
+  ) {
+    throw new Error('GitHub вернул некорректные данные или SHA. Редактор не открыт.');
   }
+
+  const nextData = YariloModel.normalize(result.data);
+
+  if (
+    !nextData ||
+    typeof nextData !== 'object' ||
+    !nextData.foundation ||
+    !nextData.requisites ||
+    !nextData.publications ||
+   !nextData.documents ||
+typeof nextData.documents !== 'object' ||
+Array.isArray(nextData.documents) ||
+    !Array.isArray(nextData.reports)
+  ) {
+    throw new Error('Структура данных сайта некорректна. Редактор не открыт.');
+  }
+
+  data = nextData;
+  sha = result.sha;
+  dirty = false;
+  uploads.clear();
+  videoDrafts.clear();
+
+  savedDocuments = JSON.stringify(data.documents);
+  savedReports = JSON.stringify([data.reports, data.reporting]);
+  savedPublications = JSON.stringify(data.publications);
+
+  for (const url of previews.values()) URL.revokeObjectURL(url);
+  previews.clear();
+
+  fill();dataLoaded = true;
+  status('Данные сайта загружены.', 'ok');
+}
+
   async function save() {
-    if(busy || !data || !sha)return;
+    if(busy || !dataLoaded || !data || !sha)return;
     try {
       const next=M.validate(collect());lock(true);status('Сохраняю данные и файлы…');
       await requireMediaV2(next);
@@ -725,17 +765,15 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     }catch{status('Не удалось проверить публикацию. Сохранённые в GitHub данные не изменены.','error');}finally{lock(false);}
   };
   $('addAccount').onclick=()=>{data=collect();data.requisites.accounts.push({label:'',recipient:data.foundation.name,bank:'',account:'',bik:'',correspondent:'',currency:'RUB',purpose:''});changed();renderAccounts();};
-
   $('reloadButton').onclick = async () => {
     if (busy) return;
 
     if (dirty && !confirm(
       'Загрузить сохранённые данные и отменить изменения в форме?'
     )) return;
-
-    lock(true);
+   dataLoaded = false;
+lock(true);
     status('Повторная загрузка данных сайта…');
-
     try {
       await loadData();
       $('editorPanel').classList.remove('hidden');
@@ -744,7 +782,7 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
       $('editorPanel').classList.add('hidden');
       $('reloadPanel').classList.remove('hidden');
       status(e.message, 'error');
-    }
+    
     } finally {
       lock(false);
     }
