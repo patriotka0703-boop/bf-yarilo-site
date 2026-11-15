@@ -699,23 +699,11 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     finally {renderMedia(container);lock(false);}
   }
 
+
 async function apiWithRetry(endpoint) {
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      return await api(endpoint);
-    } catch (error) {
-      const retryable =
-        error.message.startsWith('Нет ответа:') ||
-        error.message.startsWith('Нет связи с сервером.');
-
-     if (!retryable || attempt === 2) throw error;
-
-    status('Сервер отвечает медленно. Повторяю запрос…');
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    }
-  }
+  return api(endpoint);
 }
+
 
 async function loadData() {
   const result = await api('/data');
@@ -881,16 +869,6 @@ if (!token) {
   $('reloadPanel').classList.add('hidden');
   status('Для доступа к админке нажмите «Войти через GitHub».');
   return;
-}
-
-token = storage.get('yarilo_session');
-
-    dataLoaded = false;
-lock(true);
-status('Проверяю вход через GitHub…');
-const user = await apiWithRetry('/me');
-if (user) {
-  $('githubUser').textContent = user.name || user.login;
 }
       $('editorPanel').classList.add('hidden');
       $('loginPanel').classList.add('hidden');
