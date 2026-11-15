@@ -156,17 +156,6 @@
 
     let id;
 
-
-    // RUTUBE: accept a public video link or official embed URL.
-    if(host==='rutube.ru') {
-      
-const m=u.pathname.match(/^\/(?:video|shorts|play\/embed)\/([a-f0-9]{32}|[a-f0-9-]{36})\/?$/i);
-
-      if(!m)return null;
-      id=m[1].toLowerCase();
-      return {provider:'RUTUBE',embed:'https://rutube.ru/play/embed/'+id,url:'https://rutube.ru/video/'+id+'/'};
-    }
-
     if (
       [
         'youtube.com',
@@ -350,10 +339,7 @@ const m=u.pathname.match(/^\/(?:video|shorts|play\/embed)\/([a-f0-9]{32}|[a-f0-9
       'external-video-play';
 
     play.textContent =
-    play.textContent =
-  external.provider === 'RUTUBE'
-    ? '▶ Смотреть видео RUTUBE'
-    : '▶ Смотреть видео YouTube';
+      '▶ Смотреть видео YouTube';
 
     const expand =
       document.createElement('button');
