@@ -30,15 +30,6 @@
     if(u.protocol!=='https:'||u.username||u.password||u.port)return null;
     const host=u.hostname.toLowerCase().replace(/^www\./,'');
     let id;
-
-    // RUTUBE: accept a public video link or official embed URL.
-    if(host==='rutube.ru') {
-      const m=u.pathname.match(/^\/(?:video|play\/embed)\/([a-f0-9]{32})\/?$/i);
-      if(!m)return null;
-      id=m[1].toLowerCase();
-      return {provider:'RUTUBE',embed:'https://rutube.ru/play/embed/'+id,url:'https://rutube.ru/video/'+id+'/'};
-    }
-
     if(['youtube.com','m.youtube.com','youtube-nocookie.com','youtu.be'].includes(host)) {
       id=host==='youtu.be'?u.pathname.slice(1):u.pathname==='/watch'?u.searchParams.get('v'):(u.pathname.match(/^\/(?:embed|shorts|live)\/([^/]+)\/?$/)||[])[1];
       if(!/^[A-Za-z0-9_-]{11}$/.test(id||''))return null;
@@ -449,7 +440,7 @@
       const label=element('label',title); label.htmlFor=id;
       const input=element('input'); input.type='file'; input.id=id; input.accept=accept; input.multiple=true;
       input.onchange=()=>stageFiles(container,key,input);
-      const hint=element('p',key==='photos'?'JPG, JPEG, PNG, WEBP. Выберите несколько фото до 40 МБ каждое: крупные снимки автоматически уменьшаются перед загрузкой.':'Большие видео загрузите на RUTUBE и вставьте ссылку ниже. Существующие видео ВК и YouTube сохраняются. Прямая загрузка MP4/WEBM пока до 20 МБ на файл.','media-hint');
+      const hint=element('p',key==='photos'?'JPG, JPEG, PNG, WEBP. Выберите несколько фото до 40 МБ каждое: крупные снимки автоматически уменьшаются перед загрузкой.':'Видео любого размера храните в ВК или YouTube и добавляйте ссылку ниже. Прямая загрузка MP4/WEBM пока до 20 МБ на файл.','media-hint');
       const grid=element('div',undefined,'media-grid'); grid.dataset.mediaList=key;
       group[key].forEach((p,index)=>{
         const card=element('div',undefined,'media-item');
@@ -467,8 +458,8 @@
       container.append(label);
       if(key==='photos')container.append(input,hint);
       if(key==='videos') {
-        for(const provider of ['RUTUBE','ВК','YouTube']) {
-          const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
+        for(const provider of ['ВК','YouTube']) {
+          const suffix=provider==='ВК'?'vk':'youtube';
           const urlLabel=element('label','Видео '+provider);urlLabel.htmlFor=id+'-'+suffix+'-link';
           const url=element('textarea');url.id=id+'-'+suffix+'-link';url.rows=4;url.dataset.videoGroup=groupPath;url.dataset.videoProvider=provider;url.value=videoDrafts.get(draftKey+'-'+provider)||'';url.oninput=()=>{videoDrafts.set(draftKey+'-'+provider,url.value);changed();};
           url.placeholder='Можно добавить много видео '+provider+'. Каждую ссылку или полный код iframe вставляйте с новой строки.';
@@ -476,7 +467,7 @@
           add.onclick=()=>{try{const infos=videoBatch(url.value,provider);const group=getPath(data,groupPath);mergeVideos(group,infos);
             videoDrafts.delete(draftKey+'-'+provider);changed();renderMedia(container);status('Обработано ссылок: '+infos.length+'. Всего видео в разделе: '+group.videos.length+'. Нажмите «Сохранить изменения».');
           }catch(e){status(e.message,'error');}};
-          container.append(urlLabel,url,add,element('p',provider==='RUTUBE'?'Вставьте ссылку вида https://rutube.ru/video/…/ после обработки ролика на RUTUBE. Видео должно разрешать встраивание.':provider==='ВК'?'Если плеер пишет «Видеофайл не найден», откройте ролик в ВК, выберите «Поделиться → Экспортировать» и вставьте полный код плеера сюда. Повторное добавление обновит ссылку существующего ролика.':'Вставьте ссылку на конкретный ролик YouTube. Автор должен разрешить показ на других сайтах.','media-hint'));
+          container.append(urlLabel,url,add,element('p',provider==='ВК'?'Если плеер пишет «Видеофайл не найден», откройте ролик в ВК, выберите «Поделиться → Экспортировать» и вставьте полный код плеера сюда. Повторное добавление обновит ссылку существующего ролика.':'Вставьте ссылку на конкретный ролик YouTube. Автор должен разрешить показ на других сайтах.','media-hint'));
         }
       }
       if(key==='videos'){const files=element('details');files.append(element('summary','Или загрузить небольшой видеофайл'),input,hint);container.append(files);}
@@ -486,21 +477,17 @@
   }
   function renderCover() {
     const box=$('coverEditor');if(!box)return;box.replaceChildren();
-    const label=element('p','Картинка на главной странице');
-    const img=element('img');img.alt='Обложка главной страницы';
-    img.style.cssText='display:block;max-width:100%;width:420px;max-height:300px;object-fit:contain;margin:12px 0';
-    if(data.home.coverImage)img.src=mediaURL(data.home.coverImage);else img.hidden=true;
-    const input=element('input');input.id='coverFile';input.type='file';input.accept='.jpg,.jpeg,.png,.webp';input.hidden=true;
-    const upload=element('button','Загрузить картинку');upload.type='button';upload.onclick=()=>input.click();
+    const label=element('label','Фото на главной странице');label.htmlFor='coverFile';
+    const img=element('img');img.src=data.home.coverImage?mediaURL(data.home.coverImage):'../assets/yarilo-cover.png';img.alt='Обложка главной страницы';img.style.cssText='display:block;max-width:100%;width:320px;max-height:240px;object-fit:contain;margin:12px 0';
+    const input=element('input');input.id='coverFile';input.type='file';input.accept='.jpg,.jpeg,.png,.webp';
     input.onchange=async()=>{const original=input.files?.[0];if(!original||busy)return;try{
       if(!/\.(jpe?g|png|webp)$/i.test(original.name)||original.size>40*1024*1024)throw new Error('Выберите JPG, PNG или WEBP до 40 МБ.');
-      lock(true);status('Загружаю обложку…');const health=await api('/health');if(!health.features?.coverImage)throw new Error('Сервер пока не поддерживает смену обложки.');
+      lock(true);status('Загружаю обложку…');const health=await api('/health');if(!health.features?.coverImage)throw new Error('Для смены обложки установите Worker версии 6 из обновления.');
       const file=await preparePhoto(original);const result=await post('/upload',{name:file.name,content:await asBase64(file)});
-      uploads.set(result.path,result.receipt);previews.set(result.path,URL.createObjectURL(file));data.home.coverImage=result.path;changed();status('Картинка загружена. Нажмите «Сохранить изменения».');
+      uploads.set(result.path,result.receipt);previews.set(result.path,URL.createObjectURL(file));data.home.coverImage=result.path;changed();status('Фото выбрано. Нажмите «Сохранить изменения».');
     }catch(e){status(e.message,'error');}finally{renderCover();lock(false);}};
-    const remove=element('button','Удалить картинку','danger');remove.type='button';remove.hidden=!data.home.coverImage;
-    remove.onclick=()=>{data.home.coverImage='';changed();renderCover();status('Картинка убрана с главной страницы. Нажмите «Сохранить изменения».');};
-    box.append(label,img,input,upload,remove,element('p',data.home.coverImage?'Новая картинка заменит текущую. После загрузки или удаления нажмите «Сохранить изменения».':'Картинка не выбрана. Загрузите PNG, WEBP или JPG.','small'));
+    const reset=element('button','Вернуть исходную обложку');reset.type='button';reset.onclick=()=>{data.home.coverImage='';changed();renderCover();status('Исходная обложка выбрана. Нажмите «Сохранить изменения».');};
+    box.append(label,img,input,element('p','Выберите фото с компьютера или телефона, затем сохраните изменения.','small'),reset);
   }
   function renderQR() {
     if (!$('qrPreview')) return;
