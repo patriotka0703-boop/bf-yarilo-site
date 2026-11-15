@@ -466,11 +466,12 @@
       : [];
   }
 
-  function normalize(input) {
-    const d =
-      JSON.parse(
-        JSON.stringify(input)
-      );
+ function normalize(input) {
+  if (!input || typeof input !== 'object' || Array.isArray(input)) {
+    throw new Error('Данные сайта не получены или имеют неверный формат.');
+  }
+
+  const d = JSON.parse(JSON.stringify(input));
 
     d.aboutPage ||= {};
 
