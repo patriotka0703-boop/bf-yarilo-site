@@ -328,14 +328,13 @@ function lock(value) {
   function changed() { dirty=true; status('Есть несохранённые изменения. Нажмите «Сохранить изменения».'); }
    async function api(endpoint, options = {}) {
     const controller = new AbortController();
-    const timeout = setTimeout(
-      () => controller.abort(),
-    endpoint === '/data' ? 60000
-: endpoint === '/me' ? 30000
-: endpoint === '/health' ? 10000
-: 120000    
-
-    );
+   const timeout = setTimeout(
+  () => controller.abort(),
+  endpoint === '/data' ? 45000
+    : endpoint === '/me' ? 10000
+    : endpoint === '/health' ? 10000
+    : 120000
+);
 
     try {
       const response = await fetch(WORKER + endpoint, {
@@ -719,7 +718,7 @@ async function apiWithRetry(endpoint) {
 }
 
 async function loadData() {
- const result = await apiWithRetry('/data');
+  const result = await api('/data');
 
   if (
     !result ||
