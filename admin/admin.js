@@ -297,7 +297,12 @@ return null;
     let response;
     try { response=await fetch(WORKER+endpoint, {...options, cache:'no-store', signal:AbortSignal.timeout(120000), headers:{Authorization:'Bearer '+token,...options.headers}}); }
     catch { throw new Error('Не удалось связаться с сервером. Проверьте интернет и повторите действие. Ваши изменения остаются в форме.'); }
-    const result=await response.json().catch(()=>({message:'Сервер вернул неверный ответ.'}));
+   let result;
+try {
+  result = await response.json();
+} catch {
+  throw new Error('Не удалось получить полный ответ сервера. Попробуйте ещё раз.');
+}
     if (!response.ok) {
       if (response.status===401) { token=''; storage.remove('yarilo_session'); $('loginPanel').classList.remove('hidden'); }
       throw new Error(result.message || 'Ошибка сервера ('+response.status+').');
