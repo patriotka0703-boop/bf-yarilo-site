@@ -298,7 +298,7 @@ return null;
     const timeout = setTimeout(
       () => controller.abort(),
  
-endpoint === '/data' ? 60000 : ['/me', '/health'].includes(endpoint) ? 60000 : 120000
+endpoint === '/data' ? 120000 : ['/me', '/health'].includes(endpoint) ? 60000 : 120000
 
     );
 
