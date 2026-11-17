@@ -301,7 +301,7 @@ return null;
 try {
   result = await response.json();
 } catch {
-  throw new Error('Не удалось получить полный ответ сервера. Попробуйте ещё раз.');
+throw new Error('Не удалось прочитать ответ сервера для ' + endpoint + ' (HTTP ' + response.status + ').');
 }
     if (!response.ok) {
       if (response.status===401) { token=''; storage.remove('yarilo_session'); $('loginPanel').classList.remove('hidden'); }
