@@ -1,5 +1,5 @@
 window.YARILO_ADMIN = {
- workerUrl: "https://yarilo-admin-auth.patriotka0703.workers.dev",
+workerUrl: "https://admin-api.bf-yarilo.ru",
   siteName: "Благотворительный фонд ЯРИЛО",
   siteUrl: "https://bf-yarilo.ru",
 
