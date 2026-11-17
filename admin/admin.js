@@ -297,7 +297,9 @@ return null;
     const controller = new AbortController();
     const timeout = setTimeout(
       () => controller.abort(),
-   endpoint === '/data' ? 60000 : ['/me', '/health'].includes(endpoint) ? 15000 : 120000
+ 
+endpoint === '/data' ? 60000 : ['/me', '/health'].includes(endpoint) ? 60000 : 120000
+
     );
 
     try {
@@ -662,14 +664,28 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     } catch(e) {status(e.message+(completed?' Успешно добавлено: '+completed+'. Их можно сохранить.':''),'error');}
     finally {renderMedia(container);lock(false);}
   }
-  async function loadData() {
-    const result=await api('/data');
-    data=M.normalize(result.data);sha=result.sha;dirty=false;uploads.clear();videoDrafts.clear();
-    savedDocuments=JSON.stringify(data.documents);
-    savedReports=JSON.stringify([data.reports,data.reporting]);
-    savedPublications=JSON.stringify(data.publications);
-    for(const url of previews.values())URL.revokeObjectURL(url);previews.clear();fill();
-    status('Данные сайта загружены.','ok');
+   async function loadData() {
+    const result = await api('/data');
+    const next = M.validate(M.normalize(result.data));
+
+    data = next;
+    sha = result.sha;
+    dirty = false;
+
+    uploads.clear();
+    videoDrafts.clear();
+
+    savedDocuments = JSON.stringify(data.documents);
+    savedReports = JSON.stringify([data.reports, data.reporting]);
+    savedPublications = JSON.stringify(data.publications);
+
+    for (const url of previews.values()) {
+      URL.revokeObjectURL(url);
+    }
+    previews.clear();
+
+    fill();
+    status('Данные сайта загружены.', 'ok');
   }
   async function save() {
     if(busy || !data || !sha)return;
@@ -687,8 +703,17 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
       savedPublications=JSON.stringify(data.publications);
       fill();
       status('Сохранено в GitHub. Сайт обновится после завершения публикации GitHub Pages.','ok');
-    } catch(e) {status(e.message,'error');} finally{lock(false);}
-  }
+  
+} catch (e) {
+  dirty = true;
+  status(
+    'Сохранение не подтверждено: ' + e.message +
+    ' Не нажимайте «Сохранить» повторно до проверки данных в GitHub.',
+    'error'
+  );
+} finally {
+  lock(false);
+}
   async function login() {
     if(dirty && !confirm('Есть несохранённые изменения. Перейти ко входу и оставить их несохранёнными?'))return;
     try {const bytes=crypto.getRandomValues(new Uint8Array(24));const nonce=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');storage.set('yarilo_login_nonce',nonce);dirty=false;location.assign(WORKER+'/login?nonce='+nonce);}
@@ -710,21 +735,31 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     }catch{status('Не удалось проверить публикацию. Сохранённые в GitHub данные не изменены.','error');}finally{lock(false);}
   };
   $('addAccount').onclick=()=>{data=collect();data.requisites.accounts.push({label:'',recipient:data.foundation.name,bank:'',account:'',bik:'',correspondent:'',currency:'RUB',purpose:''});changed();renderAccounts();};
+
 $('reloadButton').onclick = async () => {
   if (busy) return;
-  if (dirty && !confirm('Загрузить сохранённые данные и отменить изменения в форме?')) return;
+
+  if (dirty && !confirm(
+    'Загрузить сохранённые данные и отменить изменения в форме?'
+  )) return;
 
   lock(true);
   status('Повторная загрузка данных сайта…');
 
   try {
     await loadData();
+    $('editorPanel').classList.remove('hidden');
   } catch (e) {
-    status(e.message, 'error');
+    $('editorPanel').classList.add('hidden');
+    status(
+      e.message + ' Загрузка не завершена. Редактирование заблокировано.',
+      'error'
+    );
   } finally {
     lock(false);
   }
 };
+
   $('logoutButton').onclick=()=>{if(dirty&&!confirm('Выйти без сохранения изменений?'))return;storage.remove('yarilo_session');dirty=false;location.replace(location.pathname);};
   $('editorPanel').addEventListener('input',changed);
   window.addEventListener('beforeunload',e=>{if(dirty||busy){e.preventDefault();e.returnValue='';}});
@@ -742,17 +777,21 @@ $('reloadButton').onclick = async () => {
       }
       token=storage.get('yarilo_session');if(!token)return;
       lock(true);const user=await api('/me');$('githubUser').textContent=user.name||user.login;
-      $('loginPanel').classList.add('hidden');
-$('editorPanel').classList.remove('hidden');
+    
+$('loginPanel').classList.add('hidden');
+$('editorPanel').classList.add('hidden');
 
 try {
   await loadData();
+  $('editorPanel').classList.remove('hidden');
 } catch (e) {
+  $('editorPanel').classList.add('hidden');
   status(
-    e.message + ' Нажмите «Повторить загрузку данных».',
+    e.message + ' Данные сайта не загружены. Редактирование заблокировано.',
     'error'
   );
 }
+
     }catch(e){status(e.message,'error');}finally{lock(false);}
   })();
 })();
