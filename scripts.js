@@ -422,36 +422,45 @@
       const gallery=text('div','','publication-media');media(gallery,item);card.append(gallery);
       if(item.link){const href=M.safeURL(item.link);if(href){const link=text('a','Подробнее →','text-link');link.href=href;card.append(link);}}
       grid.append(card);
+     
       if (publicationKind === 'news') {
-  const paragraphs = [...card.children];
-  const titleIndex = paragraphs.findIndex(el => el.tagName === 'H2');
-  const body = paragraphs.slice(titleIndex + 1);
-  const fullText = item.text || '';
+        const fullText = item.text || '';
+        const hasMedia = item.photos.length > 0 || item.videos.length > 0;
+        const needsExpand = fullText.length > 220 || hasMedia;
 
-  const preview = document.createElement('p');
-  preview.textContent = fullText.length > 220
-    ? fullText.slice(0, 220) + '…'
-    : fullText;
+        if (needsExpand) {
+          const content = [...card.children].filter(el =>
+            el.tagName === 'P' || el.classList.contains('publication-media')
+          );
 
-  const details = document.createElement('details');
-  const summary = document.createElement('summary');
-  summary.textContent = 'Читать полностью';
-  summary.className = 'text-link';
-  summary.style.cssText = 'cursor:pointer;padding:12px 0';
+          const preview = document.createElement('p');
+          const shortText = fullText.slice(0, 220);
+          const lastSpace = shortText.lastIndexOf(' ');
+          preview.textContent = fullText.length > 220
+            ? shortText.slice(0, lastSpace > 100 ? lastSpace : 220) + '…'
+            : fullText;
 
-  details.append(summary, ...body);
-  card.append(preview, details);
+          const details = document.createElement('details');
+          const summary = document.createElement('summary');
+          summary.className = 'text-link';
+          summary.textContent = 'Читать полностью';
+          summary.style.cssText = 'cursor:pointer;padding:12px 0';
 
-  details.addEventListener('toggle', () => {
-    preview.hidden = details.open;
-    summary.textContent = details.open
-      ? 'Свернуть новость'
-      : 'Читать полностью';
-    card.style.gridColumn = details.open ? '1 / -1' : '';
-  });
-}
+          details.append(summary, ...content);
+          card.append(preview, details);
+
+          details.addEventListener('toggle', () => {
+            preview.hidden = details.open;
+            summary.textContent = details.open
+              ? 'Свернуть новость'
+              : 'Читать полностью';
+            card.style.gridColumn = details.open ? '1 / -1' : '';
+          });
+        }
+      }
     }}
   }
+
   // The homepage cover and donation overlay are managed by hero-cover.js.
   const donationURL=M.safeURL(d.donation.url,location.href), donationText=d.donation.text || 'Пожертвовать';
   document.querySelectorAll('a.btn[href="donate.html"],a[data-donation]').forEach(a=>{if(donationURL)a.href=donationURL;a.textContent=donationText;});
