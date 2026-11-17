@@ -440,24 +440,97 @@ endpoint === '/data' ? 60000 : ['/me', '/health'].includes(endpoint) ? 60000 : 1
     const health=await api('/health');
     if(!health.features?.publications)throw new Error('Редактирование новостей и проектов пока недоступно: сервер сайта ещё не обновлён. Ваши изменения остаются в форме.');
   }
-  function renderPublications(kind) {
-    const container=$(kind+'Editor');if(!container)return;container.replaceChildren();
-    const items=data.publications[kind].items;
-    if(!items.length)container.append(element('p','Записи пока не добавлены.','small'));
-    items.forEach((item,index)=>{
-      const card=element('section',undefined,'report-editor publication-editor');card.dataset.publicationId=item.id;
-      card.append(element('h3',(kind==='news'?'Новость ':'Проект ')+(index+1)));
-      for(const [key,label,type,max]of [['title','Название','input',200],['date','Дата (необязательно)','input',10],['label',kind==='news'?'Метка (необязательно)':'Статус проекта','input',100],['text','Текст','textarea',100000],['link','Ссылка «Подробнее» (необязательно)','input',2000]]) {
-        const field=element(type),caption=element('label',label);field.id=kind+'-'+item.id+'-'+key;caption.htmlFor=field.id;field.maxLength=max;
-        if(key==='date')field.type='date';if(key==='link')field.placeholder='help.html или https://…';field.value=item[key];
-        field.oninput=()=>{publicationFor(kind,item.id)[key]=field.value;changed();};card.append(caption,field);
-      }
-      const media=element('div',undefined,'publication-editor-media');media.dataset.mediaGroup='publications.'+kind+'.items.'+index;renderMedia(media);card.append(media);
-      const actions=element('div',undefined,'report-editor-actions');
-      for(const [label,offset]of [['Выше',-1],['Ниже',1]]){const button=element('button',label,'secondary');button.type='button';button.hidden=index+offset<0||index+offset>=items.length;button.onclick=()=>{const current=data.publications[kind].items,i=current.findIndex(x=>x.id===item.id);[current[i],current[i+offset]]=[current[i+offset],current[i]];changed();renderPublications(kind);};actions.append(button);}
-      const remove=element('button',kind==='news'?'Удалить новость':'Удалить проект','danger');remove.type='button';remove.onclick=()=>{data.publications[kind].items=data.publications[kind].items.filter(x=>x.id!==item.id);changed();renderPublications(kind);};actions.append(remove);card.append(actions);container.append(card);
-    });
+
+function renderPublications(kind) {
+  const container = $(kind + 'Editor');
+  if (!container) return;
+  container.replaceChildren();
+
+  const items = data.publications[kind].items;
+  if (!items.length) {
+    container.append(element('p', 'Записи пока не добавлены.', 'small'));
   }
+
+  items.forEach((item, index) => {
+    const card = element('details', undefined, 'report-editor publication-editor');
+    card.dataset.publicationId = item.id;
+
+    const summary = element(
+      'summary',
+      (kind === 'news' ? 'Новость: ' : 'Проект: ') +
+      (item.title || 'Без названия') +
+      (item.date ? ' — ' + item.date : '')
+    );
+    summary.style.cssText = 'cursor:pointer;font-weight:700;padding:12px 4px;';
+    card.append(summary);
+
+    for (const [key, label, type, max] of [
+      ['title', 'Название', 'input', 200],
+      ['date', 'Дата (необязательно)', 'input', 10],
+      ['label', kind === 'news' ? 'Метка (необязательно)' : 'Статус проекта', 'input', 100],
+      ['text', 'Текст', 'textarea', 100000],
+      ['link', 'Ссылка «Подробнее» (необязательно)', 'input', 2000]
+    ]) {
+      const field = element(type);
+      const caption = element('label', label);
+      field.id = kind + '-' + item.id + '-' + key;
+      caption.htmlFor = field.id;
+      field.maxLength = max;
+
+      if (key === 'date') field.type = 'date';
+      if (key === 'link') field.placeholder = 'help.html или https://…';
+      if (key === 'text') {
+        field.rows = 16;
+        field.style.cssText = 'width:100%;min-height:320px;resize:vertical;box-sizing:border-box;';
+      }
+
+      field.value = item[key];
+      field.oninput = () => {
+        publicationFor(kind, item.id)[key] = field.value;
+        if (key === 'title' || key === 'date') {
+          summary.textContent =
+            (kind === 'news' ? 'Новость: ' : 'Проект: ') +
+            (item.title || 'Без названия') +
+            (item.date ? ' — ' + item.date : '');
+        }
+        changed();
+      };
+      card.append(caption, field);
+    }
+
+    const media = element('div', undefined, 'publication-editor-media');
+    media.dataset.mediaGroup = 'publications.' + kind + '.items.' + index;
+    renderMedia(media);
+    card.append(media);
+
+    const actions = element('div', undefined, 'report-editor-actions');
+    for (const [label, offset] of [['Выше', -1], ['Ниже', 1]]) {
+      const button = element('button', label, 'secondary');
+      button.type = 'button';
+      button.hidden = index + offset < 0 || index + offset >= items.length;
+      button.onclick = () => {
+        const current = data.publications[kind].items;
+        const i = current.findIndex(x => x.id === item.id);
+        [current[i], current[i + offset]] = [current[i + offset], current[i]];
+        changed();
+        renderPublications(kind);
+      };
+      actions.append(button);
+    }
+
+    const remove = element('button', kind === 'news' ? 'Удалить новость' : 'Удалить проект', 'danger');
+    remove.type = 'button';
+    remove.onclick = () => {
+      data.publications[kind].items = data.publications[kind].items.filter(x => x.id !== item.id);
+      changed();
+      renderPublications(kind);
+    };
+    actions.append(remove);
+    card.append(actions);
+    container.append(card);
+  });
+}
+
   const documentFiles=container=>container.dataset.reportId ? reportFor(container.dataset.reportId).files : data.documents[container.dataset.documentGroup];
   function renderReports() {
     const container=$('reportsEditor');if(!container)return;container.replaceChildren();
@@ -722,7 +795,7 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
   }
   $('loginButton').onclick=login;$('saveButton').onclick=save;
   if($('addReport'))$('addReport').onclick=()=>{if(data.reports.length>=100){status('Допускается до 100 отчётов.','error');return;}data.reports.push({id:'report-'+crypto.randomUUID(),title:'',year:String(new Date().getFullYear()),category:'annual',description:'',files:[]});changed();renderReports();$('reportsEditor').lastElementChild.querySelector('input').focus();};
-  for(const kind of Object.keys(M.publicationKinds))if($('add-'+kind))$('add-'+kind).onclick=()=>{const items=data.publications[kind].items;if(items.length>=100){status('Допускается до 100 записей.','error');return;}items.push({id:'post-'+crypto.randomUUID(),title:'',date:kind==='news'?new Date().toISOString().slice(0,10):'',label:'',text:'',link:'',photos:[],videos:[],mediaDescriptions:{}});changed();renderPublications(kind);$(kind+'Editor').lastElementChild.querySelector('input').focus();};
+  for(const kind of Object.keys(M.publicationKinds))if($('add-'+kind))$('add-'+kind).onclick=()=>{const items=data.publications[kind].items;if(items.length>=100){status('Допускается до 100 записей.','error');return;}items.push({id:'post-'+crypto.randomUUID(),title:'',date:kind==='news'?new Date().toISOString().slice(0,10):'',label:'',text:'',link:'',photos:[],videos:[],mediaDescriptions:{}});changed();renderPublications(kind);const card=$(kind+'Editor').lastElementChild;card.open=true;card.querySelector('input').focus();
   if($('donationQrFile'))$('donationQrFile').onchange=selectQR;
   if($('removeQr'))$('removeQr').onclick=()=>{data.donation.qrImage='';changed();renderQR();};
   if($('checkPublication'))$('checkPublication').onclick=async()=>{
