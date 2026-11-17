@@ -794,7 +794,7 @@ try {
 }
 }catch(e){status(e.message,'error');}finally{lock(false);}
 })();
- 
+ })();
 /* YARILO programs admin shortcut 20261007.1 */
 (()=>{
   function addProgramsShortcut(){
