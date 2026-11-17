@@ -195,7 +195,7 @@ return null;
       if (!d[key] || typeof d[key] !== 'object' || Array.isArray(d[key])) throw new Error('Отсутствует раздел: ' + key);
     }
     if(d.home.coverImage && !/^uploads\/admin-[a-f0-9-]+\.(jpe?g|png|webp)$/i.test(d.home.coverImage))throw new Error('Некорректное фото главной страницы.');
-    if (JSON.stringify(d).length > 500000) throw new Error('Слишком большой объём текстовых данных.');
+    if (JSON.stringify(d).length >2000000) throw new Error('Слишком большой объём текстовых данных.');
     if (d.documents !== undefined) {
       if (!d.documents || typeof d.documents !== 'object' || Array.isArray(d.documents)) throw new Error('Некорректный раздел документов.');
       for (const [key,title] of Object.entries(documentKinds)) {
@@ -229,7 +229,7 @@ return null;
         const ids=new Set();
         for(const item of page.items) {
           if(!item||typeof item!=='object'||Array.isArray(item)||typeof item.id!=='string'||!/^post-[a-f0-9-]{8,64}$/.test(item.id)||ids.has(item.id))throw new Error('Некорректная или повторяющаяся запись в разделе «'+title+'».');ids.add(item.id);
-          for(const [key,limit]of [['title',200],['label',100],['text',10000],['link',2000],['date',10]])if(typeof item[key]!=='string'||item[key].length>limit)throw new Error('Проверьте поля новости или проекта.');
+          for(const [key,limit]of [['title',200],['label',100],['text',100000],['link',2000],['date',10]])if(typeof item[key]!=='string'||item[key].length>limit)throw new Error('Проверьте поля новости или проекта.');
           if(!item.title.trim())throw new Error('Укажите название новости или проекта.');
           if(item.link&&!safeURL(item.link))throw new Error('Укажите безопасную ссылку новости или проекта.');
           if(item.date&&(!/^\d{4}-\d{2}-\d{2}$/.test(item.date)||!Number.isFinite(Date.parse(item.date+'T12:00:00Z'))||new Date(item.date+'T12:00:00Z').toISOString().slice(0,10)!==item.date))throw new Error('Укажите корректную дату новости или проекта.');
@@ -293,22 +293,89 @@ return null;
   function status(message, type='info') { $('status').textContent=message; $('status').className='status '+type; }
   function lock(value) { busy=value; $('editorPanel').querySelectorAll('input,textarea,select,button').forEach(e=>e.disabled=value); $('loginButton').disabled=value; }
   function changed() { dirty=true; status('Есть несохранённые изменения. Нажмите «Сохранить изменения».'); }
-  async function api(endpoint, options={}) {
-    let response;
-    try { response=await fetch(WORKER+endpoint, {...options, cache:'no-store', signal:AbortSignal.timeout(120000), headers:{Authorization:'Bearer '+token,...options.headers}}); }
-    catch { throw new Error('Не удалось связаться с сервером. Проверьте интернет и повторите действие. Ваши изменения остаются в форме.'); }
-   let result;
-try {
-  result = await response.json();
-} catch {
-throw new Error('Не удалось прочитать ответ сервера для ' + endpoint + ' (HTTP ' + response.status + ').');
-}
-    if (!response.ok) {
-      if (response.status===401) { token=''; storage.remove('yarilo_session'); $('loginPanel').classList.remove('hidden'); }
-      throw new Error(result.message || 'Ошибка сервера ('+response.status+').');
+   async function api(endpoint, options = {}) {
+    const controller = new AbortController();
+    const timeout = setTimeout(
+      () => controller.abort(),
+   endpoint === '/data' ? 60000 : ['/me', '/health'].includes(endpoint) ? 15000 : 120000
+    );
+
+    try {
+      const response = await fetch(WORKER + endpoint, {
+        ...options,
+        cache: 'no-store',
+        signal: controller.signal,
+        headers: {
+          Authorization: 'Bearer ' + token,
+          ...options.headers
+        }
+      });
+
+      if (response.status === 401) {
+        token = '';
+        storage.remove('yarilo_session');
+        $('loginPanel').classList.remove('hidden');
+        throw new Error(
+          'Срок входа истёк. Нажмите «Войти через GitHub».'
+        );
+      }
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result?.message || 'Ошибка сервера: ' + response.status
+        );
+      }
+
+      if (!result || typeof result !== 'object') {
+        throw new Error('Сервер вернул неверный ответ.');
+      }
+
+      if (endpoint === '/data' && (
+        !result.data ||
+        typeof result.data !== 'object' ||
+        Array.isArray(result.data) ||
+        typeof result.sha !== 'string' ||
+        !result.sha
+      )) {
+        throw new Error(
+         'Сервер не передал данные сайта. Повторите загрузку.'
+        );
+      }
+
+      return result;
+    } catch (error) {
+      if (controller.signal.aborted) {
+               throw new Error(
+          'Нет ответа: ' + endpoint + '. ' +
+          (endpoint === '/me'
+            ? 'Не завершилась проверка сеанса GitHub.'
+            : endpoint === '/data'
+              ? 'Не завершилась загрузка данных сайта из GitHub.'
+              : 'Не завершился запрос к серверу.')
+        );
+      }
+
+      if (error instanceof TypeError) {
+        throw new Error(
+          'Нет связи с сервером. Повторите действие. ' +
+          'Несохранённые изменения остаются в форме.'
+        );
+      }
+
+      if (error instanceof SyntaxError) {
+        throw new Error(
+          'Сервер вернул повреждённый ответ. Повторите действие.'
+        );
+      }
+
+      throw error;
+    } finally {
+      clearTimeout(timeout);
     }
-    return result;
   }
+  
   function post(endpoint, value) { return api(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)}); }
   function videoBatch(value,provider) {
     const entries=[];
@@ -378,7 +445,7 @@ throw new Error('Не удалось прочитать ответ сервер�
     items.forEach((item,index)=>{
       const card=element('section',undefined,'report-editor publication-editor');card.dataset.publicationId=item.id;
       card.append(element('h3',(kind==='news'?'Новость ':'Проект ')+(index+1)));
-      for(const [key,label,type,max]of [['title','Название','input',200],['date','Дата (необязательно)','input',10],['label',kind==='news'?'Метка (необязательно)':'Статус проекта','input',100],['text','Текст','textarea',10000],['link','Ссылка «Подробнее» (необязательно)','input',2000]]) {
+      for(const [key,label,type,max]of [['title','Название','input',200],['date','Дата (необязательно)','input',10],['label',kind==='news'?'Метка (необязательно)':'Статус проекта','input',100],['text','Текст','textarea',100000],['link','Ссылка «Подробнее» (необязательно)','input',2000]]) {
         const field=element(type),caption=element('label',label);field.id=kind+'-'+item.id+'-'+key;caption.htmlFor=field.id;field.maxLength=max;
         if(key==='date')field.type='date';if(key==='link')field.placeholder='help.html или https://…';field.value=item[key];
         field.oninput=()=>{publicationFor(kind,item.id)[key]=field.value;changed();};card.append(caption,field);
@@ -499,17 +566,21 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
   }
   function renderCover() {
     const box=$('coverEditor');if(!box)return;box.replaceChildren();
-    const label=element('label','Фото на главной странице');label.htmlFor='coverFile';
-    const img=element('img');img.src=data.home.coverImage?mediaURL(data.home.coverImage):'../assets/yarilo-cover.png';img.alt='Обложка главной страницы';img.style.cssText='display:block;max-width:100%;width:320px;max-height:240px;object-fit:contain;margin:12px 0';
-    const input=element('input');input.id='coverFile';input.type='file';input.accept='.jpg,.jpeg,.png,.webp';
+    const label=element('p','Картинка на главной странице');
+    const img=element('img');img.alt='Обложка главной страницы';
+    img.style.cssText='display:block;max-width:100%;width:420px;max-height:300px;object-fit:contain;margin:12px 0';
+    if(data.home.coverImage)img.src=mediaURL(data.home.coverImage);else img.hidden=true;
+    const input=element('input');input.id='coverFile';input.type='file';input.accept='.jpg,.jpeg,.png,.webp';input.hidden=true;
+    const upload=element('button','Загрузить картинку');upload.type='button';upload.onclick=()=>input.click();
     input.onchange=async()=>{const original=input.files?.[0];if(!original||busy)return;try{
       if(!/\.(jpe?g|png|webp)$/i.test(original.name)||original.size>40*1024*1024)throw new Error('Выберите JPG, PNG или WEBP до 40 МБ.');
-      lock(true);status('Загружаю обложку…');const health=await api('/health');if(!health.features?.coverImage)throw new Error('Для смены обложки установите Worker версии 6 из обновления.');
+      lock(true);status('Загружаю обложку…');const health=await api('/health');if(!health.features?.coverImage)throw new Error('Сервер пока не поддерживает смену обложки.');
       const file=await preparePhoto(original);const result=await post('/upload',{name:file.name,content:await asBase64(file)});
-      uploads.set(result.path,result.receipt);previews.set(result.path,URL.createObjectURL(file));data.home.coverImage=result.path;changed();status('Фото выбрано. Нажмите «Сохранить изменения».');
+      uploads.set(result.path,result.receipt);previews.set(result.path,URL.createObjectURL(file));data.home.coverImage=result.path;changed();status('Картинка загружена. Нажмите «Сохранить изменения».');
     }catch(e){status(e.message,'error');}finally{renderCover();lock(false);}};
-    const reset=element('button','Вернуть исходную обложку');reset.type='button';reset.onclick=()=>{data.home.coverImage='';changed();renderCover();status('Исходная обложка выбрана. Нажмите «Сохранить изменения».');};
-    box.append(label,img,input,element('p','Выберите фото с компьютера или телефона, затем сохраните изменения.','small'),reset);
+    const remove=element('button','Удалить картинку','danger');remove.type='button';remove.hidden=!data.home.coverImage;
+    remove.onclick=()=>{data.home.coverImage='';changed();renderCover();status('Картинка убрана с главной страницы. Нажмите «Сохранить изменения».');};
+    box.append(label,img,input,upload,remove,element('p',data.home.coverImage?'Новая картинка заменит текущую. После загрузки или удаления нажмите «Сохранить изменения».':'Картинка не выбрана. Загрузите PNG, WEBP или JPG.','small'));
   }
   function renderQR() {
     if (!$('qrPreview')) return;
@@ -639,7 +710,21 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     }catch{status('Не удалось проверить публикацию. Сохранённые в GitHub данные не изменены.','error');}finally{lock(false);}
   };
   $('addAccount').onclick=()=>{data=collect();data.requisites.accounts.push({label:'',recipient:data.foundation.name,bank:'',account:'',bik:'',correspondent:'',currency:'RUB',purpose:''});changed();renderAccounts();};
-  $('reloadButton').onclick=async()=>{if(dirty&&!confirm('Загрузить сохранённые данные и отменить изменения в форме?'))return;lock(true);try{await loadData();}catch(e){status(e.message,'error');}finally{lock(false);}};
+$('reloadButton').onclick = async () => {
+  if (busy) return;
+  if (dirty && !confirm('Загрузить сохранённые данные и отменить изменения в форме?')) return;
+
+  lock(true);
+  status('Повторная загрузка данных сайта…');
+
+  try {
+    await loadData();
+  } catch (e) {
+    status(e.message, 'error');
+  } finally {
+    lock(false);
+  }
+};
   $('logoutButton').onclick=()=>{if(dirty&&!confirm('Выйти без сохранения изменений?'))return;storage.remove('yarilo_session');dirty=false;location.replace(location.pathname);};
   $('editorPanel').addEventListener('input',changed);
   window.addEventListener('beforeunload',e=>{if(dirty||busy){e.preventDefault();e.returnValue='';}});
@@ -657,7 +742,17 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
       }
       token=storage.get('yarilo_session');if(!token)return;
       lock(true);const user=await api('/me');$('githubUser').textContent=user.name||user.login;
-      await loadData();$('loginPanel').classList.add('hidden');$('editorPanel').classList.remove('hidden');
+      $('loginPanel').classList.add('hidden');
+$('editorPanel').classList.remove('hidden');
+
+try {
+  await loadData();
+} catch (e) {
+  status(
+    e.message + ' Нажмите «Повторить загрузку данных».',
+    'error'
+  );
+}
     }catch(e){status(e.message,'error');}finally{lock(false);}
   })();
 })();
