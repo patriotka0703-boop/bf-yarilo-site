@@ -714,6 +714,7 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
 } finally {
   lock(false);
 }
+}
   async function login() {
     if(dirty && !confirm('Есть несохранённые изменения. Перейти ко входу и оставить их несохранёнными?'))return;
     try {const bytes=crypto.getRandomValues(new Uint8Array(24));const nonce=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');storage.set('yarilo_login_nonce',nonce);dirty=false;location.assign(WORKER+'/login?nonce='+nonce);}
@@ -791,9 +792,9 @@ try {
     'error'
   );
 }
-
-    }catch(e){status(e.message,'error');}finally{lock(false);}
-  })();
+}catch(e){status(e.message,'error');}finally{lock(false);}
+})();
+ 
 /* YARILO programs admin shortcut 20261007.1 */
 (()=>{
   function addProgramsShortcut(){
