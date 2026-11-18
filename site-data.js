@@ -456,6 +456,12 @@ window.YARILO = {
           "name": "годовой отчет в минюст 2025.jpg",
           "title": "годовой отчет в минюст 2025",
           "size": 911645
+        },
+        {
+          "path": "uploads/admin-968cea46-f02b-4ddd-8a0c-14c69a03b74a.jpg",
+          "name": "отчет за 2025.jpg",
+          "title": "отчет за 2025",
+          "size": 915802
         }
       ]
     },
