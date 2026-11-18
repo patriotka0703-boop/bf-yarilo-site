@@ -850,7 +850,7 @@ $('reloadButton').onclick = async () => {
         if(!expected || hash.get('nonce')!==expected)throw new Error('Не удалось подтвердить вход. Нажмите «Войти через GitHub» ещё раз.');
         storage.set('yarilo_session',received);
       }
-      token=storage.get('yarilo_session');if(!token)return;
+    token=storage.get('yarilo_session');if(!token)return;
       lock(true);const user=await api('/me');$('githubUser').textContent=user.name||user.login;
     
 status('Загружаю данные сайта из GitHub…');
