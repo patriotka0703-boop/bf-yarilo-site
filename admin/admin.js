@@ -853,14 +853,15 @@ $('reloadButton').onclick = async () => {
       token=storage.get('yarilo_session');if(!token)return;
       lock(true);const user=await api('/me');$('githubUser').textContent=user.name||user.login;
     
-$('loginPanel').classList.add('hidden');
-$('editorPanel').classList.add('hidden');
+status('Загружаю данные сайта из GitHub…');
 
 try {
   await loadData();
+  $('loginPanel').classList.add('hidden');
   $('editorPanel').classList.remove('hidden');
 } catch (e) {
   $('editorPanel').classList.add('hidden');
+  $('loginPanel').classList.remove('hidden');
   status(
     e.message + ' Данные сайта не загружены. Редактирование заблокировано.',
     'error'
