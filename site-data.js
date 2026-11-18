@@ -445,6 +445,12 @@ window.YARILO = {
           "name": "1000231803.jpg",
           "title": "1000231803",
           "size": 165359
+        },
+        {
+          "path": "uploads/admin-f1bc9ceb-b1c3-4e17-8eb9-8906b0058830.jpg",
+          "name": "годовой отчет 2024.jpg",
+          "title": "годовой отчет 2024",
+          "size": 1014722
         }
       ]
     }
