@@ -739,7 +739,28 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     finally {renderMedia(container);lock(false);}
   }
    async function loadData() {
-    const result = await api('/data');
+   
+let result;
+
+try {
+  result = await api('/data');
+} catch (error) {
+  const message = String(error?.message || '');
+
+  const connectionError =
+    message.includes('Нет ответа: /data') ||
+    message.includes('Failed to fetch') ||
+    message.includes('Нет связи с сервером') ||
+    message.includes('Ошибка соединения с Cloudflare');
+
+  if (!connectionError) throw error;
+
+  status('Соединение прервалось. Повторно загружаю данные сайта…');
+
+  await new Promise(resolve => setTimeout(resolve, 1500));
+
+  result = await api('/data');
+}
     const next = M.validate(M.normalize(result.data));
 
     data = next;
