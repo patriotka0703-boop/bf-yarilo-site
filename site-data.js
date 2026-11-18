@@ -399,32 +399,7 @@ window.YARILO = {
       "year": "2024",
       "category": "annual",
       "description": "Отчётность о деятельности фонда",
-      "files": [
-        {
-          "path": "uploads/admin-c44ceb9e-b02a-4b24-82d3-792f346db552.jpg",
-          "name": "годовой отчет 2024.jpg",
-          "title": "годовой отчет 2024",
-          "size": 1014722
-        },
-        {
-          "path": "uploads/admin-fbb8426a-e117-4280-8d0f-381edbf59afb.jpg",
-          "name": "годовой отчет о деятельности 2024.jpg",
-          "title": "годовой отчет о деятельности 2024",
-          "size": 1014436
-        },
-        {
-          "path": "uploads/admin-0c7ba1b5-9970-49da-ad7f-e0aef049e7f7.jpg",
-          "name": "заявление о продолжении деятельности.jpg",
-          "title": "заявление о продолжении деятельности",
-          "size": 815086
-        },
-        {
-          "path": "uploads/admin-38b6dc9f-e91a-414a-9405-8ad146d61984.jpg",
-          "name": "финансовый отчет 2024.jpg",
-          "title": "финансовый отчет 2024",
-          "size": 665890
-        }
-      ]
+      "files": []
     },
     {
       "id": "report-20250000",
@@ -432,44 +407,7 @@ window.YARILO = {
       "year": "2025",
       "category": "annual",
       "description": "Отчётность о деятельности фонда",
-      "files": [
-        {
-          "path": "uploads/admin-682ebfae-eb56-40c8-9c18-821b88bcfa1b.jpg",
-          "name": "1 финансовый отчет 20225.jpg",
-          "title": "1 финансовый отчет 20225",
-          "size": 1016073
-        },
-        {
-          "path": "uploads/admin-b257b0e8-c294-4997-8014-63ead494ac61.jpg",
-          "name": "2 финансовый отчет 2025.jpg",
-          "title": "2 финансовый отчет 2025",
-          "size": 320151
-        },
-        {
-          "path": "uploads/admin-3134049a-d657-4eed-8750-c5ad9218e0fe.pdf",
-          "name": "1 финансовый отчет 20225.pdf",
-          "title": "1 финансовый отчет 20225",
-          "size": 202711
-        },
-        {
-          "path": "uploads/admin-2d282bb6-df2f-40bf-901a-04a24dcac6ba.jpg",
-          "name": "годовой отчет в минюст 2025.jpg",
-          "title": "годовой отчет в минюст 2025",
-          "size": 911645
-        },
-        {
-          "path": "uploads/admin-968cea46-f02b-4ddd-8a0c-14c69a03b74a.jpg",
-          "name": "отчет за 2025.jpg",
-          "title": "отчет за 2025",
-          "size": 915802
-        },
-        {
-          "path": "uploads/admin-b3d435a6-5d30-461a-be37-e1fce14cb85f.jpg",
-          "name": "отчет о предоставленной помощи 2025.jpg",
-          "title": "отчет о предоставленной помощи 2025",
-          "size": 815402
-        }
-      ]
+      "files": []
     },
     {
       "id": "report-a1d00000",
