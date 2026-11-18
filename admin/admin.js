@@ -579,7 +579,7 @@ function renderPublications(kind) {
     try {
       if(documentFiles(container).length+files.length>20)throw new Error('В каждом разделе допускается до 20 файлов.');
       for(const file of files)if(!/\.(pdf|jpe?g|png|webp)$/i.test(file.name)||!file.size||file.size>8*1024*1024)throw new Error('Выберите PDF или изображение размером до 8 МБ: '+file.name);
-      lock(true);await requireDocuments(!!container.dataset.reportId);
+      lock(true);
       for(const file of files) {
         status('Загружаю документ '+(completed+1)+' из '+files.length+': '+file.name);
         const result=await post('/upload',{name:file.name,content:await asBase64(file)});
@@ -650,7 +650,7 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
     const upload=element('button','Загрузить картинку');upload.type='button';upload.onclick=()=>input.click();
     input.onchange=async()=>{const original=input.files?.[0];if(!original||busy)return;try{
       if(!/\.(jpe?g|png|webp)$/i.test(original.name)||original.size>40*1024*1024)throw new Error('Выберите JPG, PNG или WEBP до 40 МБ.');
-      lock(true);status('Загружаю обложку…');const health=await api('/health');if(!health.features?.coverImage)throw new Error('Сервер пока не поддерживает смену обложки.');
+    lock(true);status('Загружаю обложку…');
       const file=await preparePhoto(original);const result=await post('/upload',{name:file.name,content:await asBase64(file)});
       uploads.set(result.path,result.receipt);previews.set(result.path,URL.createObjectURL(file));data.home.coverImage=result.path;changed();status('Картинка загружена. Нажмите «Сохранить изменения».');
     }catch(e){status(e.message,'error');}finally{renderCover();lock(false);}};
@@ -727,7 +727,7 @@ const suffix=provider==='ВК'?'vk':provider==='RUTUBE'?'rutube':'youtube';
       }
       lock(true);
       if(group[key].length+files.length>200){const health=await api('/health');if(!health.features?.mediaV2)throw new Error('Для более 200 файлов сначала обновите сервер сайта.');}
-      if(container.dataset.mediaGroup.startsWith('publications.'))await requirePublications();
+      
       for(const original of files) {
         const file=key==='photos'?await preparePhoto(original):original;
         status('Загружаю '+(completed+1)+' из '+files.length+': '+file.name);
@@ -786,12 +786,8 @@ try {
     if(busy || !data || !sha)return;
     try {
       const next=M.validate(collect());lock(true);status('Сохраняю данные и файлы…');
-      await requireMediaV2(next);
-      if(JSON.stringify(next.documents)!==savedDocuments)await requireDocuments();
-      if(JSON.stringify([next.reports,next.reporting])!==savedReports)await requireDocuments(true);
-      if(JSON.stringify(next.publications)!==savedPublications)await requirePublications();
-      const paths=new Set(M.mediaPaths(next));
-      const result=await post('/save',{data:next,sha,uploads:[...uploads].filter(([p])=>paths.has(p)).map(([,receipt])=>receipt)});
+    const paths=new Set(M.mediaPaths(next));
+const result=await post('/save',{data:next,sha,uploads:[...uploads].filter(([p])=>paths.has(p)).map(([,receipt])=>receipt)});
       data=next;sha=result.sha;dirty=false;uploads.clear();videoDrafts.clear();
       savedDocuments=JSON.stringify(data.documents);
       savedReports=JSON.stringify([data.reports,data.reporting]);
