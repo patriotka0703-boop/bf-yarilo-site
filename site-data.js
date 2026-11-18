@@ -417,6 +417,12 @@ window.YARILO = {
           "name": "заявление о продолжении деятельности.jpg",
           "title": "заявление о продолжении деятельности",
           "size": 815086
+        },
+        {
+          "path": "uploads/admin-38b6dc9f-e91a-414a-9405-8ad146d61984.jpg",
+          "name": "финансовый отчет 2024.jpg",
+          "title": "финансовый отчет 2024",
+          "size": 665890
         }
       ]
     },
@@ -426,20 +432,7 @@ window.YARILO = {
       "year": "2025",
       "category": "annual",
       "description": "Отчётность о деятельности фонда",
-      "files": [
-        {
-          "path": "uploads/admin-d703e9cd-785e-4f19-8a5d-d321cfce801e.pdf",
-          "name": "03_Finansovyy_otchet_BF_YARILO_2025.pdf",
-          "title": "Финансовый отчёт БФ «ЯРИЛО» за 2025 год",
-          "size": 78414
-        },
-        {
-          "path": "uploads/admin-bc1081aa-4c77-4927-95e0-65610a749ff9.pdf",
-          "name": "01_Godovoy_otchet_BF_YARILO_2025.pdf",
-          "title": "Годовой отчёт БФ «ЯРИЛО» за 2025 год",
-          "size": 77552
-        }
-      ]
+      "files": []
     },
     {
       "id": "report-a1d00000",
