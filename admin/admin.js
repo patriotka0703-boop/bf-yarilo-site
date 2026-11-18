@@ -858,7 +858,6 @@ $('reloadButton').onclick = async () => {
 
   $('logoutButton').onclick=()=>{if(dirty&&!confirm('Выйти без сохранения изменений?'))return;storage.remove('yarilo_session');dirty=false;location.replace(location.pathname);};
   $('editorPanel').addEventListener('input',changed);
-  window.addEventListener('beforeunload',e=>{if(dirty||busy){e.preventDefault();e.returnValue='';}});
   (async()=>{
     try {
       storage.remove('yarilo_token');
