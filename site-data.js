@@ -313,6 +313,19 @@ window.YARILO = {
           "photos": [],
           "videos": [],
           "mediaDescriptions": {}
+        },
+        {
+          "id": "post-d6c967e1-0524-4d80-b255-50a07fd00b39",
+          "title": "Новость тест",
+          "date": "2026-11-18",
+          "label": "",
+          "text": "Фонду помогают собирать гуманитарный груз прихожане и работники нескольких церквей Подмосковья.  ",
+          "link": "",
+          "photos": [],
+          "videos": [
+            "https://rutube.ru/play/embed/77fecf1eca558e3ca54878d39288ed52"
+          ],
+          "mediaDescriptions": {}
         }
       ]
     },
