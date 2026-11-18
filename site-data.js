@@ -432,7 +432,32 @@ window.YARILO = {
       "year": "2025",
       "category": "annual",
       "description": "Отчётность о деятельности фонда",
-      "files": []
+      "files": [
+        {
+          "path": "uploads/admin-4f946a0f-c568-445b-a802-5e4d78bd7327.jpg",
+          "name": "финансовый отчет 2024.jpg",
+          "title": "финансовый отчет 2024",
+          "size": 665890
+        },
+        {
+          "path": "uploads/admin-fc054964-11fe-4e29-a3e4-4dab77df34f4.jpg",
+          "name": "отчет о предоставленной помощи 2025.jpg",
+          "title": "отчет о предоставленной помощи 2025",
+          "size": 815402
+        },
+        {
+          "path": "uploads/admin-1627523c-6e20-478d-8c80-171cdcaeb34b.jpg",
+          "name": "отчет за 2025.jpg",
+          "title": "отчет за 2025",
+          "size": 915802
+        },
+        {
+          "path": "uploads/admin-f0ac5255-89ad-49f3-925f-c8585e5cfb51.jpg",
+          "name": "годовой отчет в минюст 2025.jpg",
+          "title": "годовой отчет в минюст 2025",
+          "size": 911645
+        }
+      ]
     },
     {
       "id": "report-a1d00000",
