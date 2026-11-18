@@ -399,7 +399,14 @@ window.YARILO = {
       "year": "2024",
       "category": "annual",
       "description": "Отчётность о деятельности фонда",
-      "files": []
+      "files": [
+        {
+          "path": "uploads/admin-c44ceb9e-b02a-4b24-82d3-792f346db552.jpg",
+          "name": "годовой отчет 2024.jpg",
+          "title": "годовой отчет 2024",
+          "size": 1014722
+        }
+      ]
     },
     {
       "id": "report-20250000",
