@@ -297,9 +297,7 @@ return null;
     const controller = new AbortController();
     const timeout = setTimeout(
       () => controller.abort(),
- 
-endpoint === '/data' ? 120000 : ['/me', '/health'].includes(endpoint) ? 60000 : 120000
-
+endpoint === '/data' ? 15000 : ['/me', '/health'].includes(endpoint) ? 15000 : 120000
     );
 
     try {
