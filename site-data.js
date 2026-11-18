@@ -399,7 +399,32 @@ window.YARILO = {
       "year": "2024",
       "category": "annual",
       "description": "Отчётность о деятельности фонда",
-      "files": []
+      "files": [
+        {
+          "path": "uploads/admin-2adb7d96-e6dc-43c8-ac27-2976a0cc70e1.jpg",
+          "name": "годовой отчет 2024.jpg",
+          "title": "годовой отчет 2024",
+          "size": 1014722
+        },
+        {
+          "path": "uploads/admin-7ebb2ee1-f4e2-40ff-97d1-8cca4b1479a6.jpg",
+          "name": "годовой отчет о деятельности 2024 (1).jpg",
+          "title": "годовой отчет о деятельности 2024 (1)",
+          "size": 1014436
+        },
+        {
+          "path": "uploads/admin-b1d3b64b-ddde-4e52-a81b-fcc3d9b08d41.jpg",
+          "name": "заявление о продолжении деятельности.jpg",
+          "title": "заявление о продолжении деятельности",
+          "size": 815086
+        },
+        {
+          "path": "uploads/admin-907a2d3c-2f3a-4aaa-ba34-47143b1cf159.jpg",
+          "name": "финансовый отчет 2024.jpg",
+          "title": "финансовый отчет 2024",
+          "size": 665890
+        }
+      ]
     },
     {
       "id": "report-20250000",
@@ -423,40 +448,10 @@ window.YARILO = {
           "size": 195618
         },
         {
-          "path": "uploads/admin-76dea470-9373-416d-a012-08d6f0a96c07.jpg",
-          "name": "1000231804.jpg",
-          "title": "1000231804",
-          "size": 151816
-        },
-        {
-          "path": "uploads/admin-a6a5f7ed-d391-4840-8b62-d8603b27ed49.jpg",
-          "name": "1000231805.jpg",
-          "title": "1000231805",
-          "size": 217505
-        },
-        {
-          "path": "uploads/admin-a9476b59-81b2-4eac-bd85-82e9de23623f.jpg",
-          "name": "1000231798.jpg",
-          "title": "1000231798",
-          "size": 209511
-        },
-        {
           "path": "uploads/admin-eeb2029f-c000-4f84-be9b-11d5a98448cc.jpg",
           "name": "1000231803.jpg",
           "title": "1000231803",
           "size": 165359
-        },
-        {
-          "path": "uploads/admin-f1bc9ceb-b1c3-4e17-8eb9-8906b0058830.jpg",
-          "name": "годовой отчет 2024.jpg",
-          "title": "годовой отчет 2024",
-          "size": 1014722
-        },
-        {
-          "path": "uploads/admin-c072b6ea-ea9f-4770-af00-5e8891055814.jpg",
-          "name": "годовой отчет о деятельности 2024 (1).jpg",
-          "title": "годовой отчет о деятельности 2024 (1)",
-          "size": 1014436
         }
       ]
     }
