@@ -359,12 +359,13 @@ endpoint === '/data' ? 120000 : ['/me', '/health'].includes(endpoint) ? 60000 : 
         );
       }
 
-      if (error instanceof TypeError) {
-        throw new Error(
-          'Нет связи с сервером. Повторите действие. ' +
-          'Несохранённые изменения остаются в форме.'
-        );
-      }
+     if (error instanceof TypeError) {
+  throw new Error(
+    'Ошибка соединения с Cloudflare (' + endpoint + '): ' +
+    error.message +
+    '. Несохранённые изменения остаются в форме.'
+  );
+}
 
       if (error instanceof SyntaxError) {
         throw new Error(
