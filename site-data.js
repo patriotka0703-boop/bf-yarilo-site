@@ -432,7 +432,14 @@ window.YARILO = {
       "year": "2025",
       "category": "annual",
       "description": "Отчётность о деятельности фонда",
-      "files": []
+      "files": [
+        {
+          "path": "uploads/admin-682ebfae-eb56-40c8-9c18-821b88bcfa1b.jpg",
+          "name": "1 финансовый отчет 20225.jpg",
+          "title": "1 финансовый отчет 20225",
+          "size": 1016073
+        }
+      ]
     },
     {
       "id": "report-a1d00000",
