@@ -157,6 +157,19 @@
       .toLowerCase()
       .replace(/^www\./, '');
 
+if (host === 'rutube.ru') {
+  const match = u.pathname.match(
+    /^\/(?:play\/embed|video)\/([a-f0-9]{32})\/?$/i
+  );
+  if (!match) return null;
+
+  return {
+    provider: 'RUTUBE',
+    embed: 'https://rutube.ru/play/embed/' + match[1],
+    url: 'https://rutube.ru/video/' + match[1] + '/'
+  };
+}
+
     let id;
 
     if (
