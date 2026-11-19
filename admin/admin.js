@@ -798,30 +798,79 @@ try {
     fill();
     status('Данные сайта загружены.', 'ok');
   }
-  async function save() {
-    if(busy || !data || !sha)return;
-    try {
-      const next=M.validate(collect());lock(true);status('Сохраняю данные и файлы…');
-    const paths=new Set(M.mediaPaths(next));
-const result=await post('/save',{data:next,sha,uploads:[...uploads].filter(([p])=>paths.has(p)).map(([,receipt])=>receipt)});
-      data=next;sha=result.sha;dirty=false;uploads.clear();videoDrafts.clear();
-      savedDocuments=JSON.stringify(data.documents);
-      savedReports=JSON.stringify([data.reports,data.reporting]);
-      savedPublications=JSON.stringify(data.publications);
-      fill();
-      status('Сохранено в GitHub. Сайт обновится после завершения публикации GitHub Pages.','ok');
-  
-} catch (e) {
-  dirty = true;
-  status(
-    'Сохранение не подтверждено: ' + e.message +
-    ' Не нажимайте «Сохранить» повторно до проверки данных в GitHub.',
-    'error'
-  );
-} finally {
-  lock(false);
+ 
+async function save() {
+  if (busy || !data || !sha) return;
+
+  let next = null;
+  let pendingUploads = [];
+
+  try {
+    next = M.validate(collect());
+    lock(true);
+    status('Сохраняю данные и файлы...');
+
+    const paths = new Set(M.mediaPaths(next));
+    pendingUploads = [...uploads]
+      .filter(([p]) => paths.has(p))
+      .map(([, receipt]) => receipt);
+
+    const result = await post('/save', {
+      data: next,
+      sha,
+      uploads: pendingUploads
+    });
+
+    data = next;
+    sha = result.sha;
+    dirty = false;
+    uploads.clear();
+    videoDrafts.clear();
+
+    savedDocuments = JSON.stringify(data.documents);
+    savedReports = JSON.stringify([data.reports, data.reporting]);
+    savedPublications = JSON.stringify(data.publications);
+
+    fill();
+    status('Сохранено в GitHub. Сайт обновится после публикации GitHub Pages.', 'ok');
+
+  } catch (e) {
+    const uncertain = /Нет ответа: \/save|Ошибка соединения с Cloudflare \(\/save\)|Сервер вернул повреждённый ответ/.test(e.message || '');
+
+    if (uncertain && next) {
+      status('Проверяю результат сохранения в GitHub...');
+
+      const verified = await verifySavedData(next);
+
+      if (verified && pendingUploads.length === 0) {
+        data = next;
+        sha = verified.sha;
+        dirty = false;
+        uploads.clear();
+        videoDrafts.clear();
+
+        savedDocuments = JSON.stringify(data.documents);
+        savedReports = JSON.stringify([data.reports, data.reporting]);
+        savedPublications = JSON.stringify(data.publications);
+
+        fill();
+        status('Сохранение подтверждено проверкой GitHub.', 'ok');
+        return;
+      }
+    }
+
+    dirty = true;
+    status(
+      'Сохранение не подтверждено: ' + e.message +
+      '. Не нажимайте «Сохранить» повторно до проверки данных в GitHub.',
+      'error'
+    );
+
+  } finally {
+    lock(false);
+  }
 }
-}
+
   async function login() {
     if(dirty && !confirm('Есть несохранённые изменения. Перейти ко входу и оставить их несохранёнными?'))return;
     try {const bytes=crypto.getRandomValues(new Uint8Array(24));const nonce=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');storage.set('yarilo_login_nonce',nonce);dirty=false;location.assign(WORKER+'/login?nonce='+nonce);}
