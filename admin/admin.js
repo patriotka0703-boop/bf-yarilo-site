@@ -378,6 +378,24 @@ endpoint === '/data' ? 15000 : ['/me', '/health'].includes(endpoint) ? 15000 : 1
   }
   
   function post(endpoint, value) { return api(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)}); }
+ 
+async function verifySavedData(expected) {
+  try {
+    const result = await api('/data');
+
+    if (
+      JSON.stringify(result.data) ===
+      JSON.stringify(expected)
+    ) {
+      return result;
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
   function videoBatch(value,provider) {
     const entries=[];
     const rest=value.trim().replace(/<iframe\b[^>]*>[\s\S]*?<\/iframe\s*>/gi,code=>{entries.push(code);return '\n';});
