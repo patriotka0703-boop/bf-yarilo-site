@@ -305,7 +305,7 @@ window.YARILO = {
         },
         {
           "id": "post-bdb7141e-d23b-418c-9ff6-82256ed646c0",
-          "title": "Тест",
+          "title": "Тест23456",
           "date": "2026-11-18",
           "label": "Тест",
           "text": "",
