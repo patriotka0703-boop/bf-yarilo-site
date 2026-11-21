@@ -272,3 +272,114 @@
         max-height: 72px !important;
     }
 }
+}
+/* ЯРИЛО — компактный срочный сбор под фотографией */
+
+.hero .hero-cover .urgent-fund-section {
+  width: 100%;
+  margin-top: 12px;
+  padding: 0;
+  background: transparent;
+}
+
+.hero .hero-cover .urgent-fund-strip {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 78px;
+  padding: 12px 165px 12px 17px;
+  gap: 8px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.hero .hero-cover .urgent-fund-copy {
+  min-width: 0;
+}
+
+.hero .hero-cover .urgent-fund-copy strong {
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.15;
+}
+
+.hero .hero-cover .urgent-fund-copy > span {
+  font-size: clamp(12px, 1.2vw, 14px);
+  line-height: 1.35;
+}
+
+.hero .hero-cover .urgent-fund-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  box-sizing: border-box;
+  width: 145px;
+  padding: 12px 5px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.hero .hero-cover .urgent-fund-strip:hover
+.urgent-fund-button {
+  transform: translateY(calc(-50% - 2px));
+}
+
+/* QR-код выступает над полоской справа */
+
+.hero .hero-cover .hero-donation {
+  position: absolute;
+  top: auto;
+  bottom: 73px;
+  right: 12px;
+  width: 140px;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  z-index: 8;
+}
+
+.hero .hero-cover .hero-qr-caption {
+  display: none;
+}
+
+/* Планшеты и телефоны */
+
+@media (max-width: 1000px) {
+  .hero .hero-cover .hero-donation {
+    position: absolute;
+    right: 12px;
+    bottom: 73px;
+    width: 140px;
+    margin: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero .hero-cover .urgent-fund-strip {
+    flex-direction: row;
+    min-height: 88px;
+    padding: 10px 125px 10px 10px;
+  }
+
+  .hero .hero-cover .urgent-fund-copy strong {
+    font-size: 17px;
+  }
+
+  .hero .hero-cover .urgent-fund-copy > span {
+    font-size: 11px;
+  }
+
+  .hero .hero-cover .hero-donation {
+    right: 7px;
+    bottom: 80px;
+    width: 110px;
+  }
+
+  .hero .hero-cover .urgent-fund-button {
+    right: 5px;
+    width: 115px;
+    padding: 11px 3px;
+    font-size: 9px;
+  }
+}
