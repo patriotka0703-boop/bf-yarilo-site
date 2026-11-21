@@ -184,6 +184,29 @@ content.append(fold);
 card.append(content);
 wrap.append(card);
       }
+      
+wrap.addEventListener('click', function (event) {
+  const summary = event.target.closest('.program-fold > summary');
+  if (!summary || !wrap.contains(summary)) return;
+
+  event.preventDefault();
+
+  const card = summary.closest('.program');
+  const shouldOpen = !summary.parentElement.open;
+  const rowTop = card.offsetTop;
+
+  const rowFolds = [...wrap.querySelectorAll('.program')]
+    .filter(otherCard =>
+      Math.abs(otherCard.offsetTop - rowTop) < 3
+    )
+    .map(otherCard => otherCard.querySelector('.program-fold'))
+    .filter(Boolean);
+
+  rowFolds.forEach(otherFold => {
+    otherFold.open = shouldOpen;
+  });
+});
+  
       message.hidden=true;
       if(!wrap.children.length){message.hidden=false;message.textContent='Список программ пока пуст.';}
     }
