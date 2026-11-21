@@ -119,9 +119,97 @@
     max-height: 270px !important;
   }
 }
-</style>
-<meta property="og:title" content="БФ «ЯРИЛО» — помощь фронту, бойцам СВО и мирным жителям прифронтовых районов">
+.urgent-fund-section {
+  padding: 12px 0 30px;
+  background: #f8f5ed;
+}
 
+.urgent-fund-strip {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 24px;
+  border: 2px solid #e8bb55;
+  border-radius: 17px;
+  background: linear-gradient(115deg,#004329,#058b4e 52%,#005e38);
+  box-shadow: 0 5px 18px #003b252a;
+  color: white;
+  text-decoration: none;
+}
+
+.urgent-fund-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,transparent 30%,#ffe9a344 50%,transparent 70%);
+  transform: translateX(-130%);
+  animation: urgentShine 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.urgent-fund-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.urgent-fund-copy strong {
+  font-size: clamp(23px,3vw,30px);
+  color: #ffdc79;
+  line-height: 1.15;
+}
+
+.urgent-fund-copy > span {
+  font-size: clamp(15px,1.7vw,18px);
+  font-weight: 700;
+  color: white;
+}
+
+.urgent-fund-button {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  padding: 15px 21px;
+  border: 1px solid #fff0a9;
+  border-radius: 99px;
+  background: linear-gradient(175deg,#fff5b7,#f4c344 49%,#c58b18);
+  color: #493008;
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+  box-shadow: 0 5px 0 #80580c,0 3px 18px #ffdd7f82;
+  transition: transform .2s;
+}
+
+.urgent-fund-strip:hover .urgent-fund-button {
+  transform: translateY(-3px);
+}
+
+@keyframes urgentShine {
+  0%,62% { transform: translateX(-130%); }
+  90%,100% { transform: translateX(130%); }
+}
+
+@media(max-width:600px) {
+  .urgent-fund-strip {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+  }
+  .urgent-fund-button { align-self: flex-end; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .urgent-fund-strip::before { animation: none; }
+}
+ </style>  
+<meta property="og:title" content="БФ «ЯРИЛО» — помощь фронту, бойцам СВО и мирным жителям прифронтовых районов">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Благотворительный фонд «ЯРИЛО»">
 
@@ -226,6 +314,24 @@
 </aside>
 
 </div>
+</section>
+
+<section class="urgent-fund-section">
+  <div class="container">
+    <a class="urgent-fund-strip"
+       id="urgentFundLink"
+       href="/programs.html">
+      <span class="urgent-fund-copy">
+        <strong>🆘 СРОЧНЫЙ СБОР!</strong>
+        <span id="urgentFundText">
+          Помощь детскому дому в ДНР — подарим детям свет!
+        </span>
+      </span>
+      <span class="urgent-fund-button">
+        ❤️ ПОМОЧЬ СЕЙЧАС
+      </span>
+    </a>
+  </div>
 </section>
 
 
@@ -616,6 +722,25 @@ if (foundationName && data.foundation.name) {
 
   setText("home-title", data.home.title);
   setText("home-description", data.home.description);
+
+if (data.home.urgentFundTitle?.trim()) {
+  setText("urgentFundText", data.home.urgentFundTitle);
+}
+
+const urgentLink = document.getElementById("urgentFundLink");
+const urgentUrl = data.home.urgentFundUrl;
+
+if (urgentLink && typeof urgentUrl === "string" && urgentUrl.trim()) {
+  try {
+    const target = new URL(urgentUrl.trim(), location.origin);
+    if (["https:", "http:"].includes(target.protocol)
+        && !target.username && !target.password) {
+      urgentLink.href = target.href;
+    }
+  } catch (error) {
+    console.warn("Некорректная ссылка срочного сбора", error);
+  }
+}
 
   setText("mission-title", data.home.missionTitle);
   setText("mission-text", data.home.missionText);
