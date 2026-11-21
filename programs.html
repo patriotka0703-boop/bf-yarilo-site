@@ -52,7 +52,12 @@ ym(113599500,'init',{
     .grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px }
     .program { display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 5px 20px #17352a0b }
     .media { height:215px;background:#ede8dd }
-    .media img { display:block;width:100%;height:100%;object-fit:cover }
+   .media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
     .content { padding:23px;display:flex;flex-direction:column;gap:13px;flex:1 }
     .content h2 { font-size:22px;line-height:1.25;margin:0 }
     .content p { white-space:pre-line;margin:0;color:#344e43 }
@@ -65,6 +70,23 @@ ym(113599500,'init',{
     .btn.outline { background:white;color:var(--ink);border:1px solid #c3d0c8 }
     footer { padding:24px;background:var(--ink);color:white;text-align:center;font-size:14px }
     [hidden] { display:none!important }
+     .program-fold > summary {
+  cursor: pointer;
+  color: #102c23;
+  font-weight: 700;
+}
+
+.program-fold > summary:hover {
+  color: #b88a13;
+}
+
+.program-fold > summary h2 {
+  display: inline;
+}
+
+.program-fold[open] > summary {
+  margin-bottom: 16px;
+} 
   </style>
 </head>
 <body>
@@ -144,7 +166,23 @@ ym(113599500,'init',{
         if(pdf) actions.append(link('Документ программы',pdf,'outline'));
         if(protocol && protocol!==pdf) actions.append(link('Протокол',protocol,'outline'));
         if(donate) actions.append(link('Поддержать',donate,''));
-        content.append(actions);card.append(content);wrap.append(card);
+       content.append(actions);
+
+const title = content.querySelector('h2');
+const fold = document.createElement('details');
+fold.className = 'program-fold';
+
+const summary = document.createElement('summary');
+summary.append(title);
+fold.append(summary);
+
+while (content.firstChild) {
+  fold.append(content.firstChild);
+}
+
+content.append(fold);
+card.append(content);
+wrap.append(card);
       }
       message.hidden=true;
       if(!wrap.children.length){message.hidden=false;message.textContent='Список программ пока пуст.';}
