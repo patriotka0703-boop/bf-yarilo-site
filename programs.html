@@ -101,8 +101,26 @@ ym(113599500,'init',{
       return a;
     };
     function render(programs) {
+              // Срочные сборы первыми, остальные — новые сверху.
+      programs = programs
+        .map((item, index) => ({ item, index }))
+        .sort((a, b) => {
+          const urgent = x =>
+            /срочн(ый|ая|ое|ые)\s+сбор/i.test(
+              String(x.title || '') + ' ' +
+              String(x.description || '')
+            ) &&
+            !/сбор\s+заверш[её]н/i.test(String(x.title || ''));
+
+          const aUrgent = urgent(a.item);
+          const bUrgent = urgent(b.item);
+
+          if (aUrgent !== bUrgent) return aUrgent ? -1 : 1;
+
+          return b.index - a.index;
+        });
       wrap.replaceChildren();
-      for (const item of programs) {
+     for (const { item } of programs) {
         if (!item || typeof item !== 'object') continue;
         const card = document.createElement('article');card.className='program';
         const media = document.createElement('div');media.className='media';
