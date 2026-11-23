@@ -414,7 +414,7 @@
     const heading=document.querySelector('.page-hero h1'), intro=document.querySelector('.page-hero .lead');
     if(heading)heading.textContent=page.title;if(intro)intro.textContent=page.intro;
     const grid=document.querySelector(publicationKind==='news'?'.news-grid':'.cards');
-    if(grid){grid.replaceChildren();for(const item of page.items){
+   if(grid){grid.replaceChildren();for(const item of [...page.items].sort((a,b)=>(b.date||'').localeCompare(a.date||''))){
       const card=text('article','','news-card');
       if(item.date){const time=text('time',new Date(item.date+'T12:00:00Z').toLocaleDateString('ru-RU'));time.dateTime=item.date;card.append(time);}
       else if(item.label)card.append(text('p',item.label,'eyebrow'));
